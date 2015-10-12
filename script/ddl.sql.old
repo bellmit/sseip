@@ -1,0 +1,46 @@
+CREATE DATABASE gz
+  CHAR SET utf8
+  COLLATE utf8_general_ci;
+
+GRANT ALL ON gz.* TO wa@localhost;
+
+CREATE TABLE `group` (
+  id          INT PRIMARY KEY AUTO_INCREMENT,
+  name        VARCHAR(128),
+  description TEXT(512)
+);
+
+CREATE TABLE user (
+  id        INT PRIMARY KEY AUTO_INCREMENT,
+  username  CHAR(64)  NOT NULL UNIQUE,
+  password  TEXT(256) NOT NULL,
+  real_name VARCHAR(64),
+  age       INT(3),
+  id_number CHAR(20),
+  address   TEXT(512),
+  phone     DECIMAL(32),
+  added     DATETIME        DEFAULT current_timestamp,
+  role      INT,
+  group_id  INT,
+  CONSTRAINT fk_user_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
+);
+
+CREATE TABLE customer (
+  id                INT PRIMARY KEY AUTO_INCREMENT,
+  name              VARCHAR(128),
+  sex               TINYINT(1),
+  age               INT,
+  address           TEXT,
+  symptom           TEXT,
+  tel               VARCHAR(32),
+  website           SMALLINT,
+  disease_type      SMALLINT,
+  access_point_type SMALLINT,
+  faraway           TINYINT(1),
+  emergency         TINYINT(1),
+  added             DATETIME        DEFAULT current_timestamp,
+  user_id           INT,
+  group_id          INT,
+  CONSTRAINT fk_customer_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id),
+  CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
+);

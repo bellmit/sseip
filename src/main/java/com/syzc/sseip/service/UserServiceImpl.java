@@ -1,0 +1,143 @@
+package com.syzc.sseip.service;
+
+import com.alibaba.fastjson.JSON;
+import com.syzc.sseip.dao.BaseDao;
+import com.syzc.sseip.dao.UserDao;
+import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.enumtype.Role;
+import com.syzc.sseip.util.LocalAcUtil;
+import com.syzc.sseip.util.Page;
+import com.syzc.sseip.util.PageUtil;
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+@Service("userService")
+public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements UserService {
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+    private UserDao userDao;
+
+    @Resource
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    @Override
+    public BaseDao<User> getDao() {
+        return this.userDao;
+    }
+
+    @Override
+    public User add(User user) {
+        if (userDao.exist(user.getUsername())) {
+            return null;
+        }
+        if (!userDao.add(user)) {
+            return null;
+        }
+        user = userDao.get(user.getId());
+        return user;
+    }
+
+/*
+    @Override
+    public Boolean remove(Long id) {
+        return userDao.remove(id);
+    }
+*/
+
+/*
+    @Override
+    public Boolean update(User user) {
+        return userDao.update(user);
+    }
+*/
+
+/*
+    @Override
+    public User get(Long userId) {
+        return userDao.get(userId);
+    }
+*/
+
+    /*
+        @Override
+        public Page<User> list(Long pageNo, Byte size) {
+            Long total = userDao.count();
+            Page<User> page = PageUtil.make(pageNo, size, total);
+            page.setList(userDao.list(page.getRowOffset(), page.getPageSize()));
+            return page;
+        }
+    */
+
+    @Override
+    public Boolean updatePassword(Long userId, String oldPassword, String newPassword) {
+        return userDao.updatePassword(userId, oldPassword, newPassword);
+    }
+
+    @Override
+    public Boolean resetPassword(Long userId, String newPassword) {
+        return userDao.resetPassword(userId, newPassword);
+    }
+
+    @Override
+    public Page<User> listByGroup(Long groupId, Long pageNo, Byte size) {
+        Long total = userDao.countByGroup(groupId);
+        Page<User> page = PageUtil.make(pageNo, size, total);
+        page.setList(userDao.listByGroup(groupId, page.getRowOffset(), page.getPageSize()));
+        return page;
+    }
+
+    @Override
+    public Page<User> listByRole(Role role, Long pageNo, Byte size) {
+        Long total = userDao.countByRole(role);
+        Page<User> page = PageUtil.make(pageNo, size, total);
+        page.setList(userDao.listByRole(role, page.getRowOffset(), page.getPageSize()));
+        return page;
+    }
+
+    @Override
+    public Boolean leaveGroup(Long userId) {
+        return userDao.updateGroup(userId, null);
+    }
+
+    @Override
+    public Boolean changeGroup(Long userId, Long groupId) {
+        return userDao.updateGroup(userId, groupId);
+    }
+
+    public Boolean exist(String username) {
+        return userDao.exist(username);
+    }
+
+    @Override
+    public User login(String userName, String password) {
+        return userDao.login(userName, password);
+    }
+
+    @Override
+    public Boolean updateRole(Long userId, Role role) {
+        return userDao.updateRole(userId, role);
+    }
+
+    @Override
+    public Role getRole(Long userId) {
+        return userDao.getRole(userId);
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext ac;
+        ac = LocalAcUtil.getAc();
+        UserService s = (UserService) ac.getBean("userService");
+        System.out.println(s);
+//        System.out.println(JSON.toJSONString(s.login("abc2", "abc2"), true));
+//        System.out.println(JSON.toJSONString(s.get(3L), true));
+
+//        System.out.println(JSON.toJSONString(s.list(0L, (byte) 10), true));
+//        System.out.println(JSON.toJSONString(s.listByGroup(1L, 0L, (byte) 10), true));
+
+        System.out.println(JSON.toJSONString(s.listByRole(Role.DIRECTOR, 1L, (byte) 10)));
+    }
+}

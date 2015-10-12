@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.GroupDao">
+    <resultMap id="Group" type="com.syzc.sseip.entity.Group">
+        <id column="id" property="id"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        insert `group` (name, description) value (#{entity.name},#{entity.description});
+    </insert>
+    <delete id="remove">
+        DELETE FROM `group`
+        WHERE `id` = #{id};
+    </delete>
+    <update id="update">
+        UPDATE `group`
+        SET `name` = #{entity.name}, `description` = #{entity.description}
+        WHERE `id` = #{entity.id};
+    </update>
+    <select id="get" resultMap="Group">
+        SELECT
+        `id`,
+        `name`,
+        `description`
+        FROM `group`
+        WHERE id = #{id};
+    </select>
+    <select id="list" resultMap="Group">
+        SELECT
+        `id`,
+        `name`,
+        `description`
+        FROM `group` order by id desc
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="count" resultType="Long">
+        SELECT
+        count(1)
+        FROM `group`;
+    </select>
+
+    <delete id="cleanUsers">
+UPDATE user
+SET group_id = NULL
+WHERE group_id = #{groupId}
+    </delete>
+    <select id="listAll" resultMap="Group">
+        SELECT
+        `id`,
+        `name`,
+        `description`
+        FROM `group` order by id desc
+    </select>
+</mapper>
