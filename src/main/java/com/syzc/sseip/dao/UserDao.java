@@ -31,7 +31,7 @@ public interface UserDao extends BaseDao<User> {
      */
     User getByUserName(String username);
 
-    Boolean exist(String username);
+    Boolean existUsername(String username);
 
     User login(@Param("username") String userName, @Param("password") String password);
 

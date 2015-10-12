@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">推广国家一览</li>
+            <li class="active">入口网站一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -26,40 +26,34 @@
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive">
                             <colgroup class="row">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
+                                <col class="col-sm-3">
+                                <col class="col-sm-3">
+                                <col class="col-sm-3">
+                                <col class="col-sm-3">
                             </colgroup>
                             <thead>
                             <tr>
                                 <th class="text-right">id</th>
                                 <th class="text-right">名称</th>
-                                <th class="text-right">备注</th>
-                                <th class="text-right">ISO 3166-1, Alpha-2 code</th>
-                                <th class="text-right">更新时间</th>
-                                <th class="center">功能</th>
+                                <th class="text-right">域名</th>
+                                <th class="center">操作</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <#list page.list as country>
+                            <#list page.list as website>
                             <tr>
-                                <td class="text-right">${country.id}</td>
-                                <td class="text-right"><#if (country.name)??>${country.name}<#else><span class="label">不详</span></#if>
+                                <td class="text-right">${website.id}</td>
+                                <td class="text-right"><#if (website.name)??>${website.name}<#else><span class="label">不详</span></#if>
                                 </td>
-                                <td class="text-right"><#if (country.memo)??>${country.memo}<#else><span class="label">不详</span></#if>
+                                <td class="text-right"><#if (website.url)??>${website.url}<#else><span
+                                        class="label">不详</span></#if>
                                 </td>
-                                <td class="text-right"><#if (country.a2Code)??>${country.a2Code}<#else><span
-                                        class="label">不详</span></#if></td>
-                                <td class="text-right">${country.updated?string("yyyy-MM-dd HH:mm:ss")}</td>
                                 <td class="center">
-                                    <a href="/country/update/${country.id}"><span class="fa fa-edit"></span></a>
+                                    <a href="/website/update/${website.id}"><span class="fa fa-edit"></span></a>
 
-                                    <form action="${context.contextPath}/country/remove" method="post"
-                                          style="display: inline;"><input type="hidden" name="id" value="${country.id}">
+                                    <form action="${context.contextPath}/website/remove" method="post"
+                                          style="display: inline;"><input type="hidden" name="id" value="${website.id}">
                                         <button><span class="fa fa-trash"></span></button>
                                     </form>
                                 </td>
@@ -68,10 +62,10 @@
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/country/add"
+                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/website/add"
                                                                        target="_self"
                                                                        style="color:#FFF;text-decoration:none;"
-                                                                       title="建造新的国家与地区条目"
+                                                                       title="添加入口网站"
                                                                        class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>

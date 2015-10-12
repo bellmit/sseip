@@ -1,8 +1,8 @@
-CREATE DATABASE sserp
+CREATE DATABASE sseip
   CHAR SET utf8
   COLLATE utf8_general_ci;
 
-GRANT ALL ON gz.* TO sseip@localhost;
+GRANT ALL ON sseip.* TO wa@localhost;
 
 CREATE TABLE `group` (
   id          INT PRIMARY KEY AUTO_INCREMENT,
@@ -53,4 +53,27 @@ CREATE TABLE country (
   memo    VARCHAR(128),
   updated DATETIME        DEFAULT current_timestamp,
   a2_code CHAR(4)
+);
+
+CREATE TABLE website (
+  id   INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(64),
+  url  VARCHAR(128)
+);
+
+CREATE TABLE disease_type (
+  id     INT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(64)
+);
+
+CREATE TABLE access_point_type (
+  id     INT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(16)
+);
+
+CREATE TABLE user_role (
+  id      INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT,
+  role    INT,
+  CONSTRAINT fk_user_role_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );

@@ -33,11 +33,14 @@
         </#if>
         </li>
         <li>
-            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>业务资料管理<span
+            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>业务配置<span
                     class="arrow fa fa-angle-down"></span></a>
             <span class="arrow"></span>
             <ul class="submenu">
-                <li><a href="${context.contextPath}/country/list/1" target="mainFrame">国家管理</a></li>
+                <li><a href="${context.contextPath}/country/list/1" target="mainFrame">国家一览</a></li>
+                <li><a href="${context.contextPath}/access-point-type/list/1" target="mainFrame">客户接入点类型一览</a></li>
+                <li><a href="${context.contextPath}/disease-type/list/1" target="mainFrame">疾病类型一览</a></li>
+                <li><a href="${context.contextPath}/website/list/1" target="mainFrame">入口网站一览</a></li>
             </ul>
         </li>
         <li class="">

@@ -1,6 +1,6 @@
-package com.syzc.sseip.dao;
+package com.syzc.sseip.dao.handler;
 
-import com.syzc.sseip.entity.enumtype.DiseaseType;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;

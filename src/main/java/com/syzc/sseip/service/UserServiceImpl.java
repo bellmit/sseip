@@ -31,7 +31,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
 
     @Override
     public User add(User user) {
-        if (userDao.exist(user.getUsername())) {
+        if (userDao.existUsername(user.getUsername())) {
             return null;
         }
         if (!userDao.add(user)) {
@@ -109,7 +109,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     }
 
     public Boolean exist(String username) {
-        return userDao.exist(username);
+        return userDao.existUsername(username);
     }
 
     @Override

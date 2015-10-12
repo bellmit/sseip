@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">推广国家一览</li>
+            <li class="active">客户访问点类型一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -26,40 +26,32 @@
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive">
                             <colgroup class="row">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
+                                <col class="col-sm-4">
+                                <col class="col-sm-4">
+                                <col class="col-sm-4">
                             </colgroup>
                             <thead>
                             <tr>
                                 <th class="text-right">id</th>
                                 <th class="text-right">名称</th>
-                                <th class="text-right">备注</th>
-                                <th class="text-right">ISO 3166-1, Alpha-2 code</th>
-                                <th class="text-right">更新时间</th>
                                 <th class="center">功能</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <#list page.list as country>
+                            <#list page.list as accessPointType>
                             <tr>
-                                <td class="text-right">${country.id}</td>
-                                <td class="text-right"><#if (country.name)??>${country.name}<#else><span class="label">不详</span></#if>
+                                <td class="text-right">${accessPointType.id}</td>
+                                <td class="text-right"><#if (accessPointType.name)??>${accessPointType.name}<#else><span
+                                        class="label">不详</span></#if>
                                 </td>
-                                <td class="text-right"><#if (country.memo)??>${country.memo}<#else><span class="label">不详</span></#if>
-                                </td>
-                                <td class="text-right"><#if (country.a2Code)??>${country.a2Code}<#else><span
-                                        class="label">不详</span></#if></td>
-                                <td class="text-right">${country.updated?string("yyyy-MM-dd HH:mm:ss")}</td>
                                 <td class="center">
-                                    <a href="/country/update/${country.id}"><span class="fa fa-edit"></span></a>
+                                    <a href="/access-point-type/update/${accessPointType.id}"><span
+                                            class="fa fa-edit"></span></a>
 
-                                    <form action="${context.contextPath}/country/remove" method="post"
-                                          style="display: inline;"><input type="hidden" name="id" value="${country.id}">
+                                    <form action="${context.contextPath}/access-point-type/remove" method="post"
+                                          style="display: inline;"><input type="hidden" name="id"
+                                                                          value="${accessPointType.id}">
                                         <button><span class="fa fa-trash"></span></button>
                                     </form>
                                 </td>
@@ -68,11 +60,12 @@
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/country/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="建造新的国家与地区条目"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2"><a
+                                    href="${context.contextPath}/access-point-type/add"
+                                    target="_self"
+                                    style="color:#FFF;text-decoration:none;"
+                                    title="创建新的客户接入点类型"
+                                    class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
                                 <span class="col-md-10">

@@ -6,14 +6,14 @@
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
-        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.RoleHandler"/>
+        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
     </resultMap>
     <resultMap id="UserDto" type="com.syzc.sseip.entity.UserDto">
         <id column="id" property="id"/>
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
-        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.RoleHandler"/>
+        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
         <association property="group" column="group_id" select="getGroup"/>
     </resultMap>
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
@@ -194,7 +194,7 @@
         SET password = sha2(concat('!a1@B2c3D4e5F6g7', #{newPassword}, '#h4$I5j6K7l8M9n0'), 256)
         WHERE id = #{id} AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{oldPassword}, '#h4$I5j6K7l8M9n0'), 256);
     </update>
-    <select id="exist" resultType="Boolean">
+    <select id="existUsername" resultType="Boolean">
         SELECT count(1) > 0
         FROM user
         WHERE username = #{username};

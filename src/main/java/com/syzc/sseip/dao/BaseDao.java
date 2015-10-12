@@ -16,4 +16,6 @@ public interface BaseDao<T> {
     List<T> list(@Param("offset") Long offset, @Param("size") Byte size);
 
     Long count();
+
+    Boolean exist(Long id);
 }

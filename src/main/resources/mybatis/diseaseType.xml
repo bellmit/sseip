@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.DiseaseTypeDao">
+    <resultMap id="DiseaseType" type="com.syzc.sseip.entity.DiseaseType">
+        <id column="id" property="id"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO disease_type (`name`) VALUE (#{entity.name});
+    </insert>
+    <delete id="remove" parameterType="Long">
+        delete from disease_type WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE disease_type
+        SET `name` =
+        <choose>
+            <when test="entity.name!=null and entity.name!=''">#{entity.name}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <select id="get" parameterType="Long" resultMap="DiseaseType">
+SELECT
+  id,
+  `name`
+FROM disease_type
+WHERE id = #{id};
+    </select>
+    <select id="exist" parameterType="Long" resultType="Boolean">
+SELECT
+  count(1)>0
+FROM disease_type
+WHERE id = #{id};
+    </select>
+    <select id="existName" parameterType="String" resultType="Boolean">
+SELECT
+  count(1)>0
+FROM disease_type
+WHERE `name`=#{name};
+    </select>
+    <select id="list" resultMap="DiseaseType">
+SELECT
+  id,
+  `name`
+FROM disease_type
+ORDER BY `name`
+LIMIT #{offset}, #{size};
+    </select>
+    <select id="count" resultType="Long">
+SELECT
+  count(1)
+FROM disease_type;
+    </select>
+</mapper>

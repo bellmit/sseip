@@ -1,7 +1,7 @@
 package com.syzc.sseip.entity;
 
 import com.syzc.sseip.entity.enumtype.AccessPointType;
-import com.syzc.sseip.entity.enumtype.DiseaseType;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Website;
 

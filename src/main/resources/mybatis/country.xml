@@ -43,6 +43,12 @@ SELECT
 FROM country
 WHERE id = #{id};
     </select>
+    <select id="exist" parameterType="Long" resultType="Boolean">
+SELECT
+  count(1)
+FROM country
+WHERE id = #{id};
+    </select>
     <select id="list" resultMap="Country">
 SELECT
   id,

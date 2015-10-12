@@ -5,7 +5,7 @@ import com.syzc.sseip.entity.Customer;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.entity.enumtype.AccessPointType;
-import com.syzc.sseip.entity.enumtype.DiseaseType;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import com.syzc.sseip.entity.enumtype.Website;
 import org.springframework.context.ApplicationContext;
 

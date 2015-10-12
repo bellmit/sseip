@@ -5,21 +5,21 @@
         <id column="id" property="id"/>
         <!--<result column="user_id" property="userId"/>-->
         <result column="group_id" property="groupId"/>
-        <result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.SexHandler"/>
-        <result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.DiseaseTypeHandler"/>
-        <result column="website" property="website" typeHandler="com.syzc.sseip.dao.WebsiteHandler"/>
+        <result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>
+        <result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>
+        <result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>
         <result column="access_point_type" property="accessPointType"
-                typeHandler="com.syzc.sseip.dao.AccessPointTypeHandler"/>
+                typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="group_id" property="groupId"/>
-        <result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.SexHandler"/>
-        <result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.DiseaseTypeHandler"/>
-        <result column="website" property="website" typeHandler="com.syzc.sseip.dao.WebsiteHandler"/>
+        <result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>
+        <result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>
+        <result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>
         <result column="access_point_type" property="accessPointType"
-                typeHandler="com.syzc.sseip.dao.AccessPointTypeHandler"/>
+                typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>
         <association property="user" column="user_id" select="getUser"/>
         <association property="group" column="group_id" select="getGroup"/>
     </resultMap>
@@ -28,7 +28,7 @@
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
-        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.RoleHandler"/>
+        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
     </resultMap>
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
         <id column="id" property="id"/>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.WebsiteDao">
+    <resultMap id="AccessPointType" type="com.syzc.sseip.entity.Website">
+        <id column="id" property="id"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO website (`name`,url) VALUE (#{entity.name},#{entity.url});
+    </insert>
+    <delete id="remove" parameterType="Long">
+        delete from website WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE website
+        SET `name` =
+        <choose>
+            <when test="entity.name!=null and entity.name!=''">#{entity.name}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        `url` =
+        <choose>
+            <when test="entity.url!=null and entity.url!=''">#{entity.url}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id}
+    </update>
+    <select id="get" parameterType="Long" resultMap="AccessPointType">
+SELECT
+  id,
+  `name`,
+  url
+FROM website
+WHERE id = #{id}
+    </select>
+    <select id="exist" parameterType="Long" resultType="Boolean">
+SELECT
+  count(1)>0
+FROM website
+WHERE id = #{id}
+    </select>
+    <select id="existUrl" parameterType="String" resultType="Boolean">
+SELECT
+  count(1)>0
+FROM website
+WHERE url = #{url}
+    </select>
+    <select id="list" resultMap="AccessPointType">
+SELECT
+  id,
+  `name`,
+  url
+FROM website
+ORDER BY `name`
+LIMIT #{offset}, #{size}
+    </select>
+    <select id="count" resultType="Long">
+SELECT
+  count(1)
+FROM website
+    </select>
+</mapper>

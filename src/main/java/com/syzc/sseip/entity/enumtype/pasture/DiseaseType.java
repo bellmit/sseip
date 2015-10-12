@@ -1,4 +1,4 @@
-package com.syzc.sseip.entity.enumtype;
+package com.syzc.sseip.entity.enumtype.pasture;
 
 import com.alibaba.fastjson.JSON;
 

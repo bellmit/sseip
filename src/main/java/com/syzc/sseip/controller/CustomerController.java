@@ -6,6 +6,7 @@ import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserDto;
 import com.syzc.sseip.entity.enumtype.*;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import com.syzc.sseip.service.CustomerService;
 import com.syzc.sseip.service.GroupService;
 import com.syzc.sseip.service.UserService;

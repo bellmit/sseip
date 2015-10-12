@@ -1,6 +1,6 @@
 package com.syzc.sseip.controller.converters;
 
-import com.syzc.sseip.entity.enumtype.DiseaseType;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import org.springframework.core.convert.converter.Converter;
 
 public class DiseaseTypeConverter implements Converter<String, DiseaseType> {

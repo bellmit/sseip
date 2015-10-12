@@ -1,4 +1,4 @@
-package com.syzc.sseip.dao;
+package com.syzc.sseip.dao.handler;
 
 import com.syzc.sseip.entity.enumtype.Sex;
 import org.apache.ibatis.type.JdbcType;

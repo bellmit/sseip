@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>更新贸易国家信息</title>
+    <title>添加入口网站</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -20,8 +20,9 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/country/list/1">推广国家一览</a></li>
-            <li class="active">更新国家条目</li>
+            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/website-type/list/1">入口网站一览</a>
+            </li>
+            <li class="active">添加入口网站</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -30,7 +31,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
-                <form method="post" id="addForm" class="form-horizontal">
+                <form method="post" class="form-horizontal">
                     <!-- #section:elements.form -->
                 <#if success??>
                     <div class="row">
@@ -54,37 +55,27 @@
 
                         <div class="col-sm-9">
                             <input name="name" type="text" size="30" class="col-xs-10 col-sm-5"
-                                   placeholder="名称" value="${(country.name)!''}" title="名称"/>
+                                   placeholder="名称" title="名称" value="${(form.name)!''}"/>
                         </div>
                     </div>
 
                     <div class="space-4"></div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">ISO 3166-1, Alpha-2 code</label>
+                        <label class="col-sm-3 control-label no-padding-right">域名</label>
 
                         <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="description" type="text" name="a2Code"
-                                   placeholder="ISO 3166-1, Alpha-2 code" value="${(country.a2Code)!''}"
-                                   title="ISO 3166-1, Alpha-2 code"/>
-                        </div>
-                    </div>
-
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">备注</label>
-
-                        <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="description" type="text" name="memo"
-                                   placeholder="备注" title="备注" value="${(country.memo)!''}"/>
+                            <input name="url" type="text" size="30" class="col-xs-10 col-sm-5"
+                                   placeholder="域名" title="域名" value="${(form.url)!''}"/>
                         </div>
                     </div>
 
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-9">
                             <button class="btn btn-info" type="submit"><span
-                                    class="ace-icon fa fa-plus bigger-110"></span>更新条目
+                                    class="ace-icon fa fa-plus bigger-110"></span>添加入口网站
                             </button>
-                            <button class="btn" type="reset"><span class="ace-icon fa fa-undo bigger-110"></span>表单重置
+                            <button class="btn" type="reset">
+                                <span class="ace-icon fa fa-undo bigger-110"></span>表单重置
                             </button>
                         </div>
                     </div>
@@ -96,8 +87,12 @@
 </div>
 <#include "/common/common_js.ftl">
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
-<script type="text/javascript" src="${context.contextPath}/resources/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#addForm").cmsvalidate();
+    });
+</script>
 </body>
 </html>
