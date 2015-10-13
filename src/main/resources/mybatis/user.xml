@@ -15,9 +15,16 @@
         <result column="id_number" property="idNumber"/>
         <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
         <association property="group" column="group_id" select="getGroup"/>
+        <association property="userLogon" column="id" select="getUserLogonByUser"/>
     </resultMap>
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
         <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="UserLogon" type="com.syzc.sseip.entity.UserLogon">
+        <id column="id" property="id"/>
+        <result column="last_sign_in" property="lastSignIn"/>
+        <result column="last_ip" property="lastIP"/>
+        <result column="last_mac_addr" property="lastMacAddr"/>
     </resultMap>
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO user (username, password, real_name, age,id_number, address,phone,role,group_id)
@@ -241,4 +248,18 @@
         FROM `group`
         WHERE id = #{id};
     </select>
+    <select id="getUserLogonByUser" parameterType="Long" resultMap="UserLogon">
+        SELECT *
+        FROM user_logon
+        WHERE user_id = #{id};
+    </select>
+    <insert id="insertUserLogon">
+INSERT INTO user_logon (user_id, last_mac_addr, last_ip)
+  VALUE (#{userLogon.userId}, #{userLogon.lastMacAddr}, #{userLogon.lastIP});
+    </insert>
+    <update id="updateUserLogon">
+UPDATE user_logon
+SET last_mac_addr = #{userLogon.lastMacAddr}, last_ip = #{userLogon.lastIP}
+where user_id= #{userLogon.userId}
+    </update>
 </mapper>

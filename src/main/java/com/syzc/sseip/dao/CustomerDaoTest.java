@@ -2,12 +2,14 @@ package com.syzc.sseip.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.entity.enumtype.AccessPointType;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
+import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
+import com.syzc.sseip.util.LocalAcUtil;
 import org.springframework.context.ApplicationContext;
+
+import java.util.Calendar;
 
 public class CustomerDaoTest {
     public static void main(String[] args) {
@@ -71,7 +73,15 @@ public class CustomerDaoTest {
         System.out.println(d.update(c));
         System.out.println(JSON.toJSONString(d.get(3L), true));*/
 
-        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, null, null, 1L, (byte) 100), true));
-        System.out.println(JSON.toJSONString(d.countByFilter(null, null, null, null, null, null, null, null), true));
+//        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, null, null, null, null, 1L, (byte) 100), true));
+//        System.out.println(JSON.toJSONString(d.countByFilter(null, null, null, null, null, null, null, null, null, null), true));
+
+        Calendar since = Calendar.getInstance();
+        Calendar till = Calendar.getInstance();
+        since.set(2015, 9, 6);
+        till.set(2015, 9, 8);
+
+        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, since.getTime(), till.getTime(), null, null, 1L, (byte) 100), true));
+        System.out.println(JSON.toJSONString(d.countByFilter(null, null, null, null, null, null, since.getTime(), till.getTime(), null, null), true));
     }
 }

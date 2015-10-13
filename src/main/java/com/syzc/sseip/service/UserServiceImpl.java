@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.UserDao;
 import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
@@ -125,6 +126,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     @Override
     public Role getRole(Long userId) {
         return userDao.getRole(userId);
+    }
+
+    @Override
+    public Boolean saveLogonInfo(UserLogon userLogon) {
+        if (!userDao.updateUserLogon(userLogon)) {
+            if (!userDao.insertUserLogon(userLogon)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {

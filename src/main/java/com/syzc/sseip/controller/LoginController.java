@@ -3,6 +3,7 @@ package com.syzc.sseip.controller;
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.Producer;
 import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.service.UserService;
 import com.syzc.sseip.util.AgeUtil;
 import org.apache.log4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
@@ -49,18 +51,25 @@ public class LoginController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String login(@RequestParam("captcha") String captcha, @RequestParam("username") String username,
-                        @RequestParam("password") String password, @RequestParam(required = false) String refer, HttpSession httpSession, Model model) {
+                        @RequestParam("password") String password, @RequestParam(required = false) String refer,
+                        HttpSession httpSession, Model model, HttpServletRequest request) {
         String kaptcha = (String) httpSession.getAttribute("kaptcha");
         if (!captcha.equals(kaptcha)) {
             model.addAttribute("error", "验证码错误");
             return "/login";
         }
+        String addr = request.getRemoteAddr();
         User login = userService.login(username, password);
         if (login == null) {
             model.addAttribute("error", "用户名或者密码有错误，是不是忘了。");
 //        ContextLoader.getCurrentWebApplicationContext().getServletContext().getServletContextName()
             return "/login";
         }
+        UserLogon userLogon;
+        userLogon = new UserLogon();
+        userLogon.setLastIP(request.getRemoteAddr());
+        userLogon.setUserId(login.getId());
+        userService.saveLogonInfo(userLogon);
 
         httpSession.setAttribute("loginUser", login);
         if (refer != null) {

@@ -2,7 +2,7 @@ package com.syzc.sseip.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.User;
-import com.syzc.sseip.entity.enumtype.Role;
+import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.util.LocalAcUtil;
 import org.springframework.context.ApplicationContext;
 
@@ -13,16 +13,16 @@ public class UserDaoTest {
         UserDao d = (UserDao) ac.getBean("userDao");
 
         User u;
-        u = new User();
-        u.setUsername("abc");
-        u.setPassword("abc");
-        u.setRealName("天蓝");
-        u.setAge(42);
-        u.setIdNumber("123456789012345678");
-        u.setAddress("石家庄市");
-        u.setPhone("13331533315");
-        u.setGroupId(1L);
-        u.setRole(Role.EMPLOYEE);
+//        u = new User();
+//        u.setUsername("abc");
+//        u.setPassword("abc");
+//        u.setRealName("天蓝");
+//        u.setAge(42);
+//        u.setIdNumber("123456789012345678");
+//        u.setAddress("石家庄市");
+//        u.setPhone("13331533315");
+//        u.setGroupId(1L);
+//        u.setRole(Role.EMPLOYEE);
 
 //        System.out.println(JSON.toJSONString(d.add(u), true));
 //        System.out.println(JSON.toJSONString(u.getId(), true));
@@ -49,11 +49,11 @@ public class UserDaoTest {
 //        System.out.println(JSON.toJSONString(d.listByGroup(1L, 0L, (byte) 10), true));
 //        System.out.println(d.countByGroup(1L));
 
-        System.out.println(JSON.toJSONString(d.listByRole(Role.DIRECTOR, 0L, (byte) 10), true));
-        System.out.println(d.countByRole(Role.DIRECTOR));
+//        System.out.println(JSON.toJSONString(d.listByRole(Role.DIRECTOR, 0L, (byte) 10), true));
+//        System.out.println(d.countByRole(Role.DIRECTOR));
 
-        System.out.println(JSON.toJSONString(d.listByRole(Role.MANAGER, 0L, (byte) 10), true));
-        System.out.println(d.countByRole(Role.MANAGER));
+//        System.out.println(JSON.toJSONString(d.listByRole(Role.MANAGER, 0L, (byte) 10), true));
+//        System.out.println(d.countByRole(Role.MANAGER));
 
 //        System.out.println(d.resetPassword(3L, "abc"));
 //        System.out.println(d.updatePassword(3L, "abc", "abc2"));
@@ -66,5 +66,20 @@ public class UserDaoTest {
 //        System.out.println(d.updateRole(3L, Role.DIRECTOR));
 
 //        System.out.println(d.getRole(3L));
+
+        System.out.println(JSON.toJSONString(d.get(3L), true));
+
+        UserLogon userLogon;
+        userLogon = new UserLogon();
+        userLogon.setLastIP("987");
+        userLogon.setLastMacAddr("abcde");
+        userLogon.setUserId(7L);
+//        d.insertUserLogon(userLogon);
+
+        userLogon = new UserLogon();
+        userLogon.setLastIP("ffddee");
+        userLogon.setLastMacAddr("339988");
+        userLogon.setUserId(7L);
+        System.out.println(d.updateUserLogon(userLogon));
     }
 }

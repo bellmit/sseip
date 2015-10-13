@@ -43,6 +43,7 @@
                                 <th class="text-right">年龄</th>
                                 <th class="text-right">地址</th>
                                 <th class="text-right">症状</th>
+                                <th class="text-right">电子邮件</th>
                                 <th class="text-right">电话</th>
                                 <th class="text-right">网站</th>
                                 <th class="text-right">疾病类型</th>
@@ -77,6 +78,9 @@
                                     <span>没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if (customer.symptom)??>${customer.symptom}<#else>
+                                    <span>没有写</span></#if>
+                                </td>
+                                <td class="text-right"><#if (customer.email)??>${customer.email}<#else>
                                     <span>没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if (customer.tel)??>${customer.tel}<#else>

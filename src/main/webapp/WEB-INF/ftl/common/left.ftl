@@ -60,7 +60,7 @@
                 </li>
                 <li>
                     <a href="${context.contextPath}/customer/filter/1" target="mainFrame"><span
-                            class="menu-icon fa fa-list"></span><span class="menu-text">客户资源复合查询</span></a>
+                            class="menu-icon fa fa-search"></span><span class="menu-text">客户资源复合查询</span></a>
                 </li>
                 <li>
                     <a href="${context.contextPath}/customer/add" target="mainFrame">

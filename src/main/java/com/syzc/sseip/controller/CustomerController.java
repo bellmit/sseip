@@ -5,7 +5,10 @@ import com.syzc.sseip.entity.Customer;
 import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserDto;
-import com.syzc.sseip.entity.enumtype.*;
+import com.syzc.sseip.entity.enumtype.AccessPointType;
+import com.syzc.sseip.entity.enumtype.Role;
+import com.syzc.sseip.entity.enumtype.Sex;
+import com.syzc.sseip.entity.enumtype.Website;
 import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import com.syzc.sseip.service.CustomerService;
 import com.syzc.sseip.service.GroupService;
@@ -112,11 +115,11 @@ public class CustomerController {
                 throw AuthException.create("没有权限", Level.DEBUG);
             }
             // check groupId range ..?
-            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency,
+            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
                     loginUser.getGroupId(), userId, pageNo, pageSize);
         } else {
             //admin || manager
-            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency,
+            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
                     groupId, userId, pageNo, pageSize);
         }
 
@@ -140,6 +143,7 @@ public class CustomerController {
         model.addAttribute("users", users);
 
         model.addAttribute("websites", Website.values());
+        model.addAttribute("dateRange", dateRange);
         model.addAttribute("accessPointTypes", AccessPointType.values());
         model.addAttribute("diseaseTypes", DiseaseType.values());
         model.addAttribute("sexTypes", Sex.values());
@@ -251,9 +255,12 @@ public class CustomerController {
         User user = (User) session.getAttribute("loginUser");
         customer.setUserId(user.getId());
         customer.setGroupId(user.getGroupId());
+        System.out.println(JSON.toJSONString(customer, true));
         //should complete the operation. if failed, some exception should be thrown, about customed "CustomerAddFailException"
-        Customer c = customerService.add(customer);
-        System.out.println(JSON.toJSONString(c, true));
+        customer = customerService.add(customer);
+        System.out.println(JSON.toJSONString(customer, true));
+
+        model.addAttribute("customer", customer);
         // with info label, and links to user console, own role's customer list, or "/", and "add more", and show page with authorized edit links...
         return "customer-added";
     }

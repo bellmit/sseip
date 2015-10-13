@@ -5,21 +5,19 @@
         <id column="id" property="id"/>
         <!--<result column="user_id" property="userId"/>-->
         <result column="group_id" property="groupId"/>
-        <result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>
-        <result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>
-        <result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>
-        <result column="access_point_type" property="accessPointType"
-                typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>
+        <!--<result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>-->
+        <!--<result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>-->
+        <!--<result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>-->
+        <!--<result column="access_point_type" property="accessPointType" typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>-->
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="group_id" property="groupId"/>
-        <result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>
-        <result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>
-        <result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>
-        <result column="access_point_type" property="accessPointType"
-                typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>
+        <!--<result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>-->
+        <!--<result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>-->
+        <!--<result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>-->
+        <!--<result column="access_point_type" property="accessPointType" typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>-->
         <association property="user" column="user_id" select="getUser"/>
         <association property="group" column="group_id" select="getGroup"/>
     </resultMap>
@@ -28,13 +26,14 @@
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
-        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
+        <!--<result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>-->
     </resultMap>
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
         <id column="id" property="id"/>
     </resultMap>
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
-        INSERT INTO `gz`.`customer` (`name`, `sex`, `age`, `address`, `symptom`, `tel`, `website`, `disease_type`,
+        INSERT INTO customer (`name`, `sex`, `age`, `address`, `symptom`, `email`, `tel`, `website`,
+        `disease_type`,
         `access_point_type`, `faraway`, `emergency`, `user_id`, `group_id`)
         VALUES
         (
@@ -61,6 +60,11 @@
         ,
         <choose>
             <when test="entity.symptom!=null and entity.symptom!=''">#{entity.symptom}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.email!=null and entity.email!=''">#{entity.email}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
@@ -120,9 +124,30 @@
         </choose>
         ,
         `age` = #{entity.age},
-        `address` = #{entity.address},
-        `symptom` = #{entity.symptom},
-        `tel` = #{entity.tel},
+        `address` =
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        `symptom` =
+        <choose>
+            <when test="entity.symptom!=null and entity.symptom!=''">#{entity.symptom}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        `email` =
+        <choose>
+            <when test="entity.email!=null and entity.email!=''">#{entity.email}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        `tel` =
+        <choose>
+            <when test="entity.tel!=null and entity.tel!=''">#{entity.tel}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
         `website` =
         <choose>
             <when test="entity.website!=null">#{entity.website}</when>
@@ -153,6 +178,7 @@
         `age`,
         `address`,
         `symptom`,
+        `email`,
         `tel`,
         `website`,
         `disease_type`,
@@ -174,6 +200,7 @@
         `age`,
         `address`,
         `symptom`,
+        `email`,
         `tel`,
         `website`,
         `disease_type`,
@@ -184,7 +211,7 @@
         `user_id`,
         `group_id`
         FROM
-        `gz`.`customer`
+        customer
         order by id desc
         LIMIT #{offset}, #{size}
     </select>
@@ -196,6 +223,7 @@
         `age`,
         `address`,
         `symptom`,
+        `email`,
         `tel`,
         `website`,
         `disease_type`,
@@ -206,7 +234,7 @@
         `user_id`,
         `group_id`
         FROM
-        `gz`.`customer`
+        customer
         <where>
             <if test="sex != null">
                 sex=#{sex}
@@ -225,6 +253,12 @@
             </if>
             <if test="emergency !=null">
                 and emergency=#{emergency}
+            </if>
+            <if test="since !=null">
+                and added&gt;=#{since}
+            </if>
+            <if test="till !=null">
+                and added&lt;=#{till}
             </if>
             <if test="groupId !=null">
                 and group_id=#{groupId}
@@ -260,6 +294,12 @@
             <if test="emergency !=null">
                 and emergency=#{emergency}
             </if>
+            <if test="since !=null">
+                and added&gt;=#{since}
+            </if>
+            <if test="till !=null">
+                and added&lt;=#{till}
+            </if>
             <if test="groupId !=null">
                 and group_id=#{groupId}
             </if>
@@ -280,6 +320,7 @@
         `age`,
         `address`,
         `symptom`,
+        `email`,
         `tel`,
         `website`,
         `disease_type`,
@@ -290,7 +331,7 @@
         `user_id`,
         `group_id`
         FROM
-        `gz`.`customer`
+        customer
         WHERE user_id=#{userId}
         order by id desc
         LIMIT #{offset}, #{size}
@@ -306,6 +347,7 @@
         `age`,
         `address`,
         `symptom`,
+        `email`,
         `tel`,
         `website`,
         `disease_type`,
@@ -316,7 +358,7 @@
         `user_id`,
         `group_id`
         FROM
-        `gz`.`customer`
+        customer
         WHERE group_id=#{groupId}
         order by id desc
         LIMIT #{offset}, #{size}

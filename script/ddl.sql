@@ -32,12 +32,13 @@ CREATE TABLE customer (
   age               INT,
   address           TEXT,
   symptom           TEXT,
+  email             VARCHAR(254),
   tel               VARCHAR(32),
   website           SMALLINT,
   disease_type      SMALLINT,
   access_point_type SMALLINT,
-  faraway           TINYINT(1),
-  emergency         TINYINT(1),
+  faraway           TINYINT(1)      DEFAULT FALSE,
+  emergency         TINYINT(1)      DEFAULT FALSE,
   added             DATETIME        DEFAULT current_timestamp,
   user_id           INT,
   group_id          INT,
@@ -76,4 +77,13 @@ CREATE TABLE user_role (
   user_id INT,
   role    INT,
   CONSTRAINT fk_user_role_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
+);
+
+CREATE TABLE user_logon (
+  id            INT PRIMARY KEY AUTO_INCREMENT,
+  user_id       INT,
+  last_sign_in  DATETIME        DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
+  last_mac_addr VARCHAR(6),
+  last_ip       VARCHAR(39),
+  CONSTRAINT fk_user_logon_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );

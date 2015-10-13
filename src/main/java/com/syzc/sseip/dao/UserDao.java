@@ -1,6 +1,7 @@
 package com.syzc.sseip.dao;
 
 import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.entity.enumtype.Role;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -40,4 +41,8 @@ public interface UserDao extends BaseDao<User> {
     Boolean updateRole(@Param("userId") Long userId, @Param("role") Role role);
 
     Role getRole(Long id);
+
+    Boolean insertUserLogon(@Param("userLogon") UserLogon userLogon);
+
+    Boolean updateUserLogon(@Param("userLogon") UserLogon userLogon);
 }

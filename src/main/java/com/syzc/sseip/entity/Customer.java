@@ -1,11 +1,13 @@
 package com.syzc.sseip.entity;
 
 import com.syzc.sseip.entity.enumtype.AccessPointType;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Customer {
     private Long id;
@@ -14,6 +16,7 @@ public class Customer {
     private Short age;
     private String address;
     private String symptom;
+    private String email;
     private String tel;
 
     private Website website;
@@ -31,7 +34,7 @@ public class Customer {
     private Long userId;
     private Long groupId;
 
-    private String[] images;
+    private List<String> images = new LinkedList<>();
 
     public Customer() {
     }
@@ -82,6 +85,14 @@ public class Customer {
 
     public void setSymptom(String symptom) {
         this.symptom = symptom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getTel() {
@@ -154,5 +165,17 @@ public class Customer {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public void addImage(String image) {
+        images.add(image);
     }
 }

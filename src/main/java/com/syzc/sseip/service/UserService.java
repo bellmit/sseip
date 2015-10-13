@@ -2,6 +2,7 @@ package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.UserDao;
 import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.util.Page;
 
@@ -33,4 +34,6 @@ public interface UserService extends BaseService<User, UserDao> {
     Boolean updateRole(Long userId, Role role);
 
     Role getRole(Long userId);
+
+    Boolean saveLogonInfo(UserLogon userLogon);
 }

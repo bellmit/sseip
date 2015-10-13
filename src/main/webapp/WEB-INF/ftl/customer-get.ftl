@@ -32,6 +32,8 @@
                     <dd><#if (customer.address)??>${customer.address}<#else><span class="label">不详</span></#if></dd>
                     <dt>症状</dt>
                     <dd><#if (customer.symptom)??>${customer.symptom}<#else><span class="label">不详</span></#if></dd>
+                    <dt>电子邮件</dt>
+                    <dd><#if (customer.email)??>${customer.email}<#else><span class="label">不详</span></#if></dd>
                     <dt>电话</dt>
                     <dd><#if (customer.tel)??>${customer.tel}<#else><span class="label">不详</span></#if></dd>
                     <dt>网站</dt>

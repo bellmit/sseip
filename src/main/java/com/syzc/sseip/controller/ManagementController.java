@@ -36,6 +36,6 @@ public class ManagementController {
         Long logonId = loginUser.getId();
         User user = userService.get(logonId);
         model.addAttribute("user", user);
-        return "/profile";
+        return "/self-profile";
     }
 }

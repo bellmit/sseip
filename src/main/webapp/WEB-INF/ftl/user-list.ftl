@@ -44,6 +44,8 @@
                                 <th class="text-right">地址</th>
                                 <th class="text-right">电话</th>
                                 <th class="text-right">注册时间</th>
+                                <th class="text-right">最后登录时间</th>
+                                <th class="text-right">最后登录IP</th>
                                 <th class="text-right">部门</th>
                                 <th class="text-right">角色</th>
                                 <th class="center">功能</th>
@@ -64,25 +66,36 @@
                                 </td>
 
                                 <td class="text-right"><#if user.idNumber??>${user.idNumber}<#else>
-                                    <span>没有写</span></#if>
+                                    <span class="label">没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if user.address??>${user.address}<#else>
-                                    <span>没有写</span></#if>
+                                    <span class="label">没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if user.phone??>${user.phone}<#else>
-                                    <span>没有写</span></#if>
+                                    <span class="label">没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if user.added??>${user.added?string("yyyy-MM-dd,HH:mm:ss")}<#else>
-                                    <span>没有写</span></#if></td>
+                                    <span class="label">没有写</span></#if></td>
+
+                                <td class="text-right"><#if (user.userLogon.lastSignIn)??>${user.userLogon.lastSignIn?string("yyyy-MM-dd HH:mm:ss")}<#else>
+                                    <span class="label">没有写</span></#if></td>
+                                <td class="text-right"><#if (user.userLogon.lastIP)??>${user.userLogon.lastIP}<#else>
+                                    <span class="label">没有写</span></#if>
+                                </td>
+                            <#--
+                                                            <td class="text-right"><#if (user.userLogon.lastMacAddr)??>${user.userLogon.lastMacAddr}<#else>
+                                                                <span class="label">没有写</span></#if></td>
+                            -->
+
                                 <td class="text-right"><#if (user.group.name)??>${user.group.name}<#else>
-                                    <span>没有写</span></#if>
+                                    <span class="label">没有写</span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                         <a href="${context.contextPath}/group/user-update/${user.id}"
                                            title="变更部门"><span class="fa fa-gear"></span></a>
                                     </#if>
                                 </td>
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
-                                    <span>没有写</span></#if>
+                                    <span class="label">没有写</span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                         <a href="${context.contextPath}/role/updaterole/${user.id}"
                                            title="变更角色"><span class="fa fa-gear"></span></a>

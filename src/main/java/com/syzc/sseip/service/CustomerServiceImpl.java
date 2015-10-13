@@ -4,17 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.entity.enumtype.AccessPointType;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
+import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
+import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.PageUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service
 public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> implements CustomerService {
@@ -54,10 +55,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     }
 
     @Override
-    public Page<Customer> listByFilter(Sex sex, Website website, AccessPointType accessPointType, DiseaseType diseaseType, Boolean faraway, Boolean emergency, Long groupId, Long userId, Long pageNo, Byte size) {
-        Long total = customerDao.countByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId);
+    public Page<Customer> listByFilter(Sex sex, Website website, AccessPointType accessPointType, DiseaseType diseaseType, Boolean faraway, Boolean emergency, Date since, Date till, Long groupId, Long userId, Long pageNo, Byte size) {
+        Long total = customerDao.countByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till, groupId, userId);
         Page<Customer> page = PageUtil.make(pageNo, size, total);
-        page.setList(customerDao.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId, page.getRowOffset(), page.getPageSize()));
+        page.setList(customerDao.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till, groupId, userId, page.getRowOffset(), page.getPageSize()));
         return page;
     }
 

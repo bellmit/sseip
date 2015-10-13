@@ -20,7 +20,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/user/list/1">客户资源列表</a></li>
+            <li><a href="${context.contextPath}/customer/list/1">客户资源列表</a></li>
             <li class="active">填写客户资源资料</li>
         </ul>
         <!-- /.breadcrumb -->
@@ -102,6 +102,16 @@
                         <div class="col-sm-9">
                             <input name="symptom" type="text" size="30" class="col-xs-10 col-sm-5"
                                    placeholder="症状" value="${(form.symptom)!''}"/>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">电子邮件</label>
+
+                        <div class="col-sm-9">
+                            <input name="email" type="email" size="30" class="col-xs-10 col-sm-5" placeholder="电子邮件"
+                                   value="${(form.email)!''}"/>
                         </div>
                     </div>
 

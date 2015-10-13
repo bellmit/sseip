@@ -23,7 +23,7 @@
 
     <div class="page-content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-xs-12">
                 <form id="filter-form" action="" method="get" role="search"></form>
                 <select name="sex" class="col-md-2 text-right red" form="filter-form" title="选择性别">
                     <option <#if !(RequestParameters.sex)?? || RequestParameters.sex=''>selected</#if> value="">选择性别
@@ -43,10 +43,10 @@
                         value="${website.code}">${website.textName}</option>
                 </#list>
                 </select>
-                <select name="accessPointType" class="col-md-2 text-right pink" form="filter-form" title="选择介入点类型">
+                <select name="accessPointType" class="col-md-2 text-right pink" form="filter-form" title="选择接入点类型">
                     <option
                     <#if !(RequestParameters.accessPointType)??||RequestParameters.accessPointType=''>selected</#if>
-                    value="">选择介入点类型
+                    value="">选择接入点类型
                     </option>
                 <#list accessPointTypes as accessPointType>
                     <option
@@ -107,7 +107,9 @@
                 </#list>
                 </select>
 
-                <label class="col-md-3 btn btn-pink btn-xs" type="text" id="date-range">选择日期范围</label>
+            <#--<input class="col-md-3 btn btn-pink btn-xs" type="text" id="date-range" placeholder="选择日期范围">-->
+                <input class="col-md-3" id="date-range" placeholder="选择日期时间范围" title="选择日期时间范围"
+                       readonly="readonly"/>
             <#--<input form="filter-form" name="since" type="hidden" id="date-since">-->
             <#--<input form="filter-form" name="till" type="hidden" id="date-till">-->
                 <input form="filter-form" name="dateRange" type="hidden" id="date-range-input">
@@ -148,6 +150,7 @@
                                 <th class="text-right">年龄</th>
                                 <th class="text-right">地址</th>
                                 <th class="text-right">症状</th>
+                                <th class="text-right">电子邮件</th>
                                 <th class="text-right">电话</th>
                                 <th class="text-right">网站</th>
                                 <th class="text-right">疾病类型</th>
@@ -182,6 +185,9 @@
                                     <span>没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if (customer.symptom)??>${customer.symptom}<#else>
+                                    <span>没有写</span></#if>
+                                </td>
+                                <td class="text-right"><#if (customer.email)??>${customer.email}<#else>
                                     <span>没有写</span></#if>
                                 </td>
                                 <td class="text-right"><#if (customer.tel)??>${customer.tel}<#else>
@@ -256,6 +262,7 @@
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
 <script>
+    var l;
     $(function () {
         var d = new Date();
         $('#date-range').daterangepicker({
@@ -283,8 +290,12 @@
             $('#date-range').text([start.format('YYYY年M月D日H时'), ' 到 ', end.format('YYYY年M月D日H时')].join(''));
 //            $('#date-since').val(start.format('YYYY-MM-DD HH'));
             start.unix();
+            l = start;
 //            $('#date-till').val(end.format('YYYY-MM-DD HH'));
-            $('#date-range-input').val([start.unix(), end.unix()].join());
+            $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
+        });
+        $('#date-range').on('cancel.daterangepicker', function () {
+            alert('canceled!');
         });
     });
 </script>
