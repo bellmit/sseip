@@ -143,7 +143,8 @@ public class CustomerController {
         model.addAttribute("users", users);
 
         model.addAttribute("websites", Website.values());
-        model.addAttribute("dateRange", dateRange);
+        if (dateRange != null && dateRange.length > 0)
+            model.addAttribute("dateRange", new Date[]{since, till});
         model.addAttribute("accessPointTypes", AccessPointType.values());
         model.addAttribute("diseaseTypes", DiseaseType.values());
         model.addAttribute("sexTypes", Sex.values());

@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>提交资料完成</title>
+    <title>国家添加完成</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">

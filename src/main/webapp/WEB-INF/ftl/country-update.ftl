@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>更新贸易国家信息</title>
+    <title>更新国家信息</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -20,8 +20,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/country/list/1">推广国家一览</a></li>
-            <li class="active">更新国家条目</li>
+            <li><a href="${context.contextPath}/country/list/1">国家一览</a></li>
+            <li class="active">更新国家信息</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -82,9 +82,9 @@
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-9">
                             <button class="btn btn-info" type="submit"><span
-                                    class="ace-icon fa fa-plus bigger-110"></span>更新条目
+                                    class="ace-icon fa fa-plus bigger-110"></span>更新
                             </button>
-                            <button class="btn" type="reset"><span class="ace-icon fa fa-undo bigger-110"></span>表单重置
+                            <button class="btn" type="reset"><span class="ace-icon fa fa-undo bigger-110"></span>重置
                             </button>
                         </div>
                     </div>

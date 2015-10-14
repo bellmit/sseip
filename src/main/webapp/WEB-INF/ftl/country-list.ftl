@@ -2,6 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
+    <title>国家一览</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -12,7 +13,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">推广国家一览</li>
+            <li class="active">国家一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>

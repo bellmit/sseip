@@ -108,11 +108,14 @@
                 </select>
 
             <#--<input class="col-md-3 btn btn-pink btn-xs" type="text" id="date-range" placeholder="选择日期范围">-->
+            <#--<input class="col-md-3" id="date-range" placeholder="选择日期时间范围" title="选择日期时间范围" readonly="readonly"/>-->
                 <input class="col-md-3" id="date-range" placeholder="选择日期时间范围" title="选择日期时间范围"
-                       readonly="readonly"/>
+                       value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+
             <#--<input form="filter-form" name="since" type="hidden" id="date-since">-->
             <#--<input form="filter-form" name="till" type="hidden" id="date-till">-->
-                <input form="filter-form" name="dateRange" type="hidden" id="date-range-input">
+                <input form="filter-form" name="dateRange" type="text" id="date-range-input" style="display: none;"
+                       value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
             </div>
         </div>
         <div class="row">
@@ -130,6 +133,20 @@
                 <!-- PAGE CONTENT BEGINS -->
                 <div class="row">
                     <div class="col-xs-12">
+                    <#--<div class="page-header position-relative">-->
+                        <div class="position-relative">
+                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
+                                                                       target="_self"
+                                                                       style="color:#FFF;text-decoration:none;"
+                                                                       title="填写客户资源表单"
+                                                                       class="btn btn-info fa fa-plus"></a> <a
+                                    href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
+                                    title="刷新列表"></a></span>
+                                <span class="col-md-10">
+                                <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+                                </span>
+                            </div>
+                        </div>
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
                                style="word-break: break-all;table-layout:fixed">
@@ -266,15 +283,13 @@
     $(function () {
         var d = new Date();
         $('#date-range').daterangepicker({
+            "autoUpdateInput": false,
             "format": "YYYY/MM/DD HH",
-            "timePicker": true,
-            "timePicker24Hour": true,
-            "timePickerIncrement": 70,
             "locale": {
                 "format": "YYYY-MM-DD HH",
                 "separator": ",",
                 "applyLabel": "选择",
-                "cancelLabel": "取消",
+                "cancelLabel": "清除",
                 "fromLabel": "从",
                 "toLabel": "到",
                 "customRangeLabel": "订制",
@@ -282,21 +297,23 @@
                 "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
                 "firstDay": 1
             },
+            "timePicker": true,
+            "timePicker24Hour": true,
+            "timePickerIncrement": 70,
 //            "maxDate": [d.getMonth() + 1, d.getDate() + 1, d.getFullYear()].join('/')
             "maxDate": [d.getFullYear(), d.getMonth() + 1, d.getDate() + 1].join('-')
         }, function (start, end, label) {
-            console.log('New date range selected: ' + start.format('YYYY-MM-DD HH') + ' to ' + end.format('YYYY-MM-DD HH'));
-            console.log(start);
-            $('#date-range').text([start.format('YYYY年M月D日H时'), ' 到 ', end.format('YYYY年M月D日H时')].join(''));
-//            $('#date-since').val(start.format('YYYY-MM-DD HH'));
-            start.unix();
-            l = start;
-//            $('#date-till').val(end.format('YYYY-MM-DD HH'));
+//            console.log('New date range selected: ' + start.format('YYYY-MM-DD HH') + ' to ' + end.format('YYYY-MM-DD HH'));
+//            console.log(start);
+            $('#date-range').val([start.format('YYYY年MM月DD日HH时'), ' 到 ', end.format('YYYY年MM月DD日HH时')].join(''));
+//            l = start;//用于调试
             $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
         });
-        $('#date-range').on('cancel.daterangepicker', function () {
-            alert('canceled!');
-        });
+
+    <#if dateRange?? && dateRange?size gt 0 >
+    <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->
+    <#--$('#date-range-input').val([${dateRange[0]?long?c}, ${dateRange[1]?long?c}].join());-->
+    </#if>
     });
 </script>
 </body>
