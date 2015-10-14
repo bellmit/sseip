@@ -1,4 +1,4 @@
-package com.syzc.sseip.entity;
+package com.syzc.sseip.entity.pasture;
 
 public class AccessPointType {
     private Long id;

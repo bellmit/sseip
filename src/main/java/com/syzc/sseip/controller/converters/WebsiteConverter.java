@@ -1,6 +1,6 @@
 package com.syzc.sseip.controller.converters;
 
-import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.Website;
 import org.springframework.core.convert.converter.Converter;
 
 public class WebsiteConverter implements Converter<String, Website> {

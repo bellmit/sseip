@@ -1,6 +1,6 @@
 package com.syzc.sseip.controller;
 
-import com.syzc.sseip.entity.AccessPointType;
+import com.syzc.sseip.entity.pasture.AccessPointType;
 import com.syzc.sseip.service.AccessPointTypeService;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.NotExistException;

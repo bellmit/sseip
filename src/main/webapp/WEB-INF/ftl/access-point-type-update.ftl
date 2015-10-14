@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>更新客户接入点类型信息</title>
+    <title>更新推广类型信息</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -20,8 +20,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/access-point-type/list/1">客户接入点类型一览</a></li>
-            <li class="active">更新客户接入点类型信息</li>
+            <li><a href="${context.contextPath}/access-point-type/list/1">推广类型一览</a></li>
+            <li class="active">更新推广类型信息</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -63,7 +63,7 @@
                             <button class="btn btn-info" type="submit"><span
                                     class="ace-icon fa fa-plus bigger-110"></span>更新
                             </button>
-                            <button class="btn" type="reset"><span class="ace-icon fa fa-undo bigger-110"></span>表单重置
+                            <button class="btn" type="reset"><span class="ace-icon fa fa-undo bigger-110"></span>重置
                             </button>
                         </div>
                     </div>

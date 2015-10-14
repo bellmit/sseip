@@ -16,7 +16,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">客户资源列表</li>
+            <li class="active">顾客资源列表</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -138,7 +138,7 @@
                             <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
                                                                        target="_self"
                                                                        style="color:#FFF;text-decoration:none;"
-                                                                       title="填写客户资源表单"
+                                                                       title="填写顾客资源"
                                                                        class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
@@ -252,7 +252,7 @@
                             <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
                                                                        target="_self"
                                                                        style="color:#FFF;text-decoration:none;"
-                                                                       title="填写客户资源表单"
+                                                                       title="填写顾客资源"
                                                                        class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>

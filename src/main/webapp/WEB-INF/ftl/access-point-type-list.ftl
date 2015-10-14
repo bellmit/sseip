@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">客户访问点类型一览</li>
+            <li class="active">推广类型一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -64,7 +64,7 @@
                                     href="${context.contextPath}/access-point-type/add"
                                     target="_self"
                                     style="color:#FFF;text-decoration:none;"
-                                    title="创建新的客户接入点类型"
+                                    title="创建新的推广类型"
                                     class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>

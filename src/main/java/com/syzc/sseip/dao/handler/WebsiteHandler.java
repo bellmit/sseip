@@ -1,6 +1,6 @@
 package com.syzc.sseip.dao.handler;
 
-import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.Website;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;

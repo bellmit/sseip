@@ -87,3 +87,44 @@ CREATE TABLE user_logon (
   last_ip       VARCHAR(39),
   CONSTRAINT fk_user_logon_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );
+
+CREATE TABLE customer (
+  id                 INT PRIMARY KEY AUTO_INCREMENT,
+  sex                TINYINT(1),
+  age                INT,
+
+  liaison_name       VARCHAR(128),
+  liaison_address    VARCHAR(128),
+  relationship       VARCHAR(128),
+
+  patient_name       VARCHAR(128),
+  patient_address    VARCHAR(128),
+  symptom            TEXT,
+  hospitalization    TINYINT(1),
+
+  emergency          TINYINT(1)      DEFAULT FALSE,
+  email              VARCHAR(254),
+  tel                VARCHAR(32),
+
+  liaison_country_id INT,
+  patient_country_id INT,
+  disease_type_id    INT,
+  website_id         INT,
+
+  added              DATETIME        DEFAULT current_timestamp,
+  updated            DATETIME        DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
+
+  memo               TEXT,
+  contact_recoreds   TEXT,
+
+  stars              TINYINT(1),
+  valid              TINYINT(1),
+  user_id            INT,
+  group_id           INT,
+
+  CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id),
+  CONSTRAINT fk_customer_patient_country_id_country_id FOREIGN KEY (patient_country_id) REFERENCES country (id),
+  CONSTRAINT fk_customer_website_id_website_id FOREIGN KEY (website_id) REFERENCES website (id),
+  CONSTRAINT fk_customer_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id),
+  CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
+);

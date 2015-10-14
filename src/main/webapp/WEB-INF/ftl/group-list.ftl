@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">部门列表</li>
+            <li class="active">部门管理</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>

@@ -3,46 +3,23 @@
 <mapper namespace="com.syzc.sseip.dao.CustomerDao">
     <resultMap id="Customer" type="com.syzc.sseip.entity.Customer">
         <id column="id" property="id"/>
-        <result column="liaison_name" property="liaisonName"/>
-        <result column="liaison_address" property="liaisonAddress"/>
-        <result column="patient_name" property="patientName"/>
-        <result column="patient_address" property="patientAddress"/>
-        <result column="liaison_countryId" property="liaisonCountryId"/>
-        <result column="patient_country_id" property="patientCountryId"/>
-        <result column="disease_type_id" property="diseaseTypeId"/>
-        <result column="website_id" property="websiteId"/>
-        <result column="user_id" property="userId"/>
+        <!--<result column="user_id" property="userId"/>-->
         <result column="group_id" property="groupId"/>
+        <!--<result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>-->
+        <!--<result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>-->
+        <!--<result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>-->
+        <!--<result column="access_point_type" property="accessPointType" typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>-->
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
         <id column="id" property="id"/>
-        <result column="liaison_name" property="liaisonName"/>
-        <result column="liaison_address" property="liaisonAddress"/>
-        <result column="patient_name" property="patientName"/>
-        <result column="patient_address" property="patientAddress"/>
-        <result column="liaison_country_id" property="liaisonCountryId"/>
-        <result column="patient_country_id" property="patientCountryId"/>
-        <result column="disease_type_id" property="diseaseTypeId"/>
-        <result column="website_id" property="websiteId"/>
         <result column="user_id" property="userId"/>
         <result column="group_id" property="groupId"/>
-
-        <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
-        <association property="patientCountry" column="patient_country_id" select="getCountry"/>
-        <association property="diseaseType" column="disease_type_id" select="getDiseaseType"/>
-        <association property="website" column="website_id" select="getWebsite"/>
+        <!--<result column="sex" property="sex" typeHandler="com.syzc.sseip.dao.handler.SexHandler"/>-->
+        <!--<result column="disease_type" property="diseaseType" typeHandler="com.syzc.sseip.dao.handler.DiseaseTypeHandler"/>-->
+        <!--<result column="website" property="website" typeHandler="com.syzc.sseip.dao.handler.WebsiteHandler"/>-->
+        <!--<result column="access_point_type" property="accessPointType" typeHandler="com.syzc.sseip.dao.handler.AccessPointTypeHandler"/>-->
         <association property="user" column="user_id" select="getUser"/>
         <association property="group" column="group_id" select="getGroup"/>
-    </resultMap>
-    <resultMap id="Country" type="com.syzc.sseip.entity.Country">
-        <id column="id" property="id"/>
-        <result column="a2_code" property="a2Code"/>
-    </resultMap>
-    <resultMap id="DiseaseType" type="com.syzc.sseip.entity.DiseaseType">
-        <id column="id" property="id"/>
-    </resultMap>
-    <resultMap id="Website" type="com.syzc.sseip.entity.Website">
-        <id column="id" property="id"/>
     </resultMap>
     <resultMap id="User" type="com.syzc.sseip.entity.User">
         <id column="id" property="id"/>
@@ -55,210 +32,184 @@
         <id column="id" property="id"/>
     </resultMap>
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
-        INSERT INTO customer (
-        sex,
-        age,
-        liaison_name,
-        liaison_address,
-        relationship,
-        patient_name,
-        patient_address,
-        symptom,
-        hospitalization,
-        emergency,
-        email,
-        tel,
-        liaison_country_id,
-        patient_country_id,
-        disease_type_id,
-        website_id,
-        memo,
-        contact_recoreds,
-        stars,
-        valid,
-        user_id,
-        group_id
-        )
+        INSERT INTO customer (`name`, `sex`, `age`, `address`, `symptom`, `email`, `tel`, `website`,
+        `disease_type`,
+        `access_point_type`, `faraway`, `emergency`, `user_id`, `group_id`)
         VALUES
         (
-        #{entity.sex},
-        #{entity.age},
-        #{entity.liaisonName},
-        #{entity.liaisonAddress},
-        #{entity.relationship},
-        #{entity.patientName},
-        #{entity.patientAddress},
-        #{entity.symptom},
-        #{entity.hospitalization},
-        #{entity.emergency},
-        #{entity.email},
-        #{entity.tel},
-        #{entity.liaisonCountryId},
-        #{entity.patientCountryId},
-        #{entity.diseaseTypeId},
-        #{entity.websiteId},
-        #{entity.memo},
-        #{entity.contactRecoreds},
-        #{entity.stars},
-        #{entity.valid},
-        #{entity.userId},
-        #{entity.groupId}
-        );
+        <choose>
+            <when test="entity.name!=null and entity.name!=''">#{entity.name}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.sex!=null">#{entity.sex}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <!--#{entity.sex,typeHandler=SexHandler,javaType=Sex},-->
+        <choose>
+            <when test="entity.age!=null">#{entity.age}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.symptom!=null and entity.symptom!=''">#{entity.symptom}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.email!=null and entity.email!=''">#{entity.email}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.tel!=null and entity.tel!=''">#{entity.tel}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.website!=null">#{entity.website}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.diseaseType!=null">#{entity.diseaseType}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.accessPointType!=null">#{entity.accessPointType}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.faraway!=null">#{entity.faraway}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.emergency!=null">#{entity.emergency}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.userId!=null">#{entity.userId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.groupId!=null">#{entity.groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        )
     </insert>
     <delete id="remove" parameterType="Long">
         delete from customer WHERE id=#{id}
     </delete>
     <update id="update">
         UPDATE
-        customer
+        `customer`
         SET
-        sex =
+        `name` = #{entity.name},
+        `sex` =
         <choose>
             <when test="entity.sex!=null">#{entity.sex}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        age =
+        `age` = #{entity.age},
+        `address` =
         <choose>
-            <when test="entity.age!=null">#{entity.age}</when>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        liaison_name =
-        <choose>
-            <when test="entity.liaisonName!=null and entity.liaisonName!=''">#{entity.liaisonName}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        liaison_address =
-        <choose>
-            <when test="entity.liaisonAddress!=null and entity.liaisonAddress!=''">#{entity.liaisonAddress}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        relationship =
-        <choose>
-            <when test="entity.relationship!=null and entity.relationship!=''">#{entity.relationship}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        patient_name =
-        <choose>
-            <when test="entity.patientName!=null and entity.patientName!=''">#{entity.patientName}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        patient_address =
-        <choose>
-            <when test="entity.patientAddress!=null and entity.patientAddress!=''">#{entity.patientAddress}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        symptom =
+        `symptom` =
         <choose>
             <when test="entity.symptom!=null and entity.symptom!=''">#{entity.symptom}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        hospitalization =
-        <choose>
-            <when test="entity.hospitalization!=null and entity.hospitalization!=''">#{entity.hospitalization}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        emergency =
-        <choose>
-            <when test="entity.emergency!=null">#{entity.emergency}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        email =
+        `email` =
         <choose>
             <when test="entity.email!=null and entity.email!=''">#{entity.email}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        tel =
+        `tel` =
         <choose>
             <when test="entity.tel!=null and entity.tel!=''">#{entity.tel}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        liaison_country_id =
+        `website` =
         <choose>
-            <when test="entity.liaisonCountryId!=null">
-                #{entity.liaisonCountryId}
-            </when>
+            <when test="entity.website!=null">#{entity.website}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        patient_country_id =
+        `disease_type` =
         <choose>
-            <when test="entity.patientCountryId!=null">
-                #{entity.patientCountryId}
-            </when>
+            <when test="entity.diseaseType!=null">#{entity.diseaseType}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        disease_type_id =
+        `access_point_type` =
         <choose>
-            <when test="entity.diseaseTypeId!=null">#{entity.diseaseTypeId}</when>
+            <when test="entity.accessPointType!=null">#{entity.accessPointType}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        website_id =
-        <choose>
-            <when test="entity.websiteId!=null">#{entity.websiteId}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        memo =
-        <choose>
-            <when test="entity.memo!=null and entity.memo!=''">#{entity.memo}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        contact_recoreds =
-        <choose>
-            <when test="entity.contactRecoreds!=null and entity.contactRecoreds!=''">#{entity.contactRecoreds}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        stars =
-        <choose>
-            <when test="entity.stars!=null">#{entity.stars}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        valid =
-        <choose>
-            <when test="entity.valid!=null">#{entity.valid}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        user_id =
-        <choose>
-            <when test="entity.userId!=null">#{entity.userId}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        group_id =
-        <choose>
-            <when test="entity.groupId!=null">#{entity.groupId}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        WHERE id = #{entity.id};
+        `faraway` = #{entity.faraway},
+        `emergency` = #{entity.emergency}
+        WHERE `id` = #{entity.id} ;
     </update>
     <select id="get" parameterType="Long" resultMap="CustomerDto">
         SELECT
-        *
+        `id`,
+        `name`,
+        `sex`,
+        `age`,
+        `address`,
+        `symptom`,
+        `email`,
+        `tel`,
+        `website`,
+        `disease_type`,
+        `access_point_type`,
+        `faraway`,
+        `emergency`,
+        `added`,
+        `user_id`,
+        `group_id`
         FROM
         `customer`
         where id=#{id};
     </select>
     <select id="list" resultMap="CustomerDto">
         SELECT
-        *
+        `id`,
+        `name`,
+        `sex`,
+        `age`,
+        `address`,
+        `symptom`,
+        `email`,
+        `tel`,
+        `website`,
+        `disease_type`,
+        `access_point_type`,
+        `faraway`,
+        `emergency`,
+        `added`,
+        `user_id`,
+        `group_id`
         FROM
         customer
         order by id desc
@@ -266,7 +217,22 @@
     </select>
     <select id="listByFilter" resultMap="CustomerDto">
         SELECT
-        *
+        `id`,
+        `name`,
+        `sex`,
+        `age`,
+        `address`,
+        `symptom`,
+        `email`,
+        `tel`,
+        `website`,
+        `disease_type`,
+        `access_point_type`,
+        `faraway`,
+        `emergency`,
+        `added`,
+        `user_id`,
+        `group_id`
         FROM
         customer
         <where>
@@ -348,7 +314,22 @@
 
     <select id="listByUser" resultMap="CustomerDto">
         SELECT
-        *
+        `id`,
+        `name`,
+        `sex`,
+        `age`,
+        `address`,
+        `symptom`,
+        `email`,
+        `tel`,
+        `website`,
+        `disease_type`,
+        `access_point_type`,
+        `faraway`,
+        `emergency`,
+        `added`,
+        `user_id`,
+        `group_id`
         FROM
         customer
         WHERE user_id=#{userId}
@@ -360,7 +341,22 @@
     </select>
     <select id="listByGroup" resultMap="CustomerDto">
         SELECT
-        *
+        `id`,
+        `name`,
+        `sex`,
+        `age`,
+        `address`,
+        `symptom`,
+        `email`,
+        `tel`,
+        `website`,
+        `disease_type`,
+        `access_point_type`,
+        `faraway`,
+        `emergency`,
+        `added`,
+        `user_id`,
+        `group_id`
         FROM
         customer
         WHERE group_id=#{groupId}
@@ -373,23 +369,25 @@
     <!--用于关联查询-->
     <select id="getUser" resultMap="User">
         SELECT
-        *
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
         FROM user
         WHERE id = #{userId};
     </select>
     <select id="getGroup" resultMap="Group">
         SELECT
-        *
+        `id`,
+        `name`,
+        `description`
         FROM `group`
         WHERE id = #{id};
-    </select>
-    <select id="getCountry" resultMap="Country">
-        select * from country where id=#{id}
-    </select>
-    <select id="getDiseaseType" resultMap="DiseaseType">
-        select * from disease_type where id=#{id}
-    </select>
-    <select id="getWebsite" resultMap="Website">
-        select * from website where id=#{id}
     </select>
 </mapper>

@@ -1,40 +1,50 @@
 package com.syzc.sseip.entity;
 
-import com.syzc.sseip.entity.enumtype.AccessPointType;
+import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.Website;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Customer {
     private Long id;
-    private String name;
-    private Sex sex;
-    private Short age;
-    private String address;
-    private String symptom;
-    private String email;
-    private String tel;
+    private Sex sex; //患者性别
+    private Short age; //患者年龄
 
-    private Website website;
-    private DiseaseType diseaseType;
-    private AccessPointType accessPointType;
+    private String liaisonName; //咨询者名字
+    private String liaisonAddress; //咨询者住址
+    private String relationship; //咨询者和患者的关系
+    private Long liaisonCountryId;
 
-    private Boolean faraway;
+    private String patientName;
+    private String patientAddress;
+    private Long patientCountryId;
+    private String symptom; //症状描述
+    private Long diseaseTypeId;
+    private HospitalizationType hospitalization;
+
     private Boolean emergency;
 
-    private Date added;
+    private String email; //联系邮件
+    private String tel; //联系电话
 
-//    private Date calledTime;
-//    private String callBackRecord;
+    private Long websiteId;
+
+    private Date added;
+    private Date updated;
+
+    private String memo; //备注
+    private String contactRecoreds; //聊天、邮件记录
+
+    private Byte stars;
+    private Boolean valid;
 
     private Long userId;
     private Long groupId;
 
-    private List<String> images = new LinkedList<>();
+//    private Date calledTime;
+//    private String callRecord;
+
+//    private Boolean toBeDeleted;
 
     public Customer() {
     }
@@ -45,14 +55,6 @@ public class Customer {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Sex getSex() {
@@ -69,14 +71,6 @@ public class Customer {
 
     public void setAge(Short age) {
         this.age = age;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getSymptom() {
@@ -101,38 +95,6 @@ public class Customer {
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public Website getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(Website website) {
-        this.website = website;
-    }
-
-    public DiseaseType getDiseaseType() {
-        return diseaseType;
-    }
-
-    public void setDiseaseType(DiseaseType diseaseType) {
-        this.diseaseType = diseaseType;
-    }
-
-    public AccessPointType getAccessPointType() {
-        return accessPointType;
-    }
-
-    public void setAccessPointType(AccessPointType accessPointType) {
-        this.accessPointType = accessPointType;
-    }
-
-    public Boolean getFaraway() {
-        return faraway;
-    }
-
-    public void setFaraway(Boolean faraway) {
-        this.faraway = faraway;
     }
 
     public Boolean getEmergency() {
@@ -167,15 +129,123 @@ public class Customer {
         this.groupId = groupId;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getMemo() {
+        return memo;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
-    public void addImage(String image) {
-        images.add(image);
+    public Byte getStars() {
+        return stars;
+    }
+
+    public void setStars(Byte stars) {
+        this.stars = stars;
+    }
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+
+    public HospitalizationType getHospitalization() {
+        return hospitalization;
+    }
+
+    public void setHospitalization(HospitalizationType hospitalization) {
+        this.hospitalization = hospitalization;
+    }
+
+    public String getLiaisonName() {
+        return liaisonName;
+    }
+
+    public void setLiaisonName(String liaisonName) {
+        this.liaisonName = liaisonName;
+    }
+
+    public String getLiaisonAddress() {
+        return liaisonAddress;
+    }
+
+    public void setLiaisonAddress(String liaisonAddress) {
+        this.liaisonAddress = liaisonAddress;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getPatientAddress() {
+        return patientAddress;
+    }
+
+    public void setPatientAddress(String patientAddress) {
+        this.patientAddress = patientAddress;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    public Long getLiaisonCountryId() {
+        return liaisonCountryId;
+    }
+
+    public void setLiaisonCountryId(Long liaisonCountryId) {
+        this.liaisonCountryId = liaisonCountryId;
+    }
+
+    public Long getPatientCountryId() {
+        return patientCountryId;
+    }
+
+    public void setPatientCountryId(Long patientCountryId) {
+        this.patientCountryId = patientCountryId;
+    }
+
+    public Long getDiseaseTypeId() {
+        return diseaseTypeId;
+    }
+
+    public void setDiseaseTypeId(Long diseaseTypeId) {
+        this.diseaseTypeId = diseaseTypeId;
+    }
+
+    public Long getWebsiteId() {
+        return websiteId;
+    }
+
+    public void setWebsiteId(Long websiteId) {
+        this.websiteId = websiteId;
+    }
+
+    public String getContactRecoreds() {
+        return contactRecoreds;
+    }
+
+    public void setContactRecoreds(String contactRecoreds) {
+        this.contactRecoreds = contactRecoreds;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

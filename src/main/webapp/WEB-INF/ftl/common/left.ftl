@@ -22,8 +22,6 @@
                 <li class=""><a href="${context.contextPath}/user/list/1" target="mainFrame"><span
                         class="menu-icon fa fa-caret-right"></span>用户列表<span
                         class="arrow fa fa-angle-down"></span></a></li>
-                <li class=""><a href="${context.contextPath}/group/list/1" target="mainFrame"><span
-                        class="menu-icon fa fa-caret-right"></span>部门列表</a><span class="arrow"></span></li>
                 <li class="">
                     <a href="${context.contextPath}/role/list" target="mainFrame">
                         <span class="menu-icon fa fa-caret-right"></span>角色列表</a>
@@ -33,20 +31,23 @@
         </#if>
         </li>
         <li>
-            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>业务配置<span
+            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>平台管理<span
                     class="arrow fa fa-angle-down"></span></a>
             <span class="arrow"></span>
             <ul class="submenu">
-                <li><a href="${context.contextPath}/country/list/1" target="mainFrame">国家一览</a></li>
-                <li><a href="${context.contextPath}/access-point-type/list/1" target="mainFrame">客户接入点类型一览</a></li>
-                <li><a href="${context.contextPath}/disease-type/list/1" target="mainFrame">疾病类型一览</a></li>
-                <li><a href="${context.contextPath}/website/list/1" target="mainFrame">入口网站一览</a></li>
+                <li class=""><a href="${context.contextPath}/group/list/1" target="mainFrame"><span
+                        class="menu-icon fa fa-caret-right"></span>部门管理</a><span class="arrow"></span></li>
+                <li><a href="${context.contextPath}/country/list/1" target="mainFrame">国家管理</a></li>
+            <#--<li><a href="${context.contextPath}/access-point-type/list/1" target="mainFrame">推广类型一览</a></li>-->
+                <li><a href="${context.contextPath}/website/list/1" target="mainFrame">网站管理</a></li>
+                <li><a href="${context.contextPath}/disease-type/list/1" target="mainFrame">病种管理</a></li>
             </ul>
         </li>
+
         <li class="">
             <a href="javascript:;" class="dropdown-toggle">
                 <span class="menu-icon fa fa-pencil-square-o"></span>
-                <span class="menu-text">客户资源功能</span>
+                <span class="menu-text">顾客资源管理</span>
                 <span class="arrow fa fa-angle-down"></span>
             </a>
             <span class="arrow"></span>
@@ -55,17 +56,17 @@
                 <li>
                     <a href="${context.contextPath}/customer/list/1" target="mainFrame">
                         <span class="menu-icon fa fa-list"></span><span
-                            class="menu-text">客户资源列表</span>
+                            class="menu-text">顾客资源列表</span>
                     </a>
                 </li>
                 <li>
                     <a href="${context.contextPath}/customer/filter/1" target="mainFrame"><span
-                            class="menu-icon fa fa-search"></span><span class="menu-text">客户资源复合查询</span></a>
+                            class="menu-icon fa fa-search"></span><span class="menu-text">复合查询</span></a>
                 </li>
                 <li>
                     <a href="${context.contextPath}/customer/add" target="mainFrame">
                         <span class="menu-icon fa fa-edit"></span><span
-                            class="menu-text">填写客户资源表单</span>
+                            class="menu-text">添加顾客资源</span>
                     </a>
                 </li>
             </ul>

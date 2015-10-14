@@ -1,7 +1,7 @@
 package com.syzc.sseip.dao;
 
 import com.alibaba.fastjson.JSON;
-import com.syzc.sseip.entity.AccessPointType;
+import com.syzc.sseip.entity.pasture.AccessPointType;
 import com.syzc.sseip.util.LocalAcUtil;
 
 public class AccessPointTypeDaoTest {

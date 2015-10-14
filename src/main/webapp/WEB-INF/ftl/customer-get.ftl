@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>客户资源细节</title>
+    <title>顾客资源细节</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -12,8 +12,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/customer/list/1">客户资源列表</a></li>
-            <li class="active">客户资源细节</li>
+            <li><a href="${context.contextPath}/customer/list/1">顾客资源列表</a></li>
+            <li class="active">顾客资源细节</li>
         </ul>
     </div>
     <div class="page-content">
@@ -22,7 +22,7 @@
                 <dl class="dl-horizontal">
                     <dt>id</dt>
                     <dd>${customer.id}</dd>
-                    <dt>客户姓名</dt>
+                    <dt>顾客姓名</dt>
                     <dd><#if (customer.name)??>${customer.name}<#else><span class="label">不详</span></#if></dd>
                     <dt>性别</dt>
                     <dd><#if (customer.sex)??>${customer.sex.textName}<#else><span class="label">不详</span></#if></dd>

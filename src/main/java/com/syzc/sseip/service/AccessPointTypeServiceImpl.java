@@ -2,7 +2,7 @@ package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.AccessPointTypeDao;
 import com.syzc.sseip.dao.BaseDao;
-import com.syzc.sseip.entity.AccessPointType;
+import com.syzc.sseip.entity.pasture.AccessPointType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

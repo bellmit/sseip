@@ -1,9 +1,9 @@
 package com.syzc.sseip.dao;
 
 import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.enumtype.AccessPointType;
+import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
 import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.Website;
 import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

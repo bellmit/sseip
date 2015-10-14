@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>添加客户接入点类型</title>
+    <title>添加推广类型</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -20,9 +20,9 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/country/list/1">客户接入点类型一览</a>
+            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/country/list/1">推广类型一览</a>
             </li>
-            <li class="active">添加客户接入点类型</li>
+            <li class="active">添加推广类型</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>

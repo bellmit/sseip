@@ -2,9 +2,9 @@ package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.enumtype.AccessPointType;
+import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
 import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.Website;
+import com.syzc.sseip.entity.enumtype.pasture.Website;
 import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
 import com.syzc.sseip.util.Page;
 

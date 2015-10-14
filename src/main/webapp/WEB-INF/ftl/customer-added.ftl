@@ -20,7 +20,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-home home-icon"></span><a href="${context.contextPath}/customer/list/1">客户资源一览</a>
+            <li><span class="ace-icon fa fa-home home-icon"></span><a href="${context.contextPath}/customer/list/1">顾客资源一览</a>
             </li>
             <li class="active">提交完成</li>
         </ul>
@@ -32,7 +32,7 @@
             <div class="col-xs-12">
                 <div class="row">
                     <div class="alert alert-success">
-                        客户资源资料添加完成。
+                        顾客资源资料添加完成。
                     </div>
                 </div>
                 <div class="row">
@@ -40,7 +40,7 @@
                         <dl class="dl-horizontal">
                             <dt>id</dt>
                             <dd>${customer.id}</dd>
-                            <dt>客户姓名</dt>
+                            <dt>顾客姓名</dt>
                             <dd><#if (customer.name)??>${customer.name}<#else><span class="label">不详</span></#if></dd>
                             <dt>性别</dt>
                             <dd><#if (customer.sex)??>${customer.sex.textName}<#else><span class="label">不详</span></#if>
@@ -92,12 +92,12 @@
                         <span class="ace-icon fa fa-home bigger-110"></span>回首页
                     </a>
                     <a class="btn btn-info" href="${context.contextPath}/customer/list/1"><span
-                        class="ace-icon fa fa-list bigger-110"></span>客户资源一览</a>
+                            class="ace-icon fa fa-list bigger-110"></span>顾客资源一览</a>
                     <a class="btn btn-info" href="${context.contextPath}/customer/add">
                         <span class="ace-icon fa fa-edit bigger-110"></span>继续添加
                     </a>
                     <a class="btn btn-info" href="javascript:;">
-                        <span class="ace-icon fa fa-eye bigger-110"></span>看一眼
+                        <span class="ace-icon fa fa-eye bigger-110"></span>查看提交内容
                     </a>
                 </div>
             </div>
