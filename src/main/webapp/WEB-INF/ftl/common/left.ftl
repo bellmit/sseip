@@ -31,8 +31,9 @@
         </#if>
         </li>
         <li>
-            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>平台管理<span
-                    class="arrow fa fa-angle-down"></span></a>
+            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>
+                <span class="menu-text">平台管理</span>
+                <span class="arrow fa fa-angle-down"></span></a>
             <span class="arrow"></span>
             <ul class="submenu">
                 <li class=""><a href="${context.contextPath}/group/list/1" target="mainFrame"><span

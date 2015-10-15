@@ -162,7 +162,7 @@
         ,
         hospitalization =
         <choose>
-            <when test="entity.hospitalization!=null and entity.hospitalization!=''">#{entity.hospitalization}</when>
+            <when test="entity.hospitalization!=null">#{entity.hospitalization}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
@@ -270,35 +270,41 @@
         FROM
         customer
         <where>
-            <if test="sex != null">
-                sex=#{sex}
+            <if test="websiteId != null">
+                website_id=#{websiteId}
             </if>
-            <if test="website !=null">
-                and website=#{website}
+            <if test="tel!=null and tel!=''">
+                and tel=#{tel}
             </if>
-            <if test="accessPointType !=null">
-                and access_point_type=#{accessPointType}
+            <if test="name!=null and name!=''">
+                and (liaison_name=#{name} OR patient_name=#{name})
             </if>
-            <if test="diseaseType !=null">
-                and disease_type=#{diseaseType}
+            <if test="countryId!=null and countryId!=''">
+                and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
             </if>
-            <if test="faraway !=null">
-                and faraway=#{faraway}
+            <if test="userId != null">
+                and user_id=#{userId}
             </if>
-            <if test="emergency !=null">
-                and emergency=#{emergency}
+            <if test="email!=null and email!=''">
+                and email=#{email}
+            </if>
+            <if test="diseaseTypeId != null">
+                and disease_type_id=#{diseaseTypeId}
+            </if>
+            <if test="valid != null">
+                and valid=#{valid}
+            </if>
+            <if test="hospitalization !=null">
+                and hospitalization=#{hospitalization}
+            </if>
+            <if test="stars !=null">
+                and stars=#{stars}
             </if>
             <if test="since !=null">
                 and added&gt;=#{since}
             </if>
             <if test="till !=null">
                 and added&lt;=#{till}
-            </if>
-            <if test="groupId !=null">
-                and group_id=#{groupId}
-            </if>
-            <if test="userId !=null">
-                and user_id=#{userId}
             </if>
         </where>
         order by id desc
@@ -310,35 +316,41 @@
         FROM
         `customer`
         <where>
-            <if test="sex != null">
-                sex=#{sex}
+            <if test="websiteId != null">
+                website_id=#{websiteId}
             </if>
-            <if test="website !=null">
-                and website=#{website}
+            <if test="tel!=null and tel!=''">
+                and tel=#{tel}
             </if>
-            <if test="accessPointType !=null">
-                and access_point_type=#{accessPointType}
+            <if test="name!=null and name!=''">
+                and (liaison_name=#{name} OR patient_name=#{name})
             </if>
-            <if test="diseaseType !=null">
-                and disease_type=#{diseaseType}
+            <if test="countryId!=null and countryId!=''">
+                and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
             </if>
-            <if test="faraway !=null">
-                and faraway=#{faraway}
+            <if test="userId != null">
+                and user_id=#{userId}
             </if>
-            <if test="emergency !=null">
-                and emergency=#{emergency}
+            <if test="email!=null and email!=''">
+                and email=#{email}
+            </if>
+            <if test="diseaseTypeId != null">
+                and disease_type_id=#{diseaseTypeId}
+            </if>
+            <if test="valid != null">
+                and valid=#{valid}
+            </if>
+            <if test="hospitalization !=null">
+                and hospitalization=#{hospitalization}
+            </if>
+            <if test="stars !=null">
+                and stars=#{stars}
             </if>
             <if test="since !=null">
                 and added&gt;=#{since}
             </if>
             <if test="till !=null">
                 and added&lt;=#{till}
-            </if>
-            <if test="groupId !=null">
-                and group_id=#{groupId}
-            </if>
-            <if test="userId !=null">
-                and user_id=#{userId}
             </if>
         </where>
     </select>

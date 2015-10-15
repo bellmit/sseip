@@ -59,4 +59,12 @@ SELECT
   count(1)
 FROM website
     </select>
+    <select id="listAll" resultMap="AccessPointType">
+        SELECT
+        id,
+        `name`,
+        url
+        FROM website
+        ORDER BY `name`
+    </select>
 </mapper>

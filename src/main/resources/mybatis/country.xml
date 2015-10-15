@@ -65,4 +65,14 @@ SELECT
   count(1)
 FROM country;
     </select>
+    <select id="listAll" resultMap="Country">
+        SELECT
+        id,
+        memo,
+        `name`,
+        a2_code,
+        updated
+        FROM country
+        ORDER BY `name`
+    </select>
 </mapper>

@@ -9,8 +9,10 @@ public class CountryDaoTest {
         CountryDao d = (CountryDao) LocalAcUtil.getAc().getBean("countryDao");
         System.out.println(d);
 
-        System.out.println(d.count());
-        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));
+        System.out.println(JSON.toJSONString(d.listAll(), true));
+
+//        System.out.println(d.count());
+//        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));
 
         Country country;
         country = new Country();
@@ -18,9 +20,9 @@ public class CountryDaoTest {
 //        country.setMemo("备忘");
 //        country.setA2Code("ccc");
 
-        System.out.println(d.add(country));
-        System.out.println(JSON.toJSONString(country, true));
-        System.out.println(JSON.toJSONString(d.get(country.getId()), true));
+//        System.out.println(d.add(country));
+//        System.out.println(JSON.toJSONString(country, true));
+//        System.out.println(JSON.toJSONString(d.get(country.getId()), true));
 
 //        Long id = country.getId();
 //        country = new Country();

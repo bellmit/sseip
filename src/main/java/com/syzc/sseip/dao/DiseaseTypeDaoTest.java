@@ -13,6 +13,8 @@ public class DiseaseTypeDaoTest {
 
         DiseaseType t;
 
+        System.out.println(JSON.toJSONString(d.listAll()));
+
 //        t = new DiseaseType();
 //        t.setName("大头综合症");
 //        System.out.println(d.add(t));
@@ -27,7 +29,7 @@ public class DiseaseTypeDaoTest {
 
 //        System.out.println(d.remove(2L));
 
-        System.out.println(d.exist(4L));
-        System.out.println(d.existName("tttt"));
+//        System.out.println(d.exist(4L));
+//        System.out.println(d.existName("tttt"));
     }
 }

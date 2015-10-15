@@ -12,6 +12,9 @@ public class WebsiteDaoTest {
         System.out.println(d.count());
 
         Website e;
+
+        System.out.println(JSON.toJSONString(d.listAll(), true));
+
 //        e = new Website();
 //        e.setName("微型网站");
 //        e.setUrl("http://micro.example.com");
@@ -19,9 +22,9 @@ public class WebsiteDaoTest {
 //        System.out.println(e.getId());
 //        System.out.println(JSON.toJSONString(d.get(e.getId()), true));
 
-        System.out.println(d.count());
-        System.out.println(d.remove(1L));
-        System.out.println(d.count());
+//        System.out.println(d.count());
+//        System.out.println(d.remove(1L));
+//        System.out.println(d.count());
 
 //        e = new Website();
 //        e.setId(4L);
@@ -29,8 +32,8 @@ public class WebsiteDaoTest {
 //        e.setUrl("http://taobao.com/");
 //        System.out.println(d.update(e));
 
-        System.out.println(d.existUrl("123"));
-        System.out.println(d.exist(3L));
-        System.out.println(d.existUrl("http://taobao.com/"));
+//        System.out.println(d.existUrl("123"));
+//        System.out.println(d.exist(3L));
+//        System.out.println(d.existUrl("http://taobao.com/"));
     }
 }

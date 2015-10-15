@@ -42,7 +42,7 @@
     <beans:bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <beans:property name="converters">
             <beans:set>
-                <beans:bean class="com.syzc.sseip.controller.converters.AccessPointTypeConverter"/>
+                <beans:bean class="com.syzc.sseip.controller.converters.HospitalizationTypeConverter"/>
                 <beans:bean class="com.syzc.sseip.controller.converters.DiseaseTypeConverter"/>
                 <beans:bean class="com.syzc.sseip.controller.converters.RoleConverter"/>
                 <beans:bean class="com.syzc.sseip.controller.converters.SexConverter"/>

@@ -51,4 +51,11 @@ SELECT
   count(1)
 FROM disease_type;
     </select>
+    <select id="listAll" resultMap="DiseaseType">
+        SELECT
+        id,
+        `name`
+        FROM disease_type
+        ORDER BY `name`
+    </select>
 </mapper>

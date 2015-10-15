@@ -4,6 +4,8 @@ import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.PageUtil;
 
+import java.util.List;
+
 public abstract class BaseServiceImpl<T, Q extends BaseDao<T>> implements BaseService<T, Q> {
     abstract protected BaseDao<T> getDao();
 
@@ -28,5 +30,10 @@ public abstract class BaseServiceImpl<T, Q extends BaseDao<T>> implements BaseSe
         Page<T> page = PageUtil.make(pageNo, (long) size, total);
         page.setList(getDao().list(page.getRowOffset(), page.getPageSize()));
         return page;
+    }
+
+    @Override
+    public List<T> listAll() {
+        return getDao().listAll();
     }
 }

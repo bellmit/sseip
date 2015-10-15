@@ -45,7 +45,13 @@ public class LoginController {
 */
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String login() {
+    public String login(@RequestParam(required = false) String refer, HttpSession httpSession) {
+        if (httpSession.getAttribute("loginUser") != null) {
+            if (refer == null || refer.length() == 0) {
+                refer = "/";
+            }
+            return "redirect:" + refer;
+        }
         return "/login";
     }
 

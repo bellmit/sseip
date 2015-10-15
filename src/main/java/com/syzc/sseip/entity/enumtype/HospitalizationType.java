@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum HospitalizationType {
-    YES(1, "是"), NO(2, "否"), DISCHARGE(3, "出院");
+    YES(1, "住院"), NO(2, "不住院"), DISCHARGE(3, "出院");
     private int code;
     private String textName;
 

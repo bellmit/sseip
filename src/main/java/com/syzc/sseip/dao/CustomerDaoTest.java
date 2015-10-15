@@ -53,11 +53,11 @@ public class CustomerDaoTest {
         c.setUserId(3L);
         c.setGroupId(1L);
 
-        System.out.println(d.update(c));
-        System.out.println(JSON.toJSONString(d.get(3L), true));
+//        System.out.println(d.update(c));
+//        System.out.println(JSON.toJSONString(d.get(3L), true));
 
-//        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, null, null, null, null, 1L, (byte) 100), true));
-//        System.out.println(JSON.toJSONString(d.countByFilter(null, null, null, null, null, null, null, null, null, null), true));
+        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, null, null, null, null, null, null, 0L, (byte) 20), true));
+        System.out.println(JSON.toJSONString(d.countByFilter(null, null, null, null, null, null, null, null, null, null, null, null), true));
 
         Calendar since = Calendar.getInstance();
         Calendar till = Calendar.getInstance();

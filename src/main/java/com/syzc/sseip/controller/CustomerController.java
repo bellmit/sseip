@@ -5,14 +5,11 @@ import com.syzc.sseip.entity.Customer;
 import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserDto;
-import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
+import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.pasture.Website;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
-import com.syzc.sseip.service.CustomerService;
-import com.syzc.sseip.service.GroupService;
-import com.syzc.sseip.service.UserService;
+import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
+import com.syzc.sseip.service.*;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.exception.AuthException;
@@ -39,9 +36,28 @@ public class CustomerController {
     private static final Logger logger = Logger.getLogger(CustomerController.class);
     public final Byte pageSize = 10;
 
+    private CountryService countryService;
+    private DiseaseTypeService diseaseTypeService;
+    private WebsiteService websiteService;
+
     private CustomerService customerService;
     private GroupService groupService;
     private UserService userService;
+
+    @Resource
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
+    }
+
+    @Resource
+    public void setDiseaseTypeService(DiseaseTypeService diseaseTypeService) {
+        this.diseaseTypeService = diseaseTypeService;
+    }
+
+    @Resource
+    public void setWebsiteService(WebsiteService websiteService) {
+        this.websiteService = websiteService;
+    }
 
     @Resource
     public void setCustomerService(CustomerService customerService) {
@@ -82,15 +98,19 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/filter/{page:\\d+}")
-    public String filter(@RequestParam(required = false) Sex sex, @RequestParam(required = false) Website website,
-                         @RequestParam(required = false) AccessPointType accessPointType,
-                         @RequestParam(required = false) DiseaseType diseaseType,
-                         @RequestParam(required = false) Boolean faraway,
-                         @RequestParam(required = false) Boolean emergency,
-                         @RequestParam(required = false) Long groupId,
-                         @RequestParam(required = false) Long userId,
-                         @RequestParam(value = "dateRange", required = false) Long[] dateRange,
-                         @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
+    public String filter(
+            @RequestParam(value = "dateRange", required = false) Long[] dateRange,
+            @RequestParam(required = false) Long websiteId,
+            @RequestParam(required = false) String tel,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long countryId,
+            @RequestParam(required = false) Long userId,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) Long diseaseTypeId,
+            @RequestParam(required = false) Boolean valid,
+            @RequestParam(required = false) HospitalizationType hospitalization,
+            @RequestParam(required = false) Byte stars,
+            @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
         Date till = null;
         Date since = null;
@@ -98,9 +118,9 @@ public class CustomerController {
             since = new Date(dateRange[0]);
             till = new Date(dateRange[1]);
         }
-        System.out.println(Arrays.toString(dateRange));
-        System.out.println(since);
-        System.out.println(till);
+//        System.out.println(Arrays.toString(dateRange));
+//        System.out.println(since);
+//        System.out.println(till);
 
 //        System.out.println(Arrays.asList(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId));
 
@@ -115,12 +135,12 @@ public class CustomerController {
                 throw AuthException.create("没有权限", Level.DEBUG);
             }
             // check groupId range ..?
-            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
-                    loginUser.getGroupId(), userId, pageNo, pageSize);
+            page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
         } else {
             //admin || manager
-            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
-                    groupId, userId, pageNo, pageSize);
+            page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
+//            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
+//                    groupId, userId, pageNo, pageSize);
         }
 
         List<Group> groups = new ArrayList<>();
@@ -142,12 +162,17 @@ public class CustomerController {
         model.addAttribute("groups", groups);
         model.addAttribute("users", users);
 
-        model.addAttribute("websites", Website.values());
-        if (dateRange != null && dateRange.length > 0)
+        if (dateRange != null && dateRange.length > 0) {
             model.addAttribute("dateRange", new Date[]{since, till});
+        }
+
         model.addAttribute("accessPointTypes", AccessPointType.values());
-        model.addAttribute("diseaseTypes", DiseaseType.values());
+
+        model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
         model.addAttribute("sexTypes", Sex.values());
+        model.addAttribute("websites", websiteService.listAll());
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
+        model.addAttribute("countries", countryService.listAll());
 
         model.addAttribute("page", page);
         model.addAttribute("path", "/customer/filter");
@@ -237,16 +262,21 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
-        model.addAttribute("accessPointTypes", AccessPointType.values());
-        model.addAttribute("diseaseTypes", DiseaseType.values());
+        model.addAttribute("countries", countryService.listAll());
+        model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
+        model.addAttribute("websites", websiteService.listAll());
+
         model.addAttribute("sexTypes", Sex.values());
-        model.addAttribute("websites", Website.values());
+
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         return "customer-add";
     }
 
     // must be a dto, request receiver
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Customer customer, Model model, HttpSession session) {
+
+        System.out.println(JSON.toJSONString(customer, true));
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
@@ -290,11 +320,13 @@ public class CustomerController {
             throw HosException.create("没有这个客户的资料", Level.DEBUG);
         }
 
-        model.addAttribute("accessPointTypes", AccessPointType.values());
-        model.addAttribute("diseaseTypes", DiseaseType.values());
-        model.addAttribute("sexTypes", Sex.values());
-        model.addAttribute("websites", Website.values());
+        model.addAttribute("countries", countryService.listAll());
+        model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
+        model.addAttribute("websites", websiteService.listAll());
 
+        model.addAttribute("sexTypes", Sex.values());
+
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("customer", customer);
         return "customer-update";
     }
@@ -329,11 +361,13 @@ public class CustomerController {
         } else {
             model.addAttribute("error", "更新失败");
         }
-        model.addAttribute("accessPointTypes", AccessPointType.values());
-        model.addAttribute("diseaseTypes", DiseaseType.values());
-        model.addAttribute("sexTypes", Sex.values());
-        model.addAttribute("websites", Website.values());
+        model.addAttribute("countries", countryService.listAll());
+        model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
+        model.addAttribute("websites", websiteService.listAll());
 
+        model.addAttribute("sexTypes", Sex.values());
+
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("customer", customer);
         return "customer-update";
     }

@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
-import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.pasture.Website;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
+import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.PageUtil;
@@ -55,10 +52,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     }
 
     @Override
-    public Page<Customer> listByFilter(Sex sex, Website website, AccessPointType accessPointType, DiseaseType diseaseType, Boolean faraway, Boolean emergency, Date since, Date till, Long groupId, Long userId, Long pageNo, Byte size) {
-        Long total = customerDao.countByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till, groupId, userId);
+    public Page<Customer> listByFilter(Date since, Date till, Long websiteId, String tel, String name, Long countryId, Long userId, String email, Long diseaseTypeId, Boolean valid, HospitalizationType hospitalization, Byte stars, Long pageNo, Byte size) {
+        Long total = customerDao.countByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars);
         Page<Customer> page = PageUtil.make(pageNo, size, total);
-        page.setList(customerDao.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till, groupId, userId, page.getRowOffset(), page.getPageSize()));
+        page.setList(customerDao.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, page.getRowOffset(), page.getPageSize()));
         return page;
     }
 
@@ -66,11 +63,13 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
         ApplicationContext ac;
         ac = LocalAcUtil.getAc();
         CustomerService s = (CustomerService) ac.getBean("customerServiceImpl");
-        System.out.println(JSON.toJSONString(s.listByGroup(1L, 1L, (byte) 10), true));
+//        System.out.println(JSON.toJSONString(s.listByGroup(1L, 1L, (byte) 10), true));
 
-        System.out.println(JSON.toJSONString(s.listByUser(3L, 1L, (byte) 10), true));
-        System.out.println(JSON.toJSONString(s.list(1L, (byte) 10), true));
+//        System.out.println(JSON.toJSONString(s.listByUser(3L, 1L, (byte) 10), true));
+//        System.out.println(JSON.toJSONString(s.list(1L, (byte) 10), true));
 
-        System.out.println(JSON.toJSONString(s.get(3L), true));
+//        System.out.println(JSON.toJSONString(s.get(3L), true));
+
+        System.out.println(JSON.toJSONString(s.listByFilter(null, null, null, null, null, null, null, null, null, null, null, null, 0L, (byte) 10), true));
     }
 }

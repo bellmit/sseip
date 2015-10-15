@@ -1,10 +1,7 @@
 package com.syzc.sseip.dao;
 
 import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
-import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.pasture.Website;
-import com.syzc.sseip.entity.enumtype.pasture.DiseaseType;
+import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +18,36 @@ public interface CustomerDao extends BaseDao<Customer> {
 
     Long countByGroup(Long groupId);
 
+    List<Customer> listByFilter(@Param("since") Date since,
+                                @Param("till") Date till,
+                                @Param("websiteId") Long websiteId,
+                                @Param("tel") String tel,
+                                @Param("name") String name,
+                                @Param("countryId") Long countryId,
+                                @Param("userId") Long userId,
+                                @Param("email") String email,
+                                @Param("diseaseTypeId") Long diseaseTypeId,
+                                @Param("valid") Boolean valid,
+                                @Param("hospitalization") HospitalizationType hospitalization,
+                                @Param("stars") Byte stars,
+                                @Param("offset") Long offset,
+                                @Param("size") Byte size
+    );
+
+    Long countByFilter(@Param("since") Date since,
+                       @Param("till") Date till,
+                       @Param("websiteId") Long websiteId,
+                       @Param("tel") String tel,
+                       @Param("name") String name,
+                       @Param("countryId") Long countryId,
+                       @Param("userId") Long userId,
+                       @Param("email") String email,
+                       @Param("diseaseTypeId") Long diseaseTypeId,
+                       @Param("valid") Boolean valid,
+                       @Param("hospitalization") HospitalizationType hospitalization,
+                       @Param("stars") Byte stars
+    );
+/*
     List<Customer> listByFilter(@Param("sex") Sex sex, @Param("website") Website website,
                                 @Param("accessPointType") AccessPointType accessPointType,
                                 @Param("diseaseType") DiseaseType diseaseType, @Param("faraway") Boolean faraway,
@@ -34,4 +61,5 @@ public interface CustomerDao extends BaseDao<Customer> {
                        @Param("faraway") Boolean faraway, @Param("emergency") Boolean emergency, @Param("since") Date since,
                        @Param("till") Date till,
                        @Param("groupId") Long groupId, @Param("userId") Long userId);
+*/
 }

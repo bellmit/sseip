@@ -28,15 +28,37 @@
                                style="word-break: break-all;table-layout:fixed">
                             <thead>
                             <tr>
-                                <th class="text-right">ID</th>
-                                <th class="text-right">患者国家</th>
+                                <th class="text-right">id</th>
                                 <th class="text-right">患者姓名</th>
-                                <th class="text-right">星级</th>
-                                <th class="text-right">病种</th>
-                                <th class="text-right">所属人</th>
+                                <th class="text-right">患者性别</th>
+                                <th class="text-right">患者年龄</th>
+                                <th class="text-right">患者地址</th>
+                                <th class="text-right">患者国家</th>
+                                <th class="text-right">患病类型</th>
+                                <th class="text-right">症状</th>
+
+                                <th class="text-right">咨询人姓名</th>
+                                <th class="text-right">咨询人地址</th>
+                                <th class="text-right">咨询人国家</th>
+                                <th class="text-right" title="咨询人与患者关系">咨患关系</th>
+
+                                <th class="text-right">是否住院</th>
+                                <th class="text-right">紧急与否</th>
+
+                                <th class="text-right">电邮</th>
+                                <th class="text-right">电话</th>
+
                                 <th class="text-right">来源网站</th>
-                                <th class="text-right">更新时间</th>
+                                <th class="text-right">备忘</th>
+
+                                <th class="text-right">星级</th>
+                                <th class="text-right">有效性</th>
+
+                                <th class="text-right">所属人</th>
+                                <th class="text-right">所属部门</th>
+
                                 <th class="text-right">创建时间</th>
+                                <th class="text-right">更新时间</th>
 
                                 <th class="text-right">功能</th>
                             </tr>
@@ -45,21 +67,60 @@
                             <#list page.list as customer>
                             <tr>
                                 <td class="text-right">${customer.id}</td>
-                                <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
-                                    <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.patientName??>${customer.patientName}<#else><span
                                         class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.stars??>${customer.stars}<#else><span
+                                <td class="text-right"><#if customer.sex??>${customer.sex.textName}<#else><span
                                         class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.age??>${customer.age}<#else><span
+                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.patientAddress??>${customer.patientAddress}<#else>
+                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
+                                    <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.user??>${customer.user.realName}<#else><span
+                                <td class="text-right"><#if customer.symptom??>${customer.symptom}<#else><span
                                         class="label">不详</span></#if></td>
+
+                                <td class="text-right"><#if customer.liaisonName??>${customer.liaisonName}<#else><span
+                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.liaisonAddress??>${customer.liaisonAddress}<#else>
+                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.liaisonCountry??>${customer.liaisonCountry.name}<#else>
+                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.relationship??>${customer.relationship}<#else><span
+                                        class="label">不详</span></#if></td>
+
+                                <td class="text-right"><#if customer.hospitalization??>${customer.hospitalization}<#else>
+                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.emergency??>${customer.emergency?string('紧急','不紧急')}<#else>
+                                    <span
+                                            class="label">不详</span></#if></td>
+
+                                <td class="text-right"><#if customer.email??>${customer.email}<#else><span
+                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.tel??>${customer.tel}<#else><span
+                                        class="label">不详</span></#if></td>
+
                                 <td class="text-right"><#if customer.website??>${customer.website.name}<#else><span
                                         class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.updated??>${customer.updated?string('yyyy-MM-dd HH:mm:ss')}<#else>
-                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.memo??>${customer.memo}<#else><span class="label">不详</span></#if>
+                                </td>
+
+                                <td class="text-right"><#if customer.stars??>${customer.stars}<#else><span
+                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.valid??>${customer.valid?string('有效','无效')}<#else>
+                                    <span
+                                            class="label">不详</span></#if></td>
+
+                                <td class="text-right"><#if customer.user??>${customer.user.realName}<#else><span
+                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.group??>${customer.group.name}<#else><span
+                                        class="label">不详</span></#if></td>
+
                                 <td class="text-right"><#if customer.added??>${customer.added?string('yyyy-MM-dd HH:mm:ss')}<#else>
+                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.updated??>${customer.updated?string('yyyy-MM-dd HH:mm:ss')}<#else>
                                     <span class="label">不详</span></#if></td>
 
                                 <td class="center">
@@ -72,9 +133,6 @@
                                                                               value="${customer.id}">
                                             <button href="${context.contextPath}/customer/remove"><span
                                                     class="fa fa-trash"></span></button>
-                                            <a class="fa fa-search"
-                                               href="${context.contextPath}/customer/get/${customer.id}"><span
-                                                    class="fa fa-query"></span></a>
                                         </form>
                                     </#if>
                                 </td>
