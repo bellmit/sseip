@@ -284,7 +284,7 @@
                         <label class="col-sm-1 control-label no-padding-right">提交者: </label>
 
                         <div class="col-sm-2">
-                            <div class="col-sm-12"><#if (loginUser.realName)??>${loginUser.realName}<#else><span
+                            <div class="col-sm-12"><#if (customer.user.realName)??>${customer.user.realName}<#else><span
                                     class="label">不知道</span></#if></div>
                         </div>
 
