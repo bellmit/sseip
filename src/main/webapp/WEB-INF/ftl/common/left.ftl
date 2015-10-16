@@ -48,7 +48,7 @@
         <li class="">
             <a href="javascript:;" class="dropdown-toggle">
                 <span class="menu-icon fa fa-pencil-square-o"></span>
-                <span class="menu-text">顾客资源管理</span>
+                <span class="menu-text">资源管理</span>
                 <span class="arrow fa fa-angle-down"></span>
             </a>
             <span class="arrow"></span>
@@ -57,7 +57,7 @@
                 <li>
                     <a href="${context.contextPath}/customer/list/1" target="mainFrame">
                         <span class="menu-icon fa fa-list"></span><span
-                            class="menu-text">顾客资源列表</span>
+                            class="menu-text">资源列表</span>
                     </a>
                 </li>
                 <li>
@@ -67,7 +67,7 @@
                 <li>
                     <a href="${context.contextPath}/customer/add" target="mainFrame">
                         <span class="menu-icon fa fa-edit"></span><span
-                            class="menu-text">添加顾客资源</span>
+                            class="menu-text">添加资源</span>
                     </a>
                 </li>
             </ul>

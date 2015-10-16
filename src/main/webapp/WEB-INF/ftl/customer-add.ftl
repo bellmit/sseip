@@ -47,7 +47,7 @@
         </#if>
         </div>
         <div class="row">
-            <form method="post" class="form-horizontal">
+            <form method="post" class="form-horizontal" id="customer-add-form">
                 <div class="col-xs-12">
                 <#--左列-->
 
@@ -131,8 +131,8 @@
                         <label class="col-xs-1 control-label no-padding-right">症状 </label>
 
                         <div class="col-xs-6">
-                            <input name="symptom" type="text" size="30" class="col-xs-12"
-                                   placeholder="症状" value="${(form.symptom)!''}"/>
+                            <textarea name="symptom" class="col-xs-12" style="resize: vertical;"
+                                      placeholder="症状" id="textarea-symptom">${(form.symptom?xhtml)!''}</textarea>
                         </div>
                     </div>
 
@@ -249,8 +249,16 @@
                         <label class="col-xs-1 control-label no-padding-right">备忘</label>
 
                         <div class="col-xs-6">
-                            <input name="memo" type="tel" size="30" class="col-xs-12"
-                                   placeholder="备忘" value="${(form.memo)!''}"/>
+                            <input name="memo" id="customer-memo" type="hidden" value="${(form.memo?xhtml)!''}"/>
+                        <#--
+                                                    <input name="memo" type="tel" size="30" class="col-xs-12"
+                                                           placeholder="备忘" value="${(form.memo)!''}"/>
+                        -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="wysiwyg-editor" id="memo-editor">${(form.memo)!''}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -316,9 +324,24 @@
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
 <script type="text/javascript" src="${context.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
+
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>
+<#--<script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>-->
+<script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
+
 <script type="text/javascript">
     $(function () {
-        $("#addForm").cmsvalidate();
+        $('#memo-editor').ace_wysiwyg();
+        $('#customer-add-form').on('submit', function () {
+            $('#customer-memo').val($('#memo-editor').html());
+        });
+        $('#textarea-symptom').autogrow({
+            speed: 100,
+            onInitialize: true,
+            animate: false
+        });
+        $("#customer-add-form").cmsvalidate();
     });
 </script>
 </body>

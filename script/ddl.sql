@@ -51,7 +51,7 @@ DROP TABLE country;
 CREATE TABLE country (
   id      INT PRIMARY KEY AUTO_INCREMENT,
   `name`  VARCHAR(64),
-  memo    VARCHAR(128),
+  memo    TEXT(512),
   updated DATETIME        DEFAULT current_timestamp,
   a2_code CHAR(4)
 );

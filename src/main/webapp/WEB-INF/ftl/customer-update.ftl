@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
-                <form method="post" class="form-horizontal">
+                <form id="customer-update-form" method="post" class="form-horizontal">
                     <!-- #section:elements.form -->
                 <#if success??>
                     <div class="row">
@@ -249,8 +249,9 @@
                         <label class="col-xs-1 control-label no-padding-right">备忘</label>
 
                         <div class="col-xs-6">
-                            <input name="memo" type="tel" size="30" class="col-xs-12"
-                                   placeholder="备忘" value="${(customer.memo)!''}"/>
+                            <input name="memo" id="customer-memo" type="hidden" value="${(customer.memo?xhtml)!''}"/>
+                        <#--<input name="memo" type="tel" size="30" class="col-xs-12" placeholder="备忘" value="${(customer.memo)!''}"/>-->
+                            <div class="wysiwyg-editor" id="memo-editor">${(customer.memo)!''}</div>
                         </div>
                     </div>
 
@@ -318,9 +319,17 @@
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
 <script type="text/javascript" src="${context.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
+
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>
+
 <script type="text/javascript">
     $(function () {
-        $("#addForm").cmsvalidate();
+        $('#memo-editor').ace_wysiwyg();
+        $('#customer-update-form').on('submit', function () {
+            $('#customer-memo').val($('#memo-editor').html());
+        });
+        $("#customer-update-form").cmsvalidate();
     });
 </script>
 </body>

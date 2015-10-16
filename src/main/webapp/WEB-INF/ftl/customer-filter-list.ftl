@@ -5,7 +5,6 @@
 
     <!--daterangepicker-->
     <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
-
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -16,7 +15,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">顾客资源列表</li>
+            <li class="active">资源列表</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -27,91 +26,109 @@
                 <form id="filter-form" action="" method="get" role="search"></form>
                 <div class="row">
                     <div class="col-sm-12">
-                        <input class="col-md-3" id="date-range" placeholder="选择日期时间范围" title="选择日期时间范围"
-                               value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
-                        <input form="filter-form" name="dateRange" type="text" id="date-range-input"
-                               style="display: none;"
-                               value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
+                        <div class="row">
+                            <div class="col-sm-12 filters"><input class="col-md-4" id="date-range"
+                                                                  placeholder="选择日期时间范围"
+                                                                  title="选择日期时间范围"
+                                                                  value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+                                <input form="filter-form" name="dateRange" type="text" id="date-range-input"
+                                       style="display: none;"
+                                       value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
 
-                        <select name="websiteId" class="col-md-2 text-right green" form="filter-form" title="选择网站">
-                            <option
-                            <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
-                            value="">
-                                选择网站
-                            </option>
-                        <#list websites as website>
-                            <option
-                                <#if (RequestParameters.websiteId)?? && RequestParameters.websiteId==website.id?string>selected</#if>
-                                value="${website.id}">${website.name}</option>
-                        </#list>
-                        </select>
+                                <select name="websiteId" class="col-md-2 text-right green" form="filter-form"
+                                        title="选择网站">
+                                    <option
+                                    <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
+                                    value="">
+                                        选择网站
+                                    </option>
+                                <#list websites as website>
+                                    <option
+                                        <#if (RequestParameters.websiteId)?? && RequestParameters.websiteId==website.id?string>selected</#if>
+                                        value="${website.id}">${website.name}</option>
+                                </#list>
+                                </select>
 
-                        <input name="tel" class="col-md-2 text-right green" type="tel" form="filter-form" title="电话"
-                               placeholder="电话"/>
-                        <input name="name" class="col-md-2 text-right green" type="text" form="filter-form"
-                               title="患者咨询人姓名"
-                               placeholder="患者咨询人姓名"/>
-                        <select name="countryId" class="col-md-2 text-right pink" form="filter-form" title="筛选国家">
-                            <option
-                            <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
-                            value="">筛选国家
-                            </option>
-                        <#list countries as country>
-                            <option
-                                <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
-                                value="${country.id}">${country.name}</option>
-                        </#list>
-                        </select>
-                        <select name="userId" class="col-md-2 text-right pink2" form="filter-form" title="筛选所属人">
-                            <option  <#if !(RequestParameters.userId)?? || RequestParameters.userId=''>selected</#if>
-                                     value="">筛选所属人
-                            </option>
-                        <#list users as user>
-                            <option
-                                <#if (RequestParameters.userId)?? && RequestParameters.userId==user.id?string>selected</#if>
-                                value="${user.id}">${(user.group.name + ' - ')!''}${user.realName}</option>
-                        </#list>
-                        </select>
-                        <input name="email" class="col-md-2 text-right green" type="email" form="filter-form" title="电邮"
-                               placeholder="电邮"/>
-                        <select name="diseaseTypeId" class="col-md-2 text-right orange" form="filter-form"
-                                title="筛选疾病类型">
-                            <option
-                            <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
-                            value="">筛选疾病类型
-                            </option>
-                        <#list diseaseTypes as diseaseType>
-                            <option
-                                <#if (RequestParameters.diseaseTypeId)?? && RequestParameters.diseaseTypeId==diseaseType.id?string>selected</#if>
-                                value="${diseaseType.id}">${diseaseType.name}</option>
-                        </#list>
-                        </select>
-                        <select name="valid" class="col-md-2 text-right brown" form="filter-form" title="筛选是否是否有效">
-                            <option <#if !((RequestParameters.faraway)??) || RequestParameters.faraway=''>selected</#if>
+                                <input name="tel" class="col-md-2 text-right green" type="tel" form="filter-form"
+                                       title="筛选电话"
+                                       placeholder="筛选电话"/>
+                                <input name="name" class="col-md-2 text-right green" type="text" form="filter-form"
+                                       title="筛选患者咨询人姓名"
+                                       placeholder="筛选患者咨询人姓名"/>
+                                <select name="countryId" class="col-md-2 text-right pink" form="filter-form"
+                                        title="筛选患者或咨询人国家">
+                                    <option
+                                    <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
+                                    value="">筛选患者或咨询人国家
+                                    </option>
+                                <#list countries as country>
+                                    <option
+                                        <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
+                                        value="${country.id}">${country.name}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 filters"><select name="userId" class="col-md-2 text-right pink2"
+                                                                   form="filter-form" title="筛选所属人">
+                                <option
+                                <#if !(RequestParameters.userId)?? || RequestParameters.userId=''>selected</#if>
+                                value="">筛选所属人
+                                </option>
+                            <#list users as user>
+                                <option
+                                    <#if (RequestParameters.userId)?? && RequestParameters.userId==user.id?string>selected</#if>
+                                    value="${user.id}">${(user.group.name + ' - ')!''}${user.realName}</option>
+                            </#list>
+                            </select>
+                                <input name="email" class="col-md-2 text-right green" type="email" form="filter-form"
+                                       title="电邮"
+                                       placeholder="电邮"/>
+                                <select name="diseaseTypeId" class="col-md-2 text-right orange" form="filter-form"
+                                        title="筛选疾病类型">
+                                    <option
+                                    <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
+                                    value="">筛选疾病类型
+                                    </option>
+                                <#list diseaseTypes as diseaseType>
+                                    <option
+                                        <#if (RequestParameters.diseaseTypeId)?? && RequestParameters.diseaseTypeId==diseaseType.id?string>selected</#if>
+                                        value="${diseaseType.id}">${diseaseType.name}</option>
+                                </#list>
+                                </select>
+                                <select name="valid" class="col-md-2 text-right brown" form="filter-form"
+                                        title="筛选是否是否有效">
+                                    <option
+                                    <#if !((RequestParameters.faraway)??) || RequestParameters.faraway=''>selected</#if>
                                     value="">筛选是否有效
-                            </option>
-                            <option <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='1'>selected</#if>
+                                    </option>
+                                    <option
+                                    <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='1'>selected</#if>
                                     value="1">有效
-                            </option>
-                            <option <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='0'>selected</#if>
+                                    </option>
+                                    <option
+                                    <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='0'>selected</#if>
                                     value="0">无效
-                            </option>
-                        </select>
-                        <select name="hospitalization" class="col-md-2 text-right pink" form="filter-form"
-                                title="筛选住院类型">
-                            <option
-                            <#if !(RequestParameters.hospitalization)??||RequestParameters.hospitalization=''>selected</#if>
-                            value="">筛选住院类型
-                            </option>
-                        <#list hospitalizationTypes as hospitalizationType>
-                            <option
-                                <#if (RequestParameters.hospitalization)?? && RequestParameters.hospitalization==hospitalizationType.code?string>selected</#if>
-                                value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
-                        </#list>
-                        </select>
-                        <input name="stars" class="col-md-2 text-right green" type="text" form="filter-form"
-                               title="意向程度"
-                               placeholder="意向程度"/>
+                                    </option>
+                                </select>
+                                <select name="hospitalization" class="col-md-2 text-right pink" form="filter-form"
+                                        title="筛选住院类型">
+                                    <option
+                                    <#if !(RequestParameters.hospitalization)??||RequestParameters.hospitalization=''>selected</#if>
+                                    value="">筛选住院类型
+                                    </option>
+                                <#list hospitalizationTypes as hospitalizationType>
+                                    <option
+                                        <#if (RequestParameters.hospitalization)?? && RequestParameters.hospitalization==hospitalizationType.code?string>selected</#if>
+                                        value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
+                                </#list>
+                                </select>
+                                <input name="stars" class="col-md-2 text-right green" type="text" form="filter-form"
+                                       title="意向程度"
+                                       placeholder="意向程度"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -137,7 +154,7 @@
                             <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
                                                                        target="_self"
                                                                        style="color:#FFF;text-decoration:none;"
-                                                                       title="填写顾客资源"
+                                                                       title="填写资源"
                                                                        class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
@@ -219,7 +236,7 @@
                             <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
                                                                        target="_self"
                                                                        style="color:#FFF;text-decoration:none;"
-                                                                       title="填写顾客资源"
+                                                                       title="填写资源"
                                                                        class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
