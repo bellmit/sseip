@@ -4,10 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class N7ParseNamesSet {
+    static Set<String> pset;
+    static List<String> arr;
+
     public static void main(String[] args) throws IOException {
         Set<String> se = parseSet();
         System.out.println(se.size());
@@ -19,27 +24,39 @@ public class N7ParseNamesSet {
         w.close();
     }
 
-    public static HashSet<String> parseSet() throws IOException {
-        final String folderPathE = "E:/codeslike/name-eng-list.lst";
-        final String folderPathC = "E:/codeslike/name-chn-list.lst";
-
-        BufferedReader r;
-        r = new BufferedReader(new FileReader(folderPathC));
-        String line;
-        HashSet<String> ss = new HashSet<>();
-        while ((line = r.readLine()) != null) {
-//            System.out.println(line);
-            ss.add(line);
+    public static List<String> parseArr() throws IOException {
+        if (arr == null) {
+            arr = new ArrayList<>(parseSet());
         }
-        r.close();
+        return arr;
+    }
 
-        r = new BufferedReader(new FileReader(folderPathE));
-        while ((line = r.readLine()) != null) {
+    public static Set<String> parseSet() throws IOException {
+        if (pset == null) {
+
+            final String folderPathE = "E:/codeslike/name-eng-list.lst";
+            final String folderPathC = "E:/codeslike/name-chn-list.lst";
+
+            BufferedReader r;
+            r = new BufferedReader(new FileReader(folderPathC));
+            String line;
+            HashSet<String> ss = new HashSet<>();
+            while ((line = r.readLine()) != null) {
 //            System.out.println(line);
-            ss.add(line);
+                ss.add(line);
+            }
+            r.close();
+
+            r = new BufferedReader(new FileReader(folderPathE));
+            while ((line = r.readLine()) != null) {
+//            System.out.println(line);
+                ss.add(line);
+            }
+            r.close();
+            System.out.println(String.format("parsed %d individual names", ss.size()));
+
+            pset = ss;
         }
-        r.close();
-        System.out.println(String.format("parsed %d individual names", ss.size()));
-        return ss;
+        return pset;
     }
 }

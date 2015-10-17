@@ -9,7 +9,7 @@ import com.syzc.sseip.util.LocalAcUtil;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Set;
 
 public class UserDummyAdd {
     public static void main(String[] args) throws IOException {
@@ -18,7 +18,7 @@ public class UserDummyAdd {
 
         SecureRandom r = new SecureRandom();
 
-        HashSet<String> nameSet = N7ParseNamesSet.parseSet();
+        Set<String> nameSet = N7ParseNamesSet.parseSet();
         ArrayList<String> nameList = new ArrayList<>(nameSet);
 
         User u;
