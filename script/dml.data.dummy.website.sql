@@ -38,12 +38,12 @@ INSERT INTO website (url, name) VALUE
   ("http://www.ehow.com/"
     , "eHow"),
   ("http://instagram.com/"
-    , "照片共享网站"),
+    , "谷歌收购的照片共享网站"),
   ("https://www.reddit.com"
-    , "互联网社交新闻网站"),
+    , "Reddit互联网社交新闻社区"),
   ("http://photobucket.com/"
-    , "图廊网站"),
+    , "Photobucket图廊"),
   ("http://www.yellowpages.com/"
-    , "网上黄页"),
+    , "网上黄页yellowpages.com"),
   ("https://www.wikipedia.org/"
     , "维基百科");

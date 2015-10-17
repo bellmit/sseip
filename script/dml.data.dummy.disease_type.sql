@@ -1,8 +1,8 @@
-insert into disease_type(`name`) VALUE
+INSERT INTO disease_type (`name`) VALUE
   ("急性肾小球肾炎"),
   ("急进型肾炎 "),
   ("慢性肾炎 "),
-  ("肾病综合征 "),
+  ("肾病综合症 "),
   ("隐匿性肾小球疾病"),
   ("狼疮性肾炎"),
   ("紫癜性肾炎"),
@@ -40,5 +40,4 @@ insert into disease_type(`name`) VALUE
   ("尿毒症"),
   ("肾功能不全 "),
   ("IgA肾病"),
-  ("膜性肾炎")
-;
+  ("膜性肾炎");

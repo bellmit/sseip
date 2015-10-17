@@ -36,7 +36,7 @@
             <ul class="nav ace-nav">
                 <!-- #section:basics/navbar.user_menu -->
                 <li class="light-blue">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                    <a href="${context.contextPath}/profile" data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
                              alt="Jason's Photo"/>
 						<span class="user-info">
@@ -44,7 +44,7 @@
                         ${loginUser.username}
 						</span>
 
-                        <i class="ace-icon fa fa-caret-down"></i>
+                        <span class="ace-icon fa fa-caret-down"></span>
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">

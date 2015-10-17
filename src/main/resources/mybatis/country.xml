@@ -57,7 +57,7 @@ SELECT
   a2_code,
   updated
 FROM country
-ORDER BY `name`
+ORDER BY `a2_code`
 LIMIT #{offset}, #{size};
     </select>
     <select id="count" resultType="Long">
@@ -73,6 +73,6 @@ FROM country;
         a2_code,
         updated
         FROM country
-        ORDER BY `name`
+        ORDER BY `a2_code`
     </select>
 </mapper>

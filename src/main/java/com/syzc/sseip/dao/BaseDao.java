@@ -7,6 +7,8 @@ import java.util.List;
 public interface BaseDao<T> {
     Boolean add(@Param("entity") T entity);
 
+    Long addAll(@Param("entities") List<T> entities);
+
     Boolean remove(Long id);
 
     Boolean update(@Param("entity") T entity);

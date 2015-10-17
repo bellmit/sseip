@@ -26,12 +26,12 @@
         WHERE id = #{entity.id}
     </update>
     <select id="get" parameterType="Long" resultMap="AccessPointType">
-SELECT
-  id,
-  `name`,
-  url
-FROM website
-WHERE id = #{id}
+        SELECT
+        id,
+        `name`,
+        url
+        FROM website
+        WHERE id = #{id}
     </select>
     <select id="exist" parameterType="Long" resultType="Boolean">
 SELECT
@@ -46,18 +46,18 @@ FROM website
 WHERE url = #{url}
     </select>
     <select id="list" resultMap="AccessPointType">
-SELECT
-  id,
-  `name`,
-  url
-FROM website
-ORDER BY `name`
-LIMIT #{offset}, #{size}
+        SELECT
+        id,
+        `name`,
+        url
+        FROM website
+        ORDER BY `id`
+        LIMIT #{offset}, #{size}
     </select>
     <select id="count" resultType="Long">
-SELECT
-  count(1)
-FROM website
+        SELECT
+        count(1)
+        FROM website
     </select>
     <select id="listAll" resultMap="AccessPointType">
         SELECT
@@ -65,6 +65,6 @@ FROM website
         `name`,
         url
         FROM website
-        ORDER BY `name`
+        ORDER BY `id`
     </select>
 </mapper>

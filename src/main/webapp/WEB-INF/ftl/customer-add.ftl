@@ -267,8 +267,10 @@
                         <label class="col-xs-1 control-label no-padding-right">星级</label>
 
                         <div class="col-xs-6">
-                            <input name="stars" type="tel" size="30" class="col-xs-12"
-                                   placeholder="星级" value="${(form.stars)!''}"/>
+                            <input name="stars" id="form-stars" type="hidden" value="${(form.stars)!'0'}"/>
+
+                            <div id="stars-ui" data-init-score="${(form.stars)!'0'}" class="rating inline"
+                                 title="意向的星级"></div>
                         </div>
                     </div>
 
@@ -327,19 +329,36 @@
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
+
 <#--<script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>-->
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
         $('#memo-editor').ace_wysiwyg();
+        $('#stars-ui').raty({
+            noRatedMsg: "I'am readOnly and I haven't rated yet!",
+            starType: 'span',
+//            score: 0,
+//            cancel: true,
+//            cancelHint: '零意向',
+            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            score: function () {
+                return $(this).attr('data-init-score');
+            },
+            click: function (score, evt) {
+                $('#form-stars').val(score);
+                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+            }
+        });
         $('#customer-add-form').on('submit', function () {
             $('#customer-memo').val($('#memo-editor').html());
         });
         $('#textarea-symptom').autogrow({
             speed: 100,
             onInitialize: true,
-            animate: false
+            animate: false,
         });
         $("#customer-add-form").cmsvalidate();
     });

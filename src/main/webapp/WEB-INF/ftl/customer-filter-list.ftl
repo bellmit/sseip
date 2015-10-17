@@ -45,7 +45,7 @@
                                 <#list websites as website>
                                     <option
                                         <#if (RequestParameters.websiteId)?? && RequestParameters.websiteId==website.id?string>selected</#if>
-                                        value="${website.id}">${website.name}</option>
+                                        value="${website.id?c}">${website.name}</option>
                                 </#list>
                                 </select>
 
@@ -55,6 +55,10 @@
                                 <input name="name" class="col-md-2 text-right green" type="text" form="filter-form"
                                        title="筛选患者咨询人姓名"
                                        placeholder="筛选患者咨询人姓名"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 filters">
                                 <select name="countryId" class="col-md-2 text-right pink" form="filter-form"
                                         title="筛选患者或咨询人国家">
                                     <option
@@ -64,7 +68,7 @@
                                 <#list countries as country>
                                     <option
                                         <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
-                                        value="${country.id}">${country.name}</option>
+                                        value="${country.id?c}">${country.name}</option>
                                 </#list>
                                 </select>
                             </div>
@@ -79,7 +83,7 @@
                             <#list users as user>
                                 <option
                                     <#if (RequestParameters.userId)?? && RequestParameters.userId==user.id?string>selected</#if>
-                                    value="${user.id}">${(user.group.name + ' - ')!''}${user.realName}</option>
+                                    value="${user.id?c}">${(user.group.name + ' - ')!''}${user.realName}</option>
                             </#list>
                             </select>
                                 <input name="email" class="col-md-2 text-right green" type="email" form="filter-form"
@@ -94,7 +98,7 @@
                                 <#list diseaseTypes as diseaseType>
                                     <option
                                         <#if (RequestParameters.diseaseTypeId)?? && RequestParameters.diseaseTypeId==diseaseType.id?string>selected</#if>
-                                        value="${diseaseType.id}">${diseaseType.name}</option>
+                                        value="${diseaseType.id?c}">${diseaseType.name}</option>
                                 </#list>
                                 </select>
                                 <select name="valid" class="col-md-2 text-right brown" form="filter-form"
@@ -194,12 +198,14 @@
                             <tbody>
                             <#list page.list as customer>
                             <tr>
-                                <td class="text-right">${customer.id}</td>
+                                <td class="text-right">${customer.id?c}</td>
                                 <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
                                     <span class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.patientName??>${customer.patientName}<#else><span
-                                        class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.stars??>${customer.stars}<#else><span
+                                <td class="text-right"><#if customer.patientName??>
+                                    <div>${customer.patientName}</div>
+                                    <div class="stars-ui-ele btn-minier" data-init-score="${(customer.stars)!'0'}"
+                                         class="rating" title="意向的星级"></div>
+                                <#else><span
                                         class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
@@ -214,16 +220,16 @@
 
                                 <td class="center">
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="/customer/update/${customer.id}"><span
+                                        <a href="/customer/update/${customer.id?c}"><span
                                                 class="fa fa-edit"></span></a>
 
                                         <form action="${context.contextPath}/customer/remove" method="post"
                                               style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${customer.id}">
+                                                                              value="${customer.id?c}">
                                             <button href="${context.contextPath}/customer/remove"><span
                                                     class="fa fa-trash"></span></button>
                                             <a class="fa fa-search"
-                                               href="${context.contextPath}/customer/get/${customer.id}"><span
+                                               href="${context.contextPath}/customer/get/${customer.id?c}"><span
                                                     class="fa fa-query"></span></a>
                                         </form>
                                     </#if>
@@ -262,9 +268,24 @@
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
+
 <script>
     var l;
     $(function () {
+        $('.stars-ui-ele').raty({
+            noRatedMsg: "它只读，它还没有星星",
+            starType: 'span',
+            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            score: function () {
+                return $(this).attr('data-init-score');
+            },
+            readOnly: true,
+            size: 4,
+            space: false
+        });
+
         var d = new Date();
         $('#date-range').daterangepicker({
             "autoUpdateInput": false,

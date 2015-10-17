@@ -85,6 +85,7 @@
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="clean*" propagation="REQUIRED"/>
             <tx:method name="change*" propagation="REQUIRED"/>
+            <tx:method name="set*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 

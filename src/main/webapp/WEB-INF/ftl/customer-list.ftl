@@ -44,12 +44,14 @@
                             <tbody>
                             <#list page.list as customer>
                             <tr>
-                                <td class="text-right">${customer.id}</td>
+                                <td class="text-right">${customer.id?c}</td>
                                 <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
                                     <span class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.patientName??>${customer.patientName}<#else><span
-                                        class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.stars??>${customer.stars}<#else><span
+                                <td class="text-right"><#if customer.patientName??>
+                                    <div>${customer.patientName}</div>
+                                    <div class="stars-ui-ele btn-minier" data-init-score="${(customer.stars)!'0'}"
+                                         class="rating" title="意向的星级"></div>
+                                <#else><span
                                         class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
@@ -64,16 +66,16 @@
 
                                 <td class="center">
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="/customer/update/${customer.id}"><span
+                                        <a href="/customer/update/${customer.id?c}"><span
                                                 class="fa fa-edit"></span></a>
 
                                         <form action="${context.contextPath}/customer/remove" method="post"
                                               style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${customer.id}">
+                                                                              value="${customer.id?c}">
                                             <button href="${context.contextPath}/customer/remove"><span
                                                     class="fa fa-trash"></span></button>
                                             <a class="fa fa-search"
-                                               href="${context.contextPath}/customer/get/${customer.id}"><span
+                                               href="${context.contextPath}/customer/get/${customer.id?c}"><span
                                                     class="fa fa-query"></span></a>
                                         </form>
                                     </#if>
@@ -109,5 +111,23 @@
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
 <script src="${context.contextPath}/resources/js/ui/jquery.ui.datepicker.js"></script>
+
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.stars-ui-ele').raty({
+            noRatedMsg: "它只读，它还没有星星",
+            starType: 'span',
+            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            score: function () {
+                return $(this).attr('data-init-score');
+            },
+            readOnly: true,
+            size: 4,
+            space: false
+        });
+    });
+</script>
 </body>
 </html>

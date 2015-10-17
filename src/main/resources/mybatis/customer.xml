@@ -105,6 +105,59 @@
         #{entity.groupId}
         );
     </insert>
+    <insert id="addAll">
+        INSERT INTO customer (
+        sex,
+        age,
+        liaison_name,
+        liaison_address,
+        relationship,
+        patient_name,
+        patient_address,
+        symptom,
+        hospitalization,
+        emergency,
+        email,
+        tel,
+        liaison_country_id,
+        patient_country_id,
+        disease_type_id,
+        website_id,
+        memo,
+        contact_recoreds,
+        stars,
+        valid,
+        user_id,
+        group_id
+        )
+        VALUES
+        <foreach collection="entities" item="entity" separator=",">
+            (
+            #{entity.sex},
+            #{entity.age},
+            #{entity.liaisonName},
+            #{entity.liaisonAddress},
+            #{entity.relationship},
+            #{entity.patientName},
+            #{entity.patientAddress},
+            #{entity.symptom},
+            #{entity.hospitalization},
+            #{entity.emergency},
+            #{entity.email},
+            #{entity.tel},
+            #{entity.liaisonCountryId},
+            #{entity.patientCountryId},
+            #{entity.diseaseTypeId},
+            #{entity.websiteId},
+            #{entity.memo},
+            #{entity.contactRecoreds},
+            #{entity.stars},
+            #{entity.valid},
+            #{entity.userId},
+            #{entity.groupId}
+            )
+        </foreach>
+    </insert>
     <delete id="remove" parameterType="Long">
         delete from customer WHERE id=#{id}
     </delete>
@@ -312,7 +365,7 @@
     </select>
     <select id="countByFilter" resultType="Long">
         SELECT
-        count(1)
+        count(id)
         FROM
         `customer`
         <where>
@@ -355,7 +408,7 @@
         </where>
     </select>
     <select id="count" resultType="Long">
-        select count(1) from customer;
+        select count(id) from customer;
     </select>
 
     <select id="listByUser" resultMap="CustomerDto">
@@ -368,7 +421,7 @@
         LIMIT #{offset}, #{size}
     </select>
     <select id="countByUser" parameterType="Long" resultType="Long">
-        select count(1) from customer WHERE user_id=#{userId}
+        select count(id) from customer WHERE user_id=#{userId}
     </select>
     <select id="listByGroup" resultMap="CustomerDto">
         SELECT
@@ -380,7 +433,7 @@
         LIMIT #{offset}, #{size}
     </select>
     <select id="countByGroup" parameterType="Long" resultType="Long">
-        select count(1) from customer WHERE group_id=#{userId}
+        select count(id) from customer WHERE group_id=#{userId}
     </select>
     <!--用于关联查询-->
     <select id="getUser" resultMap="User">

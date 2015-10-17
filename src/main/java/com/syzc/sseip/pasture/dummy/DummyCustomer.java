@@ -8,6 +8,7 @@ import com.syzc.sseip.util.LocalAcUtil;
 
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DummyCustomer {
@@ -18,10 +19,18 @@ public class DummyCustomer {
         System.out.println(s);
         Customer c;
         System.out.println(new Date());
+        ArrayList<Customer> list;
+        final int count = 10000;
+        list = new ArrayList<>(count);
         for (int i = 0; i < 600000; i++) {
             c = gen();
 //        System.out.println(JSON.toJSONString(c, true));
-            s.add(c);
+            list.add(c);
+            if (list.size() >= count - 1) {
+                System.out.println(new Date());
+                s.addAll(list);
+                list.clear();
+            }
         }
         System.out.println(new Date());
     }

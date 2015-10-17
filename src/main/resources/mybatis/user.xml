@@ -126,7 +126,7 @@
         added,
         role,
         group_id
-        FROM user order by added DESC
+        FROM user order by id DESC
         LIMIT #{offset}, #{size};
     </select>
     <select id="listAll" resultMap="UserDto">
@@ -141,7 +141,7 @@
         added,
         role,
         group_id
-        FROM user order by added DESC
+        FROM user order by id DESC
     </select>
 
     <select id="listByGroup" resultMap="UserDto">
@@ -157,7 +157,7 @@
         role,
         group_id
         FROM user where group_id=#{groupId}
-        order by added DESC
+        order by id DESC
         LIMIT #{offset}, #{size};
     </select>
     <select id="countByGroup" resultType="Long">
@@ -176,7 +176,7 @@
         role,
         group_id
         FROM user where role=#{role}
-        order by added DESC
+        order by id DESC
         LIMIT #{offset}, #{size};
     </select>
     <select id="countByRole" resultType="Long">

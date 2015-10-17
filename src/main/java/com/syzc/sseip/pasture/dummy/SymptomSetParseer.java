@@ -1,6 +1,6 @@
 package com.syzc.sseip.pasture.dummy;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,6 +32,7 @@ public class SymptomSetParseer {
 //        System.out.println(JSON.toJSONString(ch, true));
         ArrayList<String> charr = new ArrayList<>(ch);
         Collections.shuffle(charr, r);
+
         return StringUtils.join(charr, ",");
     }
 
