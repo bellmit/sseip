@@ -10,14 +10,14 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class N2 {
+public class N4 {
     static FileWriter w;
 
     public static void main(String[] args) throws IOException {
-        String folderPath = "E:\\codeslike\\names2";
+        String folderPath = "E:\\codeslike\\names";
         File dir = new File(folderPath);
 
-        File outputEngNameFile = new File("E:/codeslike/name-eng-list.lst");
+        File outputEngNameFile = new File("E:/codeslike/name-chn-list.lst");
         if (outputEngNameFile.exists()) {
             outputEngNameFile.delete();
         }
@@ -35,21 +35,15 @@ public class N2 {
     }
 
     private static void filter(File f) throws IOException {
-        Pattern t = Pattern.compile("class=\"list\"(.*)[<]/table[>]");
-        Pattern t2 = Pattern.compile("[<]td[>](.*?)[<]/td[>]");
+        Pattern t = Pattern.compile("\t\t([^\\s]{2,5}?)[<]/li[>]", Pattern.MULTILINE);
 
         FileReader fileReader = new FileReader(f);
         String s = IOUtils.toString(fileReader);
 
         Matcher m = t.matcher(s);
-        if (!m.find()) return;
-        String s2 = m.group(1);
-//        System.out.println(s2);
-        Matcher m2 = t2.matcher(s2);
-        while (m2.find()) {
-//            System.out.println(m2.group(1));
-            System.out.println(m2.group(1).replaceAll("[<].*?[>]", ""));
-            w.append(m2.group(1).replaceAll("[<].*?[>]", ""));
+        while (m.find()) {
+            System.out.println(m.group(1));
+            w.append(m.group(1));
             w.append('\n');
         }
     }

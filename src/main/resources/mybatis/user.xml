@@ -129,6 +129,20 @@
         FROM user order by added DESC
         LIMIT #{offset}, #{size};
     </select>
+    <select id="listAll" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user order by added DESC
+    </select>
 
     <select id="listByGroup" resultMap="UserDto">
         SELECT

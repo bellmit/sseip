@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Service("userService")
+@Service
 public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements UserService {
     private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
     private UserDao userDao;
