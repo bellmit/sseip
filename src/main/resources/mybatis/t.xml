@@ -4,9 +4,13 @@
     <resultMap id="Group" type="com.syzc.sseip.entity.TTE">
         <id column="id" property="id"/>
     </resultMap>
+    <!--INSERT INTO tte (name, notes) VALUE (#{entity.name}, #{entity.notes});-->
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+INSERT INTO tte (name, notes) VALUE
+(#{entity.name}, #{entity.notes});
+    </insert>
+
     <!--
-        <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
-        </insert>
         <delete id="remove">
         </delete>
         <update id="update">

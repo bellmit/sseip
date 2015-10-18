@@ -55,13 +55,13 @@
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control" placeholder="密码"
                                                                    name="password" value=""/>
-															<i class="ace-icon fa fa-lock"></i>
+															<span class="ace-icon fa fa-lock"></span>
 														</span>
                                             </label>
                                             <label class="block clearfix"><span class="block"><a id="refresh"
                                                                                                  href="javascript:;"
                                                                                                  tabindex="-1"><img
-                                                    id="captcha" src="${context.contextPath}/login/captcha"/></a></span><span
+                                                    id="captcha" src="${context.contextPath}/login/captcha" alt="等待加载"/></a></span><span
                                                     class="block input-icon input-icon-right"><input type="text"
                                                                                                      class="form-control"
                                                                                                      placeholder="验证码"

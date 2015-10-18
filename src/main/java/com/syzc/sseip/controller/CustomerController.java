@@ -74,7 +74,7 @@ public class CustomerController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/list/{page:\\d+}")
+    //    @RequestMapping(value = "/list/{page:\\d+}")
     public String list(@PathVariable("page") Long pageNo, Model model, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
@@ -97,7 +97,7 @@ public class CustomerController {
         return "customer-list";
     }
 
-    @RequestMapping(value = "/filter/{page:\\d+}")
+    //    @RequestMapping(value = "/filter/{page:\\d+}")
     public String filter(
             @RequestParam(value = "dateRange", required = false) Long[] dateRange,
             @RequestParam(required = false) Long websiteId,
@@ -177,6 +177,91 @@ public class CustomerController {
         model.addAttribute("page", page);
         model.addAttribute("path", "/customer/filter");
         return "customer-filter-list";
+    }
+
+    @RequestMapping(value = "/filter-own/{page:\\d+}")
+    public String filterOwn(
+            @RequestParam(value = "dateRange", required = false) Long[] dateRange,
+            @RequestParam(required = false) Long websiteId,
+            @RequestParam(required = false) String tel,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long countryId,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) Long diseaseTypeId,
+            @RequestParam(required = false) Boolean valid,
+            @RequestParam(required = false) HospitalizationType hospitalization,
+            @RequestParam(required = false) Byte stars,
+            @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
+
+        Date till = null;
+        Date since = null;
+        if (dateRange != null && dateRange.length == 2) {
+            since = new Date(dateRange[0]);
+            till = new Date(dateRange[1]);
+        }
+//        System.out.println(Arrays.toString(dateRange));
+//        System.out.println(since);
+//        System.out.println(till);
+
+//        System.out.println(Arrays.asList(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId));
+
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
+        Page<Customer> page;
+        if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+            if (loginUser.getGroupId() == null) {
+                throw AuthException.create("没有权限", Level.DEBUG);
+            }
+            // check groupId range ..?
+            page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
+        } else {
+            //admin || manager
+            page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
+//            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
+//                    groupId, userId, pageNo, pageSize);
+        }
+
+        List<User> users = new ArrayList<>();
+        if (loginUser.getRole() == Role.ADMIN || loginUser.getRole() == Role.MANAGER) {
+            users = userService.list(1L, Byte.MAX_VALUE).getList();
+        } else {
+            if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+                Group group = groupService.get(loginUser.getGroupId());
+                users = userService.listByGroup(loginUser.getGroupId(), pageNo, Byte.MAX_VALUE).getList();
+            }
+        }
+
+        String query = request.getQueryString();
+        model.addAttribute("query", query);
+
+        model.addAttribute("websiteId", websiteId);
+        model.addAttribute("tel", tel);
+        model.addAttribute("name", name);
+        model.addAttribute("countryId", countryId);
+        model.addAttribute("email", email);
+        model.addAttribute("diseaseTypeId", diseaseTypeId);
+        model.addAttribute("valid", valid);
+        model.addAttribute("hospitalization", hospitalization);
+        model.addAttribute("stars", stars);
+
+        model.addAttribute("users", users);
+
+        if (dateRange != null && dateRange.length > 0) {
+            model.addAttribute("dateRange", new Date[]{since, till});
+        }
+
+        model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
+        model.addAttribute("sexTypes", Sex.values());
+        model.addAttribute("websites", websiteService.listAll());
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
+        model.addAttribute("countries", countryService.listAll());
+
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/customer/filter-own");
+        return "customer-filter-own-list";
     }
 
     @RequestMapping(value = "/by-group/{group:\\d+}/{page:\\d+}")

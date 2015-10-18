@@ -23,6 +23,19 @@
                 <!-- PAGE CONTENT BEGINS -->
                 <div class="row">
                     <div class="col-xs-12">
+                        <div class="position-relative">
+                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
+                                                                       target="_self"
+                                                                       style="color:#FFF;text-decoration:none;"
+                                                                       title="填写资源"
+                                                                       class="btn btn-info fa fa-plus"></a> <a
+                                    href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
+                                    title="刷新列表"></a></span>
+                                <span class="col-md-10">
+                                <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+                                </span>
+                            </div>
+                        </div>
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
                                style="word-break: break-all;table-layout:fixed">
@@ -34,6 +47,7 @@
                                 <th class="text-right">病种</th>
                                 <th class="text-right">所属人</th>
                                 <th class="text-right">来源网站</th>
+                                <th class="text-right">是否住院</th>
                                 <th class="text-right">更新时间</th>
                                 <th class="text-right">创建时间</th>
 
@@ -48,18 +62,22 @@
                                     <span
                                             class="label label-green">(咨询人国家)</span><#else><span
                                         class="label">不详</span></#if></#if></td>
-                                <td class="text-right"><#if customer.patientName??>
-                                    <div>${customer.patientName}</div><#else><#if customer.liaisonName??>
+                                <td class="text-right"><#if (customer.patientName)??>
+                                    <div>${customer.patientName}</div><#else><#if (customer.liaisonName)??>
                                     <div>${customer.liaisonName}</div><#else><span class="label">不详</span></#if></#if>
                                     <div class="stars-ui-ele btn-minier" data-init-score="${(customer.stars)!'0'}"
                                          class="rating" title="意向的星级"></div>
                                 </td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.user??>${customer.user.realName}<#else><span
-                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if (customer.user.realName)??>${customer.user.realName}<#else>
+                                    <span
+                                            class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.website??>${customer.website.name}<#else><span
                                         class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.hospitalization??>${customer.hospitalization.textName}<#else>
+                                    <span
+                                            class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.updated??>${customer.updated?string('yyyy-MM-dd HH:mm:ss')}<#else>
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.added??>${customer.added?string('yyyy-MM-dd HH:mm:ss')}<#else>

@@ -54,14 +54,16 @@
             <span class="arrow"></span>
         <#if (loginUser.role)?? && loginUser.role!='EMPTY'>
             <ul class="submenu">
+            <#--
+                            <li>
+                                <a href="${context.contextPath}/customer/list/1" target="mainFrame">
+                                    <span class="menu-icon fa fa-list"></span><span
+                                        class="menu-text">资源列表</span>
+                                </a>
+                            </li>
+            -->
                 <li>
-                    <a href="${context.contextPath}/customer/list/1" target="mainFrame">
-                        <span class="menu-icon fa fa-list"></span><span
-                            class="menu-text">资源列表</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="${context.contextPath}/customer/filter/1" target="mainFrame"><span
+                    <a href="${context.contextPath}/customer/filter-own/1" target="mainFrame"><span
                             class="menu-icon fa fa-search"></span><span class="menu-text">复合查询</span></a>
                 </li>
                 <li>

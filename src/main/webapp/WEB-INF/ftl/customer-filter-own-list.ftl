@@ -74,18 +74,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12 filters"><select name="userId" class="col-md-2 text-right pink2"
-                                                                   form="filter-form" title="筛选所属人">
-                                <option
-                                <#if !(RequestParameters.userId)?? || RequestParameters.userId=''>selected</#if>
-                                value="">筛选所属人
-                                </option>
-                            <#list users as user>
-                                <option
-                                    <#if (RequestParameters.userId)?? && RequestParameters.userId==user.id?string>selected</#if>
-                                    value="${user.id?c}">${(user.group.name + ' - ')!''}${user.realName}</option>
-                            </#list>
-                            </select>
+                            <div class="col-sm-12 filters">
                                 <input name="email" class="col-md-2 text-right green" type="email" form="filter-form"
                                        title="电邮"
                                        placeholder="电邮"/>
@@ -141,7 +130,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="" class="btn btn-xs col-md-2 text-right btn-warning" form="filter-form">重置条件</a>
-                <a href="${context.contextPath}/customer/filter/1"
+                <a href="${context.contextPath}/customer/filter-own/1"
                    class="btn btn-xs col-md-2 text-right btn-grey">重新搜索</a>
                 <button type="submit" class="btn btn-xs col-md-2 text-right btn-info" form="filter-form">查询
                 </button>
