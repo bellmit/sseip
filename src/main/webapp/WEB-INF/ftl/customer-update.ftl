@@ -343,7 +343,7 @@
             },
             click: function (score, evt) {
                 $('#form-stars').val(score);
-                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+//                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
             }
         });
         $('#customer-update-form').on('submit', function () {

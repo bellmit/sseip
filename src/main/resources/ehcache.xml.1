@@ -1,0 +1,22 @@
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            maxEntriesLocalHeap="1000"
+            name="defaultEhcache"
+            />
+    />
+    <cache name="s-unionid" maxBytesLocalHeap="10485760"/>
+    <cache name="s-openuser" maxBytesLocalHeap="10485760"/>
+    <!--<cache name="onlyCache"/>-->
+</ehcache>
+        <!--maxEntriesLocalHeap="1000"-->
+        <!--maxBytesLocalHeap="10485760"-->

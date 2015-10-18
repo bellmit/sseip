@@ -1,6 +1,9 @@
 package com.syzc.sseip.entity;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department implements Serializable {
+    private static final long serialVersionUID = -6324458868620916282L;
     private Long id;
     private Long name;
 

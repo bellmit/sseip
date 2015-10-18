@@ -94,14 +94,17 @@
         <!--<artifactId>commons-codec</artifactId>-->
         <!--<version>1.10</version>-->
         <!--</dependency>-->
-        <dependency> <!-- 暂时使用。想换成memcache -->
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>2.10.0</version>
-        </dependency>
+        <!-- 暂时使用。想换成memcache -->
+        <!--
+                <dependency>
+                    <groupId>net.sf.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>
+                    <version>2.10.0</version>
+                </dependency>
+        -->
+        <!-- 暂时使用。为了配合ehcache -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <!-- 暂时使用。为了配合ehcache -->
             <artifactId>slf4j-api</artifactId>
             <version>1.7.12</version>
         </dependency>
@@ -148,11 +151,13 @@
             <artifactId>mybatis</artifactId>
             <version>3.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-ehcache</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+        <!--
+                <dependency>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-ehcache</artifactId>
+                    <version>1.0.0</version>
+                </dependency>
+        -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
@@ -187,6 +192,11 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.caches</groupId>
+            <artifactId>mybatis-memcached</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>

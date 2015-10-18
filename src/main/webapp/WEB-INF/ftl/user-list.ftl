@@ -56,11 +56,8 @@
                             <#list page.list as user>
                             <tr>
                                 <td class="text-right">${user.id }</td>
-                                <td class="text-right">${user.username}
-                                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/user/profile/${user.id}" class="list_link"
-                                           title="查看资料"><span class="fa fa-eye"></span></a></#if>
-                                </td>
+                                <td class="text-right">${user.username}<#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')><a href="${context.contextPath}/user/profile/${user.id}" class="list_link"
+                                       title="查看资料"><span class="fa fa-eye"></span></a></#if></td>
                                 <td class="text-right">${user.realName}</td>
                                 <td class="text-right"><#if user.age??>${user.age}<#else><span>没有写</span></#if>
                                 </td>

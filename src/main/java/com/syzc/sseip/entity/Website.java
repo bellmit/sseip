@@ -1,6 +1,9 @@
 package com.syzc.sseip.entity;
 
-public class Website {
+import java.io.Serializable;
+
+public class Website implements Serializable {
+    private static final long serialVersionUID = -2237508767793715354L;
     private Long id;
     private String name;
     private String url;

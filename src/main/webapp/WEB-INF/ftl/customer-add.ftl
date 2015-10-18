@@ -102,6 +102,10 @@
 
                         <div class="col-sm-2">
                             <select name="patientCountryId" class="col-xs-12" size="6">
+                                <option
+                                <#if !(form.patientCountryId)?? >selected=""</#if>
+                                value="">未知
+                                </option>
                             <#list countries as country>
                                 <option
                                     <#if (form.patientCountryId)?? && form.patientCountryId=country.id>selected=""</#if>
@@ -162,6 +166,10 @@
 
                         <div class="col-sm-6">
                             <select name="liaisonCountryId" class="col-xs-12" size="6">
+                                <option
+                                <#if !(form.liaisonCountryId)?? >selected=""</#if>
+                                value="">未知
+                                </option>
                             <#list countries as country>
                                 <option
                                     <#if (form.liaisonCountryId)?? && form.liaisonCountryId=country.id>selected=""</#if>
@@ -349,7 +357,7 @@
             },
             click: function (score, evt) {
                 $('#form-stars').val(score);
-                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+//                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
             }
         });
         $('#customer-add-form').on('submit', function () {

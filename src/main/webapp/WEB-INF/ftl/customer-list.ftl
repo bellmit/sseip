@@ -31,7 +31,6 @@
                                 <th class="text-right">ID</th>
                                 <th class="text-right">患者国家</th>
                                 <th class="text-right">患者姓名</th>
-                                <th class="text-right">星级</th>
                                 <th class="text-right">病种</th>
                                 <th class="text-right">所属人</th>
                                 <th class="text-right">来源网站</th>
@@ -45,14 +44,16 @@
                             <#list page.list as customer>
                             <tr>
                                 <td class="text-right">${customer.id?c}</td>
-                                <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
-                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else><#if customer.liaisonCountry??>${customer.liaisonCountry.name}
+                                    <span
+                                            class="label label-green">(咨询人国家)</span><#else><span
+                                        class="label">不详</span></#if></#if></td>
                                 <td class="text-right"><#if customer.patientName??>
-                                    <div>${customer.patientName}</div>
+                                    <div>${customer.patientName}</div><#else><#if customer.liaisonName??>
+                                    <div>${customer.liaisonName}</div><#else><span class="label">不详</span></#if></#if>
                                     <div class="stars-ui-ele btn-minier" data-init-score="${(customer.stars)!'0'}"
                                          class="rating" title="意向的星级"></div>
-                                <#else><span
-                                        class="label">不详</span></#if></td>
+                                </td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.user??>${customer.user.realName}<#else><span

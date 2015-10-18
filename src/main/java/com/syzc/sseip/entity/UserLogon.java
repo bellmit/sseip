@@ -1,8 +1,10 @@
 package com.syzc.sseip.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserLogon {
+public class UserLogon implements Serializable {
+    private static final long serialVersionUID = 5419204435606519473L;
     private Long id;
     private Long userId;
     private Date lastSignIn;

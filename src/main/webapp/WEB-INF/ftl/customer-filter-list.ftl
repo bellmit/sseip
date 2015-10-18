@@ -184,7 +184,6 @@
                                 <th class="text-right">ID</th>
                                 <th class="text-right">患者国家</th>
                                 <th class="text-right">患者姓名</th>
-                                <th class="text-right">星级</th>
                                 <th class="text-right">病种</th>
                                 <th class="text-right">所属人</th>
                                 <th class="text-right">来源网站</th>

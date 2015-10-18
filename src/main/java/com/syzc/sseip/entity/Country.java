@@ -1,8 +1,10 @@
 package com.syzc.sseip.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Country {
+public class Country implements Serializable {
+    private static final long serialVersionUID = -5921564059019831771L;
     private Long id;
     private String name;
     private String a2Code;

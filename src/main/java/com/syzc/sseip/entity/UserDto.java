@@ -1,6 +1,9 @@
 package com.syzc.sseip.entity;
 
-public class UserDto extends User {
+import java.io.Serializable;
+
+public class UserDto extends User implements Serializable {
+    private static final long serialVersionUID = 2042209216352215111L;
     private Group group;
     private UserLogon userLogon;
 

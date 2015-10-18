@@ -1,13 +1,11 @@
 package com.syzc.sseip.entity;
 
-import java.io.Serializable;
-
-public class DiseaseType implements Serializable {
-    private static final long serialVersionUID = 3407493996319487086L;
+public class TTE {
     private Long id;
     private String name;
+    private String notes;
 
-    public DiseaseType() {
+    public TTE() {
     }
 
     public Long getId() {
@@ -24,5 +22,13 @@ public class DiseaseType implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

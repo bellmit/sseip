@@ -3,9 +3,11 @@ package com.syzc.sseip.entity;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Customer {
+public class Customer implements Serializable {
+    private static final long serialVersionUID = 1564478954650903113L;
     private Long id;
     private Sex sex; //患者性别
     private Short age; //患者年龄

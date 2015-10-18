@@ -97,4 +97,12 @@
         <!-- 通过advisor来确定具体要加入事务控制的方法 -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods"/>
     </aop:config>
+
+    <!-- 使用ehcache缓存 -->
+    <!--
+        <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+            <property name="configLocation" value="classpath:ehcache-spring.xml"/>
+            <property name="shared" value="true"/>
+        </bean>
+    -->
 </beans>
