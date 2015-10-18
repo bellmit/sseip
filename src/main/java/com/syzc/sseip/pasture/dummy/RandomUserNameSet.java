@@ -16,7 +16,7 @@ public class RandomUserNameSet {
         Set<String> set = new HashSet<>();
         char a, b, c;
 
-        while (set.size() < 25) {
+        while (set.size() < 50) {
             a = (char) (97 + r.nextInt(26));
             b = (char) (97 + r.nextInt(26));
             c = (char) (97 + r.nextInt(26));
