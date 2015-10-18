@@ -41,6 +41,7 @@ public class Customer implements Serializable {
     private Boolean valid;
 
     private Long userId;
+    private Long ownerUserId;
     private Long groupId;
 
 //    private Date calledTime;
@@ -249,5 +250,13 @@ public class Customer implements Serializable {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    public Long getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public void setOwnerUserId(Long ownerUserId) {
+        this.ownerUserId = ownerUserId;
     }
 }

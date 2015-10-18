@@ -41,8 +41,10 @@ CREATE TABLE customer (
   emergency         TINYINT(1)      DEFAULT FALSE,
   added             DATETIME        DEFAULT current_timestamp,
   user_id           INT,
+  owner_user_id     INT,
   group_id          INT,
   CONSTRAINT fk_customer_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id),
+  CONSTRAINT fk_customer_owner_user_id_user_id FOREIGN KEY (owner_user_id) REFERENCES user (id),
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id),
   INDEX idx_customer_added (added)
 );

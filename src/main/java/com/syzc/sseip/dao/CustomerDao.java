@@ -47,19 +47,21 @@ public interface CustomerDao extends BaseDao<Customer> {
                        @Param("hospitalization") HospitalizationType hospitalization,
                        @Param("stars") Byte stars
     );
-/*
-    List<Customer> listByFilter(@Param("sex") Sex sex, @Param("website") Website website,
-                                @Param("accessPointType") AccessPointType accessPointType,
-                                @Param("diseaseType") DiseaseType diseaseType, @Param("faraway") Boolean faraway,
-                                @Param("emergency") Boolean emergency, @Param("since") Date since,
-                                @Param("till") Date till, @Param("groupId") Long groupId,
-                                @Param("userId") Long userId, @Param("offset") Long offset, @Param("size") Byte size);
 
-    Long countByFilter(@Param("sex") Sex sex, @Param("website") Website website,
-                       @Param("accessPointType") AccessPointType accessPointType,
-                       @Param("diseaseType") DiseaseType diseaseType,
-                       @Param("faraway") Boolean faraway, @Param("emergency") Boolean emergency, @Param("since") Date since,
-                       @Param("till") Date till,
-                       @Param("groupId") Long groupId, @Param("userId") Long userId);
-*/
+    /*
+        List<Customer> listByFilter(@Param("sex") Sex sex, @Param("website") Website website,
+                                    @Param("accessPointType") AccessPointType accessPointType,
+                                    @Param("diseaseType") DiseaseType diseaseType, @Param("faraway") Boolean faraway,
+                                    @Param("emergency") Boolean emergency, @Param("since") Date since,
+                                    @Param("till") Date till, @Param("groupId") Long groupId,
+                                    @Param("userId") Long userId, @Param("offset") Long offset, @Param("size") Byte size);
+
+        Long countByFilter(@Param("sex") Sex sex, @Param("website") Website website,
+                           @Param("accessPointType") AccessPointType accessPointType,
+                           @Param("diseaseType") DiseaseType diseaseType,
+                           @Param("faraway") Boolean faraway, @Param("emergency") Boolean emergency, @Param("since") Date since,
+                           @Param("till") Date till,
+                           @Param("groupId") Long groupId, @Param("userId") Long userId);
+    */
+    Boolean passOn(Long ownerUserId);
 }
