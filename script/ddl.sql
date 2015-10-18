@@ -25,7 +25,7 @@ CREATE TABLE user (
   CONSTRAINT fk_user_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
 );
 
-CREATE TABLE customer (
+/*CREATE TABLE customer (
   id                INT PRIMARY KEY AUTO_INCREMENT,
   name              VARCHAR(128),
   sex               TINYINT(1),
@@ -48,9 +48,10 @@ CREATE TABLE customer (
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id),
   INDEX idx_customer_added (added)
 );
+*/
 
 USE sseip;
-DROP TABLE country;
+DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   id      INT PRIMARY KEY AUTO_INCREMENT,
   `name`  VARCHAR(64),
@@ -70,11 +71,11 @@ CREATE TABLE disease_type (
   `name` VARCHAR(64)
 );
 
-CREATE TABLE access_point_type (
+/*CREATE TABLE access_point_type (
   id     INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(16)
 );
-
+*/
 CREATE TABLE user_role (
   id      INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
@@ -91,6 +92,7 @@ CREATE TABLE user_logon (
   CONSTRAINT fk_user_logon_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
+DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
   id                 INT PRIMARY KEY AUTO_INCREMENT,
   sex                TINYINT(1),
