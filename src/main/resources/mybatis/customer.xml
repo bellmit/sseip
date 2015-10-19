@@ -463,11 +463,8 @@
     <select id="getWebsite" resultMap="Website">
         select * from website where id=#{id}
     </select>
-    <update id="updateOwnUserId" parameterType="Long">
-        update customer set owner_user_id=#{newOwnerUserId} where id=#{id}
-    </update>
     <update id="updateOwnUserIds">
-        update customer set owner_user_id=#{newOwnerUserId} where id IN
+        update customer set owner_user_id=#{newOwnerUserId} where owner_user_id=#{currUserId} and id IN
         <foreach collection="customerIds" item="customerId" separator="," open="(" close=")">#{customerId}</foreach>
     </update>
 </mapper>

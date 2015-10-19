@@ -1,16 +1,16 @@
 package com.syzc.sseip.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.syzc.sseip.entity.enumtype.Role;
-import com.syzc.sseip.service.UserService;
-import com.syzc.sseip.util.AgeUtil;
-import com.syzc.sseip.util.exception.AuthException;
 import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserDto;
+import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.GroupService;
+import com.syzc.sseip.service.UserService;
+import com.syzc.sseip.util.AgeUtil;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
+import com.syzc.sseip.util.exception.AuthException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -245,5 +245,23 @@ public class UserController {
 
         model.addAttribute("user", user);
         return "/user-m-profile";
+    }
+
+    @RequestMapping(value = "profile")
+    public String profile(Model model, HttpSession session) {
+
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        if (loginUser.getRole() == null) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+        User user = userService.get(loginUser.getId());
+        session.setAttribute("loginUser", user);
+
+        if (user == null) {
+            throw HosException.create("查无此人", Level.DEBUG);
+        }
+
+        model.addAttribute("user", user);
+        return "/profile-self";
     }
 }

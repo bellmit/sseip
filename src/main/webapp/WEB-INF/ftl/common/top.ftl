@@ -39,11 +39,8 @@
                     <a href="${context.contextPath}/profile" data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
                              alt="Jason's Photo"/>
-						<span class="user-info">
-							<small>欢迎,</small>
-                        ${(loginUser.realName)!''}
-						</span>
-
+                        <span class="user-info"><small>
+                            欢迎, ${(loginUser.role.roleName)!''}</small> ${(loginUser.realName)!''}</span>
                         <span class="ace-icon fa fa-caret-down"></span>
                     </a>
 

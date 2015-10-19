@@ -32,6 +32,9 @@
                     <dd>${(loginUser.role.roleName)!'<span class="label">没有角色</span>'}</dd>
                 </dl>
             </div>
+            <div class="col-xs-12">
+                <a href="javascript:history.go(-1);"><span class="fa fa-backward"></span>“后退”</a>
+            </div>
         </div>
     </div>
 </div>

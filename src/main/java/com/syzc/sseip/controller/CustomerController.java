@@ -97,7 +97,7 @@ public class CustomerController {
         return "customer-list";
     }
 
-    //    @RequestMapping(value = "/filter/{page:\\d+}")
+    @RequestMapping(value = "/filter/{page:\\d+}")
     public String filter(
             @RequestParam(value = "dateRange", required = false) Long[] dateRange,
             @RequestParam(required = false) Long websiteId,
@@ -224,8 +224,9 @@ public class CustomerController {
 //                    groupId, userId, pageNo, pageSize);
         }
 
-        List<User> users = new ArrayList<>();
+        List<User> users;
 /*
+        users = new ArrayList<>();
         if (loginUser.getRole() == Role.ADMIN || loginUser.getRole() == Role.MANAGER) {
             users = userService.list(1L, Byte.MAX_VALUE).getList();
         } else {
@@ -468,7 +469,10 @@ public class CustomerController {
         System.out.println(Arrays.toString(customerIds));
         String referer = request.getHeader("Referer");
 
-        Long count = customerService.passOn(customerIds, newOwnerUserId);
+        User loginUser = (User) session.getAttribute("loginUser");
+
+        Long count = customerService.passOn(customerIds, newOwnerUserId, loginUser.getId());
+
         User user = userService.get(newOwnerUserId);
         session.setAttribute("newOwnerUserId", newOwnerUserId);
         session.setAttribute("user", user);

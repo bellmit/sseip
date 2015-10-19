@@ -117,9 +117,16 @@
                                         value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
                                 </#list>
                                 </select>
-                                <input name="stars" class="col-md-2 text-right green" type="text" form="filter-form"
-                                       title="意向程度"
-                                       placeholder="意向程度"/>
+                                <input name="stars" id="form-stars" type="hidden"
+                                       value="${(RequestParameters.stars)!'0'}"/>
+
+                                <div id="stars-ui" data-init-score="${(RequestParameters.stars)!'0'}"
+                                     class="rating inline" title="意向的星级"></div>
+                            <#--
+                                                            <input name="stars" class="col-md-2 text-right green" type="text" form="filter-form"
+                                                                   title="意向程度"
+                                                                   placeholder="意向程度"/>
+                            -->
                             </div>
                         </div>
                     </div>
@@ -194,17 +201,16 @@
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if (customer.patientName)??>
                                     <div>${customer.patientName}</div><#else><#if (customer.liaisonName)??>
-                                    <div>${customer.liaisonName}</div><#else><span class="label">不详</span></#if></#if>
+                                    <div>${customer.liaisonName}</div><#else>
+                                    <div class="label">不详</div></#if></#if>
                                     <div class="stars-ui-ele btn-minier rating"
                                          data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                                          style="font-size: 7px"></div>
                                 </td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.ownerUser??>${(customer.ownerUser.group.name)!''}
-                                    - ${customer.ownerUser.realName}<#else>
-                                    <span
-                                            class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.ownerUser??>${customer.ownerUser.realName}<#else>
+                                    <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.website??>${customer.website.name}<#else><span
                                         class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.hospitalization??>${customer.hospitalization.textName}<#else>
@@ -301,6 +307,21 @@
             readOnly: true,
             size: 4,
             space: false
+        });
+        $('#stars-ui').raty({
+            noRatedMsg: "I'am readOnly and I haven't rated yet!",
+            starType: 'span',
+//            score: 0,
+            cancel: true,
+            cancelHint: '零意向',
+            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            score: function () {
+                return $(this).attr('data-init-score');
+            },
+            click: function (score, evt) {
+                $('#form-stars').val(score);
+//                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+            }
         });
 
         var d = new Date();

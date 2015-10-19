@@ -30,20 +30,20 @@ INSERT INTO website (url, name) VALUE
   ("https://www.facebook.com"
     , "Top 1社交网站"),
   ("https://twitter.com"
-    , "Twitter短博客网站"),
+    , "Twitter"),
   ("https://www.pinterest.com"
-    , "pinterest"),
+    , "Pinterest"),
   ("http://www.ask.com/"
     , "第一等问答网站"),
   ("http://www.ehow.com/"
     , "eHow"),
   ("http://instagram.com/"
-    , "谷歌收购的照片共享网站"),
+    , "Instagram"),
   ("https://www.reddit.com"
-    , "Reddit互联网社交新闻社区"),
+    , "Reddit新闻社区"),
   ("http://photobucket.com/"
-    , "Photobucket图廊"),
+    , "Photobucket"),
   ("http://www.yellowpages.com/"
-    , "网上黄页yellowpages.com"),
+    , "黄页yellowpages.com"),
   ("https://www.wikipedia.org/"
     , "维基百科");
