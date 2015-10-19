@@ -187,19 +187,24 @@
                             <tbody>
                             <#list page.list as customer>
                             <tr>
-                                <td class="text-right">${customer.id?c}</td>
+                                <td class="text-right"><label>${customer.id?c}<input type="checkbox" name="customer-ids"
+                                                                                     value="${customer.id?c}"
+                                                                                     form="pass-on-form"></label></td>
                                 <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if (customer.patientName)??>
                                     <div>${customer.patientName}</div><#else><#if (customer.liaisonName)??>
                                     <div>${customer.liaisonName}</div><#else><span class="label">不详</span></#if></#if>
-                                    <div class="stars-ui-ele btn-minier" data-init-score="${(customer.stars)!'0'}"
-                                         class="rating" title="意向的星级"></div>
+                                    <div class="stars-ui-ele btn-minier rating"
+                                         data-init-score="${(customer.stars)!'0'}" title="意向的星级"
+                                         style="font-size: 7px"></div>
                                 </td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
-                                <td class="text-right"><#if customer.user??>${customer.user.realName}<#else><span
-                                        class="label">不详</span></#if></td>
+                                <td class="text-right"><#if customer.ownerUser??>${(customer.ownerUser.group.name)!''}
+                                    - ${customer.ownerUser.realName}<#else>
+                                    <span
+                                            class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.website??>${customer.website.name}<#else><span
                                         class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.hospitalization??>${customer.hospitalization.textName}<#else>
@@ -210,7 +215,7 @@
                                     <span class="label">不详</span></#if></td>
 
                                 <td class="center">
-                                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                         <a href="/customer/update/${customer.id?c}"><span
                                                 class="fa fa-edit"></span></a>
 
@@ -229,6 +234,27 @@
                             </#list>
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-sm-12 filters"><select name="new-owner-user-id"
+                                                                   class="col-md-2 text-right pink2" form="pass-on-form"
+                                                                   title="转交给用户">
+                                <option
+                                <#if (RequestParameters.newOwnerUserId)!''=''>selected</#if>
+                                value="">转交给用户
+                                </option>
+                            <#list users as user>
+                                <option
+                                    <#if (RequestParameters.newOwnerUserId)!''==user.id?string>selected</#if>
+                                    value="${user.id?c}">${(user.group.name + ' - ')!''}${user.realName}</option>
+                            </#list>
+                            </select>
+                                <button type="submit" class="btn btn-xs col-md-2 text-right btn-warning"
+                                        form="pass-on-form">转交给用户
+                                </button>
+                                <form id="pass-on-form" method="post"
+                                      action="${context.contextPath}/customer/pass"></form>
+                            </div>
+                        </div>
                         <div class="page-header position-relative">
                             <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
                                                                        target="_self"

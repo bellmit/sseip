@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.syzc.sseip.dao.UserDao">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
-    <cache type="org.mybatis.caches.memcached.MemcachedCache" />
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache" />-->
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="User" type="com.syzc.sseip.entity.User">
         <id column="id" property="id"/>
         <result column="real_name" property="realName"/>
@@ -143,7 +144,7 @@
         added,
         role,
         group_id
-        FROM user order by id DESC
+        FROM user order by real_name DESC
     </select>
 
     <select id="listByGroup" resultMap="UserDto">

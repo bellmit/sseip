@@ -63,5 +63,7 @@ public interface CustomerDao extends BaseDao<Customer> {
                            @Param("till") Date till,
                            @Param("groupId") Long groupId, @Param("userId") Long userId);
     */
-    Boolean passOn(Long ownerUserId);
+    Boolean updateOwnUserId(@Param("id") Long id, @Param("newOwnerUserId") Long ownerUserId);
+
+    Long updateOwnUserIds(@Param("customerIds") Long[] customerIds, @Param("newOwnerUserId") Long ownerUserId);
 }

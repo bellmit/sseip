@@ -225,6 +225,7 @@ public class CustomerController {
         }
 
         List<User> users = new ArrayList<>();
+/*
         if (loginUser.getRole() == Role.ADMIN || loginUser.getRole() == Role.MANAGER) {
             users = userService.list(1L, Byte.MAX_VALUE).getList();
         } else {
@@ -233,6 +234,8 @@ public class CustomerController {
                 users = userService.listByGroup(loginUser.getGroupId(), pageNo, Byte.MAX_VALUE).getList();
             }
         }
+*/
+        users = userService.listAll();
 
         String query = request.getQueryString();
         model.addAttribute("query", query);
@@ -455,5 +458,29 @@ public class CustomerController {
         model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("customer", customer);
         return "customer-update";
+    }
+
+    @RequestMapping(value = "/pass", method = RequestMethod.POST)
+    public String passOn(@RequestParam("new-owner-user-id") Long newOwnerUserId, @RequestParam("customer-ids") Long[] customerIds, Model model, HttpSession session, HttpServletRequest request) {
+        if (newOwnerUserId == null) {
+            throw HosException.create("目标用户不能为空", Level.DEBUG);
+        }
+        System.out.println(Arrays.toString(customerIds));
+        String referer = request.getHeader("Referer");
+
+        Long count = customerService.passOn(customerIds, newOwnerUserId);
+        User user = userService.get(newOwnerUserId);
+        session.setAttribute("newOwnerUserId", newOwnerUserId);
+        session.setAttribute("user", user);
+        session.setAttribute("customerIds", customerIds);
+        session.setAttribute("passedCount", count);
+
+//        session.setAttribute("referer", referer);
+
+        if (referer == null) {
+            referer = request.getContextPath() + "/customer/filter-own/1";
+        }
+//        return "customer-pass-result";
+        return "redirect:" + referer;
     }
 }

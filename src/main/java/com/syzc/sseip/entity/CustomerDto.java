@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class CustomerDto extends Customer implements Serializable {
     private static final long serialVersionUID = -5507854566537408978L;
     private User user;
+    private User ownerUser;
     private Group group;
     private Website website;
     private Country liaisonCountry;
@@ -60,5 +61,13 @@ public class CustomerDto extends Customer implements Serializable {
 
     public void setDiseaseType(DiseaseType diseaseType) {
         this.diseaseType = diseaseType;
+    }
+
+    public User getOwnerUser() {
+        return ownerUser;
+    }
+
+    public void setOwnerUser(User ownerUser) {
+        this.ownerUser = ownerUser;
     }
 }

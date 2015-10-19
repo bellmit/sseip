@@ -259,4 +259,5 @@ public class Customer implements Serializable {
     public void setOwnerUserId(Long ownerUserId) {
         this.ownerUserId = ownerUserId;
     }
+
 }

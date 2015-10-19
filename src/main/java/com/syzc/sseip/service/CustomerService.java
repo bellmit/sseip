@@ -16,4 +16,8 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
     Page<Customer> listByFilter(Date since, Date till, Long websiteId, String tel, String name, Long countryId, Long userId, String email, Long diseaseTypeId, Boolean valid, HospitalizationType hospitalization, Byte stars, Long pageNo, Byte size);
 
 //    Page<Customer> listByFilter(Sex sex, Website website, AccessPointType accessPointType, DiseaseType diseaseType, Boolean faraway, Boolean emergency, Date since, Date till, Long groupId, Long userId, Long pageNo, Byte size);
+
+    Boolean passOn(Long id, Long userId);
+
+    Long passOn(Long[] ids, Long userId);
 }

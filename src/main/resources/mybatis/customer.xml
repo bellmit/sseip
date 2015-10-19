@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.syzc.sseip.dao.CustomerDao">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
-    <cache type="org.mybatis.caches.memcached.MemcachedCache"/>
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="Customer" type="com.syzc.sseip.entity.Customer">
         <id column="id" property="id"/>
         <result column="liaison_name" property="liaisonName"/>
@@ -28,6 +29,7 @@
         <result column="disease_type_id" property="diseaseTypeId"/>
         <result column="website_id" property="websiteId"/>
         <result column="user_id" property="userId"/>
+        <result column="owner_user_id" property="ownerUserId"/>
         <result column="group_id" property="groupId"/>
 
         <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
@@ -35,6 +37,7 @@
         <association property="diseaseType" column="disease_type_id" select="getDiseaseType"/>
         <association property="website" column="website_id" select="getWebsite"/>
         <association property="user" column="user_id" select="getUser"/>
+        <association property="ownerUser" column="owner_user_id" select="getUser"/>
         <association property="group" column="group_id" select="getGroup"/>
     </resultMap>
     <resultMap id="Country" type="com.syzc.sseip.entity.Country">
@@ -339,7 +342,7 @@
                 and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
             </if>
             <if test="userId != null">
-                and user_id=#{userId}
+                and owner_user_id=#{userId}
             </if>
             <if test="email!=null and email!=''">
                 and email=#{email}
@@ -460,4 +463,11 @@
     <select id="getWebsite" resultMap="Website">
         select * from website where id=#{id}
     </select>
+    <update id="updateOwnUserId" parameterType="Long">
+        update customer set owner_user_id=#{newOwnerUserId} where id=#{id}
+    </update>
+    <update id="updateOwnUserIds">
+        update customer set owner_user_id=#{newOwnerUserId} where id IN
+        <foreach collection="customerIds" item="customerId" separator="," open="(" close=")">#{customerId}</foreach>
+    </update>
 </mapper>

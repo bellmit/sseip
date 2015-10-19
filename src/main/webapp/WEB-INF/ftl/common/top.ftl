@@ -41,7 +41,7 @@
                              alt="Jason's Photo"/>
 						<span class="user-info">
 							<small>欢迎,</small>
-                        ${loginUser.username}
+                        ${(loginUser.realName)!''}
 						</span>
 
                         <span class="ace-icon fa fa-caret-down"></span>
