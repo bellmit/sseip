@@ -8,8 +8,7 @@ import com.syzc.sseip.util.LocalAcUtil;
 
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 
 public class UserDummyAdd {
     public static void main(String[] args) throws IOException {
@@ -18,8 +17,7 @@ public class UserDummyAdd {
 
         SecureRandom r = new SecureRandom();
 
-        Set<String> nameSet = N7ParseNamesSet.parseSet();
-        ArrayList<String> nameList = new ArrayList<>(nameSet);
+        List<String> nameList = N7ParseNamesSet.parseArr();
 
         User u;
         for (String un : RandomUserNameSet.genSet()) {
@@ -27,10 +25,10 @@ public class UserDummyAdd {
             u.setUsername(un);
             u.setPassword(un);
             u.setRealName(nameList.get(r.nextInt(nameList.size())));
-            u.setAge(r.nextInt(10) + 22);
+            u.setAge(r.nextInt(5) + 21);
             u.setPhone(String.valueOf(RandomTelNum.genTel()));
             u.setRole(Role.EMPTY);
-            u.setGroupId(r.nextInt(2) + 1L);
+            u.setGroupId(r.nextInt(3) + 1L);
             System.out.println(JSON.toJSONString(u, true));
             s.add(u);
         }

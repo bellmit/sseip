@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.*;
 
-public class SymptomSetParseer {
+public class SymptomSetParser {
     static Set<String> sset;
     static ArrayList<String> arr;
     static SecureRandom r = new SecureRandom();
@@ -39,18 +39,21 @@ public class SymptomSetParseer {
     public static Set<String> parse() throws IOException {
         if (sset == null) {
 
-            final String path = "E:\\codeslike\\notes\\symptom.lst";
+//            final String path = "E:\\codeslike\\notes\\symptom.lst";
+            final String path = SymptomSetParser.class.getResource("/dummy/symptom.lst").getFile();
             Set<String> set = new HashSet<>();
             String line;
             int ln = 0;
             try (BufferedReader br = new BufferedReader(new FileReader(path))) {
                 while ((line = br.readLine()) != null) {
-                    set.add(line);
-                    ln++;
+                    if (line.length() > 0) {
+                        set.add(line);
+                        ln++;
+                    }
                 }
             }
             if (set.size() <= 5) {
-                System.out.println("太少了");
+                System.out.println("症状集合的尺寸太少了");
                 System.out.println(set.size());
             }
             sset = set;

@@ -125,11 +125,13 @@ CREATE TABLE customer (
   stars              TINYINT(1),
   valid              TINYINT(1),
   user_id            INT,
+  owner_user_id      INT,
   group_id           INT,
 
   CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id),
   CONSTRAINT fk_customer_patient_country_id_country_id FOREIGN KEY (patient_country_id) REFERENCES country (id),
   CONSTRAINT fk_customer_website_id_website_id FOREIGN KEY (website_id) REFERENCES website (id),
   CONSTRAINT fk_customer_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id),
+  CONSTRAINT fk_customer_owner_user_id_user_id FOREIGN KEY (owner_user_id) REFERENCES user (id),
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
 );

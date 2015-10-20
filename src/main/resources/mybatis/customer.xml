@@ -83,6 +83,7 @@
         stars,
         valid,
         user_id,
+        owner_user_id,
         group_id
         )
         VALUES
@@ -107,6 +108,7 @@
         #{entity.contactRecoreds},
         #{entity.stars},
         #{entity.valid},
+        #{entity.userId},
         #{entity.userId},
         #{entity.groupId}
         );
@@ -134,6 +136,7 @@
         stars,
         valid,
         user_id,
+        owner_user_id,
         group_id
         )
         VALUES
@@ -160,7 +163,65 @@
             #{entity.stars},
             #{entity.valid},
             #{entity.userId},
+            #{entity.userId},
             #{entity.groupId}
+            )
+        </foreach>
+    </insert>
+    <insert id="addAllDummies">
+        INSERT INTO customer (
+        sex,
+        age,
+        liaison_name,
+        liaison_address,
+        relationship,
+        patient_name,
+        patient_address,
+        symptom,
+        hospitalization,
+        emergency,
+        email,
+        tel,
+        liaison_country_id,
+        patient_country_id,
+        disease_type_id,
+        website_id,
+        memo,
+        contact_recoreds,
+        stars,
+        valid,
+        user_id,
+        owner_user_id,
+        group_id,
+        added
+        )
+        VALUES
+        <foreach collection="entities" item="entity" separator=",">
+            (
+            #{entity.sex},
+            #{entity.age},
+            #{entity.liaisonName},
+            #{entity.liaisonAddress},
+            #{entity.relationship},
+            #{entity.patientName},
+            #{entity.patientAddress},
+            #{entity.symptom},
+            #{entity.hospitalization},
+            #{entity.emergency},
+            #{entity.email},
+            #{entity.tel},
+            #{entity.liaisonCountryId},
+            #{entity.patientCountryId},
+            #{entity.diseaseTypeId},
+            #{entity.websiteId},
+            #{entity.memo},
+            #{entity.contactRecoreds},
+            #{entity.stars},
+            #{entity.valid},
+            #{entity.userId},
+            #{entity.userId},
+            #{entity.groupId},
+            #{entity.added}
             )
         </foreach>
     </insert>

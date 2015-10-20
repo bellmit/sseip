@@ -1,17 +1,13 @@
 package com.syzc.sseip.pasture.dummy;
 
-import org.apache.commons.io.IOUtils;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.security.SecureRandom;
 
-public class RandomSimpleCnString {
+public class RandomSimpleEnString {
     private static String s;
     //    static final String path = "E:\\codeslike\\notes\\小学生生字大全.txt";
-    static final String path = RandomSimpleCnString.class.getResource("/dummy/pupil-characters.txt").getFile();
-    
+    static final String path = RandomSimpleEnString.class.getResource("/dummy/pupil-characters.txt").getFile();
+
     public static void main(String[] args) throws IOException {
         System.out.println(genString(20));
         System.out.println(genString(30));
@@ -20,9 +16,14 @@ public class RandomSimpleCnString {
 
     public static String genString(int len) throws IOException {
         if (s == null) {
-            try (FileReader fr = new FileReader(path)) {
-                s = IOUtils.toString(new BufferedReader(fr));
+            StringBuilder builder = new StringBuilder();
+            for (char i = 'A'; i <= 'Z'; i++) {
+                builder.append(i);
             }
+            for (char i = 'a'; i <= 'z'; i++) {
+                builder.append(i);
+            }
+            s = builder.toString();
         }
 
         SecureRandom r = new SecureRandom();
