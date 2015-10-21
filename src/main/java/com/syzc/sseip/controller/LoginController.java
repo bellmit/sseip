@@ -78,6 +78,7 @@ public class LoginController {
         userService.saveLogonInfo(userLogon);
 
         httpSession.setAttribute("loginUser", login);
+        httpSession.setAttribute("loginUserId", login.getId());
         if (refer != null) {
             return "redirect:" + refer;
         }

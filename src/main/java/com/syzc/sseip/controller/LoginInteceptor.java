@@ -1,7 +1,5 @@
 package com.syzc.sseip.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.syzc.sseip.entity.User;
 import com.syzc.sseip.service.UserService;
 import com.syzc.sseip.util.UrlComponentUtil;
 import org.springframework.stereotype.Service;
@@ -22,8 +20,8 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession();
 //        HandlerMethod hm = (HandlerMethod) handler;
         //可能是 DefaultServletHttpRequestHandler， 找不到对应的， 转而寻找静态资源。
-        Object o = session.getAttribute("loginUser");
-        if (o == null) {
+        Long id = (Long) session.getAttribute("loginUserId");
+        if (id == null) {
             StringBuilder refer = new StringBuilder();
             refer.append(request.getRequestURL());
             if (request.getQueryString() != null) {
@@ -34,7 +32,8 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
             //kj代码里缺少的这个， 否则报已经提交——在后头的提交找不到内容的页面里。
             return false;
         }
-        System.out.println(JSON.toJSONString(userService.get(((User) o).getId())));
+//        System.out.println(JSON.toJSONString(userService.get(id)));
+        session.setAttribute("loginUser", userService.get(id));
         return super.preHandle(request, response, handler);
     }
 }
