@@ -36,7 +36,6 @@
                                 <th class="text-right">用户名</th>
                                 <th class="text-right">真实姓名</th>
                                 <th class="text-right">年龄</th>
-                                <th class="text-right">身份证号</th>
                                 <th class="text-right">地址</th>
                                 <th class="text-right">电话</th>
                                 <th class="text-right">注册时间</th>
@@ -51,14 +50,14 @@
                             <tr>
                                 <td class="text-right"><a href="#">${user.id }</a></td>
                                 <td class="text-right"><a href="${context.contextPath}/user/profile/${user.id}"
-                                                          class="list_link">${user.username} 查看</a></td>
+                                                          class="list_link">${user.username} <span
+                                        class="fa fa-search"
+                                        title="查看"></span></a>
+                                </td>
                                 <td class="text-right">${user.realName}</td>
                                 <td class="text-right"><#if user.age??>${user.age}<#else><span>没有写</span></#if>
                                 </td>
 
-                                <td class="text-right"><#if user.idNumber??>${user.idNumber}<#else>
-                                    <span class="label">没有写</span></#if>
-                                </td>
                                 <td class="text-right"><#if user.address??>${user.address}<#else>
                                     <span class="label">没有写</span></#if>
                                 </td>
@@ -71,7 +70,8 @@
                                     <span class="label">没有写</span></#if></td>
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
                                     <span class="label">没有写</span></#if></td>
-                                <td class="center"><a href="${context.contextPath}/role/updaterole/${user.id}">编辑</a>
+                                <td class="center"><a href="${context.contextPath}/role/updaterole/${user.id}"><span
+                                        class="fa fa-edit" title="编辑"></span></a>
                                 </td>
                             </tr>
                             </#list>
