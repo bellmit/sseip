@@ -21,7 +21,7 @@ public class DummyCustomer {
         System.out.println(s);
         Customer c;
         System.out.println(new Date());
-        final int count = 15000;
+        final int count = 30000;
         ArrayList<Customer> list = new ArrayList<>(count + 7);
         int size = 1000000;
 //        int size = 60;

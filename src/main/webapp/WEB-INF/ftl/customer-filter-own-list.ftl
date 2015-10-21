@@ -117,7 +117,7 @@
                                         value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
                                 </#list>
                                 </select>
-                                <input name="stars" id="form-stars" type="hidden"
+                                <input name="stars" id="form-stars" type="hidden" form="filter-form"
                                        value="${(RequestParameters.stars)!'0'}"/>
 
                                 <div id="stars-ui" data-init-score="${(RequestParameters.stars)!'0'}"
