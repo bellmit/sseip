@@ -27,7 +27,7 @@ public class UserDummyAdd {
             u.setRealName(nameList.get(r.nextInt(nameList.size())));
             u.setAge(r.nextInt(5) + 21);
             u.setPhone(String.valueOf(RandomTelNum.genTel()));
-            u.setRole(Role.EMPTY);
+            u.setRole(Role.EMPLOYEE);
             u.setGroupId(r.nextInt(3) + 1L);
             System.out.println(JSON.toJSONString(u, true));
             s.add(u);

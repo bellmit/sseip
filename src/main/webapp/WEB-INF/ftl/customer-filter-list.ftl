@@ -191,6 +191,7 @@
                                 <th class="text-right">患者姓名</th>
                                 <th class="text-right">病种</th>
                                 <th class="text-right">所属人</th>
+                                <th class="text-right">创建人</th>
                                 <th class="text-right">来源网站</th>
                                 <th class="text-right">是否住院</th>
                                 <th class="text-right">更新时间</th>
@@ -216,6 +217,8 @@
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.ownerUser??>${customer.ownerUser.realName}<#else>
+                                    <span class="label">不详</span></#if></td>
+                                <td class="text-right"><#if (customer.user.realName)??>${customer.user.realName}<#else>
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if customer.website??>${customer.website.name}<#else><span
                                         class="label">不详</span></#if></td>

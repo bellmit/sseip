@@ -14,22 +14,27 @@ import java.util.Date;
 
 public class DummyCustomer {
     static SecureRandom r = new SecureRandom();
+    static Date[] dates;
 
     public static void main(String[] args) throws IOException {
         CustomerDao s = (CustomerDao) LocalAcUtil.getAc().getBean("customerDao");
         System.out.println(s);
         Customer c;
         System.out.println(new Date());
-        ArrayList<Customer> list;
-        final int count = 30000;
-        list = new ArrayList<>(count);
-        for (int i = 0; i < 600000; i++) {
+        final int count = 15000;
+        ArrayList<Customer> list = new ArrayList<>(count + 7);
+        int size = 1000000;
+//        int size = 60;
+        dates = RandomDate.genSortedDates(size);
+        for (int i = 0; i < size; i++) {
 //        for (int i = 0; i < 600; i++) {
-            c = gen();
+            c = gen(i);
 //            System.out.println(JSON.toJSONString(c, true));
             list.add(c);
-            if (list.size() >= count - 1) {
+            if (list.size() >= count) {
+                System.out.println(i);
                 System.out.println(new Date());
+                System.out.println(String.format("index at %d, %s", i, new Date().toString()));
                 s.addAllDummies(list);
                 list.clear();
             }
@@ -38,15 +43,13 @@ public class DummyCustomer {
         System.out.println(new Date());
     }
 
-    public static Customer gen() throws IOException {
+    public static Customer gen(int index) throws IOException {
         Customer c;
 
 /*
         Long liaisonCountryId = r.nextInt(498 - 250) + 250L;
         Long patientCountryId = r.nextInt(498 - 250) + 250L;
 */
-        Long liaisonCountryId = r.nextInt(249 - 1) + 1L;
-        Long patientCountryId = r.nextInt(249 - 1) + 1L;
         String liaisonName = N7ParseNamesSet.parseArr().get(r.nextInt(N7ParseNamesSet.parseArr().size()));
         String patientName = N7ParseNamesSet.parseArr().get(r.nextInt(N7ParseNamesSet.parseArr().size()));
         String liaisonAddress = RandomSimpleCnString.genString(r.nextInt(50) + 16);
@@ -57,14 +60,17 @@ public class DummyCustomer {
         Boolean emergency = r.nextBoolean();
         String email = RandomSimpleEnString.genString(r.nextInt(30) + 2) + "@example.com";
         String tel = String.valueOf(RandomTelNum.genTel());
-        Long diseaseTypeId = r.nextInt(42 - 1) + 1L;
-        Long websiteId = r.nextInt(24 - 1) + 1L;
         String memo = RandomSimpleCnString.genString(r.nextInt(400) + 5);
         String contactRecoreds = RandomSimpleCnString.genString(r.nextInt(400) + 5);
-        Byte stars = (byte) (r.nextInt(5 - 1) + 1);
+        Byte stars = (byte) (r.nextInt(5) + 1);
         Boolean valid = r.nextBoolean();
 
-        Long userId = r.nextInt(50 - 1) + 1L;
+        Long liaisonCountryId = r.nextInt(249) + 1L;
+        Long patientCountryId = r.nextInt(249) + 1L;
+
+        Long diseaseTypeId = r.nextInt(41) + 1L;
+        Long websiteId = r.nextInt(24) + 1L;
+        Long userId = r.nextInt(50) + 1L;
         Long groupId = r.nextInt(3) + 1L;
 
         Sex sex = Sex.values()[r.nextInt(Sex.values().length)];
@@ -100,7 +106,8 @@ public class DummyCustomer {
         c.setSex(sex);
         c.setAge(age);
 
-        c.setAdded(RandomDate.gen());
+//        c.setAdded(RandomDate.gen());
+        c.setAdded(dates[index]);
 
 /*
         System.out.println(liaisonCountryId);
