@@ -6,9 +6,19 @@
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <span class="ace-icon fa fa-home home-icon"></span>
+                <a href="${context.contextPath}/" target="_top">Home</a>
+            </li>
+            <li class="active">个人资料</li>
+        </ul>
+        <!-- /.breadcrumb -->
+    </div>
     <div class="page-content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 well">
                 <dl class="dl-horizontal">
                     <dt>id</dt>
                     <dd>${loginUser.id}</dd>
@@ -32,8 +42,10 @@
                     <dd>${(loginUser.role.roleName)!'<span class="label">没有角色</span>'}</dd>
                 </dl>
             </div>
-            <div class="col-xs-12">
-                <a href="javascript:history.go(-1);"><span class="fa fa-backward"></span>“后退”</a>
+            <div class="col-xs-12 btn-group">
+                <a class="btn" href="javascript:history.go(-1);"><span class="fa fa-backward"></span> 后退</a>
+                <a class="btn" href="${context.contextPath}/user/update/${loginUserId}"><span class="fa fa-edit"></span>
+                    变更</a>
             </div>
         </div>
     </div>

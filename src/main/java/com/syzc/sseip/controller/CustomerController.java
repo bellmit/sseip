@@ -82,7 +82,7 @@ public class CustomerController {
         }
 
         Page<Customer> page;
-        if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+        /*if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
             if (loginUser.getGroupId() == null) {
                 throw AuthException.create("没有权限", Level.DEBUG);
             }
@@ -90,7 +90,12 @@ public class CustomerController {
         } else {
             //admin || manager
             page = customerService.list(pageNo, pageSize);
+        }*/
+        if (loginUser.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
         }
+        //admin || manager
+        page = customerService.list(pageNo, pageSize);
 
         model.addAttribute("page", page);
         model.addAttribute("path", "/customer/list");
@@ -131,7 +136,7 @@ public class CustomerController {
         }
 
         Page<Customer> page;
-        if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+        /*if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
             if (loginUser.getGroupId() == null) {
                 throw AuthException.create("没有权限", Level.DEBUG);
             }
@@ -142,11 +147,19 @@ public class CustomerController {
             page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
 //            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
 //                    groupId, userId, pageNo, pageSize);
+        }*/
+        if (loginUser.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
         }
+
+        //admin || manager
+        page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
+//            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
+//                    groupId, userId, pageNo, pageSize);
 
         List<Group> groups = new ArrayList<>();
         List<User> users = new ArrayList<>();
-        if (loginUser.getRole() == Role.ADMIN || loginUser.getRole() == Role.MANAGER) {
+        /*if (loginUser.getRole() == Role.ADMIN || loginUser.getRole() == Role.MANAGER) {
             groups = groupService.listAll();
             users = userService.list(1L, Byte.MAX_VALUE).getList();
         } else {
@@ -155,7 +168,9 @@ public class CustomerController {
                 groups = Arrays.asList(new Group[]{group});
                 users = userService.listByGroup(loginUser.getGroupId(), pageNo, Byte.MAX_VALUE).getList();
             }
-        }
+        }*/
+        groups = groupService.listAll();
+        users = userService.list(1L, Byte.MAX_VALUE).getList();
 
         String query = request.getQueryString();
         model.addAttribute("query", query);
@@ -207,23 +222,12 @@ public class CustomerController {
 //        System.out.println(Arrays.asList(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId));
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
-            throw AuthException.create("没有权限", Level.DEBUG);
-        }
 
         Page<Customer> page;
-        if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
-            if (loginUser.getGroupId() == null) {
-                throw AuthException.create("没有权限", Level.DEBUG);
-            }
-            // check groupId range ..?
-            page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
-        } else {
-            //admin || manager
-            page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
-//            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
-//                    groupId, userId, pageNo, pageSize);
+        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE) {
+            throw AuthException.create("没有权限", Level.DEBUG);
         }
+        page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
 
         List<User> users;
 /*
@@ -297,10 +301,10 @@ public class CustomerController {
 
         Customer customer = customerService.get(id);
 
-        if (loginUser.getRole() == Role.DIRECTOR && customer != null && loginUser.getGroupId() != null
+        /*if (loginUser.getRole() == Role.DIRECTOR && customer != null && loginUser.getGroupId() != null
                 && !loginUser.getGroupId().equals(customer.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
         if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
@@ -401,8 +405,11 @@ public class CustomerController {
         //不修改部门和联系人部分
         Customer customer = customerService.get(id);
 
-        if (loginUser.getRole() == Role.DIRECTOR && customer != null && loginUser.getGroupId() != null
+        /*if (loginUser.getRole() == Role.DIRECTOR && customer != null && loginUser.getGroupId() != null
                 && !loginUser.getGroupId().equals(customer.getGroupId())) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (customer != null && loginUser.getGroupId() != null && !loginUser.getGroupId().equals(customer.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -435,10 +442,10 @@ public class CustomerController {
 
         Customer oldCustomer = customerService.get(id);
 
-        if (loginUser.getRole() == Role.DIRECTOR && oldCustomer != null && loginUser.getGroupId() != null
+        /*if (loginUser.getRole() == Role.DIRECTOR && oldCustomer != null && loginUser.getGroupId() != null
                 && !loginUser.getGroupId().equals(oldCustomer.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
         if (loginUser.getRole() == Role.EMPLOYEE && oldCustomer != null && !loginUser.getId().equals(oldCustomer.getUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
@@ -467,7 +474,9 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/pass", method = RequestMethod.POST)
-    public String passOn(@RequestParam("new-owner-user-id") Long newOwnerUserId, @RequestParam("customer-ids") Long[] customerIds, Model model, HttpSession session, HttpServletRequest request) {
+    public String passOn(@RequestParam("new-owner-user-id") Long
+                                 newOwnerUserId, @RequestParam("customer-ids") Long[] customerIds, Model model, HttpSession
+                                 session, HttpServletRequest request) {
         if (newOwnerUserId == null) {
             throw HosException.create("目标用户不能为空", Level.DEBUG);
         }

@@ -6,6 +6,16 @@
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <span class="ace-icon fa fa-home home-icon"></span>
+                <a href="${context.contextPath}/" target="_top">Home</a>
+            </li>
+            <li class="active">个人资料</li>
+        </ul>
+        <!-- /.breadcrumb -->
+    </div>
     <div class="page-content">
         <div class="row">
             <div class="col-xs-12">

@@ -20,8 +20,8 @@
         <#if (loginUser.role)?? && loginUser.role!='EMPTY'>
             <ul class="submenu">
                 <li class=""><a href="${context.contextPath}/user/list/1" target="mainFrame"><span
-                        class="menu-icon fa fa-caret-right"></span>用户列表<span
-                        class="arrow fa fa-angle-down"></span></a></li>
+                        class="menu-icon fa fa-caret-right"></span>用户列表<#--<span class="arrow fa fa-angle-down"></span>-->
+                </a></li>
                 <li class="">
                     <a href="${context.contextPath}/role/list" target="mainFrame">
                         <span class="menu-icon fa fa-caret-right"></span>角色列表</a>

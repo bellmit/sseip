@@ -53,8 +53,8 @@
                     </li>-->
 
                         <li>
-                            <a href="javascript:;" target="mainFrame">
-                                <span class="ace-icon fa fa-user"></span>个人设置</a>
+                            <a href="${context.contextPath}/user/profile" target="mainFrame">
+                                <span class="ace-icon fa fa-user"></span>个人资料</a>
                         </li>
 
                         <li class="divider"></li>

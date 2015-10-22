@@ -149,6 +149,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
 //        System.out.println(JSON.toJSONString(s.list(0L, (byte) 10), true));
 //        System.out.println(JSON.toJSONString(s.listByGroup(1L, 0L, (byte) 10), true));
 
-        System.out.println(JSON.toJSONString(s.listByRole(Role.DIRECTOR, 1L, (byte) 10)));
+//        System.out.println(JSON.toJSONString(s.listByRole(Role.DIRECTOR, 1L, (byte) 10)));
     }
 }

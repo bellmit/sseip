@@ -28,6 +28,12 @@
 <#include "/common/foot.ftl">
 <#include "/common/common_js.ftl">
 <script>
+    $(function () {
+        $('ul.nav-list li:not(:has(li))').click(function (e) {
+            $('ul.nav-list .active').removeClass('active');
+            $(this).addClass('active');
+        })
+    });
     function loginFrame() {
         var mainFrame = document.getElementById("mainFrame");
         var bheight = document.documentElement.clientHeight;
