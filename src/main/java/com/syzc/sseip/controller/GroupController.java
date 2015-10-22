@@ -1,15 +1,15 @@
 package com.syzc.sseip.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.syzc.sseip.entity.enumtype.Role;
-import com.syzc.sseip.service.UserService;
-import com.syzc.sseip.util.exception.AuthException;
 import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserDto;
+import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.GroupService;
+import com.syzc.sseip.service.UserService;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
+import com.syzc.sseip.util.exception.AuthException;
 import org.apache.log4j.Level;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +61,10 @@ public class GroupController {
     public String add(HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
         return "group-add";
@@ -71,7 +74,10 @@ public class GroupController {
     public String add(Group group, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -86,7 +92,10 @@ public class GroupController {
     public String remove(@RequestParam("groupid") Long groupid, Model model, HttpServletRequest request, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -107,7 +116,10 @@ public class GroupController {
     public String updateView(@PathVariable("groupid") Long groupId, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -120,7 +132,10 @@ public class GroupController {
     public String update(@PathVariable("groupid") Long groupId, Group group, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -145,7 +160,12 @@ public class GroupController {
         Group group = groupService.get(groupId);
         Page<User> page;
 
-        if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+        /*if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+            if (loginUser.getGroup() == null || loginUser.getGroup().getId() != groupId) {
+                throw AuthException.create("没有权限", Level.DEBUG);
+            }
+        }*/
+        if (loginUser.getRole() == Role.EMPLOYEE) {
             if (loginUser.getGroup() == null || loginUser.getGroup().getId() != groupId) {
                 throw AuthException.create("没有权限", Level.DEBUG);
             }
@@ -162,7 +182,10 @@ public class GroupController {
     public String joinUser(Long userId, Long groupId, HttpServletRequest request, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -179,7 +202,10 @@ public class GroupController {
     public String updateUserGroup(@PathVariable("user") Long userId, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -197,7 +223,10 @@ public class GroupController {
     public String updateUserGroup(@PathVariable("user") Long userId, @RequestParam(value = "group", required = false) Long groupId, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 

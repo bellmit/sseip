@@ -15,7 +15,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">资源列表</li>
+            <li class="active">个人资源一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -151,21 +151,22 @@
                     <div class="col-xs-12">
                     <#--<div class="page-header position-relative">-->
                         <div class="position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="填写资源"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2"><span class="btn-group"><a
+                                    href="${context.contextPath}/customer/add"
+                                    target="_self"
+                                    style="color:#FFF;text-decoration:none;"
+                                    title="填写资源"
+                                    class="btn btn-info fa fa-plus"></a><a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span>
+                                    title="刷新列表"></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>
                             </div>
                         </div>
-                        <table id="sample-table-1"
+                        <table id="customer-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all;table-layout:fixed">
+                               style="word-wrap: break-word;table-layout:fixed">
                         <#--<colgroup class="row">
                             <col class="col-sm-1">
                             <col class="col-sm-2">
@@ -177,7 +178,8 @@
                         </colgroup>-->
                             <thead>
                             <tr>
-                                <th class="text-right">ID</th>
+                                <th class="text-right"><label style="width:100%">ID<input type="checkbox"
+                                                                                          id="check-all"></label></th>
                                 <th class="text-right">患者国家</th>
                                 <th class="text-right">患者姓名</th>
                                 <th class="text-right">病种</th>
@@ -195,9 +197,11 @@
                             <tbody>
                             <#list page.list as customer>
                             <tr>
-                                <td class="text-right"><label>${customer.id?c}<input type="checkbox" name="customer-ids"
-                                                                                     value="${customer.id?c}"
-                                                                                     form="pass-on-form"></label></td>
+                                <td class="text-right id-col">
+                                    <label style="width: 100%;">${customer.id?c}<input
+                                            type="checkbox" name="customer-ids" value="${customer.id?c}"
+                                            form="pass-on-form"></label>
+                                </td>
                                 <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
                                     <span class="label">不详</span></#if></td>
                                 <td class="text-right"><#if (customer.patientName)??>
@@ -225,18 +229,22 @@
 
                                 <td class="center">
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="/customer/update/${customer.id?c}"><span
+                                        <span class="btn-group">
+                                        <a class="btn btn-minier" href="/customer/update/${customer.id?c}"><span
                                                 class="fa fa-edit"></span></a>
 
-                                        <form action="${context.contextPath}/customer/remove" method="post"
-                                              style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${customer.id?c}">
-                                            <button href="${context.contextPath}/customer/remove"><span
-                                                    class="fa fa-trash"></span></button>
-                                            <a class="fa fa-search"
+                                            <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                                <form action="${context.contextPath}/customer/remove" method="post"
+                                                      style="display: inline;"><input type="hidden" name="id"
+                                                                                      value="${customer.id?c}">
+                                                    <button class="btn btn-minier"
+                                                            href="${context.contextPath}/customer/remove"><span
+                                                            class="fa fa-trash"></span></button>
+                                                </form></#if>
+                                            <a class="btn btn-minier"
                                                href="${context.contextPath}/customer/get/${customer.id?c}"><span
-                                                    class="fa fa-query"></span></a>
-                                        </form>
+                                                    class="fa fa-search"></span></a>
+                                        </span>
                                     </#if>
                                 </td>
                             </tr>
@@ -265,13 +273,12 @@
                             </div>
                         </div>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="填写资源"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
-                                    href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span>
+                            <div class="row"><span class="col-md-2">
+                                <span class="btn-group"><a href="${context.contextPath}/customer/add"
+                                                           target="_self" title="填写资源"
+                                                           class="btn btn-info fa fa-plus"></a><a href=""
+                                                                                                  class="btn btn-info fa fa-refresh"
+                                                                                                  title="刷新列表"></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>
@@ -318,6 +325,7 @@
             cancel: true,
             cancelHint: '零意向',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            space: false,
             score: function () {
                 return $(this).attr('data-init-score');
             },
@@ -356,10 +364,13 @@
             $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
         });
 
-    <#if dateRange?? && dateRange?size gt 0 >
+        $('#check-all').click(function () {
+        });
+
+    <#--<#if dateRange?? && dateRange?size gt 0 >-->
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->
     <#--$('#date-range-input').val([${dateRange[0]?long?c}, ${dateRange[1]?long?c}].join());-->
-    </#if>
+    <#--</#if>-->
     });
 </script>
 </body>

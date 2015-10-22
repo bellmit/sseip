@@ -26,7 +26,7 @@
                     <div class="col-xs-12">
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all">
+                               style="word-wrap: break-word;table-layout:fixed">
                             <colgroup class="row">
                             <#--<col class="col-md-1">-->
                             </colgroup>
@@ -48,11 +48,10 @@
                             <tbody>
                             <#list page.list as user>
                             <tr>
-                                <td class="text-right"><a href="#">${user.id }</a></td>
-                                <td class="text-right"><a href="${context.contextPath}/user/profile/${user.id}"
-                                                          class="list_link">${user.username} <span
-                                        class="fa fa-search"
-                                        title="查看"></span></a>
+                                <td class="text-right">${user.id}</td>
+                                <td class="text-right">${user.username}<a
+                                        href="${context.contextPath}/user/profile/${user.id}" class="list_link"><span
+                                        class="fa fa-search" title="查看"></span></a>
                                 </td>
                                 <td class="text-right">${user.realName}</td>
                                 <td class="text-right"><#if user.age??>${user.age}<#else><span>没有写</span></#if>
@@ -70,7 +69,8 @@
                                     <span class="label">没有写</span></#if></td>
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
                                     <span class="label">没有写</span></#if></td>
-                                <td class="center"><a href="${context.contextPath}/role/updaterole/${user.id}"><span
+                                <td class="center"><a class="btn btn-minier"
+                                                      href="${context.contextPath}/role/updaterole/${user.id}"><span
                                         class="fa fa-edit" title="编辑"></span></a>
                                 </td>
                             </tr>

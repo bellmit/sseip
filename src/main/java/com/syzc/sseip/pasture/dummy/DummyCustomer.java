@@ -138,6 +138,7 @@ public class DummyCustomer {
 
     public static Customer gen2() throws IOException {
         Customer c;
+//        nwe String[]{"abc"}
 
         Long liaisonCountryId = r.nextInt(498 - 250) + 250L;
         Long patientCountryId = r.nextInt(498 - 250) + 250L;

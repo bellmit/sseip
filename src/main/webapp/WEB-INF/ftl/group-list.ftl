@@ -25,7 +25,7 @@
                     <div class="col-xs-12">
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all">
+                               style="word-wrap: break-word;table-layout:fixed">
                             <colgroup class="row">
                                 <col class="col-md-1">
                                 <col class="col-md-2">
@@ -49,23 +49,28 @@
                                 <td class="text-right"><#if group.description??>${group.description}<#else>
                                     <span>没有写</span></#if></td>
                                 <td class="center">
+                                    <span class="btn-group">
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/group/edit/${group.id}" title="编辑"><span
-                                                class="fa fa-edit"></span></a>
+                                        <a class="btn btn-minier" href="${context.contextPath}/group/edit/${group.id}"
+                                           title="编辑"><span class="fa fa-edit"></span></a>
                                     </#if>
-                                    <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER'||
-                                    ((loginUser.groupId)??&&loginUser.groupId==group.id))>
-                                        <a href="${context.contextPath}/group/user-list/${group.id}/1"
-                                           title="用户列表"><span class="fa fa-list"></span></a>
-                                    </#if>
-                                    <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <form action="${context.contextPath}/group/remove" method="post"
-                                              style="display: inline"><input type="hidden" name="groupid"
-                                                                             value="${group.id}">
-                                            <button type="submit" title="删除" class=""><span
+                                        <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER'||
+                                        ((loginUser.groupId)??&&loginUser.groupId==group.id))>
+                                            <a class="btn btn-minier"
+                                               href="${context.contextPath}/group/user-list/${group.id}/1"
+                                               title="用户列表"><span class="fa fa-list"></span></a>
+                                        </#if>
+                                        <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                            <button type="submit" title="删除" class="btn btn-minier"
+                                                    form="from-remove-${group_index}"><span
                                                     class="fa fa-trash"></span></button>
-                                        </form>
-                                    </#if>
+                                            <form id="from-remove-${group_index}"
+                                                  action="${context.contextPath}/group/remove" method="post"
+                                                  style="display: inline"><input type="hidden" name="groupid"
+                                                                                 value="${group.id}">
+                                            </form>
+                                        </#if>
+                                        </span>
                                 </td>
                             </tr>
                             </#list>
@@ -74,12 +79,14 @@
 
                         <div class="page-header position-relative">
                             <div class="row">
-                                <span class="col-md-2"><a href="${context.contextPath}/group/add" target="_self"
-                                                          style="color:#FFF;text-decoration:none;" title="添加部门"
-                                                          class="btn btn-info fa fa-plus"></a> <a href=""
-                                                                                                  style="color:#FFF;text-decoration:none;"
-                                                                                                  class="btn btn-info fa fa-refresh"
-                                                                                                  title="刷新列表"></a></span>
+                                <span class="col-md-2 btn-group"><a href="${context.contextPath}/group/add"
+                                                                    target="_self"
+                                                                    style="color:#FFF;text-decoration:none;"
+                                                                    title="添加部门"
+                                                                    class="btn btn-info fa fa-plus"></a> <a href=""
+                                                                                                            style="color:#FFF;text-decoration:none;"
+                                                                                                            class="btn btn-info fa fa-refresh"
+                                                                                                            title="刷新列表"></a></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0>
                                     <#import

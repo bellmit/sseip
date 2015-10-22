@@ -316,12 +316,13 @@
 
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-2 col-md-10">
+                            <span class="btn-group">
                             <button class="btn btn-info" type="submit">
                                 <span class="ace-icon fa fa-plus bigger-110"></span>提交
                             </button>
                             <button class="btn" type="reset">
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
-                            </button>
+                            </button></span>
                         </div>
                     </div>
                 </div>
@@ -351,7 +352,8 @@
 //            score: 0,
 //            cancel: true,
 //            cancelHint: '零意向',
-            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+//            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            hints: ['一般', '好', '很好', '非常好', '棒极了'],
             score: function () {
                 return $(this).attr('data-init-score');
             },

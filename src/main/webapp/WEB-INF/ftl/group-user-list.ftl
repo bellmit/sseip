@@ -26,7 +26,7 @@
                     <div class="col-xs-12">
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all">
+                               style="word-wrap: break-word;table-layout:fixed">
                             <colgroup class="row">
                             <#--<col class="col-md-1">-->
                             </colgroup>

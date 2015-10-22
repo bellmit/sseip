@@ -15,7 +15,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">资源列表</li>
+            <li class="active">全部资源一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -160,13 +160,14 @@
                     <div class="col-xs-12">
                     <#--<div class="page-header position-relative">-->
                         <div class="position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="填写资源"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2"><span class="btn-group"><a
+                                    href="${context.contextPath}/customer/add"
+                                    target="_self"
+                                    style="color:#FFF;text-decoration:none;"
+                                    title="填写资源"
+                                    class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span>
+                                    title="刷新列表"></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>
@@ -174,7 +175,7 @@
                         </div>
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all;table-layout:fixed">
+                               style="word-wrap: break-word;table-layout:fixed">
                         <#--<colgroup class="row">
                             <col class="col-sm-1">
                             <col class="col-sm-2">
@@ -231,32 +232,35 @@
 
                                 <td class="center">
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="/customer/update/${customer.id?c}" class="btn btn-minier"><span
-                                                class="fa fa-edit"></span></a>
+                                    <span class="btn-group"><a href="/customer/update/${customer.id?c}"
+                                                               class="btn btn-minier"><span
+                                            class="fa fa-edit"></span></a>
 
-                                        <form action="${context.contextPath}/customer/remove" method="post"
-                                              style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${customer.id?c}">
-                                            <button href="${context.contextPath}/customer/remove"
-                                                    class="btn btn-minier"><span class="fa fa-trash"></span></button>
-                                        </form>
-                                        <a class="fa fa-search"
-                                           href="${context.contextPath}/customer/get/${customer.id?c}"
-                                           class="btn btn-minier"><span class="fa fa-query"></span></a>
+                                        <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                            <form action="${context.contextPath}/customer/remove" method="post"
+                                                  style="display: inline;"><input type="hidden" name="id"
+                                                                                  value="${customer.id?c}">
+                                                <button href="${context.contextPath}/customer/remove"
+                                                        class="btn btn-minier"><span class="fa fa-trash"></span>
+                                                </button>
+                                            </form></#if>
                                     </#if>
+                                    <a href="${context.contextPath}/customer/get/${customer.id?c}"
+                                       class="btn btn-minier"><span class="fa fa-search"></span></a></span>
                                 </td>
                             </tr>
                             </#list>
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="填写资源"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2"><span class="btn-group"><a
+                                    href="${context.contextPath}/customer/add"
+                                    target="_self"
+                                    style="color:#FFF;text-decoration:none;"
+                                    title="填写资源"
+                                    class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span>
+                                    title="刷新列表"></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>
@@ -289,6 +293,7 @@
             noRatedMsg: "它只读，它还没有星星",
             starType: 'span',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            space: false,
             score: function () {
                 return $(this).attr('data-init-score');
             },
@@ -303,6 +308,7 @@
             cancel: true,
             cancelHint: '零意向',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            space: false,
             score: function () {
                 return $(this).attr('data-init-score');
             },

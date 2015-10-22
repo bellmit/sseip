@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>欢迎使用双友信息推广的CMS</title>
+    <title>欢迎使用双友之春CRM</title>
 </head>
 <body class="no-skin">
 <!-- header -->
@@ -16,8 +16,13 @@
     </script>
 <#include "/common/left.ftl">
     <div class="main-content">
+    <#if ['ADMIN']?seq_contains(loginUser.role)>
+        <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter/1"
+                style="margin:0 auto;width:100%;height:100%;"></iframe>
+    <#else>
         <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter-own/1"
                 style="margin:0 auto;width:100%;height:100%;"></iframe>
+    </#if>
     </div>
 </div>
 <#include "/common/foot.ftl">

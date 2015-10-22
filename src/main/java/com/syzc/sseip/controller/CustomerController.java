@@ -318,23 +318,27 @@ public class CustomerController {
     public String remove(Long id, Model model, HttpServletRequest request, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+        /*if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || loginUser.getRole() != Role.ADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
         Customer customer = customerService.get(id);
 
-        if (loginUser.getRole() == Role.DIRECTOR && customer != null && loginUser.getGroupId() != null
+        /*if (loginUser.getRole() == Role.DIRECTOR && customer != null && loginUser.getGroupId() != null
                 && !loginUser.getGroupId().equals(customer.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
-        if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
+        /*if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
         if (customer == null) {
             throw HosException.create("没有这个客户的资料", Level.DEBUG);
         }
+        customerService.remove(id);
 
         String referer = request.getHeader("Referer");
         if (referer == null) {

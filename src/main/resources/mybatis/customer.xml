@@ -54,7 +54,7 @@
         <id column="id" property="id"/>
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
-        <result column="id_number" property="idNumber"/>
+        <!--<result column="id_number" property="idNumber"/>-->
         <!--<result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>-->
     </resultMap>
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
@@ -106,7 +106,15 @@
         #{entity.websiteId},
         #{entity.memo},
         #{entity.contactRecoreds},
-        #{entity.stars},
+        <choose>
+            <when test="stars !=null and stars !=0">
+                #{entity.stars}
+            </when>
+            <otherwise>
+                NULL
+            </otherwise>
+        </choose>
+        ,
         #{entity.valid},
         #{entity.userId},
         #{entity.userId},
@@ -417,7 +425,7 @@
             <if test="hospitalization !=null">
                 and hospitalization=#{hospitalization}
             </if>
-            <if test="stars !=null">
+            <if test="stars !=null and stars !=0">
                 and stars=#{stars}
             </if>
             <if test="since !=null">
@@ -463,7 +471,7 @@
             <if test="hospitalization !=null">
                 and hospitalization=#{hospitalization}
             </if>
-            <if test="stars !=null">
+            <if test="stars !=null and stars !=0">
                 and stars=#{stars}
             </if>
             <if test="since !=null">

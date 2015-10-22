@@ -346,6 +346,7 @@
 //            cancel: true,
 //            cancelHint: '零意向',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            space: false,
             score: function () {
                 return $(this).attr('data-init-score');
             },

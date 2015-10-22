@@ -24,7 +24,7 @@
             <!-- #section:basics/navbar.layout.brand -->
             <small>
                 <a href="#" class="navbar-brand">
-                    <span class="fa fa-globe"></span>北京 双友信息网络推广科技</a>
+                    <span class="fa fa-globe"></span>北京 双友之春</a>
             </small>
             <!-- /section:basics/navbar.layout.brand -->
             <!-- #section:basics/navbar.toggle -->
@@ -45,12 +45,12 @@
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li>
-                            <a href="javascript:;" target="mainFrame">
-                                <i class="ace-icon fa fa-cog"></i>
-                                系统设置
-                            </a>
-                        </li>
+                    <#--<li>
+                        <a href="javascript:;" target="mainFrame">
+                            <i class="ace-icon fa fa-cog"></i>
+                            系统设置
+                        </a>
+                    </li>-->
 
                         <li>
                             <a href="javascript:;" target="mainFrame">

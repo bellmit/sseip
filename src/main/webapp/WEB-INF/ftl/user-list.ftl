@@ -24,7 +24,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <table id="sample-table-1"
-                               class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                               class="table table-striped table-bordered table-hover table-condensed table-responsive"
+                               style="word-wrap: break-word;table-layout:fixed">
                         <#--<colgroup class="row">
                             <col class="col-sm-1">
                             <col class="col-sm-2">
@@ -56,7 +57,8 @@
                             <#list page.list as user>
                             <tr>
                                 <td class="text-right">${user.id }</td>
-                                <td class="text-right">${user.username}<#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')><a href="${context.contextPath}/user/profile/${user.id}" class="list_link"
+                                <td class="text-right">${user.username}<#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                    <a href="${context.contextPath}/user/profile/${user.id}" class="list_link"
                                        title="查看资料"><span class="fa fa-eye"></span></a></#if></td>
                                 <td class="text-right">${user.realName}</td>
                                 <td class="text-right"><#if user.age??>${user.age}<#else><span>没有写</span></#if>
@@ -99,23 +101,27 @@
                                     </#if>
                                 </td>
                                 <td class="center">
-                                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="/user/update/${user.id}" title="更新资料"><span class="fa fa-edit"></span></a>
-                                    </#if>
-                                    <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/user/remove/${user.id}"><span
-                                                class="fa fa-trash"></span></a>
-                                    </#if>
+                                    <span class="btn-group">
+                                        <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                            <a class="btn btn-minier" href="/user/update/${user.id}" title="更新资料"><span
+                                                    class="fa fa-edit"></span></a>
+                                        </#if>
+                                        <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                            <a class="btn btn-minier"
+                                               href="${context.contextPath}/user/remove/${user.id}"><span
+                                                    class="fa fa-trash"></span></a>
+                                        </#if></span>
                                 </td>
                             </tr>
                             </#list>
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/user/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="增加员工" class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2 btn-group"><a href="${context.contextPath}/user/add"
+                                                                                 target="_self"
+                                                                                 style="color:#FFF;text-decoration:none;"
+                                                                                 title="增加员工"
+                                                                                 class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
                                 <span class="col-md-10">

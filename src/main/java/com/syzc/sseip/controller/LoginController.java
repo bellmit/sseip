@@ -5,7 +5,6 @@ import com.google.code.kaptcha.Producer;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.service.UserService;
-import com.syzc.sseip.util.AgeUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Controller
@@ -46,7 +44,7 @@ public class LoginController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String login(@RequestParam(required = false) String refer, HttpSession httpSession) {
-        if (httpSession.getAttribute("loginUser") != null) {
+        if (httpSession.getAttribute("loginUserId") != null) {
             if (refer == null || refer.length() == 0) {
                 refer = "/";
             }
@@ -128,12 +126,15 @@ public class LoginController {
             errors.add("密码不匹配");
             state = false;
         }
+
+/*
         Matcher m = idNPattern.matcher(form.getIdNumber());
         if (!m.matches()) {
             errors.add("身份证号码格式错误");
             logger.trace("错误的身份证号码: " + form.getIdNumber());
             state = false;
         }
+
         int age = form.getAge();
         int calcAge = AgeUtil.calc(form.getIdNumber());
         if (age != calcAge) {
@@ -141,14 +142,17 @@ public class LoginController {
             logger.trace(String.format("错误的身份证号码与年龄关系: %s,\t%s", form.getIdNumber(), age));
             state = false;
         }
+*/
+
         if (!state) {
-            System.out.println(JSON.toJSONString(errors, true));
+//            System.out.println(JSON.toJSONString(errors, true));
             model.addAttribute("form", form);
             model.addAttribute("errors", errors);
             return "/register";
         }
         form = userService.add(form);
         httpSession.setAttribute("loginUser", form);
+        httpSession.setAttribute("loginUserId", form.getId());
         return "redirect:/welcome";
     }
 }

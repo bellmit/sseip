@@ -83,15 +83,17 @@
                         </div>
                     </div>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">身份证号: </label>
+                <#--
+                                    <div class="space-4"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right">身份证号: </label>
 
-                        <div class="col-sm-9">
-                            <input name="idNumber" type="text" size="30" class="col-xs-10 col-sm-5" placeholder="身份证号"
-                                   value="${(user.idNumber)!''}"/>
-                        </div>
-                    </div>
+                                        <div class="col-sm-9">
+                                            <input name="idNumber" type="text" size="30" class="col-xs-10 col-sm-5" placeholder="身份证号"
+                                                   value="${(user.idNumber)!''}"/>
+                                        </div>
+                                    </div>
+                -->
 
                     <div class="space-4"></div>
                     <div class="form-group">

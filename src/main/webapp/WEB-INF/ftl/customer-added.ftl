@@ -20,7 +20,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-home home-icon"></span><a href="${context.contextPath}/customer/list/1">顾客资源一览</a>
+            <li><span class="ace-icon fa fa-home home-icon"></span><a
+                    href="${context.contextPath}/customer/filter-own/1">顾客资源一览</a>
             </li>
             <li class="active">提交完成</li>
         </ul>
@@ -39,7 +40,7 @@
                     <div class="col-xs-12">
                         <dl class="dl-horizontal">
                             <dt>id</dt>
-                            <dd>${customer.id}</dd>
+                            <dd>${customer.id?c}</dd>
                             <dt>患者姓名</dt>
                             <dd><#if (customer.patientName)??>${customer.patientName}<#else><span
                                     class="label">不详</span></#if></dd>
@@ -125,7 +126,7 @@
                     <a class="btn btn-info" href="${context.contextPath}/" target="_top">
                         <span class="ace-icon fa fa-home bigger-110"></span>回首页
                     </a>
-                    <a class="btn btn-info" href="${context.contextPath}/customer/list/1"><span
+                    <a class="btn btn-info" href="${context.contextPath}/customer/filter-own/1"><span
                             class="ace-icon fa fa-list bigger-110"></span>顾客资源一览</a>
                     <a class="btn btn-info" href="${context.contextPath}/customer/add">
                         <span class="ace-icon fa fa-edit bigger-110"></span>继续添加

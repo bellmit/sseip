@@ -7,7 +7,6 @@ import com.syzc.sseip.entity.UserDto;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.GroupService;
 import com.syzc.sseip.service.UserService;
-import com.syzc.sseip.util.AgeUtil;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.exception.AuthException;
@@ -25,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Controller
@@ -53,11 +51,17 @@ public class UserController {
     public String updateUser(@PathVariable("userid") Long userId, Model model, HttpServletRequest request, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.EMPLOYEE)) {
+//        System.out.println(JSON.toJSONString(loginUser, true));
+
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.EMPLOYEE)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
-        if (loginUser.getRole() == Role.EMPLOYEE && loginUser.getId() != userId) {
+        //合并了不同种类操作； 普通雇员只能修改自己的资料
+        if (loginUser.getRole() == Role.EMPLOYEE && !loginUser.getId().equals(userId)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -79,11 +83,14 @@ public class UserController {
     public String updateUser(@PathVariable("userid") Long userId, @RequestParam("referer") String referer, User user, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.EMPLOYEE)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.EMPLOYEE)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
-        if (loginUser.getRole() == Role.EMPLOYEE && loginUser.getId() != userId) {
+        if (loginUser.getRole() == Role.EMPLOYEE && !loginUser.getId().equals(userId)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -106,7 +113,10 @@ public class UserController {
     public String removeUser(@PathVariable("userid") Long userId, HttpServletRequest request, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -126,7 +136,10 @@ public class UserController {
     public String addUser(Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -139,7 +152,10 @@ public class UserController {
 //        logger.trace(JSON.toJSONString(form, true));
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -149,6 +165,8 @@ public class UserController {
             errors.add("密码不匹配");
             state = false;
         }
+
+/*
         Matcher m = idNPattern.matcher(form.getIdNumber());
         if (!m.matches()) {
             errors.add("身份证号码格式错误");
@@ -162,8 +180,10 @@ public class UserController {
             logger.trace(String.format("错误的身份证号码与年龄关系: %s,\t%s", form.getIdNumber(), age));
             state = false;
         }
+*/
+
         if (!state) {
-            System.out.println(JSON.toJSONString(errors, true));
+//            System.out.println(JSON.toJSONString(errors, true));
             model.addAttribute("roleTypes", Role.values());
             model.addAttribute("form", form);
             model.addAttribute("errors", errors);
@@ -180,12 +200,23 @@ public class UserController {
     public String list(@PathVariable("page") Long pageNo, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.DIRECTOR && loginUser.getRole() != Role.EMPLOYEE)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.DIRECTOR && loginUser.getRole() != Role.EMPLOYEE)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
         Page<User> page;
-        if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+        /*if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
+            if (loginUser.getGroupId() == null) {
+                throw AuthException.create("没有权限", Level.DEBUG);
+            }
+            page = userService.listByGroup(loginUser.getGroupId(), pageNo, pageSize);
+        } else {
+            page = userService.list(pageNo, pageSize);
+        }*/
+        if (loginUser.getRole() == Role.EMPLOYEE) {
             if (loginUser.getGroupId() == null) {
                 throw AuthException.create("没有权限", Level.DEBUG);
             }
@@ -203,13 +234,20 @@ public class UserController {
     public String listByGroup(@PathVariable("dept") Long groupId, @PathVariable("page") Long pageNo, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.DIRECTOR)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.DIRECTOR)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+        if (loginUser.getRole() == Role.EMPLOYEE && loginUser.getGroupId() != groupId) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
-        if (loginUser.getRole() == Role.DIRECTOR && !groupId.equals(loginUser.getGroupId())) {
+
+        /*if (loginUser.getRole() == Role.DIRECTOR && !groupId.equals(loginUser.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
         Group group = groupService.get(groupId);
         if (group == null) {
@@ -225,19 +263,19 @@ public class UserController {
     public String profile(@PathVariable("id") Long userId, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.DIRECTOR && loginUser.getRole() != Role.EMPLOYEE)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.DIRECTOR && loginUser.getRole() != Role.EMPLOYEE)) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
-
-        if (loginUser.getRole() == Role.EMPLOYEE && !userId.equals(loginUser.getGroupId())) {
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
         User user = userService.get(userId);
 
-        if (loginUser.getRole() == Role.DIRECTOR && user != null && !loginUser.getGroupId().equals(user.getGroupId())) {
+        //主任查看本部门用户资料
+        /*if (loginUser.getRole() == Role.DIRECTOR && user != null && !loginUser.getGroupId().equals(user.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
         if (user == null) {
             throw HosException.create("查无此人", Level.DEBUG);

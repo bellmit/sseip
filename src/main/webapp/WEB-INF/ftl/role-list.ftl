@@ -25,12 +25,12 @@
                     <div class="col-xs-12">
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all">
-                            <colgroup class="row">
-                                <col class="col-md-1">
-                                <col class="col-md-2">
-                                <col class="col-md-2">
-                            </colgroup>
+                               style="word-wrap: break-word;table-layout:fixed">
+                        <#--<colgroup class="row">
+                            <col class="col-md-1">
+                            <col class="col-md-2">
+                            <col class="col-md-2">
+                        </colgroup>-->
                             <thead>
                             <tr>
                                 <th class="text-right">id</th>
@@ -46,7 +46,9 @@
                                 <td class="text-right">${roleType.roleName}</td>
                                 <td class="center">
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/role/user-list/${roleType.code}/1">用户列表</a>
+                                        <a class="btn btn-minier"
+                                           href="${context.contextPath}/role/user-list/${roleType.code}/1" title="用户列表"><span
+                                                class="fa fa-list"></span></a>
                                     </#if>
                                 </td>
                             </tr>

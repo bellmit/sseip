@@ -1,12 +1,12 @@
 package com.syzc.sseip.controller;
 
 import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.UserDto;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.UserService;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.exception.AuthException;
-import com.syzc.sseip.entity.UserDto;
 import org.apache.log4j.Level;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +45,10 @@ public class RoleController {
     public String listUsers(@PathVariable("role") Integer code, @PathVariable("page") Long pageNo, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -65,7 +68,10 @@ public class RoleController {
     public String upadateUserRole(@PathVariable("user") Long userId, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -80,7 +86,10 @@ public class RoleController {
     public String upadateUserRole(@PathVariable("user") Long userId, @RequestParam("role") Role role, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+        /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*/
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 

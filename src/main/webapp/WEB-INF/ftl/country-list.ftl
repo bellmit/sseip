@@ -25,7 +25,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <table id="sample-table-1"
-                               class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                               class="table table-striped table-bordered table-hover table-condensed table-responsive"
+                               style="word-wrap: break-word;table-layout:fixed">
                             <colgroup class="row">
                                 <col class="col-xs-2">
                                 <col class="col-xs-2">
@@ -57,25 +58,29 @@
                                         class="label">不详</span></#if></td>
                                 <td class="text-right">${country.updated?string("yyyy-MM-dd HH:mm:ss")}</td>
                                 <td class="center">
-                                    <a href="/country/update/${country.id}"><span class="fa fa-edit"></span></a>
-
-                                    <form action="${context.contextPath}/country/remove" method="post"
-                                          style="display: inline;"><input type="hidden" name="id" value="${country.id}">
-                                        <button><span class="fa fa-trash"></span></button>
-                                    </form>
+                                    <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                        <form action="${context.contextPath}/country/remove" method="post"
+                                              style="display: inline;"><input type="hidden" name="id"
+                                                                              value="${country.id}">
+                                            <span class="btn-group">
+                                            <a class="btn btn-minier" href="/country/update/${country.id}"><span
+                                                    class="fa fa-edit"></span></a>
+                                            <button class="btn btn-minier"><span class="fa fa-trash"></span></button>
+                                                </span>
+                                        </form></#if>
                                 </td>
                             </tr>
                             </#list>
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/country/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="建造新的国家与地区条目"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
-                                    href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span>
+                            <div class="row"><span
+                                    class="col-md-2 btn-group"><#if ['ADMIN']?seq_contains(loginUser.role)><a
+                                    href="${context.contextPath}/country/add" target="_self"
+                                    style="color:#FFF;text-decoration:none;" title="建立新的国家与地区条目"
+                                    class="btn btn-info fa fa-plus"></a></#if>
+                                <a href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
+                                   title="刷新列表"></a></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>

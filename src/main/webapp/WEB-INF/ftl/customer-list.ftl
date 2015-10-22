@@ -38,7 +38,7 @@
                         </div>
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
-                               style="word-break: break-all;table-layout:fixed">
+                               style="word-wrap: break-word;table-layout:fixed">
                             <thead>
                             <tr>
                                 <th class="text-right">ID</th>
@@ -66,8 +66,8 @@
                                 <td class="text-right"><#if (customer.patientName)??>
                                     <div>${customer.patientName}</div><#else><#if (customer.liaisonName)??>
                                     <div>${customer.liaisonName}</div><#else><span class="label">不详</span></#if></#if>
-                                    <div class="stars-ui-ele btn-minier" data-init-score="${(customer.stars)!'0'}"
-                                         class="rating" title="意向的星级"></div>
+                                    <div class="stars-ui-ele btn-minier rating"
+                                         data-init-score="${(customer.stars)!'0'}" title="意向的星级"></div>
                                 </td>
                                 <td class="text-right"><#if customer.diseaseType??>${customer.diseaseType.name}<#else>
                                     <span class="label">不详</span></#if></td>
@@ -87,18 +87,21 @@
 
                                 <td class="center">
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="/customer/update/${customer.id?c}"><span
+                                        <a class="btn btn-minier" href="/customer/update/${customer.id?c}"><span
                                                 class="fa fa-edit"></span></a>
 
-                                        <form action="${context.contextPath}/customer/remove" method="post"
-                                              style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${customer.id?c}">
-                                            <button href="${context.contextPath}/customer/remove"><span
-                                                    class="fa fa-trash"></span></button>
-                                            <a class="fa fa-search"
+                                        <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                            <form action="${context.contextPath}/customer/remove" method="post"
+                                                  style="display: inline;"><input type="hidden" name="id"
+                                                                                  value="${customer.id?c}">
+                                                <button class="btn btn-minier"
+                                                        href="${context.contextPath}/customer/remove"><span
+                                                        class="fa fa-trash"></span></button>
+                                            </form>
+                                            <a class="btn btn-minier"
                                                href="${context.contextPath}/customer/get/${customer.id?c}"><span
-                                                    class="fa fa-query"></span></a>
-                                        </form>
+                                                    class="fa fa-search"></span></a>
+                                        </#if>
                                     </#if>
                                 </td>
                             </tr>
@@ -141,6 +144,7 @@
             noRatedMsg: "它只读，它还没有星星",
             starType: 'span',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            space: false,
             score: function () {
                 return $(this).attr('data-init-score');
             },

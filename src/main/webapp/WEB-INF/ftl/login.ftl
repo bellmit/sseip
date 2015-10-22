@@ -14,9 +14,9 @@
                 <div class="login-container">
                     <div class="center">
                         <h1>
-                            <i class="ace-icon fa fa-leaf green"></i>
-                            <span class="red">用户</span>
-                            <span class="white" id="id-text2">CMS</span>
+                            <span class="ace-icon fa fa-leaf green"></span>
+                            <span class="red">双友之春</span>
+                            <span class="white" id="id-text2">CRM</span>
                         </h1>
                         <h4 class="blue" id="id-company-text">&copy; 登录</h4>
                     </div>
@@ -41,7 +41,12 @@
                                     <#--<form>-->
                                         <fieldset>
                                         <#if error??>
-                                            <label class="block clearfix">${error}</label>
+                                            <div class="alert alert-danger">
+                                                <button type="button" class="close" data-dismiss="alert">
+                                                    <span class="ace-icon fa fa-times"></span>
+                                                </button>
+                                                <strong><span class="ace-icon fa fa-times"></span>${error}</strong>
+                                            </div>
                                         </#if>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">

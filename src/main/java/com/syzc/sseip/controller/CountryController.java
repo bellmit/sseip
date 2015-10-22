@@ -1,10 +1,13 @@
 package com.syzc.sseip.controller;
 
 import com.syzc.sseip.entity.Country;
+import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.CountryService;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.NotExistException;
 import com.syzc.sseip.util.Page;
+import com.syzc.sseip.util.exception.AuthException;
 import org.apache.log4j.Level;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +48,11 @@ public class CountryController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String remove(Long id, Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        if (user.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
         //删除操作
         Boolean r = countryService.remove(id);
         if (!r) {
@@ -60,11 +68,21 @@ public class CountryController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        if (user.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
         return "country-add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Country country, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        if (user.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
         if (countryService.add(country) != null) {
             model.addAttribute("country", country);
             return "country-added";
@@ -75,6 +93,11 @@ public class CountryController {
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.GET)
     public String update(@PathVariable("id") Long id, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        if (user.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
         Country country = countryService.get(id);
         if (country == null) {
             throw NotExistException.create(Level.DEBUG);
@@ -85,6 +108,11 @@ public class CountryController {
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.POST)
     public String update(@PathVariable("id") Long id, Country country, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        if (user.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
         country.setId(id);
         if (!countryService.update(country)) {
             throw HosException.create("目标不存在", Level.DEBUG);

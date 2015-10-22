@@ -4,7 +4,7 @@
         <div class="footer-content">
 			<span class="bigger-120">
 				北京&nbsp;<span class="blue bolder">双友</span>
-				&nbsp;信息网络推广 &copy; 2015-2026
+				&nbsp;之春&copy; 2015-2026
 			</span>
 
             &nbsp; &nbsp;

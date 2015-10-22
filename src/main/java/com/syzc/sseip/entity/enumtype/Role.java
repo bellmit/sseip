@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Role {
-    EMPLOYEE(1, "基本雇员"), DIRECTOR(2, "部门主任"), MANAGER(3, "部门经理"), ADMIN(4, "系统管理员"), EMPTY(5, "停职");
+    EMPLOYEE(1, "基本雇员"),
+    //    DIRECTOR(2, "部门主任"),
+//    MANAGER(3, "部门经理"),
+    ADMIN(4, "系统管理员"), EMPTY(5, "停职");
     protected int code;
     protected String roleName;
 
