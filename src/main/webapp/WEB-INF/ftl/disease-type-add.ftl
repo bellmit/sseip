@@ -20,9 +20,9 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/disease-type/list/1">疾病类型一览</a>
+            <li><a href="${context.contextPath}/disease-type/list/1">疾病类型一览<span class="ace-icon fa fa-list"></span></a>
             </li>
-            <li class="active">添加疾病类型</li>
+            <li class="active">添加疾病类型<span class="ace-icon fa fa-edit"></span></li>
         </ul>
         <!-- /.breadcrumb -->
     </div>

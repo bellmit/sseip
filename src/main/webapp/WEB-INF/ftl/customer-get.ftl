@@ -9,16 +9,14 @@
     <div class="breadcrumbs" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
-                <span class="ace-icon fa fa-home home-icon"></span>
-                <a href="${context.contextPath}/" target="_top">Home</a>
+                <a href="${context.contextPath}/" target="_top"><span class="fa fa-home home-icon"></span></a>
             </li>
-            <li><a href="${context.contextPath}/customer/list/1">顾客资源列表</a></li>
-            <li class="active">顾客资源细节</li>
+            <li class="active">顾客资源细节<a href=""><span class="fa fa-refresh"></span></a></li>
         </ul>
     </div>
     <div class="page-content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 well">
                 <dl class="dl-horizontal">
                     <dt>id</dt>
                     <dd>${customer.id}</dd>
@@ -30,6 +28,12 @@
                     </dd>
                     <dt>患者年龄</dt>
                     <dd><#if (customer.age)??>${customer.age}<#else><span class="label">不详</span></#if></dd>
+                    <dt>疾病类型</dt>
+                    <dd><#if (customer.diseaseType)??>${customer.diseaseType.name}<#else><span
+                            class="label">不详</span></#if></dd>
+                    <dt>症状</dt>
+                    <dd><#if (customer.symptom)??>${customer.symptom}<#else><span class="label">不详</span></#if>
+                    </dd>
                     <dt>患者地址</dt>
                     <dd><#if (customer.patientAddress)??>${customer.patientAddress}<#else><span
                             class="label">不详</span></#if>
@@ -38,12 +42,16 @@
                     <dd><#if (customer.patientCountry.name)??>${customer.patientCountry.name}<#else><span
                             class="label">不详</span></#if>
                     </dd>
-                    <dt>疾病类型</dt>
-                    <dd><#if (customer.diseaseType)??>${customer.diseaseType.name}<#else><span
+                    <dt>是否住院</dt>
+                    <dd><#if customer.hospitalization??>${customer.hospitalization.textName}<#else><span
                             class="label">不详</span></#if></dd>
-                    <dt>症状</dt>
-                    <dd><#if (customer.symptom)??>${customer.symptom}<#else><span class="label">不详</span></#if>
-                    </dd>
+                    <dt>是否紧急</dt>
+                    <dd><#if customer.emergency??>${customer.emergency?then('紧急','不紧急')}<#else><span
+                            class="label">不详</span></#if></dd>
+                    <dt>电子邮件</dt>
+                    <dd><#if (customer.email)??>${customer.email}<#else><span class="label">不详</span></#if></dd>
+                    <dt>电话</dt>
+                    <dd><#if (customer.tel)??>${customer.tel}<#else><span class="label">不详</span></#if></dd>
 
                     <dt>咨询人姓名</dt>
                     <dd><#if (customer.liaisonName)??>${customer.liaisonName}<#else><span
@@ -60,16 +68,6 @@
                     <dd><#if (customer.relationship)??>${customer.relationship}<#else><span
                             class="label">不详</span></#if>
                     </dd>
-                    <dt>是否住院</dt>
-                    <dd><#if customer.hospitalization??>${customer.hospitalization.textName}<#else><span
-                            class="label">不详</span></#if></dd>
-                    <dt>是否紧急</dt>
-                    <dd><#if customer.emergency??>${customer.emergency?then('紧急','不紧急')}<#else><span
-                            class="label">不详</span></#if></dd>
-                    <dt>电子邮件</dt>
-                    <dd><#if (customer.email)??>${customer.email}<#else><span class="label">不详</span></#if></dd>
-                    <dt>电话</dt>
-                    <dd><#if (customer.tel)??>${customer.tel}<#else><span class="label">不详</span></#if></dd>
                     <dt>来源网站</dt>
                     <dd><#if (customer.website)??>${customer.website.name}<#else><span
                             class="label">不详</span></#if>

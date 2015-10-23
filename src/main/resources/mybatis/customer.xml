@@ -428,6 +428,9 @@
             <if test="stars !=null and stars !=0">
                 and stars=#{stars}
             </if>
+            <if test="discard !=null">
+                and discard=#{discard}
+            </if>
             <if test="since !=null">
                 and added&gt;=#{since}
             </if>
@@ -473,6 +476,9 @@
             </if>
             <if test="stars !=null and stars !=0">
                 and stars=#{stars}
+            </if>
+            <if test="discard !=null">
+                and discard=#{discard}
             </if>
             <if test="since !=null">
                 and added&gt;=#{since}
@@ -535,5 +541,8 @@
     <update id="updateOwnUserIds">
         update customer set owner_user_id=#{newOwnerUserId} where owner_user_id=#{currUserId} and id IN
         <foreach collection="customerIds" item="customerId" separator="," open="(" close=")">#{customerId}</foreach>
+    </update>
+    <update id="updateDiscard">
+        update customer SET  discard=#{discard} where id=#{id}
     </update>
 </mapper>

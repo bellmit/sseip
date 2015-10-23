@@ -44,6 +44,8 @@ public class Customer implements Serializable {
     private Long ownerUserId;
     private Long groupId;
 
+    private Boolean discard;
+
 //    private Date calledTime;
 //    private String callRecord;
 
@@ -260,4 +262,11 @@ public class Customer implements Serializable {
         this.ownerUserId = ownerUserId;
     }
 
+    public Boolean getDiscard() {
+        return discard;
+    }
+
+    public void setDiscard(Boolean discard) {
+        this.discard = discard;
+    }
 }

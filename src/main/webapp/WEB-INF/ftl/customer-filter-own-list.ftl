@@ -199,7 +199,8 @@
                             <tr>
                                 <td class="text-right id-col">
                                     <label style="width: 100%;">${customer.id?c}<input
-                                            type="checkbox" name="customer-ids" value="${customer.id?c}"
+                                            type="checkbox" class="checkbox-each-id" name="customer-ids"
+                                            value="${customer.id?c}"
                                             form="pass-on-form"></label>
                                 </td>
                                 <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
@@ -233,14 +234,24 @@
                                         <a class="btn btn-minier" href="/customer/update/${customer.id?c}"><span
                                                 class="fa fa-edit"></span></a>
 
-                                            <#if ['ADMIN']?seq_contains(loginUser.role)>
-                                                <form action="${context.contextPath}/customer/remove" method="post"
-                                                      style="display: inline;"><input type="hidden" name="id"
-                                                                                      value="${customer.id?c}">
-                                                    <button class="btn btn-minier"
-                                                            href="${context.contextPath}/customer/remove"><span
-                                                            class="fa fa-trash"></span></button>
-                                                </form></#if>
+                                        <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
+                                            <form action="${context.contextPath}/customer/remove" method="post"
+                                                  style="display: inline;"><input type="hidden" name="id"
+                                                                                  value="${customer.id?c}">
+                                                <button class="btn btn-minier"
+                                                        href="${context.contextPath}/customer/remove"><span
+                                                        class="fa fa-trash"></span></button>
+                                            </form></#if>-->
+                                            <form action="${context.contextPath}/customer/update-discard" method="post"
+                                                  style="display: inline;"><input type="hidden" name="id"
+                                                                                  value="${customer.id?c}"><input
+                                                    type="hidden" name="discard"
+                                                    value="${customer.discard?string('0','1')}">
+                                                <button class="btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
+                                                        title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
+                                                        class="fa fa-trash"></span>
+                                                </button>
+                                            </form>
                                             <a class="btn btn-minier"
                                                href="${context.contextPath}/customer/get/${customer.id?c}"><span
                                                     class="fa fa-search"></span></a>
@@ -364,8 +375,9 @@
             $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
         });
 
-        $('#check-all').click(function () {
-        });
+        $('#check-all').change(function (e) {
+            $('.checkbox-each-id').prop('checked', $('#check-all').prop('checked'));
+        })
 
     <#--<#if dateRange?? && dateRange?size gt 0 >-->
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->

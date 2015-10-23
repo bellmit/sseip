@@ -15,7 +15,7 @@ public class CustomerDaoTest {
         CustomerDao d = (CustomerDao) ac.getBean("customerDao");
         System.out.println(d);
 
-        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));
+//        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));
 //        System.out.println(d.count());
 
 //        System.out.println(JSON.toJSONString(d.get(1L), true));
@@ -56,7 +56,7 @@ public class CustomerDaoTest {
 //        System.out.println(d.update(c));
 //        System.out.println(JSON.toJSONString(d.get(3L), true));
 
-//        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, null, null, null, null, null, null, 0L, (byte) 20), true));
+        System.out.println(JSON.toJSONString(d.listByFilter(null, null, null, null, null, null, null, null, null, null, null, null, null, 0L, (byte) 20), true));
 //        System.out.println(JSON.toJSONString(d.countByFilter(null, null, null, null, null, null, null, null, null, null, null, null), true));
 
         Calendar since = Calendar.getInstance();

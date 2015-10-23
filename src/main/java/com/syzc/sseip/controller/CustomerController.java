@@ -115,6 +115,7 @@ public class CustomerController {
             @RequestParam(required = false) Boolean valid,
             @RequestParam(required = false) HospitalizationType hospitalization,
             @RequestParam(required = false) Byte stars,
+            @RequestParam(required = false) Boolean discard,
             @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
         Date till = null;
@@ -153,7 +154,8 @@ public class CustomerController {
         }
 
         //admin || manager
-        page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
+        page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
+                valid, hospitalization, stars, discard, pageNo, pageSize);
 //            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
 //                    groupId, userId, pageNo, pageSize);
 
@@ -207,6 +209,7 @@ public class CustomerController {
             @RequestParam(required = false) Boolean valid,
             @RequestParam(required = false) HospitalizationType hospitalization,
             @RequestParam(required = false) Byte stars,
+            @RequestParam(required = false) Boolean discard,
             @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
         Date till = null;
@@ -227,7 +230,8 @@ public class CustomerController {
         if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
-        page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email, diseaseTypeId, valid, hospitalization, stars, pageNo, pageSize);
+        page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email,
+                diseaseTypeId, valid, hospitalization, stars, discard, pageNo, pageSize);
 
         List<User> users;
 /*
@@ -473,6 +477,7 @@ public class CustomerController {
         return "customer-update";
     }
 
+    //目前只有普通用户操作； dao更新操作只执行对应当前登录用户id的项
     @RequestMapping(value = "/pass", method = RequestMethod.POST)
     public String passOn(@RequestParam("new-owner-user-id") Long
                                  newOwnerUserId, @RequestParam("customer-ids") Long[] customerIds, Model model, HttpSession
@@ -499,6 +504,18 @@ public class CustomerController {
             referer = request.getContextPath() + "/customer/filter-own/1";
         }
 //        return "customer-pass-result";
+        return "redirect:" + referer;
+    }
+
+    //只有普通用户操作
+    @RequestMapping(value = "update-discard", method = RequestMethod.POST)
+    public String updateDiscard(@RequestParam("id") Long customerId, Boolean discard, HttpServletRequest request, HttpSession session) {
+        String referer = request.getHeader("Referer");
+        if (referer == null) {
+            referer = request.getContextPath() + "/customer/filter-own/1";
+        }
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        customerService.updateDiscard(customerId, discard, loginUser.getId());
         return "redirect:" + referer;
     }
 }

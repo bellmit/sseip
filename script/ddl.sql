@@ -122,6 +122,8 @@ CREATE TABLE customer (
   memo               TEXT,
   contact_recoreds   TEXT,
 
+  discard            TINYINT(1)      DEFAULT FALSE,
+
   stars              TINYINT(1),
   valid              TINYINT(1),
   user_id            INT,

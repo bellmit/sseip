@@ -28,8 +28,10 @@
                     <dd>${(loginUser.realName)!'没写'}</dd>
                     <dt>年龄</dt>
                     <dd>${(loginUser.age)!'没写'}</dd>
-                    <dt>身份证号</dt>
-                    <dd>${(loginUser.idNumber)!'没写'}</dd>
+                <#--
+                                    <dt>身份证号</dt>
+                                    <dd>${(loginUser.idNumber)!'没写'}</dd>
+                -->
                     <dt>地址</dt>
                     <dd>${(loginUser.address)!'没写'}</dd>
                     <dt>电话</dt>

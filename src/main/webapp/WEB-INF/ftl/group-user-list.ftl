@@ -36,7 +36,6 @@
                                 <th class="text-right">用户名</th>
                                 <th class="text-right">真实姓名</th>
                                 <th class="text-right">年龄</th>
-                                <th class="text-right">身份证号</th>
                                 <th class="text-right">地址</th>
                                 <th class="text-right">电话</th>
                                 <th class="text-right">注册时间</th>
@@ -49,7 +48,7 @@
                             <tbody>
                             <#list page.list as user>
                             <tr>
-                                <td class="text-right"><a href="#">${user.id }</a></td>
+                                <td class="text-right">${user.id}</td>
                                 <td class="text-right">${user.username}
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                         <a href="${context.contextPath}/user/profile/${user.id}" class=""
@@ -60,9 +59,9 @@
                                 <td class="text-right"><#if user.age??>${user.age}<#else><span>没有写</span></#if>
                                 </td>
 
-                                <td class="text-right"><#if user.idNumber??>${user.idNumber}<#else>
-                                    <span class="label">没有写</span></#if>
-                                </td>
+                            <#--<td class="text-right"><#if user.idNumber??>${user.idNumber}<#else>
+                                <span class="label">没有写</span></#if>
+                            </td>-->
                                 <td class="text-right"><#if user.address??>${user.address}<#else>
                                     <span class="label">没有写</span></#if>
                                 </td>

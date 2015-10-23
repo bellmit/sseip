@@ -30,6 +30,7 @@ public interface CustomerDao extends BaseDao<Customer> {
                                 @Param("valid") Boolean valid,
                                 @Param("hospitalization") HospitalizationType hospitalization,
                                 @Param("stars") Byte stars,
+                                @Param("discard") Boolean discard,
                                 @Param("offset") Long offset,
                                 @Param("size") Byte size
     );
@@ -45,7 +46,8 @@ public interface CustomerDao extends BaseDao<Customer> {
                        @Param("diseaseTypeId") Long diseaseTypeId,
                        @Param("valid") Boolean valid,
                        @Param("hospitalization") HospitalizationType hospitalization,
-                       @Param("stars") Byte stars
+                       @Param("stars") Byte stars,
+                       @Param("discard") Boolean discard
     );
 
     /*
@@ -69,4 +71,6 @@ public interface CustomerDao extends BaseDao<Customer> {
     Long updateOwnUserIds(@Param("customerIds") Long[] customerIds, @Param("newOwnerUserId") Long ownerUserId, @Param("currUserId") Long currUserId);
 
     Long addAllDummies(@Param("entities") List<Customer> entities);
+
+    Boolean updateDiscard(@Param("id") Long id, @Param("discard") Boolean discard);
 }

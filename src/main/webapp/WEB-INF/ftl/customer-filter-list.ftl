@@ -102,7 +102,7 @@
                                 </#list>
                                 </select>
                                 <select name="valid" class="col-md-2 text-right brown" form="filter-form"
-                                        title="筛选是否是否有效">
+                                        title="筛选是否有效">
                                     <option
                                     <#if !((RequestParameters.faraway)??) || RequestParameters.faraway=''>selected</#if>
                                     value="">筛选是否有效
@@ -132,10 +132,29 @@
                                        value="${(RequestParameters.stars)!'0'}"/>
 
                                 <div id="stars-ui" data-init-score="${(RequestParameters.stars)!'0'}"
-                                     class="rating inline" title="意向的星级"></div>
+                                     class="rating inline" title="筛选意向程度星级"></div>
                             <#--<input name="stars" class="col-md-2 text-right green" type="text" form="filter-form"
                                    title="意向程度"
                                    placeholder="意向程度"/>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 filters">
+                                <select name="discard" class="col-md-2 text-right brown" form="filter-form"
+                                        title="筛选是否提交删除">
+                                    <option
+                                    <#if !((RequestParameters.discard)??) || RequestParameters.discard=''>selected</#if>
+                                    value="">筛选是否提交删除
+                                    </option>
+                                    <option
+                                    <#if (RequestParameters.discard)?? && RequestParameters.discard=='1'>selected</#if>
+                                    value="1">提交删除
+                                    </option>
+                                    <option
+                                    <#if (RequestParameters.discard)?? && RequestParameters.discard=='0'>selected</#if>
+                                    value="0">未提交删除
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -165,7 +184,7 @@
                                     target="_self"
                                     style="color:#FFF;text-decoration:none;"
                                     title="填写资源"
-                                    class="btn btn-info fa fa-plus"></a> <a
+                                    class="btn btn-info fa fa-plus"></a><a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span></span>
                                 <span class="col-md-10">
@@ -231,7 +250,11 @@
                                     <span class="label">不详</span></#if></td>
 
                                 <td class="center">
-                                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId??
+                                    && loginUser.id==customer.userId) ||(loginUser.role='DIRECTOR'
+                                    && customer.groupId?? && loginUser.groupId??
+                                    && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'
+                                    ||loginUser.role='MANAGER')>
                                     <span class="btn-group"><a href="/customer/update/${customer.id?c}"
                                                                class="btn btn-minier"><span
                                             class="fa fa-edit"></span></a>
@@ -241,7 +264,9 @@
                                                   style="display: inline;"><input type="hidden" name="id"
                                                                                   value="${customer.id?c}">
                                                 <button href="${context.contextPath}/customer/remove"
-                                                        class="btn btn-minier"><span class="fa fa-trash"></span>
+                                                        class="btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
+                                                        title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
+                                                        class="fa fa-trash"></span>
                                                 </button>
                                             </form></#if>
                                     </#if>
@@ -254,13 +279,12 @@
                         </table>
                         <div class="page-header position-relative">
                             <div class="row"><span class="col-md-2"><span class="btn-group"><a
-                                    href="${context.contextPath}/customer/add"
-                                    target="_self"
-                                    style="color:#FFF;text-decoration:none;"
-                                    title="填写资源"
-                                    class="btn btn-info fa fa-plus"></a> <a
-                                    href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span></span>
+                                    href="${context.contextPath}/customer/add" target="_self"
+                                    style="color:#FFF;text-decoration:none;" title="填写资源"
+                                    class="btn btn-info fa fa-plus"></a><a href=""
+                                                                           style="color:#FFF;text-decoration:none;"
+                                                                           class="btn btn-info fa fa-refresh"
+                                                                           title="刷新列表"></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>

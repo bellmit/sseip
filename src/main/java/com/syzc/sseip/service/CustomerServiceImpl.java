@@ -8,6 +8,8 @@ import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.PageUtil;
+import com.syzc.sseip.util.exception.AuthException;
+import org.apache.log4j.Level;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -52,16 +54,32 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     }
 
     @Override
-    public Page<Customer> listByFilter(Date since, Date till, Long websiteId, String tel, String name, Long countryId, Long userId, String email, Long diseaseTypeId, Boolean valid, HospitalizationType hospitalization, Byte stars, Long pageNo, Byte size) {
-        Long total = customerDao.countByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars);
+    public Page<Customer> listByFilter(Date since, Date till, Long websiteId, String tel, String name, Long countryId,
+                                       Long userId, String email, Long diseaseTypeId, Boolean valid,
+                                       HospitalizationType hospitalization, Byte stars, Boolean discard, Long pageNo, Byte size) {
+        Long total = customerDao.countByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
+                valid, hospitalization, stars, discard);
         Page<Customer> page = PageUtil.make(pageNo, size, total);
-        page.setList(customerDao.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, page.getRowOffset(), page.getPageSize()));
+        page.setList(customerDao.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
+                valid, hospitalization, stars, discard, page.getRowOffset(), page.getPageSize()));
         return page;
     }
 
     @Override
     public Long passOn(Long[] ids, Long userId, Long currUserId) {
         return customerDao.updateOwnUserIds(ids, userId, currUserId);
+    }
+
+    @Override
+    public Boolean updateDiscard(Long id, Boolean discard, Long userId) {
+        Customer customer = customerDao.get(id);
+        if (customer == null) {
+            return false;
+        }
+        if (!customer.getOwnerUserId().equals(userId)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+        return customerDao.updateDiscard(id, discard);
     }
 
     public static void main(String[] args) {
@@ -75,6 +93,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
 
 //        System.out.println(JSON.toJSONString(s.get(3L), true));
 
-        System.out.println(JSON.toJSONString(s.listByFilter(null, null, null, null, null, null, null, null, null, null, null, null, 0L, (byte) 10), true));
+        System.out.println(JSON.toJSONString(s.listByFilter(null, null, null, null, null, null, null, null, null,
+                null, null, null, null, 0L, (byte) 10), true));
     }
 }

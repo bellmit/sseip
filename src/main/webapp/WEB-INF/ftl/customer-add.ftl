@@ -20,7 +20,6 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/customer/list/1">顾客资源列表</a></li>
             <li class="active">填写顾客资源资料</li>
         </ul>
         <!-- /.breadcrumb -->
