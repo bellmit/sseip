@@ -129,6 +129,25 @@
                             -->
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12 filters">
+                                <select name="discard" class="col-md-2 text-right brown" form="filter-form"
+                                        title="筛选是否提交删除">
+                                    <option
+                                    <#if !((RequestParameters.discard)??) || RequestParameters.discard=''>selected</#if>
+                                    value="">筛选是否提交删除
+                                    </option>
+                                    <option
+                                    <#if (RequestParameters.discard)?? && RequestParameters.discard=='1'>selected</#if>
+                                    value="1">提交删除
+                                    </option>
+                                    <option
+                                    <#if (RequestParameters.discard)?? && RequestParameters.discard=='0'>selected</#if>
+                                    value="0">未提交删除
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -178,8 +197,7 @@
                         </colgroup>-->
                             <thead>
                             <tr>
-                                <th class="text-right"><label style="width:100%">ID<input type="checkbox"
-                                                                                          id="check-all"></label></th>
+                                <th class="text-right">ID<input type="checkbox" id="check-all"></th>
                                 <th class="text-right">患者国家</th>
                                 <th class="text-right">患者姓名</th>
                                 <th class="text-right">病种</th>
@@ -198,10 +216,11 @@
                             <#list page.list as customer>
                             <tr>
                                 <td class="text-right id-col">
-                                    <label style="width: 100%;">${customer.id?c}<input
-                                            type="checkbox" class="checkbox-each-id" name="customer-ids"
-                                            value="${customer.id?c}"
-                                            form="pass-on-form"></label>
+                                ${customer.id?c}<input
+                                        type="checkbox" class="checkbox-each-id" name="customer-ids"
+                                        value="${customer.id?c}"
+                                        form="pass-on-form">
+                                <#--<label style="width: 100%;"></label>-->
                                 </td>
                                 <td class="text-right"><#if customer.patientCountry??>${customer.patientCountry.name}<#else>
                                     <span class="label">不详</span></#if></td>
@@ -377,6 +396,22 @@
 
         $('#check-all').change(function (e) {
             $('.checkbox-each-id').prop('checked', $('#check-all').prop('checked'));
+        })
+
+        /**
+         * 两个事件，用于阻止checkbox事件冒泡，和绑定td点击事件；附加对全选的td点击事件绑定
+         */
+        $('.checkbox-each-id,#check-all').click(function (e) {
+            e.stopPropagation();
+        })
+        $('.id-col').click(function (e) {
+            var i = $('.checkbox-each-id', this);
+            i.prop('checked', !i.prop('checked'));
+            e.stopPropagation();
+        })
+        $('th:first').click(function (e) {
+            $('#check-all').click();
+            e.stopPropagation();
         })
 
     <#--<#if dateRange?? && dateRange?size gt 0 >-->
