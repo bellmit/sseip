@@ -56,9 +56,11 @@
                                         <form action="${context.contextPath}/website/remove" method="post"
                                               style="display: inline;"><input type="hidden" name="id"
                                                                               value="${website.id}">
-                                            <a class="btn btn-minier" href="/website/update/${website.id}"><span
+                                            <a class="btn btn-minier" href="/website/update/${website.id}"
+                                               title="编辑网站条目"><span
                                                     class="fa fa-edit"></span></a>
-                                            <button class="btn btn-minier"><span class="fa fa-trash"></span></button>
+                                            <button class="btn btn-minier" title="删除网站条目"><span class="fa fa-trash"></span>
+                                            </button>
                                         </form>
                                         </span>
                                     </#if>
@@ -93,5 +95,9 @@
 <#include "/common/common_js.ftl">
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+
+<script>
+    $('.btn').tooltip();
+</script>
 </body>
 </html>

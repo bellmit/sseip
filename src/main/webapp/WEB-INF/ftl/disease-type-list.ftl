@@ -53,9 +53,10 @@
                                               style="display: inline;"><input type="hidden" name="id"
                                                                               value="${diseaseType.id}">
                                             <a class="btn btn-minier"
-                                               href="/disease-type/update/${diseaseType.id}"><span
+                                               href="/disease-type/update/${diseaseType.id}" title="编辑病种"><span
                                                     class="fa fa-edit"></span></a>
-                                            <button class="btn btn-minier"><span class="fa fa-trash"></span></button>
+                                            <button class="btn btn-minier" title="删除病种"><span
+                                                    class="fa fa-trash"></span></button>
                                         </form>
                                         </span>
                                     </#if>
@@ -90,5 +91,9 @@
 <#include "/common/common_js.ftl">
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+
+<script>
+    $('.btn').tooltip();
+</script>
 </body>
 </html>

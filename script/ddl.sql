@@ -13,7 +13,7 @@ CREATE TABLE `group` (
 CREATE TABLE user (
   id        INT PRIMARY KEY AUTO_INCREMENT,
   username  CHAR(64)  NOT NULL UNIQUE,
-  password  TEXT(256) NOT NULL,
+  password  CHAR(128) NOT NULL,
   real_name VARCHAR(64),
   age       INT(3),
   id_number CHAR(20),
@@ -23,6 +23,7 @@ CREATE TABLE user (
   role      INT,
   group_id  INT,
   CONSTRAINT fk_user_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
+    ON DELETE SET NULL
 );
 
 /*CREATE TABLE customer (
@@ -90,6 +91,7 @@ CREATE TABLE user_logon (
   last_mac_addr VARCHAR(6),
   last_ip       VARCHAR(39),
   CONSTRAINT fk_user_logon_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
+    ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS customer;
@@ -130,10 +132,16 @@ CREATE TABLE customer (
   owner_user_id      INT,
   group_id           INT,
 
-  CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id),
-  CONSTRAINT fk_customer_patient_country_id_country_id FOREIGN KEY (patient_country_id) REFERENCES country (id),
-  CONSTRAINT fk_customer_website_id_website_id FOREIGN KEY (website_id) REFERENCES website (id),
-  CONSTRAINT fk_customer_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id),
-  CONSTRAINT fk_customer_owner_user_id_user_id FOREIGN KEY (owner_user_id) REFERENCES user (id),
+  CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_customer_patient_country_id_country_id FOREIGN KEY (patient_country_id) REFERENCES country (id)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_customer_website_id_website_id FOREIGN KEY (website_id) REFERENCES website (id)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_customer_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_customer_owner_user_id_user_id FOREIGN KEY (owner_user_id) REFERENCES user (id)
+    ON DELETE SET NULL,
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
+    ON DELETE SET NULL
 );

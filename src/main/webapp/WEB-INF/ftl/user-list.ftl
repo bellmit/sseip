@@ -95,10 +95,9 @@
                                 </td>
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
                                     <span class="label">没有写</span></#if>
-                                    <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/role/updaterole/${user.id}"
-                                           title="变更角色"><span class="fa fa-gear"></span></a>
-                                    </#if>
+                                    <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')><a
+                                            href="${context.contextPath}/role/updaterole/${user.id}" title="变更角色"><span
+                                            class="fa fa-gear"></span></a></#if>
                                 </td>
                                 <td class="center">
                                     <span class="btn-group">
@@ -108,7 +107,7 @@
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                             <a class="btn btn-minier"
-                                               href="${context.contextPath}/user/remove/${user.id}"><span
+                                               href="${context.contextPath}/user/remove/${user.id}" title="删除"><span
                                                     class="fa fa-trash"></span></a>
                                         </#if></span>
                                 </td>
@@ -144,5 +143,8 @@
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
 
+<script>
+    $('.btn').tooltip();
+</script>
 </body>
 </html>

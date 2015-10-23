@@ -63,9 +63,11 @@
                                               style="display: inline;"><input type="hidden" name="id"
                                                                               value="${country.id}">
                                             <span class="btn-group">
-                                            <a class="btn btn-minier" href="/country/update/${country.id}"><span
+                                            <a class="btn btn-minier" href="/country/update/${country.id}"
+                                               title="编辑国家条目"><span
                                                     class="fa fa-edit"></span></a>
-                                            <button class="btn btn-minier"><span class="fa fa-trash"></span></button>
+                                            <button class="btn btn-minier" title="删除国家条目"><span
+                                                    class="fa fa-trash"></span></button>
                                                 </span>
                                         </form></#if>
                                 </td>
@@ -99,5 +101,9 @@
 <#include "/common/common_js.ftl">
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+
+<script>
+    $('.btn').tooltip();
+</script>
 </body>
 </html>

@@ -78,5 +78,8 @@
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
 
+<script>
+    $('.btn').tooltip();
+</script>
 </body>
 </html>
