@@ -132,6 +132,8 @@ CREATE TABLE customer (
   owner_user_id      INT,
   group_id           INT,
 
+  if_report          TINYINT(1),
+
   CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id)
     ON DELETE SET NULL,
   CONSTRAINT fk_customer_patient_country_id_country_id FOREIGN KEY (patient_country_id) REFERENCES country (id)

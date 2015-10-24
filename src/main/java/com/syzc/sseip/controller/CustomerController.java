@@ -34,7 +34,7 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
     private static final Logger logger = Logger.getLogger(CustomerController.class);
-    public final Byte pageSize = 10;
+    public final Byte pageSize = 20;
 
     private CountryService countryService;
     private DiseaseTypeService diseaseTypeService;

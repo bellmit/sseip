@@ -46,6 +46,8 @@ public class Customer implements Serializable {
 
     private Boolean discard;
 
+    private Boolean ifReport;
+
 //    private Date calledTime;
 //    private String callRecord;
 
@@ -268,5 +270,13 @@ public class Customer implements Serializable {
 
     public void setDiscard(Boolean discard) {
         this.discard = discard;
+    }
+
+    public Boolean getIfReport() {
+        return ifReport;
+    }
+
+    public void setIfReport(Boolean ifReport) {
+        this.ifReport = ifReport;
     }
 }

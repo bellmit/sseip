@@ -17,6 +17,7 @@
         <result column="user_id" property="userId"/>
         <result column="owner_user_id" property="ownerUserId"/>
         <result column="group_id" property="groupId"/>
+        <result column="if_report" property="ifReport"/>
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
         <id column="id" property="id"/>
@@ -31,6 +32,7 @@
         <result column="user_id" property="userId"/>
         <result column="owner_user_id" property="ownerUserId"/>
         <result column="group_id" property="groupId"/>
+        <result column="if_report" property="ifReport"/>
 
         <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
         <association property="patientCountry" column="patient_country_id" select="getCountry"/>
@@ -84,7 +86,8 @@
         valid,
         user_id,
         owner_user_id,
-        group_id
+        group_id,
+        if_report
         )
         VALUES
         (
@@ -118,7 +121,8 @@
         #{entity.valid},
         #{entity.userId},
         #{entity.userId},
-        #{entity.groupId}
+        #{entity.groupId},
+        #{entity.ifReport}
         );
     </insert>
     <insert id="addAll">
@@ -145,7 +149,8 @@
         valid,
         user_id,
         owner_user_id,
-        group_id
+        group_id,
+        if_report
         )
         VALUES
         <foreach collection="entities" item="entity" separator=",">
@@ -172,7 +177,8 @@
             #{entity.valid},
             #{entity.userId},
             #{entity.userId},
-            #{entity.groupId}
+            #{entity.groupId},
+            #{entity.ifReport}
             )
         </foreach>
     </insert>
@@ -375,6 +381,12 @@
             <when test="entity.groupId!=null">#{entity.groupId}</when>
             <otherwise>NULL</otherwise>
         </choose>
+        ,
+        if_report =
+        <choose>
+            <when test="entity.ifReport!=null">#{entity.ifReport}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
         WHERE id = #{entity.id};
     </update>
     <select id="get" parameterType="Long" resultMap="CustomerDto">
@@ -543,6 +555,6 @@
         <foreach collection="customerIds" item="customerId" separator="," open="(" close=")">#{customerId}</foreach>
     </update>
     <update id="updateDiscard">
-        update customer SET  discard=#{discard} where id=#{id}
+        update customer SET discard=#{discard} where id=#{id}
     </update>
 </mapper>

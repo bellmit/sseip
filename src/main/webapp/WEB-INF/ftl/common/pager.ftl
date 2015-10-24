@@ -18,7 +18,7 @@
                         </li>
                     </#if>
         -->
-            <#if page.maxPageNo gte 3><#list  (page.pageNo-10>2)?then(page.pageNo-10,2)..(page.pageNo+10 lt page.maxPageNo)?then(page.pageNo+10,page.maxPageNo-1) as i>
+            <#if page.maxPageNo gte 3><#list  (page.pageNo-3>2)?then(page.pageNo-3,2)..(page.pageNo+3 lt page.maxPageNo)?then(page.pageNo+3,page.maxPageNo-1) as i>
                 <li><#if page.pageNo=i><span class="green">${i?c}</span><#else>
                     <a href="${baseUrl+'/'+i?c}${('?'+query)!''}">
                         <#switch i >
