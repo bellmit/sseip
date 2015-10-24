@@ -340,6 +340,27 @@ window.onload = function() {
          </tr>
      </tbody>
    </table>
+   <div style=" width:310px; height:150px;border:solid 1px #CCC; margin-left:15px; padding:15px;">
+   <fieldset style="height: 100px; width:300px; float:left; color:#336666; border-color:#666;">
+<legend>
+<font size="2" color="#36424a" style="font-weight:bolder;">删除/转移</font>
+</legend>
+<input type="button" onclick="deleteXZ();" value="批量删除">
+<font size="2"> 共有50条资源</font>
+<br>
+<br>
+<font size="2">将资源转给：</font>
+<select id="admininfo_name" name="admininfo_name">
+<option value="请选择客服人员">请选择客服人员</option>
+<option value="admin"> admin </option>
+<option value="houziru"> houziru </option>
+<option value="白雪"> 白雪 </option>
+<option value="王小云"> 王小云 </option>
+<option value="吴丽霞"> 吴丽霞 </option>
+</select>
+<input type="button" onclick="ziyuanZY()" value="转移" name="zy">
+</fieldset>
+</div>
      </div>             
      </div>
     </div>   
