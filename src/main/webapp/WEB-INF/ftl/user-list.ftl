@@ -106,21 +106,31 @@
                                                     class="fa fa-edit"></span></a>
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                            <a class="btn btn-minier"
-                                               href="${context.contextPath}/user/remove/${user.id}" title="删除"><span
-                                                    class="fa fa-trash"></span></a>
+                                        <#--<a class="remove-control btn btn-minier"
+                                           href="${context.contextPath}/user/remove/${user.id}" title="删除"><span
+                                                class="fa fa-trash"></span></a>-->
+                                            <button form="form-remove-user-${user_index}"
+                                                    class="remove-control btn btn-minier" title="删除"><span
+                                                    class="fa fa-trash"></span></button>
                                         </#if></span>
+
+                                    <form id="form-remove-user-${user_index}"
+                                          action="${context.contextPath}/user/remove" method="post"><input type="hidden"
+                                                                                                           name="id"
+                                                                                                           value="${user.id}">
+                                    </form>
                                 </td>
                             </tr>
                             </#list>
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2 btn-group"><a href="${context.contextPath}/user/add"
-                                                                                 target="_self"
-                                                                                 style="color:#FFF;text-decoration:none;"
-                                                                                 title="增加员工"
-                                                                                 class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2 btn-group btn-corner"><a
+                                    href="${context.contextPath}/user/add"
+                                    target="_self"
+                                    style="color:#FFF;text-decoration:none;"
+                                    title="增加员工"
+                                    class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
                                 <span class="col-md-10">
@@ -142,9 +152,36 @@
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 
 <script>
-    $('.btn').tooltip();
+    $(function () {
+        $('.btn').tooltip();
+
+        $(".remove-control").click(function (e) {
+            e.preventDefault();
+            var button = this;
+            bootbox.confirm({
+                        message: "将要删除！",
+                        buttons: {
+                            confirm: {
+                                label: "好的",
+                                className: "btn-danger btn-sm"
+                            },
+                            cancel: {
+                                label: "不好",
+                                className: "btn-primary btn-sm"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $(button).prop('form').submit();
+                            }
+                        }
+                    }
+            );
+        });
+    });
 </script>
 </body>
 </html>

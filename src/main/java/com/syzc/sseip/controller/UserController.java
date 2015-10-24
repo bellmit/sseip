@@ -109,8 +109,31 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/remove/{userid:[\\d]+}")
+    /*@RequestMapping(value = "/remove/{userid:[\\d]+}")
     public String removeUser(@PathVariable("userid") Long userId, HttpServletRequest request, HttpSession session) {
+
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        *//*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }*//*
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN)) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
+        String referer = request.getHeader("Referer");
+        if (referer == null) {
+            referer = "/";
+        }
+        if (userService.remove(userId)) {
+//            model.addAttribute("success", "移除完成！");
+            return "redirect:" + referer;
+        } else {
+            throw HosException.create("删除用户操作没有执行成功", Level.WARN);
+        }
+    }*/
+    
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String removeUserPost(@RequestParam("id") Long userId, HttpServletRequest request, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER)) {

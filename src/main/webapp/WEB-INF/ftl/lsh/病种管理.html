@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>北京双友之春</title>
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/css.css" />
+<script type="text/javascript" src="js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/sdmenu.js"></script>
+<script type="text/javascript" src="js/laydate/laydate.js"></script>
+
+</head>
+
+<body>
+<div class="header">
+	 <div class="logo"><img  src="img/logo.png" /></div>    
+				<div class="header-right">
+                <i class="icon-off icon-white"></i> <a id="modal-973558" href="#modal-container-973558" role="button" data-toggle="modal">注销</a> 
+                <div id="modal-container-973558" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:300px; margin-left:-150px; top:30%">
+				<div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">
+						注销系统
+					</h3>
+				</div>
+				<div class="modal-body">
+					<p>
+						您确定要注销退出系统吗？
+					</p>
+				</div>
+				<div class="modal-footer">
+					 <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> <a class="btn btn-primary" style="line-height:20px;" href="登录.html" >确定退出</a>
+				</div>
+			</div>
+				</div>
+</div>
+<!-- 顶部 -->     
+            
+<div id="middle">
+     <div class="left">
+     
+     <script type="text/javascript">
+var myMenu;
+window.onload = function() {
+	myMenu = new SDMenu("my_menu");
+	myMenu.init();
+};
+</script>
+
+<div id="my_menu" class="sdmenu">
+	<div >
+		<span>信息管理</span>
+        <a href="发布客服.html">发布客服</a>
+		<a href="查询页面.html">查看资源</a>
+		<a href="分理处发货排行榜.html">新资源管理</a>
+		<a href="开票界面.html">客服转资源管理</a>
+		<a href="客户投诉.html">住院患者管理</a>
+		<a href="线路管理.html">出院患者管理</a>
+		<a href="#">下载文件</a>
+        <a href="#">上传文件</a>
+       
+	</div>
+	<div class="collapsed">
+		<span>资源管理</span>
+        <a href="#">资源统计</a>
+		<a href="#">即将过期资源</a>
+        <a href="#">已过期资源</a>
+        <a href="#">无效资源</a>
+	</div>
+	<div class="collapsed">
+		<span>用户管理</span>
+		 <a href="#">用户管理</a>
+		 <a href="#">添加用户</a>
+	</div>
+    
+ 	<div class="collapsed">
+		<span>平台管理</span>
+		<a href="部门管理.html">部门管理</a>
+		<a href="添加部门.html">添加部门</a>
+		<a href="国家管理.html">国家管理</a>
+        <a href="添加国家.html">添加国家</a>
+		<a href="网站管理.html">网站管理</a>
+		<a href="添加网站.html">添加网站</a>
+		<a href="病种管理.html">病种管理</a>
+        <a href="添加病种.html">添加病种</a>
+	</div>    
+</div>
+
+     </div>
+     <div class="Switch"></div>
+     <script type="text/javascript">
+	$(document).ready(function(e) {
+    $(".Switch").click(function(){
+	$(".left").toggle();
+	 
+		});
+});
+</script>
+
+     <div class="right_cont" style="float:left;">     
+   <div class="title_right"><strong>管理人员基本信息列表</strong></div>   
+   <table class="table table-bordered table-striped table-hover" >
+     <tbody>
+       <tr align="center">
+         <td nowrap="nowrap"><strong><a href="#">全</a>/<a href="#">反</a></strong></td>
+         <td nowrap="nowrap" style="width:100px;"><strong>编号</strong></td>
+         <td nowrap="nowrap" style="width:150px;"><strong>病种</strong></td>
+         <td nowrap="nowrap" style="width:250px;"><strong>备注</strong></td>
+         <td nowrap="nowrap" style="width:440px;"><strong>修改时间</strong></td>
+         <td nowrap="nowrap" style="width:200px;"><strong>基本操作</strong></td>
+         </tr>
+       <tr align="center">
+         <td nowrap="nowrap"><input type="checkbox" name="" /></td>
+         <td nowrap="nowrap">1 </td>
+         <td nowrap="nowrap"> </td>
+         <td  style=" width:100px;">石家庄</td>
+         <td nowrap="nowrap">59</td>
+         <td nowrap="nowrap"><a href="#">删除</a> <a href="#">编辑</a></td>
+         </tr>
+     </tbody>    
+   </table>
+     <div class="page">
+      <div class="page_left">
+      	<span>总记录数：2 每页显示：20条， 当前页：1/1 </span>
+	  </div>
+      <div class="page_right">
+      	<span class="STYLE22"><a href="#">上一页</a></span>
+        <span class="STYLE22"><a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a></span>
+        <span class="STYLE22"><a href="#">下一页</a></span>
+      </div>
+     </div>
+     </div>
+    
+<!-- 底部 -->
+ <script>
+!function(){
+laydate.skin('molv');
+laydate({elem: '#Calendar'});
+}();
+ 
+</script>
+
+
+
+ 
+</body>
+</html>

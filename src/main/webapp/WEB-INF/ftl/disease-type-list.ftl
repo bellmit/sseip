@@ -49,16 +49,19 @@
                                 <td class="center">
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
-                                        <form action="${context.contextPath}/disease-type/remove" method="post"
-                                              style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${diseaseType.id}">
                                             <a class="btn btn-minier"
                                                href="/disease-type/update/${diseaseType.id}" title="编辑病种"><span
                                                     class="fa fa-edit"></span></a>
-                                            <button class="btn btn-minier" title="删除病种"><span
+                                            <button form="from-remove-disease-type-${diseaseType_index}"
+                                                    class="remove-control btn btn-minier" title="删除病种"><span
                                                     class="fa fa-trash"></span></button>
-                                        </form>
                                         </span>
+
+                                        <form id="from-remove-disease-type-${diseaseType_index}"
+                                              action="${context.contextPath}/disease-type/remove" method="post"
+                                              style="display: inline;"><input type="hidden" name="id"
+                                                                              value="${diseaseType.id}">
+                                        </form>
                                     </#if>
                                 </td>
                             </tr>
@@ -67,7 +70,7 @@
                         </table>
                         <div class="page-header position-relative">
                             <div class="row"><span
-                                    class="col-md-2 btn-group"><#if ['ADMIN']?seq_contains(loginUser.role)><a
+                                    class="col-md-2 btn-group btn-corner"><#if ['ADMIN']?seq_contains(loginUser.role)><a
                                     href="${context.contextPath}/disease-type/add" target="_self"
                                     style="color:#FFF;text-decoration:none;" title="建造新的贸易国家与地区条目"
                                     class="btn btn-info fa fa-plus"></a></#if>
@@ -91,9 +94,36 @@
 <#include "/common/common_js.ftl">
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 
 <script>
-    $('.btn').tooltip();
+    $(function () {
+        $('.btn').tooltip();
+
+        $(".remove-control").click(function (e) {
+            e.preventDefault();
+            var button = this;
+            bootbox.confirm({
+                        message: "将要删除！",
+                        buttons: {
+                            confirm: {
+                                label: "好的",
+                                className: "btn-danger btn-sm"
+                            },
+                            cancel: {
+                                label: "不好",
+                                className: "btn-primary btn-sm"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $(button).prop('form').submit();
+                            }
+                        }
+                    }
+            );
+        });
+    });
 </script>
 </body>
 </html>

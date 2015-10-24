@@ -13,7 +13,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">国家管理</li>
+            <li class="active">国家条目管理</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -59,17 +59,22 @@
                                 <td class="text-right">${country.updated?string("yyyy-MM-dd HH:mm:ss")}</td>
                                 <td class="center">
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
-                                        <form action="${context.contextPath}/country/remove" method="post"
-                                              style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${country.id}">
-                                            <span class="btn-group">
+                                        <span class="btn-group">
                                             <a class="btn btn-minier" href="/country/update/${country.id}"
                                                title="编辑国家条目"><span
                                                     class="fa fa-edit"></span></a>
-                                            <button class="btn btn-minier" title="删除国家条目"><span
-                                                    class="fa fa-trash"></span></button>
+                                            <button form="from-remove-country-${country_index}"
+                                                    class="remove-control btn btn-minier"
+                                                    title="删除国家条目"> <span
+                                                    class="fa fa-trash"> </span></button>
                                                 </span>
-                                        </form></#if>
+
+                                        <form id="from-remove-country-${country_index}"
+                                              action="${context.contextPath}/country/remove" method="post"
+                                              style="display: inline;"><input type="hidden" name="id"
+                                                                              value="${country.id}">
+                                        </form>
+                                    </#if>
                                 </td>
                             </tr>
                             </#list>
@@ -77,7 +82,7 @@
                         </table>
                         <div class="page-header position-relative">
                             <div class="row"><span
-                                    class="col-md-2 btn-group"><#if ['ADMIN']?seq_contains(loginUser.role)><a
+                                    class="col-md-2 btn-group btn-corner"><#if ['ADMIN']?seq_contains(loginUser.role)><a
                                     href="${context.contextPath}/country/add" target="_self"
                                     style="color:#FFF;text-decoration:none;" title="建立新的国家与地区条目"
                                     class="btn btn-info fa fa-plus"></a></#if>
@@ -101,9 +106,36 @@
 <#include "/common/common_js.ftl">
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 
 <script>
-    $('.btn').tooltip();
+    $(function () {
+        $('.btn').tooltip();
+
+        $(".remove-control").click(function (e) {
+            e.preventDefault();
+            var button = this;
+            bootbox.confirm({
+                        message: "将要删除！",
+                        buttons: {
+                            confirm: {
+                                label: "好的",
+                                className: "btn-danger btn-sm"
+                            },
+                            cancel: {
+                                label: "不好",
+                                className: "btn-primary btn-sm"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $(button).prop('form').submit();
+                            }
+                        }
+                    }
+            );
+        });
+    });
 </script>
 </body>
 </html>

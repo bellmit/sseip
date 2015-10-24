@@ -104,7 +104,7 @@ public class GroupController {
             referer = "/group/list/1";
         }
         if (groupService.remove(groupid)) {
-            model.addAttribute("removed", "");
+//            model.addAttribute("removed", "");
             return "redirect:" + referer;
         } else {
             model.addAttribute("removefailed", "");// bootstrap - danger colored css class

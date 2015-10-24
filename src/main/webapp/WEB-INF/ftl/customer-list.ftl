@@ -109,11 +109,12 @@
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2"><a href="${context.contextPath}/customer/add"
-                                                                       target="_self"
-                                                                       style="color:#FFF;text-decoration:none;"
-                                                                       title="填写顾客资源"
-                                                                       class="btn btn-info fa fa-plus"></a> <a
+                            <div class="row"><span class="col-md-2 btn-group btn-corner"><a
+                                    href="${context.contextPath}/customer/add"
+                                    target="_self"
+                                    style="color:#FFF;text-decoration:none;"
+                                    title="填写顾客资源"
+                                    class="btn btn-info fa fa-plus"></a> <a
                                     href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
                                     title="刷新列表"></a></span>
                                 <span class="col-md-10">

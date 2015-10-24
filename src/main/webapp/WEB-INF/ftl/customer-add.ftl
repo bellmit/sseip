@@ -95,125 +95,77 @@
                         </div>
                     </div>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right">患者国家 </label>
+                    <div class="row">
+                        <div class="col-xs-7">
+                        <#--折叠栏开始-->
+                            <div class="accordion-style1 panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle collapsed" data-toggle="collapse"
+                                               data-parent="#accordion"
+                                               href="#collapseOne">
+                            <span data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"
+                                  class="bigger-110 ace-icon fa fa-angle-right"></span>点击展开填写咨询人信息</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        <#--折叠栏内容开始-->
 
-                        <div class="col-sm-2">
-                            <select name="patientCountryId" class="col-xs-12" size="6">
-                                <option
-                                <#if !(form.patientCountryId)?? >selected=""</#if>
-                                value="">未知
-                                </option>
-                            <#list countries as country>
-                                <option
-                                    <#if (form.patientCountryId)?? && form.patientCountryId=country.id>selected=""</#if>
-                                    value="${country.id}">${country.name}</option>
-                            </#list>
-                            </select>
-                        </div>
-                    </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label no-padding-right">咨询人姓名 </label>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right">疾病类型 </label>
+                                                <div class="col-xs-10">
+                                                    <input name="liaisonName" type="text" size="30" class="col-xs-12"
+                                                           placeholder="咨询人姓名" value="${(form.liaisonName)!''}"/>
+                                                </div>
+                                            </div>
 
-                        <div class="col-sm-6">
-                            <select name="diseaseTypeId" class="col-xs-12" size="5">
-                            <#list diseaseTypes as diseaseType>
-                                <option
-                                    <#if (form.diseaseTypeId)?? && form.diseaseTypeId=diseaseType.id>selected=""</#if>
-                                    value="${diseaseType.id}">${diseaseType.name}</option>
-                            </#list>
-                            </select>
-                        </div>
-                    </div>
+                                            <div class="space-4"></div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label no-padding-right">咨询人地址 </label>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label no-padding-right">症状 </label>
+                                                <div class="col-xs-10">
+                                                    <input name="liaisonAddress" type="text" size="30" class="col-xs-12"
+                                                           placeholder="咨询人地址" value="${(form.liaisonAddress)!''}"/>
+                                                </div>
+                                            </div>
 
-                        <div class="col-xs-6">
-                            <textarea name="symptom" class="col-xs-12" style="resize: vertical;"
-                                      placeholder="症状" id="textarea-symptom">${(form.symptom?xhtml)!''}</textarea>
-                        </div>
-                    </div>
+                                            <div class="space-4"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">咨询人国家 </label>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label no-padding-right">咨询人姓名 </label>
+                                                <div class="col-sm-10">
+                                                    <select name="liaisonCountryId" class="col-xs-12" size="6">
+                                                        <option
+                                                        <#if !(form.liaisonCountryId)?? >selected=""</#if>
+                                                        value="">未知
+                                                        </option>
+                                                    <#list countries as country>
+                                                        <option
+                                                            <#if (form.liaisonCountryId)?? && form.liaisonCountryId=country.id>selected=""</#if>
+                                                            value="${country.id}">${country.name}</option>
+                                                    </#list>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                        <div class="col-xs-6">
-                            <input name="liaisonName" type="text" size="30" class="col-xs-12"
-                                   placeholder="咨询人姓名" value="${(form.liaisonName)!''}"/>
-                        </div>
-                    </div>
+                                            <div class="space-4"></div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label no-padding-right">咨患关系 </label>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label no-padding-right">咨询人地址 </label>
-
-                        <div class="col-xs-6">
-                            <input name="liaisonAddress" type="text" size="30" class="col-xs-12"
-                                   placeholder="咨询人地址" value="${(form.liaisonAddress)!''}"/>
-                        </div>
-                    </div>
-
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right">咨询人国家 </label>
-
-                        <div class="col-sm-6">
-                            <select name="liaisonCountryId" class="col-xs-12" size="6">
-                                <option
-                                <#if !(form.liaisonCountryId)?? >selected=""</#if>
-                                value="">未知
-                                </option>
-                            <#list countries as country>
-                                <option
-                                    <#if (form.liaisonCountryId)?? && form.liaisonCountryId=country.id>selected=""</#if>
-                                    value="${country.id}">${country.name}</option>
-                            </#list>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label no-padding-right">咨患关系 </label>
-
-                        <div class="col-xs-6">
-                            <input name="relationship" type="text" size="30" class="col-xs-12"
-                                   placeholder="咨患关系" value="${(form.relationship)!''}"/>
-                        </div>
-                    </div>
-
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right">住院情况 </label>
-
-                        <div class="col-sm-6">
-                            <select name="hospitalization" class="col-xs-12" size="5">
-                            <#list hospitalizationTypes as hospitalizationType>
-                                <option
-                                    <#if (form.hospitalization)?? && form.hospitalization.code=hospitalizationType.code>selected=""</#if>
-                                    value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
-                            </#list>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right">紧急 </label>
-
-                        <div class="col-sm-2">
-                            <select name="emergency" class="col-xs-12">
-                                <option <#if (form.emergency)?? && form.emergency>selected=""</#if> value="1">紧急
-                                </option>
-                                <option <#if !((form.emergency)??) || !(form.emergency)>selected=""</#if> value="0">不紧急
-                                </option>
-                            </select>
+                                                <div class="col-xs-10">
+                                                    <input name="relationship" type="text" size="30" class="col-xs-12"
+                                                           placeholder="咨患关系" value="${(form.relationship)!''}"/>
+                                                </div>
+                                            </div>
+                                        <#--折叠栏内容结束-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <#--折叠栏结束-->
                         </div>
                     </div>
 
@@ -239,6 +191,50 @@
 
                     <div class="space-4"></div>
                     <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right">症状 </label>
+
+                        <div class="col-xs-6">
+                            <textarea name="symptom" class="col-xs-12" style="resize: vertical;"
+                                      placeholder="症状" id="textarea-symptom">${(form.symptom?xhtml)!''}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label no-padding-right">疾病类型 </label>
+
+                        <div class="col-sm-6">
+                            <select name="diseaseTypeId" class="col-xs-12" size="5">
+                            <#list diseaseTypes as diseaseType>
+                                <option
+                                    <#if (form.diseaseTypeId)?? && form.diseaseTypeId=diseaseType.id>selected=""</#if>
+                                    value="${diseaseType.id}">${diseaseType.name}</option>
+                            </#list>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label no-padding-right">患者国家 </label>
+
+                        <div class="col-sm-6">
+                            <select name="patientCountryId" class="col-xs-12" size="6">
+                                <option
+                                <#if !(form.patientCountryId)?? >selected=""</#if>
+                                value="">未知
+                                </option>
+                            <#list countries as country>
+                                <option
+                                    <#if (form.patientCountryId)?? && form.patientCountryId=country.id>selected=""</#if>
+                                    value="${country.id}">${country.name}</option>
+                            </#list>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
                         <label class="col-sm-1 control-label no-padding-right">网站 </label>
 
                         <div class="col-sm-6">
@@ -247,6 +243,36 @@
                                 <option <#if (form.websiteId)?? && form.websiteId=website.id>selected=""</#if>
                                         value="${website.id}">${website.name}</option>
                             </#list>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label no-padding-right">住院情况 </label>
+
+                        <div class="col-sm-6">
+                            <select name="hospitalization" class="col-xs-12" size="3">
+                            <#list hospitalizationTypes as hospitalizationType>
+                                <option
+                                    <#if (form.hospitalization)?? && form.hospitalization.code=hospitalizationType.code>selected=""</#if>
+                                    value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
+                            </#list>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label no-padding-right">紧急 </label>
+
+                        <div class="col-sm-2">
+                            <select name="emergency" class="col-xs-12">
+                                <option <#if (form.emergency)?? && form.emergency>selected=""</#if> value="1">紧急
+                                </option>
+                                <option <#if !((form.emergency)??) || !(form.emergency)>selected=""</#if> value="0">
+                                    不紧急
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -271,7 +297,7 @@
 
                     <div class="space-4"></div>
                     <div class="form-group">
-                        <label class="col-xs-1 control-label no-padding-right">星级</label>
+                        <label class="col-xs-1 control-label no-padding-right">患者意向</label>
 
                         <div class="col-xs-6">
                             <input name="stars" id="form-stars" type="hidden" value="${(form.stars)!'0'}"/>
@@ -315,7 +341,7 @@
 
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-2 col-md-10">
-                            <span class="btn-group">
+                            <span class="btn-group btn-corner">
                             <button class="btn btn-info" type="submit">
                                 <span class="ace-icon fa fa-plus bigger-110"></span>提交
                             </button>

@@ -53,16 +53,21 @@
                                 <td class="center">
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
-                                        <form action="${context.contextPath}/website/remove" method="post"
-                                              style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${website.id}">
                                             <a class="btn btn-minier" href="/website/update/${website.id}"
                                                title="编辑网站条目"><span
                                                     class="fa fa-edit"></span></a>
-                                            <button class="btn btn-minier" title="删除网站条目"><span class="fa fa-trash"></span>
+                                            <button form="from-remove-website-${website_index}"
+                                                    class="remove-control btn btn-minier"
+                                                    title="删除网站条目"><span
+                                                    class="fa fa-trash"></span>
                                             </button>
-                                        </form>
                                         </span>
+
+                                        <form id="from-remove-website-${website_index}"
+                                              action="${context.contextPath}/website/remove" method="post"
+                                              style="display: inline;"><input type="hidden" name="id"
+                                                                              value="${website.id}">
+                                        </form>
                                     </#if>
                                 </td>
                             </tr>
@@ -71,7 +76,7 @@
                         </table>
                         <div class="page-header position-relative">
                             <div class="row"><span
-                                    class="col-md-2 btn-group"><#if ['ADMIN']?seq_contains(loginUser.role)><a
+                                    class="col-md-2 btn-group btn-corner"><#if ['ADMIN']?seq_contains(loginUser.role)><a
                                     href="${context.contextPath}/website/add" target="_self"
                                     style="color:#FFF;text-decoration:none;" title="添加入口网站"
                                     class="btn btn-info fa fa-plus"></a></#if>
@@ -95,9 +100,36 @@
 <#include "/common/common_js.ftl">
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 
 <script>
-    $('.btn').tooltip();
+    $(function () {
+        $('.btn').tooltip();
+
+        $(".remove-control").click(function (e) {
+            e.preventDefault();
+            var button = this;
+            bootbox.confirm({
+                        message: "将要删除！",
+                        buttons: {
+                            confirm: {
+                                label: "好的",
+                                className: "btn-danger btn-sm"
+                            },
+                            cancel: {
+                                label: "不好",
+                                className: "btn-primary btn-sm"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $(button).prop('form').submit();
+                            }
+                        }
+                    }
+            );
+        });
+    });
 </script>
 </body>
 </html>

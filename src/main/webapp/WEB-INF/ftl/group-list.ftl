@@ -61,7 +61,7 @@
                                                title="用户列表"><span class="fa fa-list"></span></a>
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                            <button type="submit" title="删除" class="btn btn-minier"
+                                            <button type="submit" title="删除" class="remove-control btn btn-minier"
                                                     form="from-remove-${group_index}"><span
                                                     class="fa fa-trash"></span></button>
                                             <form id="from-remove-${group_index}"
@@ -79,14 +79,15 @@
 
                         <div class="page-header position-relative">
                             <div class="row">
-                                <span class="col-md-2 btn-group"><a href="${context.contextPath}/group/add"
-                                                                    target="_self"
-                                                                    style="color:#FFF;text-decoration:none;"
-                                                                    title="添加部门"
-                                                                    class="btn btn-info fa fa-plus"></a> <a href=""
-                                                                                                            style="color:#FFF;text-decoration:none;"
-                                                                                                            class="btn btn-info fa fa-refresh"
-                                                                                                            title="刷新列表"></a></span>
+                                <span class="col-md-2 btn-group btn-corner"><a href="${context.contextPath}/group/add"
+                                                                               target="_self"
+                                                                               style="color:#FFF;text-decoration:none;"
+                                                                               title="添加部门"
+                                                                               class="btn btn-info fa fa-plus"></a> <a
+                                        href=""
+                                        style="color:#FFF;text-decoration:none;"
+                                        class="btn btn-info fa fa-refresh"
+                                        title="刷新列表"></a></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0>
                                     <#import
@@ -111,9 +112,36 @@
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 
 <script>
-    $('.btn').tooltip();
+    $(function () {
+        $('.btn').tooltip();
+
+        $(".remove-control").click(function (e) {
+            e.preventDefault();
+            var button = this;
+            bootbox.confirm({
+                        message: "将要删除！",
+                        buttons: {
+                            confirm: {
+                                label: "好的",
+                                className: "btn-danger btn-sm"
+                            },
+                            cancel: {
+                                label: "不好",
+                                className: "btn-primary btn-sm"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $(button).prop('form').submit();
+                            }
+                        }
+                    }
+            );
+        });
+    });
 </script>
 </body>
 </html>
