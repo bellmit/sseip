@@ -227,7 +227,7 @@
         target="_self"
         style="color:#FFF;text-decoration:none;"
         title="填写资源"
-        class="btn btn-info btn-sm"><span class="fa fa-plus"></span></a><a
+        class="btn btn-info btn-sm"><span class="fa fa-pencil"></span></a><a
         href="" style="color:#FFF;text-decoration:none;" class="btn btn-info btn-sm"
         title="刷新列表"><span class="fa fa-refresh"></span></a></span></span>
                                 <span class="col-md-10">
@@ -360,9 +360,9 @@
     <div class="row">
 <span class="col-md-1">
 <span class="btn-group btn-corner"><a href="${context.contextPath}/customer/add" target="_self" title="填写资源"
-                                      class="btn btn-info btn-sm"><span class="fa fa-plus"></span></a><a href=""
-                                                                                                         class="btn btn-info btn-sm"
-                                                                                                         title="刷新列表"><span
+                                      class="btn btn-info btn-sm"><span class="fa fa-pencil"></span></a><a href=""
+                                                                                                           class="btn btn-info btn-sm"
+                                                                                                           title="刷新列表"><span
         class="fa fa-refresh"></span></a></span></span>
         <select name="new-owner-user-id" class="filters col-md-2 text-right pink2" form="pass-on-form" title="转交给用户">
             <option
