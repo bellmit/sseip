@@ -15,7 +15,7 @@
         }
     </style>
 </head>
-<body class="no-skin">
+<body style="background-color: white">
 <div class="main-content-inner">
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
@@ -53,7 +53,7 @@
                                     <div class="row">
 
                                         <div class="col-sm-12"><input class="filters col-md-4" id="date-range"
-                                                                      placeholder="选择日期时间范围"
+                                                                      placeholder="日期时间范围"
                                                                       title="选择日期时间范围"
                                                                       value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
                                             <input form="filter-form" name="dateRange" type="hidden"
@@ -74,24 +74,24 @@
                                         <div class="col-sm-12">
                                             <input class="filters col-md-2 text-right green" name="name" type="text"
                                                    form="filter-form"
-                                                   title="筛选患者咨询人姓名"
-                                                   placeholder="筛选患者咨询人姓名"/>
+                                                   title="筛选或患者咨询人的姓名"
+                                                   placeholder="患者或咨询人的姓名"/>
                                             <input class="filters col-md-2 text-right green" name="email"
-                                                   type="email" form="filter-form" title="电邮" placeholder="电邮"/>
+                                                   type="email" form="filter-form" title="电子邮件地址" placeholder="电子邮件地址"/>
                                             <input class="filters col-md-2 text-right green" name="tel" type="tel"
                                                    form="filter-form"
                                                    title="筛选电话"
-                                                   placeholder="筛选电话"/>
+                                                   placeholder="电话"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <select class="filters col-md-2 text-right pink" name="countryId"
                                                     form="filter-form"
-                                                    title="筛选患者或咨询人国家">
+                                                    title="筛选患者或咨询人的国家">
                                                 <option
                                                 <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
-                                                value="">筛选患者或咨询人国家
+                                                value="">患者或咨询人的国家
                                                 </option>
                                             <#list countries as country>
                                                 <option
@@ -103,7 +103,7 @@
                                                     form="filter-form" title="筛选疾病类型">
                                                 <option
                                                 <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
-                                                value="">筛选疾病类型
+                                                value="">疾病类型
                                                 </option>
                                             <#list diseaseTypes as diseaseType>
                                                 <option
@@ -132,7 +132,7 @@
                                                     form="filter-form" title="筛选是否有效">
                                                 <option
                                                 <#if !((RequestParameters.faraway)??) || RequestParameters.faraway=''>selected</#if>
-                                                value="">筛选是否有效
+                                                value="">是否有效
                                                 </option>
                                                 <option
                                                 <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='1'>selected</#if>
@@ -147,7 +147,7 @@
                                                     form="filter-form" title="筛选住院类型">
                                                 <option
                                                 <#if !(RequestParameters.hospitalization)??||RequestParameters.hospitalization=''>selected</#if>
-                                                value="">筛选住院类型
+                                                value="">住院类型
                                                 </option>
                                             <#list hospitalizationTypes as hospitalizationType>
                                                 <option
@@ -159,7 +159,7 @@
                                                     form="filter-form" title="筛选是否提交删除">
                                                 <option
                                                 <#if !((RequestParameters.discard)??) || RequestParameters.discard=''>selected</#if>
-                                                value="">筛选是否提交删除
+                                                value="">是否提交删除
                                                 </option>
                                                 <option
                                                 <#if (RequestParameters.discard)?? && RequestParameters.discard=='1'>selected</#if>
@@ -174,17 +174,33 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
+                                            <select name="ifReport" class="filters col-md-2 text-right brown"
+                                                    form="filter-form"
+                                                    title="筛选是否报备">
+                                                <option
+                                                <#if !((RequestParameters.ifReport)??) || RequestParameters.ifReport=''>selected</#if>
+                                                value="">是否报备
+                                                </option>
+                                                <option
+                                                <#if (RequestParameters.ifReport)?? && RequestParameters.ifReport=='1'>selected</#if>
+                                                value="1">报备
+                                                </option>
+                                                <option
+                                                <#if (RequestParameters.ifReport)?? && RequestParameters.ifReport=='0'>selected</#if>
+                                                value="0">不报备
+                                                </option>
+                                            </select>
                                             <select class="filters col-md-2 text-right pink2"
                                                     name="userId" form="filter-form"
                                                     title="筛选所属人">
                                                 <option
                                                 <#if !(RequestParameters.userId)?? || RequestParameters.userId=''>selected</#if>
-                                                value="">筛选所属人
+                                                value="">所属人
                                                 </option>
                                             <#list users as user>
                                                 <option
                                                     <#if (RequestParameters.userId)?? && RequestParameters.userId==user.id?string>selected</#if>
-                                                    value="${user.id?c}">${(user.group.name + ' - ')!''}${user.realName}</option>
+                                                    value="${user.id?c}">${(user.group.name + ' - ')!''}${(user.realName)!'佚名'}</option>
                                             </#list>
                                             </select>
                                         </div>
@@ -289,16 +305,16 @@
                 <span class="label">不详</span></#if></td>
             <td class="text-right"><#if customer.memo??><#if customer.memo?length gt 6>${customer.memo?substring(0,5)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label">不详</span></#if></td>
-            <td class="text-right"><#if (customer.ifReport)??><#if customer.ifReport?length gt 8>${customer.ifReport?substring(0,5)+'...'}<#else>${customer.ifReport}</#if><#else>
+            <td class="text-right"><#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}<#else>
                 <span class="label">不详</span></#if></td>
         <#--<td class="text-right"
             title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
             <span class="label">不详</span></#if></td>-->
             <td class="text-right"
-                title="${customer.ownerUser.realName!''}"><#if customer.ownerUser??><#if customer.ownerUser.realName?length gt 8>${customer.ownerUser.realName?substring(0,5)+'...'}<#else>${customer.ownerUser.realName}</#if><#else>
+                title="${(customer.ownerUser.realName)!''}"><#if (customer.ownerUser.realName)??><#if customer.ownerUser.realName?length gt 8>${customer.ownerUser.realName?substring(0,5)+'...'}<#else>${customer.ownerUser.realName}</#if><#else>
                 <span class="label">不详</span></#if></td>
             <td class="text-right"
-                title="${customer.user.realName!''}"><#if (customer.user.realName)??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
+                title="${(customer.user.realName)!''}"><#if (customer.user.realName)??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
                 <span class="label">不详</span></#if></td>
             <td class="text-right"
                 <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('M.dd')}<#else>

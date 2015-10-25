@@ -9,7 +9,6 @@ import com.syzc.sseip.util.LocalAcUtil;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class DummyCustomer {
@@ -23,7 +22,7 @@ public class DummyCustomer {
         System.out.println(new Date());
         final int count = 30000;
         ArrayList<Customer> list = new ArrayList<>(count + 7);
-        int size = 1000000;
+        int size = 10000;
 //        int size = 60;
         dates = RandomDate.genSortedDates(size);
         for (int i = 0; i < size; i++) {
@@ -76,10 +75,6 @@ public class DummyCustomer {
         Sex sex = Sex.values()[r.nextInt(Sex.values().length)];
         Short age = (short) (r.nextInt(73));
 
-        Calendar tm, tmx;
-        tm = Calendar.getInstance();
-        tmx = Calendar.getInstance();
-        tm.set(2010, 0, 1);
 
         c = new Customer();
         c.setLiaisonCountryId(liaisonCountryId);
@@ -106,8 +101,8 @@ public class DummyCustomer {
         c.setSex(sex);
         c.setAge(age);
 
-//        c.setAdded(RandomDate.gen());
         c.setAdded(dates[index]);
+        c.setIfReport(r.nextBoolean());
 
 /*
         System.out.println(liaisonCountryId);

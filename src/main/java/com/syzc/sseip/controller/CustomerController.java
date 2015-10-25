@@ -8,7 +8,6 @@ import com.syzc.sseip.entity.UserDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.entity.enumtype.Sex;
-import com.syzc.sseip.entity.enumtype.pasture.AccessPointType;
 import com.syzc.sseip.service.*;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
@@ -103,7 +102,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/filter/{page:\\d+}")
-    public String filter(
+    public String filterAll(
             @RequestParam(value = "dateRange", required = false) Long[] dateRange,
             @RequestParam(required = false) Long websiteId,
             @RequestParam(required = false) String tel,
@@ -116,6 +115,7 @@ public class CustomerController {
             @RequestParam(required = false) HospitalizationType hospitalization,
             @RequestParam(required = false) Byte stars,
             @RequestParam(required = false) Boolean discard,
+            @RequestParam(required = false) Boolean ifReport,
             @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
         Date till = null;
@@ -155,7 +155,7 @@ public class CustomerController {
 
         //admin || manager
         page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
-                valid, hospitalization, stars, discard, pageNo, pageSize);
+                valid, hospitalization, stars, discard, ifReport, pageNo, pageSize);
 //            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
 //                    groupId, userId, pageNo, pageSize);
 
@@ -184,8 +184,6 @@ public class CustomerController {
             model.addAttribute("dateRange", new Date[]{since, till});
         }
 
-        model.addAttribute("accessPointTypes", AccessPointType.values());
-
         model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
         model.addAttribute("sexTypes", Sex.values());
         model.addAttribute("websites", websiteService.listAll());
@@ -210,6 +208,7 @@ public class CustomerController {
             @RequestParam(required = false) HospitalizationType hospitalization,
             @RequestParam(required = false) Byte stars,
             @RequestParam(required = false) Boolean discard,
+            @RequestParam(required = false) Boolean ifReport,
             @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
         Date till = null;
@@ -231,7 +230,7 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
         page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email,
-                diseaseTypeId, valid, hospitalization, stars, discard, pageNo, pageSize);
+                diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, pageSize);
 
         List<User> users;
 /*

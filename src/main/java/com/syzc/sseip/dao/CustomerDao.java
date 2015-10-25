@@ -31,6 +31,7 @@ public interface CustomerDao extends BaseDao<Customer> {
                                 @Param("hospitalization") HospitalizationType hospitalization,
                                 @Param("stars") Byte stars,
                                 @Param("discard") Boolean discard,
+                                @Param("ifReport") Boolean ifReport,
                                 @Param("offset") Long offset,
                                 @Param("size") Byte size
     );
@@ -47,7 +48,8 @@ public interface CustomerDao extends BaseDao<Customer> {
                        @Param("valid") Boolean valid,
                        @Param("hospitalization") HospitalizationType hospitalization,
                        @Param("stars") Byte stars,
-                       @Param("discard") Boolean discard
+                       @Param("discard") Boolean discard,
+                       @Param("ifReport") Boolean ifReport
     );
 
     /*

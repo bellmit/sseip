@@ -25,23 +25,23 @@
 <script src="${context.contextPath}/resources/ace/assets/js/excanvas.js"></script>
 <![endif]-->
 <script src="${context.contextPath}/resources/ace/assets/js/jquery-ui.custom.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.ui.touch-punch.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.easypiechart.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.sparkline.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.ui.touch-punch.js"></script>-->
+<#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.easypiechart.js"></script>-->
+<#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.sparkline.js"></script>-->
 
 <!-- ace scripts -->
-<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.scroller.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.scroller.js"></script>-->
 <script src="${context.contextPath}/resources/ace/assets/js/ace/elements.colorpicker.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/elements.fileinput.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/elements.typeahead.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/elements.wysiwyg.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/elements.spinner.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.treeview.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.wizard.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.aside.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.treeview.js"></script>-->
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.wizard.js"></script>-->
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.aside.js"></script>-->
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.ajax-content.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/ace.touch-drag.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/ace.touch-drag.js"></script>-->
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.sidebar.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.sidebar-scroll-1.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.submenu-hover.js"></script>
@@ -50,7 +50,7 @@
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.settings-rtl.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.settings-skin.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/ace/ace.widget-on-reload.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/ace.searchbox-autocomplete.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/ace.searchbox-autocomplete.js"></script>-->
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -141,6 +141,7 @@
 
         var sales_charts = $('#sales-charts').css({'width': '100%', 'height': '220px'});
 
+/*
         $('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
         function tooltip_placement(context, source) {
             var $source = $(source);
@@ -159,6 +160,7 @@
         $('.dialogs,.comments').ace_scroll({
             size: 300
         });
+*/
 
 
         //Android's default browser somehow is confused when tapping on label which will lead to dragging the task
@@ -206,13 +208,13 @@
 </script>
 
 <!-- the following scripts are used in demo only for onpage help and you don't need them -->
-<link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/ace.onpage-help.css"/>
+<#--<link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/ace.onpage-help.css"/>-->
 
 <#--<link rel="stylesheet" href="${context.contextPath}/resources/ace/docs/assets/js/themes/sunburst.css" />-->
 
 <script type="text/javascript"> ace.vars['base'] = '${context.contextPath}/resources/ace'; </script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.onpage-help.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/ace/ace.onpage-help.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/elements.onpage-help.js"></script>-->
+<#--<script src="${context.contextPath}/resources/ace/assets/js/ace/ace.onpage-help.js"></script>-->
 
 <#--
 <script src="${context.contextPath}/resources/ace/docs/assets/js/rainbow.js"></script>

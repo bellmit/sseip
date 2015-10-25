@@ -61,13 +61,6 @@
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
                             </button></span></div>
                     </div>
-                    <div class="col-md-3">
-                        <label class="col-xs-6 control-label no-padding-right">提交者: <#if (loginUser.realName)??>${loginUser.realName}<#else>
-                            <span class="label">不知道</span></#if></label>
-
-                        <label class="col-sm-6 control-label no-padding-right">部门: <#if (loginUser.group.name)??>${loginUser.group.name}<#else>
-                            <span class="label">没有部门</span></#if></label>
-                    </div>
                 </div>
 
                 <div class="row">
@@ -293,7 +286,7 @@
                                     <label class="col-sm-2 control-label no-padding-right">疾病类型</label>
 
                                     <div class="col-sm-10">
-                                        <select name="diseaseTypeId" class="col-xs-12" size="5">
+                                        <select name="diseaseTypeId" class="col-xs-12" size="6">
                                         <#list diseaseTypes as diseaseType>
                                             <option
                                                 <#if (form.diseaseTypeId)?? && form.diseaseTypeId=diseaseType.id>selected=""</#if>
@@ -308,12 +301,28 @@
                                     <label class="col-sm-2 control-label no-padding-right" title="住院情况">住院</label>
 
                                     <div class="col-sm-10">
-                                        <select name="hospitalization" class="col-xs-12" size="5">
+                                        <select name="hospitalization" class="col-xs-12" size="3">
                                         <#list hospitalizationTypes as hospitalizationType>
                                             <option
                                                 <#if (form.hospitalization)?? && form.hospitalization.code=hospitalizationType.code>selected=""</#if>
                                                 value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
                                         </#list>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" title="是否报备">报备</label>
+
+                                    <div class="col-sm-10">
+                                        <select name="ifReport" class="col-xs-12">
+                                            <option
+                                            <#if !((customer.ifReport)??) || !(customer.ifReport)>selected=""</#if>
+                                            value="0">不报备
+                                            </option>
+                                            <option
+                                            <#if (customer.ifReport)?? && customer.ifReport>selected=""</#if>
+                                            value="1">报备
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -327,17 +336,14 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                         <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
-                            <label class="col-xs-1">症状</label>
-
                             <div class="col-xs-12">
                             <textarea name="symptom" class="col-xs-12" style="resize: vertical;"
-                                      placeholder="症状" id="textarea-symptom">${(form.symptom?xhtml)!''}</textarea>
+                                      placeholder="症状" id="textarea-symptom"
+                                      title="症状">${(form.symptom?xhtml)!''}</textarea>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-xs-1">备忘</label>
-
+                        <div class="form-group" title="备忘">
                             <div class="col-xs-12">
                                 <input name="memo" id="customer-memo" type="hidden" value="${(form.memo?xhtml)!''}"/>
 

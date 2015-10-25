@@ -20,9 +20,6 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-home home-icon"></span><a
-                    href="${context.contextPath}/customer/filter-own/1">顾客资源一览</a>
-            </li>
             <li class="active">提交完成</li>
         </ul>
         <!-- /.breadcrumb -->

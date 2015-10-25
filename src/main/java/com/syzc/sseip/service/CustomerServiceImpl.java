@@ -56,12 +56,12 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     @Override
     public Page<Customer> listByFilter(Date since, Date till, Long websiteId, String tel, String name, Long countryId,
                                        Long userId, String email, Long diseaseTypeId, Boolean valid,
-                                       HospitalizationType hospitalization, Byte stars, Boolean discard, Long pageNo, Byte size) {
+                                       HospitalizationType hospitalization, Byte stars, Boolean discard, Boolean ifReport, Long pageNo, Byte size) {
         Long total = customerDao.countByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
-                valid, hospitalization, stars, discard);
+                valid, hospitalization, stars, discard, ifReport);
         Page<Customer> page = PageUtil.make(pageNo, size, total);
         page.setList(customerDao.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
-                valid, hospitalization, stars, discard, page.getRowOffset(), page.getPageSize()));
+                valid, hospitalization, stars, discard, ifReport, page.getRowOffset(), page.getPageSize()));
         return page;
     }
 
@@ -94,6 +94,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
 //        System.out.println(JSON.toJSONString(s.get(3L), true));
 
         System.out.println(JSON.toJSONString(s.listByFilter(null, null, null, null, null, null, null, null, null,
-                null, null, null, null, 0L, (byte) 10), true));
+                null, null, null, null, null, 0L, (byte) 10), true));
     }
 }

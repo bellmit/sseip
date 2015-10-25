@@ -14,7 +14,7 @@ public class CustomerServiceImplTest {
         CustomerService s = (CustomerService) ac.getBean("customerServiceImpl");
 
         System.out.println(JSON.toJSONString(s.listByFilter(null, null, null, null, null, null, null, null, null,
-                null, null, null, null, 1L, (byte) 100), true));
+                null, null, null, null, null, 1L, (byte) 100), true));
 //        System.out.println(JSON.toJSONString(s.listByFilter(null, null, AccessPointType.HOT_LINE, null, null, null, null, null, null, null, 1L, (byte) 100), true));
 
         Customer c;

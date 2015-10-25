@@ -110,7 +110,7 @@
         #{entity.memo},
         #{entity.contactRecoreds},
         <choose>
-            <when test="stars !=null and stars !=0">
+            <when test="entity.stars !=null and entity.stars !=0">
                 #{entity.stars}
             </when>
             <otherwise>
@@ -207,7 +207,8 @@
         user_id,
         owner_user_id,
         group_id,
-        added
+        added,
+        if_report
         )
         VALUES
         <foreach collection="entities" item="entity" separator=",">
@@ -235,7 +236,8 @@
             #{entity.userId},
             #{entity.userId},
             #{entity.groupId},
-            #{entity.added}
+            #{entity.added},
+            #{entity.ifReport}
             )
         </foreach>
     </insert>
@@ -370,18 +372,22 @@
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        user_id =
-        <choose>
-            <when test="entity.userId!=null">#{entity.userId}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
-        group_id =
-        <choose>
-            <when test="entity.groupId!=null">#{entity.groupId}</when>
-            <otherwise>NULL</otherwise>
-        </choose>
-        ,
+        <!--
+                user_id =
+                <choose>
+                    <when test="entity.userId!=null">#{entity.userId}</when>
+                    <otherwise>NULL</otherwise>
+                </choose>
+                ,
+        -->
+        <!--
+                group_id =
+                <choose>
+                    <when test="entity.groupId!=null">#{entity.groupId}</when>
+                    <otherwise>NULL</otherwise>
+                </choose>
+                ,
+        -->
         if_report =
         <choose>
             <when test="entity.ifReport!=null">#{entity.ifReport}</when>
@@ -443,6 +449,9 @@
             <if test="discard !=null">
                 and discard=#{discard}
             </if>
+            <if test="ifReport !=null">
+                and if_report=#{ifReport}
+            </if>
             <if test="since !=null">
                 and added&gt;=#{since}
             </if>
@@ -491,6 +500,9 @@
             </if>
             <if test="discard !=null">
                 and discard=#{discard}
+            </if>
+            <if test="ifReport !=null">
+                and if_report=#{ifReport}
             </if>
             <if test="since !=null">
                 and added&gt;=#{since}
