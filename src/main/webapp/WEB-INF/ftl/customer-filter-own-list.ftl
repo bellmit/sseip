@@ -323,10 +323,10 @@
                 <span class="btn-group">
                                             <a class="btn btn-minier"
                                                href="${context.contextPath}/customer/get/${customer.id?c}"
-                                               title="查看"><span class="fa fa-heart-o"></span></a>
+                                               title="查看"><span class="fa fa-newspaper-o"></span></a>
                                         <a class="btn btn-minier" href="/customer/update/${customer.id?c}"
                                            title="编辑"><span
-                                                class="fa fa-stethoscope"></span></a>
+                                                class="fa fa-paint-brush"></span></a>
 
                 <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
                     <form action="${context.contextPath}/customer/remove" method="post"

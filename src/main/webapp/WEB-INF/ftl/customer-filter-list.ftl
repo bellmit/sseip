@@ -332,10 +332,10 @@
                 ||loginUser.role='MANAGER')>
                 <span class="btn-group">
                     <a href="${context.contextPath}/customer/get/${customer.id?c}"
-                       class="btn btn-minier" title="查看"><span class="fa fa-heart-o"></span></a>
+                       class="btn btn-minier" title="查看"><span class="fa fa-newspaper-o"></span></a>
                                         <a href="/customer/update/${customer.id?c}"
                                            class="btn btn-minier" title="编辑"><span
-                                                class="fa fa-stethoscope"></span></a>
+                                                class="fa fa-paint-brush"></span></a>
 
                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                         <button form="from-remove-customer-${customer_index}"

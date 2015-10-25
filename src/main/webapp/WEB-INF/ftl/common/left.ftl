@@ -12,7 +12,7 @@
 
         <li class="">
             <a href="javascript:;" class="dropdown-toggle">
-                <span class="menu-icon fa glyphicon-user fa-users"></span>
+                <span class="menu-icon fa glyphicon-user fa-user-md"></span>
                 <span class="menu-text">用户管理</span>
                 <span class="arrow fa fa-angle-down"></span>
             </a>
@@ -74,7 +74,7 @@
         </li>
         <li class="">
             <a href="#" class="dropdown-toggle">
-                <span class="menu-icon fa fa-cogs"></span>
+                <span class="menu-icon fa fa-gear"></span>
                 <span class="menu-text">系统设置 </span>
 
                 <span class="arrow fa fa-angle-down"></span>
