@@ -4,7 +4,7 @@
         <li class="active">
             <a href="${context.contextPath}/">
                 <span class="menu-icon fa fa-desktop"></span>
-                <span class="menu-text">查看首页</span>
+                <span class="menu-text">首页</span>
             </a>
 
             <span class="arrow"></span>
@@ -31,7 +31,7 @@
         </#if>
         </li>
         <li>
-            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-gears"></span>
+            <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-hospital-o"></span>
                 <span class="menu-text">平台管理</span>
                 <span class="arrow fa fa-angle-down"></span></a>
             <span class="arrow"></span>
@@ -47,7 +47,7 @@
 
         <li class="">
             <a href="javascript:;" class="dropdown-toggle">
-                <span class="menu-icon fa fa-pencil-square-o"></span>
+                <span class="menu-icon fa fa-ambulance"></span>
                 <span class="menu-text">资源管理</span>
                 <span class="arrow fa fa-angle-down"></span>
             </a>

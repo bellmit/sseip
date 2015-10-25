@@ -82,8 +82,9 @@
                                             <a class="accordion-toggle collapsed" data-toggle="collapse"
                                                data-parent="#accordion"
                                                href="#collapseOne">
-                            <span data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"
-                                  class="bigger-110 ace-icon fa fa-angle-right"></span>展开补充咨询人信息</a>
+                            <span data-icon-show="ace-icon fa fa-plus-square"
+                                  data-icon-hide="ace-icon fa fa-minus-square-o"
+                                  class="bigger-110 ace-icon fa fa-plus-square"></span>展开补充咨询人信息</a>
                                         </h4>
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse">

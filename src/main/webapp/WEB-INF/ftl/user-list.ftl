@@ -126,13 +126,11 @@
                         </table>
                         <div class="page-header position-relative">
                             <div class="row"><span class="col-md-2 btn-group btn-corner"><a
-                                    href="${context.contextPath}/user/add"
-                                    target="_self"
-                                    style="color:#FFF;text-decoration:none;"
-                                    title="增加员工"
-                                    class="btn btn-info fa fa-plus"></a> <a
-                                    href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-                                    title="刷新列表"></a></span>
+                                    href="${context.contextPath}/user/add" target="_self" title="添加员工"
+                                    class="btn btn-info fa fa-plus"></a> <a href=""
+                                                                            style="color:#FFF;text-decoration:none;"
+                                                                            class="btn btn-info fa fa-refresh"
+                                                                            title="刷新列表"></a></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>

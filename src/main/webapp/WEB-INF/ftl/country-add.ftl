@@ -20,7 +20,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/country/list/1">国家一览</a>
+            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/country/list/1"><span class="fa fa-globe"></span>国家管理</a>
             </li>
             <li class="active">添加国家</li>
         </ul>

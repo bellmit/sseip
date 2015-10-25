@@ -13,7 +13,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">国家条目管理</li>
+            <li class="active"><span class="fa fa-globe"></span>国家管理</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>

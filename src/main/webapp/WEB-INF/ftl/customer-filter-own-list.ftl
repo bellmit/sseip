@@ -34,9 +34,10 @@
             <h4 class="panel-title">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
                    href="#collapseOne">
-                            <span data-icon-show="ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down"
-                                  class="bigger-110 ace-icon fa fa-angle-right"></span>
-                    筛选查询条件
+                            <span data-icon-show="ace-icon fa fa-plus-square"
+                                  data-icon-hide="ace-icon fa fa-minus-square-o"
+                                  class="bigger-110 ace-icon fa fa-plus-square"></span>
+                    筛选条件
                 </a>
             </h4>
         </div>
@@ -226,9 +227,9 @@
         target="_self"
         style="color:#FFF;text-decoration:none;"
         title="填写资源"
-        class="btn btn-info fa fa-plus"></a><a
-        href="" style="color:#FFF;text-decoration:none;" class="btn btn-info fa fa-refresh"
-        title="刷新列表"></a></span></span>
+        class="btn btn-info btn-sm"><span class="fa fa-plus"></span></a><a
+        href="" style="color:#FFF;text-decoration:none;" class="btn btn-info btn-sm"
+        title="刷新列表"><span class="fa fa-refresh"></span></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>
@@ -322,10 +323,10 @@
                 <span class="btn-group">
                                             <a class="btn btn-minier"
                                                href="${context.contextPath}/customer/get/${customer.id?c}"
-                                               title="查看"><span class="fa fa-search"></span></a>
+                                               title="查看"><span class="fa fa-heart-o"></span></a>
                                         <a class="btn btn-minier" href="/customer/update/${customer.id?c}"
                                            title="编辑"><span
-                                                class="fa fa-edit"></span></a>
+                                                class="fa fa-stethoscope"></span></a>
 
                 <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
                     <form action="${context.contextPath}/customer/remove" method="post"
@@ -359,8 +360,10 @@
     <div class="row">
 <span class="col-md-1">
 <span class="btn-group btn-corner"><a href="${context.contextPath}/customer/add" target="_self" title="填写资源"
-                                      class="btn btn-info fa fa-plus"></a><a href="" class="btn btn-info fa fa-refresh"
-                                                                             title="刷新列表"></a></span></span>
+                                      class="btn btn-info btn-sm"><span class="fa fa-plus"></span></a><a href=""
+                                                                                                         class="btn btn-info btn-sm"
+                                                                                                         title="刷新列表"><span
+        class="fa fa-refresh"></span></a></span></span>
         <select name="new-owner-user-id" class="filters col-md-2 text-right pink2" form="pass-on-form" title="转交给用户">
             <option
             <#if (RequestParameters.newOwnerUserId)!''=''>selected</#if>
