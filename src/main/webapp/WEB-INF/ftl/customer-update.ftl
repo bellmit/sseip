@@ -58,7 +58,9 @@
         <div class="row">
             <div class="col-xs-12">
             <#--左列-->
-                <form method="post" class="form-horizontal" id="customer-update-form">
+                <form method="post" class="form-horizontal" id="customer-update-form"><input name="referer"
+                                                                                             type="hidden"
+                                                                                             value="${(referer)!'/'}"/>
 
                     <div class="row">
                         <div class="col-md-offset-0 col-md-2">
@@ -68,7 +70,11 @@
                             </button>
                             <button class="btn btn-warning btn-sm" type="reset">
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
-                            </button></span></div>
+                            </button>
+                            <a class="btn btn-primary btn-sm" href="${(referer)}">
+                                <span class="ace-icon fa fa-back bigger-110"></span>返回列表
+                            </a>
+                            </span></div>
                         </div>
                     </div>
 

@@ -76,13 +76,14 @@
                                             <input class="filters col-md-2 text-right green" name="name" type="text"
                                                    form="filter-form"
                                                    title="筛选或患者咨询人的姓名"
-                                                   placeholder="患者或咨询人的姓名"/>
+                                                   placeholder="患者或咨询人的姓名" value="${(RequestParameters.name)!''}"/>
                                             <input class="filters col-md-2 text-right green" name="email"
-                                                   type="email" form="filter-form" title="电子邮件地址" placeholder="电子邮件地址"/>
+                                                   type="email" form="filter-form" title="电子邮件地址"
+                                                   placeholder="电子邮件地址" value="${(RequestParameters.email)!''}"/>
                                             <input class="filters col-md-2 text-right green" name="tel" type="tel"
                                                    form="filter-form"
                                                    title="筛选电话"
-                                                   placeholder="电话"/>
+                                                   placeholder="电话" value="${(RequestParameters.tel)!''}"/>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -132,15 +133,15 @@
                                             <select class="filters col-md-2 text-right brown" name="valid"
                                                     form="filter-form" title="筛选是否有效">
                                                 <option
-                                                <#if !((RequestParameters.faraway)??) || RequestParameters.faraway=''>selected</#if>
+                                                <#if !((RequestParameters.valid)??) || RequestParameters.valid=''>selected</#if>
                                                 value="">是否有效
                                                 </option>
                                                 <option
-                                                <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='1'>selected</#if>
+                                                <#if (RequestParameters.valid)?? && RequestParameters.valid=='1'>selected</#if>
                                                 value="1">有效
                                                 </option>
                                                 <option
-                                                <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='0'>selected</#if>
+                                                <#if (RequestParameters.valid)?? && RequestParameters.valid=='0'>selected</#if>
                                                 value="0">无效
                                                 </option>
                                             </select>

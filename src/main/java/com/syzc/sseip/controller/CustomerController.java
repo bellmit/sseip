@@ -284,7 +284,7 @@ public class CustomerController {
         model.addAttribute("countries", countryService.listAll());
 
         model.addAttribute("page", page);
-        model.addAttribute("path", "/customer/filter-own");
+        model.addAttribute("path", "/customer/filter-own/1");
         return "customer-filter-own-list";
     }
 
@@ -410,7 +410,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") Long id, Model model, HttpSession session) {
+    public String update(@PathVariable("id") Long id, @RequestParam(required = false) String referer, Model model, HttpSession session, HttpServletRequest request) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
@@ -437,6 +437,11 @@ public class CustomerController {
             throw HosException.create("没有这个客户的资料", Level.DEBUG);
         }
 
+        if (referer == null) {
+            referer = request.getHeader("Referer");// may be still null
+        }
+        model.addAttribute("referer", referer);
+
         model.addAttribute("countries", countryService.listAll());
         model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
         model.addAttribute("websites", websiteService.listAll());
@@ -449,7 +454,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.POST)
-    public String update(@PathVariable("id") Long id, Customer customer, Model model, HttpSession session) {
+    public String update(@PathVariable("id") Long id, Customer customer, @RequestParam(required = false) String referer, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
@@ -478,6 +483,8 @@ public class CustomerController {
         } else {
             model.addAttribute("error", "更新失败");
         }
+        model.addAttribute("referer", referer);
+
         model.addAttribute("countries", countryService.listAll());
         model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
         model.addAttribute("websites", websiteService.listAll());
