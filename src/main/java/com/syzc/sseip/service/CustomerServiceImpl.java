@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
 
 @Service
@@ -57,6 +58,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     public Page<Customer> listByFilter(Date since, Date till, Long websiteId, String tel, String name, Long countryId,
                                        Long userId, String email, Long diseaseTypeId, Boolean valid,
                                        HospitalizationType hospitalization, Byte stars, Boolean discard, Boolean ifReport, Long pageNo, Byte size) {
+
+        System.out.println("since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, pageSize");
+        System.out.println(Arrays.toString(new Object[]{since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, size}));
+
         Long total = customerDao.countByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
                 valid, hospitalization, stars, discard, ifReport);
         Page<Customer> page = PageUtil.make(pageNo, size, total);

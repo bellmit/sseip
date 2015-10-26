@@ -151,9 +151,23 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
+        //测试参数编码格式， 遇到get请求name解码错误， 因为服务器解析url参数设置编码格式。
+//        System.out.println("since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, pageSize");
+//        System.out.println(Arrays.toString(new Object[]{since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, pageSize}));
+/*
+        if (name != null) {
+            try {
+                System.out.println(new String(name.getBytes("ISO8859-1"), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+*/
+
         //admin || manager
         page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
                 valid, hospitalization, stars, discard, ifReport, pageNo, pageSize);
+
 //            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
 //                    groupId, userId, pageNo, pageSize);
 

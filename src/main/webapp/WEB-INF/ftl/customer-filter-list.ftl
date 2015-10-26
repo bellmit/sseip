@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
 <#include "/common/common_css.ftl">
 
@@ -213,8 +213,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="" class="filters btn btn-xs col-md-2 btn-warning"
-                               form="filter-form">重置条件</a>
+                            <a href="" class="filters btn btn-xs col-md-2 btn-warning">重置条件</a>
                             <a href="${context.contextPath}/customer/filter/1"
                                class="filters btn btn-xs col-md-2 btn-grey">重新搜索</a>
                             <button type="submit" class="filters btn btn-xs col-md-2 btn-info"

@@ -123,8 +123,8 @@
                     <a class="btn btn-info" href="${context.contextPath}/" target="_top">
                         <span class="ace-icon fa fa-home bigger-110"></span>回首页
                     </a>
-                    <a class="btn btn-info" href="${context.contextPath}/customer/filter-own/1"><span
-                            class="ace-icon fa fa-list bigger-110"></span>顾客资源一览</a>
+                <#--<a class="btn btn-info" href="${context.contextPath}/customer/filter-own/1"><span
+                        class="ace-icon fa fa-list bigger-110"></span>顾客资源一览</a>-->
                     <a class="btn btn-info" href="${context.contextPath}/customer/add">
                         <span class="ace-icon fa fa-edit bigger-110"></span>继续添加
                     </a>

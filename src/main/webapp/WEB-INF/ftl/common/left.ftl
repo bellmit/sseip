@@ -68,7 +68,7 @@
                     <li><a href="${context.contextPath}/customer/filter-own/1" target="mainFrame"><span
                             class="menu-icon fa fa-search"></span><span class="menu-text">个人复合查询</span></a></li></#if>
                 <li><a href="${context.contextPath}/customer/add" target="mainFrame"><span
-                        class="menu-icon fa fa-edit"></span><span class="menu-text">添加资源</span></a></li>
+                        class="menu-icon fa fa-file-o"></span><span class="menu-text">添加资源</span></a></li>
             </ul>
         </#if>
         </li>
