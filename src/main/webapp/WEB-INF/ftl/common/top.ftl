@@ -37,10 +37,15 @@
                 <!-- #section:basics/navbar.user_menu -->
                 <li class="light-blue">
                     <a href="${context.contextPath}/profile" data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
-                             alt="Jason's Photo"/>
+                    <#--<img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
+                         alt="Jason's Photo"/>-->
+                    <#if loginUser.role='ADMIN'>
+                        <span class="fa fa-user-secret bigger-250"></span>
+                    <#else>
+                        <span class="fa fa-user-md bigger-250"></span>
+                    </#if>
                         <span class="user-info"><small>
-                            欢迎, ${(loginUser.role.roleName)!''}</small> ${(loginUser.realName)!''}</span>
+                            欢迎, <#--${(loginUser.role.roleName)!''}--></small> ${(loginUser.realName)!''}</span>
                         <span class="ace-icon fa fa-caret-down"></span>
                     </a>
 
@@ -54,7 +59,7 @@
 
                         <li>
                             <a href="${context.contextPath}/user/profile" target="mainFrame">
-                                <span class="ace-icon fa fa-user"></span>个人资料</a>
+                                <span class="ace-icon fa fa-credit-card"></span>个人资料</a>
                         </li>
 
                         <li class="divider"></li>

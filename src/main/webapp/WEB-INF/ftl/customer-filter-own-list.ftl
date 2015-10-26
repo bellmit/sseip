@@ -23,7 +23,7 @@
             <span class="ace-icon fa fa-home home-icon"></span>
             <a href="${context.contextPath}/" target="_top">Home</a>
         </li>
-        <li class="active">个人资源一览</li>
+        <li class="active"><span class="fa fa-table"></span>个人资源一览</li>
     </ul>
     <!-- /.breadcrumb -->
 </div>
@@ -227,7 +227,7 @@
         target="_self"
         style="color:#FFF;text-decoration:none;"
         title="填写资源"
-        class="btn btn-info btn-sm"><span class="fa fa-pencil"></span></a><a
+        class="btn btn-info btn-sm"><span class="fa fa-file"></span></a><a
         href="" style="color:#FFF;text-decoration:none;" class="btn btn-info btn-sm"
         title="刷新列表"><span class="fa fa-refresh"></span></a></span></span>
                                 <span class="col-md-10">
@@ -339,7 +339,7 @@
                     <button form="from-discard-customer-${customer_index}"
                             class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
                             title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
-                            class="fa fa-trash"></span>
+                            class="fa fa-eraser"></span>
                     </button>
                                             <form id="from-discard-customer-${customer_index}"
                                                   action="${context.contextPath}/customer/update-discard" method="post"
@@ -360,9 +360,9 @@
     <div class="row">
 <span class="col-md-1">
 <span class="btn-group btn-corner"><a href="${context.contextPath}/customer/add" target="_self" title="填写资源"
-                                      class="btn btn-info btn-sm"><span class="fa fa-pencil"></span></a><a href=""
-                                                                                                           class="btn btn-info btn-sm"
-                                                                                                           title="刷新列表"><span
+                                      class="btn btn-info btn-sm"><span class="fa fa-file"></span></a><a href=""
+                                                                                                         class="btn btn-info btn-sm"
+                                                                                                         title="刷新列表"><span
         class="fa fa-refresh"></span></a></span></span>
         <select name="new-owner-user-id" class="filters col-md-2 text-right pink2" form="pass-on-form" title="转交给用户">
             <option

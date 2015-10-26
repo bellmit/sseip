@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">疾病类型一览</li>
+            <li class="active"><span class="fa fa-heartbeat orange"></span>疾病类型一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -51,10 +51,10 @@
                                         <span class="btn-group">
                                             <a class="btn btn-minier"
                                                href="/disease-type/update/${diseaseType.id}" title="编辑病种"><span
-                                                    class="fa fa-edit"></span></a>
+                                                    class="fa fa-pencil-square"></span></a>
                                             <button form="from-remove-disease-type-${diseaseType_index}"
                                                     class="remove-control btn btn-minier" title="删除病种"><span
-                                                    class="fa fa-trash"></span></button>
+                                                    class="fa fa-eraser"></span></button>
                                         </span>
 
                                         <form id="from-remove-disease-type-${diseaseType_index}"

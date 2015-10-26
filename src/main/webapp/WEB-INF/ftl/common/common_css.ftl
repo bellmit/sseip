@@ -7,7 +7,8 @@
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/bootstrap.css"/>
-<link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/font-awesome.css"/>
+<#--<link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/font-awesome.css"/>-->
+<link rel="stylesheet" href="${context.contextPath}/resources/self/font-awesome/css/font-awesome.css"/>
 
 <!-- page specific plugin styles -->
 

@@ -24,7 +24,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">全部资源一览</li>
+            <li class="active"><span class="fa fa-table"></span>全部资源一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -236,10 +236,10 @@
             target="_self"
             style="color:#FFF;text-decoration:none;"
             title="填写资源"
-            class="btn btn-info btn-sm"><span class="fa fa-pencil"></span></a><a href=""
-                                                                                 style="color:#FFF;text-decoration:none;"
-                                                                                 class="btn btn-info btn-sm"
-                                                                                 title="刷新列表"><span
+            class="btn btn-info btn-sm"><span class="fa fa-file"></span></a><a href=""
+                                                                               style="color:#FFF;text-decoration:none;"
+                                                                               class="btn btn-info btn-sm"
+                                                                               title="刷新列表"><span
             class="fa fa-refresh"></span></a></span></span> <span
             class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if> </span>
     </div>
@@ -356,13 +356,12 @@
         </#list>
         </tbody>
     </table>
-    <div><span class="col-md-2"><span class="btn-group btn-corner"><a
-            href="${context.contextPath}/customer/add" target="_self"
-            style="color:#FFF;text-decoration:none;" title="填写资源"
-            class="btn btn-info btn-sm"><span class="fa fa-pencil"></span></a><a href=""
-                                                                                 style="color:#FFF;text-decoration:none;"
-                                                                                 class="btn btn-info btn-sm"
-                                                                                 title="刷新列表"><span
+    <div><span class="col-md-2"><span class="btn-group btn-corner"><a href="${context.contextPath}/customer/add"
+                                                                      target="_self"
+                                                                      style="color:#FFF;text-decoration:none;"
+                                                                      title="填写资源" class="btn btn-info btn-sm"><span
+            class="fa fa-file"></span></a><a href="" style="color:#FFF;text-decoration:none;"
+                                             class="btn btn-info btn-sm" title="刷新列表"><span
             class="fa fa-refresh"></span></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>

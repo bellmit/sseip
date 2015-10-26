@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">入口网站一览</li>
+            <li class="active"><span class="fa fa-map-signs orange2"></span>入口网站一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -54,12 +54,11 @@
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
                                             <a class="btn btn-minier" href="/website/update/${website.id}"
-                                               title="编辑网站条目"><span
-                                                    class="fa fa-edit"></span></a>
+                                               title="编辑网站条目"><span class="fa fa-pencil-square"></span></a>
                                             <button form="from-remove-website-${website_index}"
                                                     class="remove-control btn btn-minier"
                                                     title="删除网站条目"><span
-                                                    class="fa fa-trash"></span>
+                                                    class="fa fa-eraser"></span>
                                             </button>
                                         </span>
 

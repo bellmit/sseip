@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active">用户列表</li>
+            <li class="active"><span class="fa fa-users"></span>用户列表</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -125,12 +125,14 @@
                             </tbody>
                         </table>
                         <div class="page-header position-relative">
-                            <div class="row"><span class="col-md-2 btn-group btn-corner"><a
-                                    href="${context.contextPath}/user/add" target="_self" title="添加员工"
-                                    class="btn btn-info fa fa-plus"></a> <a href=""
-                                                                            style="color:#FFF;text-decoration:none;"
-                                                                            class="btn btn-info fa fa-refresh"
-                                                                            title="刷新列表"></a></span>
+                            <div class="row"><span class="col-md-2 btn-group btn-corner">
+                                <#if loginUser.role="ADMIN">
+                                    <a href="${context.contextPath}/user/add" target="_self" title="添加员工"
+                                       class="btn btn-info fa fa-user-plus"></a>
+                                </#if>
+                                    <a href="" style="color:#FFF;text-decoration:none;"
+                                       class="btn btn-info fa fa-refresh" title="刷新列表"></a>
+                            </span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>

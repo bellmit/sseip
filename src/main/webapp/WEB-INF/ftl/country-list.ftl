@@ -13,7 +13,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa fa-globe"></span>国家管理</li>
+            <li class="active"><span class="fa fa-globe light-blue"></span>国家管理</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -61,8 +61,7 @@
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
                                             <a class="btn btn-minier" href="/country/update/${country.id}"
-                                               title="编辑国家条目"><span
-                                                    class="fa fa-edit"></span></a>
+                                               title="编辑国家条目"><span class="fa fa-pencil-square"></span></a>
                                             <button form="from-remove-country-${country_index}"
                                                     class="remove-control btn btn-minier"
                                                     title="删除国家条目"> <span
