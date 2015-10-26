@@ -48,10 +48,7 @@ public class Customer implements Serializable {
 
     private Boolean ifReport;
 
-//    private Date calledTime;
-//    private String callRecord;
-
-//    private Boolean toBeDeleted;
+    //    private Date calledTime;
 
     public Customer() {
     }

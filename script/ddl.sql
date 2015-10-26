@@ -122,6 +122,7 @@ CREATE TABLE customer (
   updated            DATETIME        DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
 
   memo               TEXT,
+  call_record         TEXT,
   contact_recoreds   TEXT,
 
   discard            TINYINT(1)      DEFAULT FALSE,

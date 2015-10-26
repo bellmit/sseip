@@ -343,14 +343,24 @@
                                       title="症状">${(form.symptom?xhtml)!''}</textarea>
                             </div>
                         </div>
-
-                        <div class="form-group" title="备忘">
+                        <div class="form-group">
+                        <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
                             <div class="col-xs-12">
-                                <input name="memo" id="customer-memo" type="hidden" value="${(form.memo?xhtml)!''}"/>
+                            <textarea name="memo" class="col-xs-12" style="resize: vertical;"
+                                      placeholder="备忘" id="textarea-memo"
+                                      title="备忘">${(form.memo?xhtml)!''}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row" title="通讯记录">
+                            <div class="col-xs-12">
+                                <input name="contactRecoreds" id="contact-records" type="hidden"
+                                       value="${(form.contactRecoreds?xhtml)!''}"/>
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="wysiwyg-editor" id="memo-editor" title="备忘">${(form.memo)!''}</div>
+                                        <div class="wysiwyg-editor" id="contact-records-editor"
+                                             title="通讯记录">${(form.contactRecoreds)!''}</div>
                                     </div>
                                 </div>
                             </div>
@@ -381,14 +391,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#memo-editor').ace_wysiwyg();
         $('#stars-ui').raty({
             noRatedMsg: "I'am readOnly and I haven't rated yet!",
             starType: 'span',
 //            score: 0,
 //            cancel: true,
 //            cancelHint: '零意向',
-//            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
             hints: ['一般', '好', '很好', '非常好', '棒极了'],
             score: function () {
                 return $(this).attr('data-init-score');
@@ -398,13 +406,14 @@
 //                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
             }
         });
-        $('#customer-add-form').on('submit', function () {
-            $('#customer-memo').val($('#memo-editor').html());
-        });
-        $('#textarea-symptom').autogrow({
+        $('#textarea-symptom,#textarea-memo').autogrow({
             speed: 100,
             onInitialize: true,
             animate: false,
+        });
+        $('#contact-records-editor').ace_wysiwyg();
+        $('#customer-add-form').on('submit', function () {
+            $('#contact-records').val($('#contact-records-editor').html());
         });
         $("#customer-add-form").cmsvalidate();
     });

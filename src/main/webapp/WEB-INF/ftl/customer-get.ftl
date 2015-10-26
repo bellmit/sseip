@@ -76,6 +76,10 @@
                     <dd><#if (customer.memo)??>${customer.memo}<#else><span
                             class="label">不详</span></#if>
                     </dd>
+                    <dt>联系记录</dt>
+                    <dd><#if (customer.contactRecoreds)??>${customer.contactRecoreds}<#else><span
+                            class="label">不详</span></#if>
+                    </dd>
                     <dt>星级</dt>
                     <dd><#if (customer.stars)??>${customer.stars}<#else><span
                             class="label">不详</span></#if>

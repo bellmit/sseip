@@ -301,7 +301,8 @@
         <td class="text-right"
             title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
             <span class="label">不详</span></#if></td>
-        <td class="text-right"><#if customer.memo??><#if customer.memo?length gt 6>${customer.memo?substring(0,5)+'...'}<#else>${customer.memo}</#if><#else>
+        <td class="text-right"
+            title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 6>${customer.memo?substring(0,5)+'...'}<#else>${customer.memo}</#if><#else>
             <span class="label">不详</span></#if></td>
         <td class="text-right"><#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}<#else>
             <span class="label">不详</span></#if></td>

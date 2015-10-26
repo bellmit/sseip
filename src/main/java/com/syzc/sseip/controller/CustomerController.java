@@ -1,6 +1,5 @@
 package com.syzc.sseip.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.Customer;
 import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
@@ -25,7 +24,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -377,7 +375,7 @@ public class CustomerController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Customer customer, Model model, HttpSession session) {
 
-        System.out.println(JSON.toJSONString(customer, true));
+//        System.out.println(JSON.toJSONString(customer, true));
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
@@ -387,10 +385,10 @@ public class CustomerController {
         User user = (User) session.getAttribute("loginUser");
         customer.setUserId(user.getId());
         customer.setGroupId(user.getGroupId());
-        System.out.println(JSON.toJSONString(customer, true));
+//        System.out.println(JSON.toJSONString(customer, true));
         //should complete the operation. if failed, some exception should be thrown, about customed "CustomerAddFailException"
         customer = customerService.add(customer);
-        System.out.println(JSON.toJSONString(customer, true));
+//        System.out.println(JSON.toJSONString(customer, true));
 
         model.addAttribute("customer", customer);
         // with info label, and links to user console, own role's customer list, or "/", and "add more", and show page with authorized edit links...
@@ -412,9 +410,10 @@ public class CustomerController {
                 && !loginUser.getGroupId().equals(customer.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
-        if (customer != null && loginUser.getGroupId() != null && !loginUser.getGroupId().equals(customer.getGroupId())) {
+
+        /*if (customer != null && loginUser.getGroupId() != null && !loginUser.getGroupId().equals(customer.getGroupId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
         if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
@@ -484,7 +483,7 @@ public class CustomerController {
         if (newOwnerUserId == null) {
             throw HosException.create("目标用户不能为空", Level.DEBUG);
         }
-        System.out.println(Arrays.toString(customerIds));
+//        System.out.println(Arrays.toString(customerIds));
         String referer = request.getHeader("Referer");
 
         User loginUser = (User) session.getAttribute("loginUser");
