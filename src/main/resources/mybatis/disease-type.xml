@@ -3,7 +3,7 @@
 <mapper namespace="com.syzc.sseip.dao.DiseaseTypeDao">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
     <!--<cache type="org.mybatis.caches.memcached.MemcachedCache" />-->
-    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
     <resultMap id="DiseaseType" type="com.syzc.sseip.entity.DiseaseType">
         <id column="id" property="id"/>
     </resultMap>

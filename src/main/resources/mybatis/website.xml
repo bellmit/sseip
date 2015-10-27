@@ -3,7 +3,7 @@
 <mapper namespace="com.syzc.sseip.dao.WebsiteDao">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
     <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
-    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
     <resultMap id="AccessPointType" type="com.syzc.sseip.entity.Website">
         <id column="id" property="id"/>
     </resultMap>

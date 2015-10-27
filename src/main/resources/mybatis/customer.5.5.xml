@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.CustomerDao">
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
+    <resultMap id="Customer" type="com.syzc.sseip.entity.Customer">
+        <id column="id" property="id"/>
+        <result column="liaison_name" property="liaisonName"/>
+        <result column="liaison_address" property="liaisonAddress"/>
+        <result column="patient_name" property="patientName"/>
+        <result column="patient_address" property="patientAddress"/>
+        <result column="contact_recoreds" property="contactRecoreds"/>
+        <result column="liaison_countryId" property="liaisonCountryId"/>
+        <result column="patient_country_id" property="patientCountryId"/>
+        <result column="disease_type_id" property="diseaseTypeId"/>
+        <result column="website_id" property="websiteId"/>
+        <result column="user_id" property="userId"/>
+        <result column="owner_user_id" property="ownerUserId"/>
+        <result column="group_id" property="groupId"/>
+        <result column="if_report" property="ifReport"/>
+    </resultMap>
+    <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
+        <id column="id" property="id"/>
+        <result column="liaison_name" property="liaisonName"/>
+        <result column="liaison_address" property="liaisonAddress"/>
+        <result column="patient_name" property="patientName"/>
+        <result column="patient_address" property="patientAddress"/>
+        <result column="contact_recoreds" property="contactRecoreds"/>
+        <result column="liaison_country_id" property="liaisonCountryId"/>
+        <result column="patient_country_id" property="patientCountryId"/>
+        <result column="disease_type_id" property="diseaseTypeId"/>
+        <result column="website_id" property="websiteId"/>
+        <result column="user_id" property="userId"/>
+        <result column="owner_user_id" property="ownerUserId"/>
+        <result column="group_id" property="groupId"/>
+        <result column="if_report" property="ifReport"/>
+
+        <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
+        <association property="patientCountry" column="patient_country_id" select="getCountry"/>
+        <association property="diseaseType" column="disease_type_id" select="getDiseaseType"/>
+        <association property="website" column="website_id" select="getWebsite"/>
+        <association property="user" column="user_id" select="getUser"/>
+        <association property="ownerUser" column="owner_user_id" select="getUser"/>
+        <association property="group" column="group_id" select="getGroup"/>
+    </resultMap>
+    <resultMap id="Country" type="com.syzc.sseip.entity.Country">
+        <id column="id" property="id"/>
+        <result column="a2_code" property="a2Code"/>
+    </resultMap>
+    <resultMap id="DiseaseType" type="com.syzc.sseip.entity.DiseaseType">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="Website" type="com.syzc.sseip.entity.Website">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="User" type="com.syzc.sseip.entity.User">
+        <id column="id" property="id"/>
+        <result column="real_name" property="realName"/>
+        <result column="group_id" property="groupId"/>
+        <!--<result column="id_number" property="idNumber"/>-->
+        <!--<result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>-->
+    </resultMap>
+    <resultMap id="Group" type="com.syzc.sseip.entity.Group">
+        <id column="id" property="id"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO customer (
+        added,
+        updated,
+        sex,
+        age,
+        liaison_name,
+        liaison_address,
+        relationship,
+        patient_name,
+        patient_address,
+        symptom,
+        hospitalization,
+        emergency,
+        email,
+        tel,
+        liaison_country_id,
+        patient_country_id,
+        disease_type_id,
+        website_id,
+        memo,
+        contact_recoreds,
+        stars,
+        valid,
+        user_id,
+        owner_user_id,
+        group_id,
+        if_report
+        )
+        VALUES
+        (
+        now(),
+        now(),
+        #{entity.sex},
+        #{entity.age},
+        #{entity.liaisonName},
+        #{entity.liaisonAddress},
+        #{entity.relationship},
+        #{entity.patientName},
+        #{entity.patientAddress},
+        #{entity.symptom},
+        #{entity.hospitalization},
+        #{entity.emergency},
+        #{entity.email},
+        #{entity.tel},
+        #{entity.liaisonCountryId},
+        #{entity.patientCountryId},
+        #{entity.diseaseTypeId},
+        #{entity.websiteId},
+        #{entity.memo},
+        #{entity.contactRecoreds},
+        <choose>
+            <when test="entity.stars !=null and entity.stars !=0">
+                #{entity.stars}
+            </when>
+            <otherwise>
+                NULL
+            </otherwise>
+        </choose>
+        ,
+        #{entity.valid},
+        #{entity.userId},
+        #{entity.userId},
+        #{entity.groupId},
+        #{entity.ifReport}
+        );
+    </insert>
+    <insert id="addAll">
+        INSERT INTO customer (
+        added,
+        update,
+        sex,
+        age,
+        liaison_name,
+        liaison_address,
+        relationship,
+        patient_name,
+        patient_address,
+        symptom,
+        hospitalization,
+        emergency,
+        email,
+        tel,
+        liaison_country_id,
+        patient_country_id,
+        disease_type_id,
+        website_id,
+        memo,
+        contact_recoreds,
+        stars,
+        valid,
+        user_id,
+        owner_user_id,
+        group_id,
+        if_report
+        )
+        VALUES
+        <foreach collection="entities" item="entity" separator=",">
+            (
+            now(),
+            now(),
+            #{entity.sex},
+            #{entity.age},
+            #{entity.liaisonName},
+            #{entity.liaisonAddress},
+            #{entity.relationship},
+            #{entity.patientName},
+            #{entity.patientAddress},
+            #{entity.symptom},
+            #{entity.hospitalization},
+            #{entity.emergency},
+            #{entity.email},
+            #{entity.tel},
+            #{entity.liaisonCountryId},
+            #{entity.patientCountryId},
+            #{entity.diseaseTypeId},
+            #{entity.websiteId},
+            #{entity.memo},
+            #{entity.contactRecoreds},
+            #{entity.stars},
+            #{entity.valid},
+            #{entity.userId},
+            #{entity.userId},
+            #{entity.groupId},
+            #{entity.ifReport}
+            )
+        </foreach>
+    </insert>
+    <insert id="addAllDummies">
+        INSERT INTO customer (
+        updated,
+        sex,
+        age,
+        liaison_name,
+        liaison_address,
+        relationship,
+        patient_name,
+        patient_address,
+        symptom,
+        hospitalization,
+        emergency,
+        email,
+        tel,
+        liaison_country_id,
+        patient_country_id,
+        disease_type_id,
+        website_id,
+        memo,
+        contact_recoreds,
+        stars,
+        valid,
+        user_id,
+        owner_user_id,
+        group_id,
+        added,
+        if_report
+        )
+        VALUES
+        <foreach collection="entities" item="entity" separator=",">
+            (
+            #{entity.added},
+            #{entity.sex},
+            #{entity.age},
+            #{entity.liaisonName},
+            #{entity.liaisonAddress},
+            #{entity.relationship},
+            #{entity.patientName},
+            #{entity.patientAddress},
+            #{entity.symptom},
+            #{entity.hospitalization},
+            #{entity.emergency},
+            #{entity.email},
+            #{entity.tel},
+            #{entity.liaisonCountryId},
+            #{entity.patientCountryId},
+            #{entity.diseaseTypeId},
+            #{entity.websiteId},
+            #{entity.memo},
+            #{entity.contactRecoreds},
+            #{entity.stars},
+            #{entity.valid},
+            #{entity.userId},
+            #{entity.userId},
+            #{entity.groupId},
+            #{entity.added},
+            #{entity.ifReport}
+            )
+        </foreach>
+    </insert>
+    <delete id="remove" parameterType="Long">
+        delete from customer WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE
+        customer
+        SET
+        updated=now(),
+        sex =
+        <choose>
+            <when test="entity.sex!=null">#{entity.sex}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        age =
+        <choose>
+            <when test="entity.age!=null">#{entity.age}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        liaison_name =
+        <choose>
+            <when test="entity.liaisonName!=null and entity.liaisonName!=''">#{entity.liaisonName}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        liaison_address =
+        <choose>
+            <when test="entity.liaisonAddress!=null and entity.liaisonAddress!=''">#{entity.liaisonAddress}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        relationship =
+        <choose>
+            <when test="entity.relationship!=null and entity.relationship!=''">#{entity.relationship}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        patient_name =
+        <choose>
+            <when test="entity.patientName!=null and entity.patientName!=''">#{entity.patientName}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        patient_address =
+        <choose>
+            <when test="entity.patientAddress!=null and entity.patientAddress!=''">#{entity.patientAddress}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        symptom =
+        <choose>
+            <when test="entity.symptom!=null and entity.symptom!=''">#{entity.symptom}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        hospitalization =
+        <choose>
+            <when test="entity.hospitalization!=null">#{entity.hospitalization}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        emergency =
+        <choose>
+            <when test="entity.emergency!=null">#{entity.emergency}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        email =
+        <choose>
+            <when test="entity.email!=null and entity.email!=''">#{entity.email}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        tel =
+        <choose>
+            <when test="entity.tel!=null and entity.tel!=''">#{entity.tel}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        liaison_country_id =
+        <choose>
+            <when test="entity.liaisonCountryId!=null">
+                #{entity.liaisonCountryId}
+            </when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        patient_country_id =
+        <choose>
+            <when test="entity.patientCountryId!=null">
+                #{entity.patientCountryId}
+            </when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        disease_type_id =
+        <choose>
+            <when test="entity.diseaseTypeId!=null">#{entity.diseaseTypeId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        website_id =
+        <choose>
+            <when test="entity.websiteId!=null">#{entity.websiteId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        memo =
+        <choose>
+            <when test="entity.memo!=null and entity.memo!=''">#{entity.memo}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        contact_recoreds =
+        <choose>
+            <when test="entity.contactRecoreds!=null and entity.contactRecoreds!=''">#{entity.contactRecoreds}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        stars =
+        <choose>
+            <when test="entity.stars!=null">#{entity.stars}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        valid =
+        <choose>
+            <when test="entity.valid!=null">#{entity.valid}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <!--
+                user_id =
+                <choose>
+                    <when test="entity.userId!=null">#{entity.userId}</when>
+                    <otherwise>NULL</otherwise>
+                </choose>
+                ,
+        -->
+        <!--
+                group_id =
+                <choose>
+                    <when test="entity.groupId!=null">#{entity.groupId}</when>
+                    <otherwise>NULL</otherwise>
+                </choose>
+                ,
+        -->
+        if_report =
+        <choose>
+            <when test="entity.ifReport!=null">#{entity.ifReport}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <select id="get" parameterType="Long" resultMap="CustomerDto">
+        SELECT
+        *
+        FROM
+        `customer`
+        where id=#{id};
+    </select>
+    <select id="list" resultMap="CustomerDto">
+        SELECT
+        *
+        FROM
+        customer
+        order by id desc
+        LIMIT #{offset}, #{size}
+    </select>
+    <select id="listByFilter" resultMap="CustomerDto">
+        SELECT
+        *
+        FROM
+        customer
+        <where>
+            <if test="websiteId != null">
+                website_id=#{websiteId}
+            </if>
+            <if test="tel!=null and tel!=''">
+                and tel=#{tel}
+            </if>
+            <if test="name!=null and name!=''">
+                and (liaison_name=#{name} OR patient_name=#{name})
+            </if>
+            <if test="countryId!=null and countryId!=''">
+                and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
+            </if>
+            <if test="userId != null">
+                and owner_user_id=#{userId}
+            </if>
+            <if test="email!=null and email!=''">
+                and email=#{email}
+            </if>
+            <if test="diseaseTypeId != null">
+                and disease_type_id=#{diseaseTypeId}
+            </if>
+            <if test="valid != null">
+                and valid=#{valid}
+            </if>
+            <if test="hospitalization !=null">
+                and hospitalization=#{hospitalization}
+            </if>
+            <if test="stars !=null and stars !=0">
+                and stars=#{stars}
+            </if>
+            <if test="discard !=null">
+                and discard=#{discard}
+            </if>
+            <if test="ifReport !=null">
+                and if_report=#{ifReport}
+            </if>
+            <if test="since !=null">
+                and added&gt;=#{since}
+            </if>
+            <if test="till !=null">
+                and added&lt;=#{till}
+            </if>
+        </where>
+        order by id desc
+        LIMIT #{offset}, #{size, javaType=Byte}
+    </select>
+    <select id="countByFilter" resultType="Long">
+        SELECT
+        count(id)
+        FROM
+        `customer`
+        <where>
+            <if test="websiteId != null">
+                website_id=#{websiteId}
+            </if>
+            <if test="tel!=null and tel!=''">
+                and tel=#{tel}
+            </if>
+            <if test="name!=null and name!=''">
+                and (liaison_name=#{name} OR patient_name=#{name})
+            </if>
+            <if test="countryId!=null and countryId!=''">
+                and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
+            </if>
+            <if test="userId != null">
+                and user_id=#{userId}
+            </if>
+            <if test="email!=null and email!=''">
+                and email=#{email}
+            </if>
+            <if test="diseaseTypeId != null">
+                and disease_type_id=#{diseaseTypeId}
+            </if>
+            <if test="valid != null">
+                and valid=#{valid}
+            </if>
+            <if test="hospitalization !=null">
+                and hospitalization=#{hospitalization}
+            </if>
+            <if test="stars !=null and stars !=0">
+                and stars=#{stars}
+            </if>
+            <if test="discard !=null">
+                and discard=#{discard}
+            </if>
+            <if test="ifReport !=null">
+                and if_report=#{ifReport}
+            </if>
+            <if test="since !=null">
+                and added&gt;=#{since}
+            </if>
+            <if test="till !=null">
+                and added&lt;=#{till}
+            </if>
+        </where>
+    </select>
+    <select id="count" resultType="Long">
+        select count(id) from customer;
+    </select>
+
+    <select id="listByUser" resultMap="CustomerDto">
+        SELECT
+        *
+        FROM
+        customer
+        WHERE user_id=#{userId}
+        order by id desc
+        LIMIT #{offset}, #{size}
+    </select>
+    <select id="countByUser" parameterType="Long" resultType="Long">
+        select count(id) from customer WHERE user_id=#{userId}
+    </select>
+    <select id="listByGroup" resultMap="CustomerDto">
+        SELECT
+        *
+        FROM
+        customer
+        WHERE group_id=#{groupId}
+        order by id desc
+        LIMIT #{offset}, #{size}
+    </select>
+    <select id="countByGroup" parameterType="Long" resultType="Long">
+        select count(id) from customer WHERE group_id=#{userId}
+    </select>
+    <!--用于关联查询-->
+    <select id="getUser" resultMap="User">
+        SELECT
+        *
+        FROM user
+        WHERE id = #{userId};
+    </select>
+    <select id="getGroup" resultMap="Group">
+        SELECT
+        *
+        FROM `group`
+        WHERE id = #{id};
+    </select>
+    <select id="getCountry" resultMap="Country">
+        select * from country where id=#{id}
+    </select>
+    <select id="getDiseaseType" resultMap="DiseaseType">
+        select * from disease_type where id=#{id}
+    </select>
+    <select id="getWebsite" resultMap="Website">
+        select * from website where id=#{id}
+    </select>
+    <update id="updateOwnUserIds">
+        update customer set owner_user_id=#{newOwnerUserId},updated=now() where owner_user_id=#{currUserId} and id IN
+        <foreach collection="customerIds" item="customerId" separator="," open="(" close=")">#{customerId}</foreach>
+    </update>
+    <update id="updateDiscard">
+        update customer SET discard=#{discard},updated=now() where id=#{id}
+    </update>
+</mapper>

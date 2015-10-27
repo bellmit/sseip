@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.CountryDao">
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache" />-->
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
+    <resultMap id="Country" type="com.syzc.sseip.entity.Country">
+        <id column="id" property="id"/>
+        <result column="a2_code" property="a2Code"/>
+        <result column="name" property="name"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO country (updated,`name`, memo, a2_code) VALUE (now(),#{entity.name}, #{entity.memo}, #{entity.a2Code});
+    </insert>
+    <delete id="remove" parameterType="Long">
+        delete from country WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE country
+        SET
+        updated=now(),
+        name =
+        <choose>
+            <when test="entity.name!=null and entity.name!=''">#{entity.name}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        memo =
+        <choose>
+            <when test="entity.memo!=null and entity.memo!=''">#{entity.memo}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        a2_code =
+        <choose>
+            <when test="entity.a2Code!=null and entity.a2Code!=''">#{entity.a2Code}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <select id="get" parameterType="Long" resultMap="Country">
+SELECT
+  id,
+  memo,
+  `name`,
+  a2_code,
+  updated
+FROM country
+WHERE id = #{id};
+    </select>
+    <select id="exist" parameterType="Long" resultType="Boolean">
+SELECT
+  count(1)
+FROM country
+WHERE id = #{id};
+    </select>
+    <select id="list" resultMap="Country">
+SELECT
+  id,
+  memo,
+  `name`,
+  a2_code,
+  updated
+FROM country
+ORDER BY `a2_code`
+LIMIT #{offset}, #{size};
+    </select>
+    <select id="count" resultType="Long">
+SELECT
+  count(1)
+FROM country;
+    </select>
+    <select id="listAll" resultMap="Country">
+        SELECT
+        id,
+        memo,
+        `name`,
+        a2_code,
+        updated
+        FROM country
+        ORDER BY `a2_code`
+    </select>
+</mapper>

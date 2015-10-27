@@ -24,7 +24,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa fa-table"></span>全部资源一览</li>
+            <li class="active"><span class="fa light-red fa-table"></span>全部资源一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -244,7 +244,7 @@
             class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if> </span>
     </div>
     <table id="sample-table-1"
-           class="table table-striped table-bordered table-hover table-condensed table-responsive"
+           class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
            style="word-wrap: break-word;table-layout:fixed">
         <colgroup class="row">
         <#--1-->
@@ -306,17 +306,17 @@
             <td class="text-right"<#if customer.patientCountry??>
                 title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
                 <span class="label">不详</span></#if></td>
-            <td class="text-right"
+            <td class=""
                 title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
                 <span class="label">不详</span></#if></td>
             <td class="text-right"
                 title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
                 <#switch customer.hospitalization>
-                    <#case 'YES'><span class="fa fa-hotel text-danger"></span>
+                    <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
                         <#break>
-                    <#case 'NO'><span class="fa fa-thumbs-o-down text-info"></span>
+                    <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span>
                         <#break>
-                    <#case 'DISCHARGE'><span class="fa fa-child text-success"></span>
+                    <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span>
                         <#break>
                 </#switch>
             <#else>
@@ -324,13 +324,12 @@
             <td class="text-right"
                 title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
                 <span class="label">不详</span></#if></td>
-            <td class="text-right"
+            <td class=""
                 title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label">不详</span></#if></td>
             <td class="text-right"
                 title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
-                <span class="fa fa-check-square-o text-warning"></span><#else><span
-                    class="fa fa-square-o text-info"></span></#if><#else> <span class="label">不详</span></#if></td>
+            <span class="fa bigger-140 fa-circle-o-notch dark"></#if><#else> <span class="label">不详</span></#if></td>
         <#--<td class="text-right"
             title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
             <span class="label">不详</span></#if></td>-->

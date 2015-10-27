@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.UserDao">
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache" />-->
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
+    <resultMap id="User" type="com.syzc.sseip.entity.User">
+        <id column="id" property="id"/>
+        <result column="real_name" property="realName"/>
+        <result column="group_id" property="groupId"/>
+        <result column="id_number" property="idNumber"/>
+        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
+    </resultMap>
+    <resultMap id="UserDto" type="com.syzc.sseip.entity.UserDto">
+        <id column="id" property="id"/>
+        <result column="real_name" property="realName"/>
+        <result column="group_id" property="groupId"/>
+        <result column="id_number" property="idNumber"/>
+        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
+        <association property="group" column="group_id" select="getGroup"/>
+        <association property="userLogon" column="id" select="getUserLogonByUser"/>
+    </resultMap>
+    <resultMap id="Group" type="com.syzc.sseip.entity.Group">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="UserLogon" type="com.syzc.sseip.entity.UserLogon">
+        <id column="id" property="id"/>
+        <result column="last_sign_in" property="lastSignIn"/>
+        <result column="last_ip" property="lastIP"/>
+        <result column="last_mac_addr" property="lastMacAddr"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO user (added,username, password, real_name, age,id_number, address,phone,role,group_id)
+        VALUE
+        (
+        now(),
+        #{entity.username},
+        sha2(concat('!a1@B2c3D4e5F6g7', #{entity.password}, '#h4$I5j6K7l8M9n0'), 256),
+        #{entity.realName},
+        #{entity.age},
+        #{entity.idNumber},
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.phone!=null and entity.phone!=''">#{entity.phone}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.role!=null">
+                #{entity.role}
+            </when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.groupId!=null and entity.groupId!=''">#{entity.groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        );
+    </insert>
+    <delete id="remove">
+        DELETE FROM user
+        WHERE id = #{userId};
+    </delete>
+    <update id="update">
+        UPDATE user
+        SET username = #{entity.username}, real_name = #{entity.realName},
+        age =
+        <choose>
+            <when test="entity.age!=null and entity.age!=''">#{entity.age}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        id_number =
+        <choose>
+            <when test="entity.idNumber!=null and entity.idNumber!=''">#{entity.idNumber}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        address =
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        phone =
+        <choose>
+            <when test="entity.phone!=null and entity.phone!=''">#{entity.phone}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        group_id =
+        <choose>
+            <when test="entity.groupId!=null and entity.groupId!=''">#{entity.groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <select id="get" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user
+        WHERE id = #{userId};
+    </select>
+    <select id="count" resultType="Long">
+        SELECT count(1)
+        FROM user;
+    </select>
+    <select id="list" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user order by id DESC
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="listAll" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user order by real_name DESC
+    </select>
+
+    <select id="listByGroup" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user where group_id=#{groupId}
+        order by id DESC
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="countByGroup" resultType="Long">
+        select count(1) from user where group_id=#{groupId}
+    </select>
+    <select id="listByRole" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user where role=#{role}
+        order by id DESC
+        LIMIT #{offset}, #{size};
+    </select>
+    <select id="countByRole" resultType="Long">
+        select count(1) from user where role=#{role}
+    </select>
+    <update id="updateInfo">
+        UPDATE user
+        SET real_name = #{entity.realName},
+        age = #{entity.age},
+        id_number =
+        <choose>
+            <when test="entity.idNumber!=null and entity.idNumber!=''">#{entity.idNumber}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ，
+        address =
+        <choose>
+            <when test="entity.address!=null and entity.address!=''">#{entity.address}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        phone =
+        <choose>
+            <when test="entity.phone!=null and entity.phone!=''">#{entity.phone}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        WHERE id = #{entity.id};
+    </update>
+    <update id="resetPassword">
+        UPDATE user
+        SET password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        WHERE id = #{id};
+    </update>
+    <update id="updatePassword">
+        UPDATE user
+        SET password = sha2(concat('!a1@B2c3D4e5F6g7', #{newPassword}, '#h4$I5j6K7l8M9n0'), 256)
+        WHERE id = #{id} AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{oldPassword}, '#h4$I5j6K7l8M9n0'), 256);
+    </update>
+    <select id="existUsername" resultType="Boolean">
+        SELECT count(1) > 0
+        FROM user
+        WHERE username = #{username};
+    </select>
+    <select id="login" resultMap="UserDto">
+        SELECT
+        id,
+        username,
+        password,
+        real_name,
+        age,
+        id_number,
+        address,
+        phone,
+        added,
+        role,
+        group_id
+        FROM user
+        WHERE username = #{username} AND
+        password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        limit 1;
+    </select>
+    <update id="updateGroup">
+        update user set group_id=
+        <choose>
+            <when test="groupId!=null and groupId!=''">#{groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        where id=#{userId};
+    </update>
+    <!--update user set role=#{role,typeHandler=RoleHandler,javaType=Role} where id=#{userId}-->
+    <update id="updateRole">
+        update user set role=#{role} where id=#{userId}
+    </update>
+    <select id="getRole" resultType="com.syzc.sseip.entity.enumtype.Role">
+        select role from user where id=#{id}
+    </select>
+    <!--关联查询-->
+    <select id="getGroup" resultMap="Group">
+        SELECT
+        `id`,
+        `name`,
+        `description`
+        FROM `group`
+        WHERE id = #{id};
+    </select>
+    <select id="getUserLogonByUser" parameterType="Long" resultMap="UserLogon">
+        SELECT *
+        FROM user_logon
+        WHERE user_id = #{id};
+    </select>
+    <insert id="insertUserLogon">
+INSERT INTO user_logon (last_sign_in, user_id, last_mac_addr, last_ip)
+  VALUE (now(), #{userLogon.userId}, #{userLogon.lastMacAddr}, #{userLogon.lastIP});
+    </insert>
+    <update id="updateUserLogon">
+UPDATE user_logon
+SET last_sign_in=now(),last_mac_addr = #{userLogon.lastMacAddr}, last_ip = #{userLogon.lastIP}
+where user_id= #{userLogon.userId}
+    </update>
+</mapper>

@@ -40,7 +40,7 @@
                     <#--<img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
                          alt="Jason's Photo"/>-->
                     <#if loginUser.role='ADMIN'>
-                        <span class="fa fa-user-secret bigger-250"></span>
+                        <span class="fa fa-user-secret bigger-250 dark"></span>
                     <#else>
                         <span class="fa fa-user-md bigger-250"></span>
                     </#if>

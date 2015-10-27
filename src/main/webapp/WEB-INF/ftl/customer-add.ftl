@@ -21,7 +21,7 @@
             <span class="ace-icon fa fa-home home-icon"></span>
             <a href="${context.contextPath}/" target="_top">Home</a>
         </li>
-        <li class="active">填写顾客资源资料</li>
+        <li class="active"><span class="fa fa-file-o light-grey"></span>添加资源</li>
     </ul>
     <!-- /.breadcrumb -->
 </div>
