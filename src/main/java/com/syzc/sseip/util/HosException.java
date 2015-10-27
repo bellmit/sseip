@@ -1,5 +1,6 @@
 package com.syzc.sseip.util;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -90,7 +91,9 @@ public class HosException extends RuntimeException {
     public void print(Logger logger) {
         if (level.isGreaterOrEqual(logger.getParent().getLevel())) {
             String str;
-            str = String.join("\n", msgList);
+//            str = String.join("\n", msgList); // java 8
+            str = StringUtils.join(msgList, '\n');
+
             logger.log(level, str, this);
         }
     }
