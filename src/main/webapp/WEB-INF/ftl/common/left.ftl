@@ -20,11 +20,11 @@
         <#if (loginUser.role)?? && loginUser.role!='EMPTY'>
             <ul class="submenu">
                 <li class=""><a href="${context.contextPath}/user/list/1" target="mainFrame"><span
-                        class="menu-icon fa fa-caret-right"></span>用户列表<#--<span class="arrow fa fa-angle-down"></span>-->
+                        class="menu-icon fa fa-child"></span>用户列表<#--<span class="arrow fa fa-angle-down"></span>-->
                 </a></li>
                 <li class="">
                     <a href="${context.contextPath}/role/list" target="mainFrame">
-                        <span class="menu-icon fa fa-caret-right"></span>角色列表</a>
+                        <span class="menu-icon fa fa-users"></span>角色列表</a>
                     <span class="arrow"></span>
                 </li>
             </ul>
@@ -37,11 +37,14 @@
             <span class="arrow"></span>
             <ul class="submenu">
                 <li class=""><a href="${context.contextPath}/group/list/1" target="mainFrame"><span
-                        class="menu-icon fa fa-caret-right"></span>部门管理</a><span class="arrow"></span></li>
-                <li><a href="${context.contextPath}/country/list/1" target="mainFrame">国家管理</a></li>
+                        class="menu-icon fa fa-building-o brown"></span></span>部门管理</a><span class="arrow"></span></li>
+                <li><a href="${context.contextPath}/country/list/1" target="mainFrame"><span
+                        class="menu-icon fa fa-globe light-blue"></span>国家管理</a></li>
             <#--<li><a href="${context.contextPath}/access-point-type/list/1" target="mainFrame">推广类型一览</a></li>-->
-                <li><a href="${context.contextPath}/website/list/1" target="mainFrame">网站管理</a></li>
-                <li><a href="${context.contextPath}/disease-type/list/1" target="mainFrame">病种管理</a></li>
+                <li><a href="${context.contextPath}/website/list/1" target="mainFrame"><span
+                        class="menu-icon fa fa-map-signs orange2"></span>网站管理</a></li>
+                <li><a href="${context.contextPath}/disease-type/list/1" target="mainFrame"><span
+                        class="menu-icon fa fa-heartbeat orange"></span>病种管理</a></li>
             </ul>
         </li>
 
@@ -64,7 +67,7 @@
             <#--</#if>-->
                 <#if ['ADMIN','MANAGER','DIRECTOR']?seq_contains(loginUser.role)>
                     <li><a href="${context.contextPath}/customer/filter/1" target="mainFrame"><span
-                            class="menu-icon fa fa-search"></span><span class="menu-text">全部复合查询</span></a></li><#else>
+                            class="menu-icon fa fa-table"></span><span class="menu-text">全部复合查询</span></a></li><#else>
                     <li><a href="${context.contextPath}/customer/filter-own/1" target="mainFrame"><span
                             class="menu-icon fa fa-search"></span><span class="menu-text">个人复合查询</span></a></li></#if>
                 <li><a href="${context.contextPath}/customer/add" target="mainFrame"><span

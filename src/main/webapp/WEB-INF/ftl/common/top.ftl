@@ -23,7 +23,7 @@
         <div class="navbar-header pull-left">
             <!-- #section:basics/navbar.layout.brand -->
             <small>
-                <a href="#" class="navbar-brand">
+                <a href="${context.contextPath}/" class="navbar-brand">
                     <span class="fa fa-globe"></span>北京 双友之春</a>
             </small>
             <!-- /section:basics/navbar.layout.brand -->
@@ -59,7 +59,7 @@
 
                         <li>
                             <a href="${context.contextPath}/user/profile" target="mainFrame">
-                                <span class="ace-icon fa fa-credit-card"></span>个人资料</a>
+                                <span class="ace-icon fa fa-newspaper-o"></span>个人资料</a>
                         </li>
 
                         <li class="divider"></li>

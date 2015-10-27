@@ -236,25 +236,40 @@
 <table id="customer-table-1"
        class="table table-striped table-bordered table-hover table-condensed table-responsive"
        style="word-wrap: break-word;table-layout:fixed">
-<#--<colgroup class="row">
-    <col class="col-sm-1">
+    <colgroup class="row">
+    <#--1-->
+        <col style="width: 5em;">
+        <col style="width: 13em;">
+        <col style="width: 11em;">
+        <col class="">
+    <#--5    -->
+        <col style="width: 3em;">
+        <col style="width: 9em;">
+        <col <#--style="width: 11em;"-->> <#--备注-->
+        <col style="width: 3em;">
+    <#--9-->
+        <col style="width: 5em;">
+        <col style="width: 6.5em;">
+        <col style="width: 6.5em;">
+        <col style="width: 5em;">
+    <#--<col class="col-sm-1">
     <col class="col-sm-2">
     <col class="col-sm-2">
     <col class="col-sm-2">
     <col class="col-sm-2">
     <col class="col-sm-1">
-    <col class="col-sm-2">
-</colgroup>-->
+    <col class="col-sm-2">-->
+    </colgroup>
     <thead>
     <tr>
-        <th class="text-right">ID<input type="checkbox" id="check-all"></th>
+        <th class="text-right"><input type="checkbox" id="check-all"></th>
         <th class="text-right">姓名</th>
         <th class="text-right">国家</th>
         <th class="text-right">症状</th>
-        <th class="text-right">是否住院</th>
+        <th class="text-right" title="是否住院">住院</th>
         <th class="text-right">所属网站</th>
         <th class="text-right">备注</th>
-        <th class="text-right">是否报备</th>
+        <th class="text-right" title="是否报备">报备</th>
         <th class="text-right">提交人</th>
         <th class="text-right">更新时间</th>
         <th class="text-right">创建时间</th>
@@ -267,42 +282,53 @@
     <#list page.list as customer>
     <tr>
         <td class="text-right id-col">
-        ${customer.id?c}<input
-                type="checkbox" class="checkbox-each-id" name="customer-ids"
-                value="${customer.id?c}"
-                form="pass-on-form">
+        <#--${customer.id?c}--><input type="checkbox" class="checkbox-each-id" name="customer-ids"
+                                      value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
         <#--<label style="width: 100%;"></label>-->
         </td>
         <td class="text-right"
             <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
             <div>
+                <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
                 <#if (customer.patientName)??>
-                    <#if customer.patientName?length gt 8>${customer.patientName?substring(0,5)+'...'}<#else>${customer.patientName}</#if>
+                    <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                 <#else>
                     <#if (customer.liaisonName)??>
                     ${customer.liaisonName}<#else><span
                             class="label">不详</span></#if>
-                </#if> <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
+                </#if>
             </div>
         <#--<div class="stars-ui-ele btn-minier rating"
              data-init-score="${(customer.stars)!'0'}" title="意向的星级"
              style="font-size: 7px"></div>-->
         </td>
         <td class="text-right"<#if customer.patientCountry??>
-            title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 10>${customer.patientCountry.name?substring(0,10)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
+            title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
             <span class="label">不详</span></#if></td>
-        <td class="text-right"
-            title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 6>${customer.symptom?substring(0,5)+'...'}<#else>${customer.symptom}</#if><#else>
+        <td class=""
+            title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
             <span class="label">不详</span></#if></td>
-        <td class="text-right"><#if customer.hospitalization??>${customer.hospitalization.textName}<#else>
+        <td class="text-right" title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
+            <#switch customer.hospitalization>
+                <#case 'YES'><span class="fa fa-hotel text-danger"></span>
+                    <#break>
+                <#case 'NO'><span class="fa fa-thumbs-o-down text-info"></span>
+                    <#break>
+                <#case 'DISCHARGE'><span class="fa fa-child text-success"></span>
+                    <#break>
+            </#switch>
+        <#else>
             <span class="label">不详</span></#if></td>
         <td class="text-right"
             title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
             <span class="label">不详</span></#if></td>
-        <td class="text-right"
-            title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 6>${customer.memo?substring(0,5)+'...'}<#else>${customer.memo}</#if><#else>
+        <td class=""
+            title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
             <span class="label">不详</span></#if></td>
-        <td class="text-right"><#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}<#else>
+        <td class="text-right"
+            title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
+            <span class="fa fa-check-square-o text-warning"></span><#else><span
+                class="fa fa-square-o text-info"></span></#if><#else>
             <span class="label">不详</span></#if></td>
     <#--<td class="text-right"
         title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
@@ -311,21 +337,16 @@
             title="${(customer.user.realName)!''}"><#if ((customer.user.realName))??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
             <span class="label">不详</span></#if></td>
         <td class="text-right"
-            <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('MM.dd')}<#else>
+            <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('M.dd HH:mm')}<#else>
             <span class="label">不详</span></#if></td>
         <td class="text-right"
-            <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('MM.dd')}<#else>
+            <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('M.dd HH:mm')}<#else>
             <span class="label">不详</span></#if></td>
 
         <td class="center">
             <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                <span class="btn-group">
-                                            <a class="btn btn-minier"
-                                               href="${context.contextPath}/customer/get/${customer.id?c}"
-                                               title="查看"><span class="fa fa-newspaper-o"></span></a>
-                                        <a class="btn btn-minier" href="/customer/update/${customer.id?c}"
-                                           title="编辑"><span
-                                                class="fa fa-paint-brush"></span></a>
+                <span class="btn-group"><a class="btn btn-minier" href="/customer/update/${customer.id?c}"
+                                           title="编辑"><span class="fa fa-paint-brush"></span></a>
 
                 <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
                     <form action="${context.contextPath}/customer/remove" method="post"

@@ -2,16 +2,16 @@
 <div class="dataTables_paginate">
     <ul class="pagination">
         <li>
-            <span>${page.pageNo?c}/${page.maxPageNo?c}页</span>
+            <#--<span>${page.pageNo?c}/${page.maxPageNo?c}页</span>-->
             <span>每页${page.pageSize?c}条</span>
-        </li>
-        <li>
+        <#--</li>-->
+        <#--<li>-->
             <span>共${page.totalRows?c}条</span>
         </li>
         <#if page.totalRows gt 0>
             <#if !page.firstPage>
-                <li><a href="${baseUrl+'/1'}${('?'+query)!''}">首页</a></li><#else>
-                <li class="active"><span class="">首页</span></li></#if>
+                <li><a href="${baseUrl+'/1'}${('?'+query)!''}">1</a></li><#else>
+                <li class="active"><span class="">1</span></li></#if>
 
         <#--
                     <#if !page.firstPage && page.maxPageNo gte 3>
@@ -26,10 +26,10 @@
                     <li><a href="${baseUrl+'/'+i?c}${('?'+query)!''}">
                         <#switch i >
                             <#case page.pageNo-1>
-                                上一页
+                                <span class="fa fa-angle-left"></span>
                                 <#break >
                             <#case page.pageNo+1>
-                                下一页
+                                <span class="fa fa-angle-right"></span>
                                 <#break >
                             <#default>
                             ${i?c}
@@ -46,8 +46,8 @@
         -->
             <#if page.maxPageNo gte 2>
                 <#if !page.lastPage>
-                    <li><a href="${baseUrl+'/'+page.maxPageNo?c}${('?'+query)!''}">尾页</a></li><#else>
-                    <li class="active"><span class="">尾页</span></li></#if>
+                    <li><a href="${baseUrl+'/'+page.maxPageNo?c}${('?'+query)!''}">${page.maxPageNo}</a></li><#else>
+                    <li class="active"><span class="">${page.maxPageNo}</span></li></#if>
 
             </#if>
         </#if>

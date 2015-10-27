@@ -284,7 +284,7 @@ public class CustomerController {
         model.addAttribute("countries", countryService.listAll());
 
         model.addAttribute("page", page);
-        model.addAttribute("path", "/customer/filter-own/1");
+        model.addAttribute("path", "/customer/filter-own");
         return "customer-filter-own-list";
     }
 
