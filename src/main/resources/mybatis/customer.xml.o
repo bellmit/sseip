@@ -10,7 +10,7 @@
         <result column="liaison_address" property="liaisonAddress"/>
         <result column="patient_name" property="patientName"/>
         <result column="patient_address" property="patientAddress"/>
-        <result column="contact_recoreds" property="contactRecoreds"/>
+        <result column="contact_records" property="contactRecords"/>
         <result column="liaison_countryId" property="liaisonCountryId"/>
         <result column="patient_country_id" property="patientCountryId"/>
         <result column="disease_type_id" property="diseaseTypeId"/>
@@ -26,7 +26,7 @@
         <result column="liaison_address" property="liaisonAddress"/>
         <result column="patient_name" property="patientName"/>
         <result column="patient_address" property="patientAddress"/>
-        <result column="contact_recoreds" property="contactRecoreds"/>
+        <result column="contact_records" property="contactRecords"/>
         <result column="liaison_country_id" property="liaisonCountryId"/>
         <result column="patient_country_id" property="patientCountryId"/>
         <result column="disease_type_id" property="diseaseTypeId"/>

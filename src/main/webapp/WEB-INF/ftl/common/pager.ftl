@@ -2,7 +2,7 @@
 <div class="dataTables_paginate">
     <ul class="pagination">
         <li>
-            <#--<span>${page.pageNo?c}/${page.maxPageNo?c}页</span>-->
+        <#--<span>${page.pageNo?c}/${page.maxPageNo?c}页</span>-->
             <span>每页${page.pageSize?c}条</span>
         <#--</li>-->
         <#--<li>-->
@@ -46,8 +46,8 @@
         -->
             <#if page.maxPageNo gte 2>
                 <#if !page.lastPage>
-                    <li><a href="${baseUrl+'/'+page.maxPageNo?c}${('?'+query)!''}">${page.maxPageNo}</a></li><#else>
-                    <li class="active"><span class="">${page.maxPageNo}</span></li></#if>
+                    <li><a href="${baseUrl+'/'+page.maxPageNo?c}${('?'+query)!''}">${page.maxPageNo?c}</a></li><#else>
+                    <li class="active"><span class="">${page.maxPageNo?c}</span></li></#if>
 
             </#if>
         </#if>

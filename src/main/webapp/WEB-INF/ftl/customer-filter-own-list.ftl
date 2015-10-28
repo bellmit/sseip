@@ -326,7 +326,7 @@
             <span class="label">不详</span></#if></td>
         <td class="text-right"
             title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
-            <span class="fa bigger-140 fa-circle-o-notch dark"></span></#if><#else> <span class="label">不详</span></#if>
+            <span class="fa bigger-140 fa-circle-o-notch green"></span></#if><#else> <span class="label">不详</span></#if>
         </td>
     <#--<td class="text-right"
         title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>

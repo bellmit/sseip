@@ -10,7 +10,8 @@ CREATE TABLE `group` (
   id          INT PRIMARY KEY AUTO_INCREMENT,
   name        VARCHAR(128),
   description TEXT(512)
-);
+)
+  ENGINE innodb;
 
 CREATE TABLE user (
   id        INT PRIMARY KEY AUTO_INCREMENT,
@@ -26,7 +27,8 @@ CREATE TABLE user (
   group_id  INT,
   CONSTRAINT fk_user_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
     ON DELETE SET NULL
-);
+)
+  ENGINE innodb;
 
 /*CREATE TABLE customer (
   id                INT PRIMARY KEY AUTO_INCREMENT,
@@ -61,18 +63,21 @@ CREATE TABLE country (
   memo    TEXT(512),
   updated DATETIME,
   a2_code CHAR(4)
-);
+)
+  ENGINE innodb;
 
 CREATE TABLE website (
   id   INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(64),
   url  VARCHAR(128)
-);
+)
+  ENGINE innodb;
 
 CREATE TABLE disease_type (
   id     INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(64)
-);
+)
+  ENGINE innodb;
 
 /*CREATE TABLE access_point_type (
   id     INT PRIMARY KEY AUTO_INCREMENT,
@@ -84,7 +89,8 @@ CREATE TABLE user_role (
   user_id INT,
   role    INT,
   CONSTRAINT fk_user_role_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
-);
+)
+  ENGINE innodb;
 
 CREATE TABLE user_logon (
   id            INT PRIMARY KEY AUTO_INCREMENT,
@@ -94,7 +100,8 @@ CREATE TABLE user_logon (
   last_ip       VARCHAR(39),
   CONSTRAINT fk_user_logon_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
     ON DELETE CASCADE
-);
+)
+  ENGINE innodb;
 
 DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
@@ -124,7 +131,7 @@ CREATE TABLE customer (
   updated            DATETIME,
 
   memo               TEXT,
-  contact_recoreds   TEXT,
+  contact_records    TEXT,
 
   discard            TINYINT(1)      DEFAULT FALSE,
 
@@ -148,4 +155,8 @@ CREATE TABLE customer (
     ON DELETE SET NULL,
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
     ON DELETE SET NULL
-);
+)
+  ENGINE innodb;
+
+truncate customer;
+

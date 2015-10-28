@@ -20,9 +20,9 @@ public class DummyCustomer {
         System.out.println(s);
         Customer c;
         System.out.println(new Date());
-        final int count = 30000;
-        ArrayList<Customer> list = new ArrayList<>(count + 7);
-        int size = 10000;
+        final int bulkCount = 30000;
+        ArrayList<Customer> list = new ArrayList<>(bulkCount + 7);
+        int size = 600000;
 //        int size = 60;
         dates = RandomDate.genSortedDates(size);
         for (int i = 0; i < size; i++) {
@@ -30,7 +30,7 @@ public class DummyCustomer {
             c = gen(i);
 //            System.out.println(JSON.toJSONString(c, true));
             list.add(c);
-            if (list.size() >= count) {
+            if (list.size() >= bulkCount) {
                 System.out.println(i);
                 System.out.println(new Date());
                 System.out.println(String.format("index at %d, %s", i, new Date().toString()));
@@ -38,7 +38,9 @@ public class DummyCustomer {
                 list.clear();
             }
         }
-        s.addAllDummies(list);
+        if (list.size() > 0) {
+            s.addAllDummies(list);
+        }
         System.out.println(new Date());
     }
 

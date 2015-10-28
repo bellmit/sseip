@@ -2,7 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -63,41 +67,37 @@
     </bean>
 
     <!-- 配置事务管理器 -->
-    <!--<bean id="transactionManager"
+    <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-    </bean>-->
+    </bean>
     <!--配置一个数据源结束-->
 
     <!-- 配置哪些方法要加入事务控制 -->
-    <!--
-        <tx:advice id="txAdvice" transaction-manager="transactionManager">
-            <tx:attributes>
-                &lt;!&ndash; 所有方法加入事务管理，为了提高效率把查询类方法设置为只读事务 &ndash;&gt;
-                <tx:method name="*" propagation="REQUIRED" read-only="true"/>
-                &lt;!&ndash; 可能执行修改的方法 &ndash;&gt;
-                <tx:method name="add*" propagation="REQUIRED"/>
-                <tx:method name="save*" propagation="REQUIRED"/>
-                <tx:method name="delete*" propagation="REQUIRED"/>
-                <tx:method name="remove*" propagation="REQUIRED"/>
-                <tx:method name="update*" propagation="REQUIRED"/>
-                <tx:method name="clean*" propagation="REQUIRED"/>
-                <tx:method name="change*" propagation="REQUIRED"/>
-                <tx:method name="set*" propagation="REQUIRED"/>
-            </tx:attributes>
-        </tx:advice>
-    -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--所有方法加入事务管理，为了提高效率把查询类方法设置为只读事务-->
+            <tx:method name="*" propagation="REQUIRED" read-only="true"/>
+            <!--可能执行修改的方法-->
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="clean*" propagation="REQUIRED"/>
+            <tx:method name="change*" propagation="REQUIRED"/>
+            <tx:method name="set*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
 
     <!-- 配置AOP，Spring是通过AOP来进行事务管理的 -->
-    <!--
-        <aop:config>
-            &lt;!&ndash; 设置pointCut表示哪些方法要加入事务处理 &ndash;&gt;
-            <aop:pointcut id="allMethods"
-                          expression="execution(* com.syzc.sseip.service.*.*(..))"/>
-            &lt;!&ndash; 通过advisor来确定具体要加入事务控制的方法 &ndash;&gt;
-            <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods"/>
-        </aop:config>
-    -->
+    <aop:config>
+        <!--设置pointCut表示哪些方法要加入事务处理-->
+        <aop:pointcut id="allMethods"
+                      expression="execution(* com.syzc.sseip.service.*.*(..))"/>
+        <!--通过advisor来确定具体要加入事务控制的方法-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods"/>
+    </aop:config>
 
     <!-- 使用ehcache缓存 for service -->
     <!--

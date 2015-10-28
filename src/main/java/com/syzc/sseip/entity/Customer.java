@@ -35,7 +35,7 @@ public class Customer implements Serializable {
     private Date updated;
 
     private String memo; //备注
-    private String contactRecoreds; //聊天、邮件记录
+    private String contactRecords; //聊天、邮件记录
 
     private Byte stars;
     private Boolean valid;
@@ -237,12 +237,12 @@ public class Customer implements Serializable {
         this.websiteId = websiteId;
     }
 
-    public String getContactRecoreds() {
-        return contactRecoreds;
+    public String getContactRecords() {
+        return contactRecords;
     }
 
-    public void setContactRecoreds(String contactRecoreds) {
-        this.contactRecoreds = contactRecoreds;
+    public void setContactRecords(String contactRecords) {
+        this.contactRecords = contactRecords;
     }
 
     public Date getUpdated() {
