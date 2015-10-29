@@ -19,6 +19,7 @@
         <result column="owner_user_id" property="ownerUserId"/>
         <result column="group_id" property="groupId"/>
         <result column="if_report" property="ifReport"/>
+        <result column="source_website" property="sourceWebsite"/>
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
         <id column="id" property="id"/>
@@ -35,6 +36,7 @@
         <result column="owner_user_id" property="ownerUserId"/>
         <result column="group_id" property="groupId"/>
         <result column="if_report" property="ifReport"/>
+        <result column="source_website" property="sourceWebsite"/>
 
         <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
         <association property="patientCountry" column="patient_country_id" select="getCountry"/>
@@ -85,13 +87,14 @@
         disease_type_id,
         website_id,
         memo,
-        contact_recoreds,
+        contact_records,
         stars,
         valid,
         user_id,
         owner_user_id,
         group_id,
-        if_report
+        if_report,
+        source_website
         )
         VALUES
         (
@@ -114,7 +117,7 @@
         #{entity.diseaseTypeId},
         #{entity.websiteId},
         #{entity.memo},
-        #{entity.contactRecoreds},
+        #{entity.contactRecords},
         <choose>
             <when test="entity.stars !=null and entity.stars !=0">
                 #{entity.stars}
@@ -128,7 +131,8 @@
         #{entity.userId},
         #{entity.userId},
         #{entity.groupId},
-        #{entity.ifReport}
+        #{entity.ifReport},
+        #{entity.sourceWebsite}
         );
     </insert>
     <insert id="addAll">
@@ -152,13 +156,14 @@
         disease_type_id,
         website_id,
         memo,
-        contact_recoreds,
+        contact_records,
         stars,
         valid,
         user_id,
         owner_user_id,
         group_id,
-        if_report
+        if_report,
+        source_website
         )
         VALUES
         <foreach collection="entities" item="entity" separator=",">
@@ -182,13 +187,14 @@
             #{entity.diseaseTypeId},
             #{entity.websiteId},
             #{entity.memo},
-            #{entity.contactRecoreds},
+            #{entity.contactRecords},
             #{entity.stars},
             #{entity.valid},
             #{entity.userId},
             #{entity.userId},
             #{entity.groupId},
-            #{entity.ifReport}
+            #{entity.ifReport},
+            #{entity.sourceWebsite}
             )
         </foreach>
     </insert>
@@ -212,14 +218,15 @@
         disease_type_id,
         website_id,
         memo,
-        contact_recoreds,
+        contact_records,
         stars,
         valid,
         user_id,
         owner_user_id,
         group_id,
         added,
-        if_report
+        if_report,
+        source_website
         )
         VALUES
         <foreach collection="entities" item="entity" separator=",">
@@ -242,14 +249,15 @@
             #{entity.diseaseTypeId},
             #{entity.websiteId},
             #{entity.memo},
-            #{entity.contactRecoreds},
+            #{entity.contactRecords},
             #{entity.stars},
             #{entity.valid},
             #{entity.userId},
             #{entity.userId},
             #{entity.groupId},
             #{entity.added},
-            #{entity.ifReport}
+            #{entity.ifReport},
+            #{entity.sourceWebsite}
             )
         </foreach>
     </insert>
@@ -367,9 +375,9 @@
             <otherwise>NULL</otherwise>
         </choose>
         ,
-        contact_recoreds =
+        contact_records =
         <choose>
-            <when test="entity.contactRecoreds!=null and entity.contactRecoreds!=''">#{entity.contactRecoreds}</when>
+            <when test="entity.contactRecords!=null and entity.contactRecords!=''">#{entity.contactRecords}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
@@ -401,6 +409,12 @@
                 </choose>
                 ,
         -->
+        source_website =
+        <choose>
+            <when test="entity.sourceWebsite!=null and entity.sourceWebsite!=''">#{entity.sourceWebsite}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
         if_report =
         <choose>
             <when test="entity.ifReport!=null">#{entity.ifReport}</when>
@@ -581,5 +595,9 @@
     </update>
     <update id="updateDiscard">
         update customer SET discard=#{discard},updated=now() where id=#{id}
+    </update>
+
+    <update id="updateMemo">
+        UPDATE customer SET memo=#{memo} where id=#{id}
     </update>
 </mapper>

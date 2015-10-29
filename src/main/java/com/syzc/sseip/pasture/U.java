@@ -1,6 +1,5 @@
 package com.syzc.sseip.pasture;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.util.Date;
@@ -38,10 +37,14 @@ public class U {
             System.out.println(e.attr("href"));
         }
 */
-        Pattern p = Pattern.compile("[<]a.*?href.*?=.*?\"(http.*?)\"", Pattern.DOTALL);
+        Pattern p = Pattern.compile("[<]a.*?href.*?=.*?\"(http\\S*?)\"", Pattern.DOTALL);
         Matcher m;
+        m = p.matcher(u);
+        if (m.find()) {
+            System.out.println(m.group(1));
+        }
 
-        for (int i = 0; i < 1 << 17; i++) {
+        /*for (int i = 0; i < 1 << 17; i++) {
             d = Jsoup.parseBodyFragment(u);
             m = p.matcher(u);
             if (i % 1024 == 0) {
@@ -51,7 +54,7 @@ public class U {
                 m.group(1);
 //                System.out.println(m.group(1));
             }
-        }
+        }*/
         System.out.println(new Date());
     }
 }

@@ -22,7 +22,7 @@ public class CustomerServiceImplTest {
         Customer c;
         c = new Customer();
         c.setAge((short) 1);
-        c.setContactRecoreds("123");
+        c.setContactRecords("123");
         c.setEmail("234");
         c.setEmergency(true);
         c.setHospitalization(HospitalizationType.DISCHARGE);

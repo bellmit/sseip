@@ -110,7 +110,7 @@
         #{entity.diseaseTypeId},
         #{entity.websiteId},
         #{entity.memo},
-        #{entity.contactRecoreds},
+        #{entity.contactRecords},
         <choose>
             <when test="entity.stars !=null and entity.stars !=0">
                 #{entity.stars}
@@ -174,7 +174,7 @@
             #{entity.diseaseTypeId},
             #{entity.websiteId},
             #{entity.memo},
-            #{entity.contactRecoreds},
+            #{entity.contactRecords},
             #{entity.stars},
             #{entity.valid},
             #{entity.userId},
@@ -232,7 +232,7 @@
             #{entity.diseaseTypeId},
             #{entity.websiteId},
             #{entity.memo},
-            #{entity.contactRecoreds},
+            #{entity.contactRecords},
             #{entity.stars},
             #{entity.valid},
             #{entity.userId},
@@ -358,7 +358,7 @@
         ,
         contact_recoreds =
         <choose>
-            <when test="entity.contactRecoreds!=null and entity.contactRecoreds!=''">#{entity.contactRecoreds}</when>
+            <when test="entity.contactRecords!=null and entity.contactRecords!=''">#{entity.contactRecords}</when>
             <otherwise>NULL</otherwise>
         </choose>
         ,
@@ -571,4 +571,8 @@
     <update id="updateDiscard">
         update customer SET discard=#{discard} where id=#{id}
     </update>
+
+        <update id="updateMemo">
+            UPDATE customer SET memo=#{memo} where id=#{id}
+        </update>
 </mapper>

@@ -22,18 +22,18 @@
             <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-6 col-xs-offset-3">
                         <table id="sample-table-1"
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
                                style="word-wrap: break-word;table-layout:fixed">
-                        <#--<colgroup class="row">
-                            <col class="col-md-1">
-                            <col class="col-md-2">
-                            <col class="col-md-2">
-                        </colgroup>-->
+                            <colgroup>
+                                <col class="col-md-1">
+                                <col class="col-md-2">
+                            <#--<col class="col-md-2">-->
+                            </colgroup>
                             <thead>
                             <tr>
-                                <th class="text-right">id</th>
+                            <#--<th class="text-right">id</th>-->
                                 <th class="text-right">名称</th>
                                 <th class="center">功能</th>
                             </tr>
@@ -42,7 +42,7 @@
                             <tbody>
                             <#list roleTypes as roleType>
                             <tr>
-                                <td class="text-right">${roleType.code}</td>
+                            <#--<td class="text-right">${roleType.code}</td>-->
                                 <td class="text-right">${roleType.roleName}</td>
                                 <td class="center">
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>

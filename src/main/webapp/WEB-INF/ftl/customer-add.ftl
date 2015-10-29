@@ -185,7 +185,7 @@
                             <label class="col-sm-1 control-label no-padding-right">紧急 </label>
 
                             <div class="col-sm-2">
-                                <select name="emergency" class="col-xs-12">
+                                <select name="emergency" class="col-xs-12" title="是否紧急">
                                     <option <#if (form.emergency)?? && form.emergency>selected=""</#if> value="1">紧急
                                     </option>
                                     <option <#if !((form.emergency)??) || !(form.emergency)>selected=""</#if> value="0">
@@ -235,9 +235,9 @@
                             <label class="col-xs-1 control-label no-padding-right" title="患者意向">意向</label>
 
                             <div class="col-xs-5">
-                                <input name="stars" id="form-stars" type="hidden" value="${(form.stars)!'0'}"/>
+                                <input name="stars" id="form-stars" type="hidden" value="${(form.stars)!'3'}"/>
 
-                                <div id="stars-ui" data-init-score="${(form.stars)!'0'}" class="rating inline"
+                                <div id="stars-ui" data-init-score="${(form.stars)!'3'}" class="rating inline"
                                      title="意向的星级"></div>
                             </div>
 
@@ -265,7 +265,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label no-padding-right">网站 </label>
+                                    <label class="col-sm-2 control-label no-padding-right">网站</label>
 
                                     <div class="col-sm-10">
                                         <select name="websiteId" class="col-xs-12" size="6">
@@ -352,15 +352,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                            <#--<span id="source-website" title="来源网址" class="col-xs-12"></span>-->
+                                <label title="来源网址" class="col-xs-12">来源网址: <span id="source-website"
+                                                                                  class="gold"></span></label>
+                            </div>
+                        </div>
+
                         <div class="row" title="通讯记录">
                             <div class="col-xs-12">
-                                <input name="contactRecoreds" id="contact-records" type="hidden"
-                                       value="${(form.contactRecoreds?xhtml)!''}"/>
+                                <input name="contactRecords" id="contact-records" type="hidden"
+                                       value="${(form.contactRecords?xhtml)!''}"/>
 
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="wysiwyg-editor" id="contact-records-editor"
-                                             title="通讯记录">${(form.contactRecoreds)!''}</div>
+                                             title="通讯记录">${(form.contactRecords)!''}</div>
                                     </div>
                                 </div>
                             </div>
@@ -412,6 +420,26 @@
             animate: false,
         });
         $('#contact-records-editor').ace_wysiwyg();
+        {
+            var ff = function () {
+                //            $('#source-website').text($('#contact-records-editor').html());
+                var i = $('#contact-records-editor').html();
+                var r = /[<]a.*?href.*?=.*?"(\S*?)"/;
+//            var r = /[<]a.*?href.*?=.*?"(.*?)"/;
+                var res = r.exec(i);
+                if (res != null) {
+                    $('#source-website').text(res[1]);
+                } else {
+//                console.log('null of regex match.');
+                    $('#source-website').html('<span class="label">空</span>');
+                }
+            };
+//        $('#source-website').text($('#contact-records-editor').html());
+            ff();
+            $('#contact-records-editor').parent().focusout(function (e) {
+                ff();
+            });
+        }
         $('#customer-add-form').on('submit', function () {
             $('#contact-records').val($('#contact-records-editor').html());
         });

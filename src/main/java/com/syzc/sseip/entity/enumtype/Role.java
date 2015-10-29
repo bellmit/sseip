@@ -7,7 +7,7 @@ public enum Role {
     EMPLOYEE(1, "基本雇员"),
     //    DIRECTOR(2, "部门主任"),
 //    MANAGER(3, "部门经理"),
-    ADMIN(4, "系统管理员"), EMPTY(5, "停职");
+    ADMIN(4, "系统管理员"), EMPTY(5, "停职"), TELADMIN(6, "电话管理员");
     protected int code;
     protected String roleName;
 

@@ -22,4 +22,6 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
     Long passOn(Long[] ids, Long userId, Long currUserId);
 
     Boolean updateDiscard(Long id, Boolean discard, Long userId);
+
+    Boolean updateMemo(Long id, String memo);
 }

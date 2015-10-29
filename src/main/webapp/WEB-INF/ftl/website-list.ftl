@@ -29,14 +29,14 @@
                             <colgroup class="row">
                                 <col class="col-sm-3">
                                 <col class="col-sm-3">
-                                <col class="col-sm-3">
+                            <#--<col class="col-sm-3">-->
                                 <col class="col-sm-3">
                             </colgroup>
                             <thead>
                             <tr>
                                 <th class="text-right">id</th>
                                 <th class="text-right">名称</th>
-                                <th class="text-right">域名</th>
+                            <#--<th class="text-right">域名</th>-->
                                 <th class="center">操作</th>
                             </tr>
                             </thead>
@@ -47,9 +47,9 @@
                                 <td class="text-right">${website.id}</td>
                                 <td class="text-right"><#if (website.name)??>${website.name}<#else><span class="label">不详</span></#if>
                                 </td>
-                                <td class="text-right"><#if (website.url)??>${website.url}<#else><span
-                                        class="label">不详</span></#if>
-                                </td>
+                            <#--<td class="text-right"><#if (website.url)??>${website.url}<#else><span
+                                    class="label">不详</span></#if>
+                            </td>-->
                                 <td class="center">
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">

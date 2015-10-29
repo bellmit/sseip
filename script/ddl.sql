@@ -122,7 +122,7 @@ CREATE TABLE customer (
   updated            DATETIME        DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
 
   memo               TEXT,
-  contact_recoreds   TEXT,
+  contact_records    TEXT,
 
   discard            TINYINT(1)      DEFAULT FALSE,
 
@@ -133,6 +133,7 @@ CREATE TABLE customer (
   group_id           INT,
 
   if_report          TINYINT(1),
+  source_website     VARCHAR(2000),
 
   CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id)
     ON DELETE SET NULL,

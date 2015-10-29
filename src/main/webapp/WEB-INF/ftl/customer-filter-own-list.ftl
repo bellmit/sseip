@@ -244,6 +244,7 @@
     <#--5    -->
         <col style="width: 3em;">
         <col style="width: 9em;">
+        <col style="width: 9em;">
         <col <#--style="width: 11em;"-->> <#--备注-->
         <col style="width: 3em;">
     <#--9-->
@@ -266,7 +267,8 @@
         <th class="text-right">国家</th>
         <th class="text-right">症状</th>
         <th class="text-right" title="是否住院">住院</th>
-        <th class="text-right">所属网站</th>
+        <th class="text-right">所属网站组</th>
+        <th class="text-right">来源网站</th>
         <th class="text-right">备注</th>
         <th class="text-right" title="是否报备">报备</th>
         <th class="text-right">提交人</th>
@@ -319,7 +321,10 @@
         <#else>
             <span class="label">不详</span></#if></td>
         <td class="text-right"
-            title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
+            title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,8)+'...'}<#else>${customer.website.name}</#if><#else>
+            <span class="label">不详</span></#if></td>
+        <td class="text-right"
+            title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,16)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
             <span class="label">不详</span></#if></td>
         <td class=""
             title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>

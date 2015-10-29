@@ -26,12 +26,16 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
     private static final Logger logger = Logger.getLogger(CustomerController.class);
     public final Byte pageSize = 20;
+
+    private static final Pattern achorHrefPattern = Pattern.compile("[<]a.*?href.*?=.*?\"(http\\S*?)\"", Pattern.DOTALL);
 
     private CountryService countryService;
     private DiseaseTypeService diseaseTypeService;
@@ -116,6 +120,8 @@ public class CustomerController {
             @RequestParam(required = false) Boolean ifReport,
             @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+
         Date till = null;
         Date since = null;
         if (dateRange != null && dateRange.length == 2) {
@@ -129,10 +135,9 @@ public class CustomerController {
 
 //        System.out.println(Arrays.asList(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId));
 
-        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+        /*if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
             throw AuthException.create("没有权限", Level.DEBUG);
-        }
+        }*/
 
         Page<Customer> page;
         /*if (loginUser.getRole() == Role.DIRECTOR || loginUser.getRole() == Role.EMPLOYEE) {
@@ -147,7 +152,7 @@ public class CustomerController {
 //            page = customerService.listByFilter(sex, website, accessPointType, diseaseType, faraway, emergency, since, till,
 //                    groupId, userId, pageNo, pageSize);
         }*/
-        if (loginUser.getRole() != Role.ADMIN) {
+        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -396,6 +401,17 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
+        if (customer.getContactRecords() != null) {
+            Matcher m = achorHrefPattern.matcher(customer.getContactRecords());
+            if (m.find()) {
+                customer.setSourceWebsite(m.group(1));
+            } else {
+                System.out.println("source website not found");
+            }
+        } else {
+            System.out.println("contact records null");
+        }
+
         User user = (User) session.getAttribute("loginUser");
         customer.setUserId(user.getId());
         customer.setGroupId(user.getGroupId());
@@ -477,6 +493,18 @@ public class CustomerController {
         }
 
         customer.setId(id);
+
+        if (customer.getContactRecords() != null) {
+            Matcher m = achorHrefPattern.matcher(customer.getContactRecords());
+            if (m.find()) {
+                customer.setSourceWebsite(m.group(1));
+            } else {
+                System.out.println("source website not found");
+            }
+        } else {
+            System.out.println("contact records null");
+        }
+
         if (customerService.update(customer)) {
             customer = customerService.get(id);
             model.addAttribute("success", "更新完成");
@@ -536,5 +564,53 @@ public class CustomerController {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         customerService.updateDiscard(customerId, discard, loginUser.getId());
         return "redirect:" + referer;
+    }
+
+    @RequestMapping(value = "/{id:\\d+}/update-by-tel-admin", method = RequestMethod.GET)
+    public String updateMemo(@PathVariable Long id, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+
+        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+        if (referer == null) {
+            referer = request.getHeader("Referer");// may be still null
+        }
+        Customer customer = customerService.get(id);
+        if (customer == null) {
+            throw HosException.create("没有这个客户的资料", Level.DEBUG);
+        }
+
+        model.addAttribute("customer", customer);
+
+        return "customer-memo-udpate-by-tel-admin";
+    }
+
+    @RequestMapping(value = "/{id:\\d+}/update-by-tel-admin", method = RequestMethod.POST)
+    public String updateMemo(@PathVariable Long id, String memo, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+
+        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
+        if (referer == null) {
+            referer = "/";
+        }
+        Customer customer = customerService.get(id);
+        if (customer == null) {
+            throw HosException.create("没有这个客户的资料", Level.DEBUG);
+        }
+
+        if (customerService.updateMemo(id, memo)) {
+            model.addAttribute("success", "更新完成");
+        } else {
+            model.addAttribute("error", "更新失败");
+        }
+        customer = customerService.get(id);
+        model.addAttribute("customer", customer);
+        model.addAttribute("referer", referer);
+
+        return "customer-memo-udpate-by-tel-admin";
     }
 }

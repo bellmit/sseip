@@ -142,7 +142,7 @@
 <script type="text/javascript">
     $(function () {
         $('.stars-ui-ele').raty({
-            noRatedMsg: "它只读，它还没有星星",
+            noRatedMsg: "它还没有星星",
             starType: 'span',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
             space: false,

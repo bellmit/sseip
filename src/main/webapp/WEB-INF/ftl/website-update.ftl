@@ -58,15 +58,15 @@
                         </div>
                     </div>
 
-                    <div class="space-4"></div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">域名</label>
+                <#--<div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">域名</label>
 
-                        <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="description" type="text" name="url"
-                                   placeholder="域名 3166-1, Alpha-2 code" value="${(website.url)!''}" title="域名"/>
-                        </div>
+                    <div class="col-sm-9">
+                        <input class="col-xs-10 col-sm-5" id="description" type="text" name="url"
+                               placeholder="域名 3166-1, Alpha-2 code" value="${(website.url)!''}" title="域名"/>
                     </div>
+                </div>-->
 
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-9">

@@ -62,7 +62,7 @@ public class DummyCustomer {
         String email = RandomSimpleEnString.genString(r.nextInt(30) + 2) + "@example.com";
         String tel = String.valueOf(RandomTelNum.genTel());
         String memo = RandomSimpleCnString.genString(r.nextInt(400) + 5);
-        String contactRecoreds = RandomSimpleCnString.genString(r.nextInt(400) + 5);
+        String contactRecords = RandomSimpleCnString.genString(r.nextInt(400) + 5);
         Byte stars = (byte) (r.nextInt(5) + 1);
         Boolean valid = r.nextBoolean();
 
@@ -94,7 +94,7 @@ public class DummyCustomer {
         c.setDiseaseTypeId(diseaseTypeId);
         c.setWebsiteId(websiteId);
         c.setMemo(memo);
-        c.setContactRecoreds(contactRecoreds);
+        c.setContactRecords(contactRecords);
         c.setStars(stars);
         c.setValid(valid);
         c.setUserId(userId);
@@ -122,7 +122,7 @@ public class DummyCustomer {
         System.out.println(diseaseTypeId);
         System.out.println(websiteId);
         System.out.println(memo);
-        System.out.println(contactRecoreds);
+        System.out.println(contactRecords);
         System.out.println(stars);
         System.out.println(valid);
 
@@ -152,7 +152,7 @@ public class DummyCustomer {
         Long diseaseTypeId = r.nextInt(44 - 3) + 3L;
         Long websiteId = r.nextInt(24 - 1) + 1L;
         String memo = RandomSimpleCnString.genString(r.nextInt(400) + 5);
-        String contactRecoreds = RandomSimpleCnString.genString(r.nextInt(400) + 5);
+        String contactRecords = RandomSimpleCnString.genString(r.nextInt(400) + 5);
         Byte stars = (byte) (r.nextInt(5 - 1) + 1);
         Boolean valid = r.nextBoolean();
 
@@ -178,7 +178,7 @@ public class DummyCustomer {
         c.setDiseaseTypeId(diseaseTypeId);
         c.setWebsiteId(websiteId);
         c.setMemo(memo);
-        c.setContactRecoreds(contactRecoreds);
+        c.setContactRecords(contactRecords);
         c.setStars(stars);
         c.setValid(valid);
         c.setUserId(userId);
@@ -203,7 +203,7 @@ public class DummyCustomer {
         System.out.println(diseaseTypeId);
         System.out.println(websiteId);
         System.out.println(memo);
-        System.out.println(contactRecoreds);
+        System.out.println(contactRecords);
         System.out.println(stars);
         System.out.println(valid);
 

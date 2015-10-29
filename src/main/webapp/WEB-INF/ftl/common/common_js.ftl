@@ -9,21 +9,28 @@
 
 <!-- <![endif]-->
 
+<#--
 <!--[if IE]>
 <script type="text/javascript">
     window.jQuery || document.write("<script src='${context.contextPath}/resources/ace/assets/js/jquery1x.js'>" + "<" + "/script>");
 </script>
-<![endif]-->
+<![endif]&ndash;&gt;
+-->
+
+<#--
 <script type="text/javascript">
     if ('ontouchstart' in document.documentElement) document.write("<script src='${context.contextPath}/resources/ace/assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
 </script>
+-->
+
 <script src="${context.contextPath}/resources/ace/assets/js/bootstrap.js"></script>
 
 <!-- page specific plugin scripts -->
 
-<!--[if lte IE 8]>
-<script src="${context.contextPath}/resources/ace/assets/js/excanvas.js"></script>
-<![endif]-->
+<#--<!--[if lte IE 8]>-->
+<!--<script src="${context.contextPath}/resources/ace/assets/js/excanvas.js"></script>-->
+<#--<![endif]&ndash;&gt;-->
+
 <script src="${context.contextPath}/resources/ace/assets/js/jquery-ui.custom.js"></script>
 <#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.ui.touch-punch.js"></script>-->
 <#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.easypiechart.js"></script>-->
@@ -141,26 +148,26 @@
 
         var sales_charts = $('#sales-charts').css({'width': '100%', 'height': '220px'});
 
-/*
-        $('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-        function tooltip_placement(context, source) {
-            var $source = $(source);
-            var $parent = $source.closest('.tab-content')
-            var off1 = $parent.offset();
-            var w1 = $parent.width();
+        /*
+                $('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+                function tooltip_placement(context, source) {
+                    var $source = $(source);
+                    var $parent = $source.closest('.tab-content')
+                    var off1 = $parent.offset();
+                    var w1 = $parent.width();
 
-            var off2 = $source.offset();
-            //var w2 = $source.width();
+                    var off2 = $source.offset();
+                    //var w2 = $source.width();
 
-            if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-            return 'left';
-        }
+                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                    return 'left';
+                }
 
 
-        $('.dialogs,.comments').ace_scroll({
-            size: 300
-        });
-*/
+                $('.dialogs,.comments').ace_scroll({
+                    size: 300
+                });
+        */
 
 
         //Android's default browser somehow is confused when tapping on label which will lead to dragging the task
@@ -222,3 +229,4 @@
 <script src="${context.contextPath}/resources/ace/docs/assets/js/language/html.js"></script>
 <script src="${context.contextPath}/resources/ace/docs/assets/js/language/css.js"></script>
 <script src="${context.contextPath}/resources/ace/docs/assets/js/language/javascript.js"></script>-->
+

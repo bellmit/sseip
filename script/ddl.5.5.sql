@@ -142,6 +142,7 @@ CREATE TABLE customer (
   group_id           INT,
 
   if_report          TINYINT(1),
+  source_website     VARCHAR(2000),
 
   CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id)
     ON DELETE SET NULL,
@@ -158,5 +159,5 @@ CREATE TABLE customer (
 )
   ENGINE innodb;
 
-truncate customer;
+TRUNCATE customer;
 

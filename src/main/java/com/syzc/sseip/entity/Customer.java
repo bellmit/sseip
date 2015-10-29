@@ -48,6 +48,11 @@ public class Customer implements Serializable {
 
     private Boolean ifReport;
 
+    /**
+     * 来源网址
+     */
+    private String sourceWebsite;
+
     //    private Date calledTime;
 
     public Customer() {
@@ -275,5 +280,13 @@ public class Customer implements Serializable {
 
     public void setIfReport(Boolean ifReport) {
         this.ifReport = ifReport;
+    }
+
+    public String getSourceWebsite() {
+        return sourceWebsite;
+    }
+
+    public void setSourceWebsite(String sourceWebsite) {
+        this.sourceWebsite = sourceWebsite;
     }
 }

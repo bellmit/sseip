@@ -255,6 +255,7 @@
         <#--4    -->
             <col style="width: 3em;">
             <col style="width: 9em;">
+            <col style="width: 9em;">
             <col <#--style="width: 11em;"-->> <#--备注-->
             <col style="width: 3em;">
         <#--8-->
@@ -271,7 +272,8 @@
             <th class="text-right">国家</th>
             <th class="text-right">症状</th>
             <th class="text-right" title="是否住院">住院</th>
-            <th class="text-right">所属网站</th>
+            <th class="text-right">所属网站组</th>
+            <th class="text-right">来源网站</th>
             <th class="text-right">备注</th>
             <th class="text-right" title="是否报备">报备</th>
             <th class="text-right">所属人</th>
@@ -324,6 +326,9 @@
             <td class="text-right"
                 title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
                 <span class="label">不详</span></#if></td>
+            <td class="text-right"
+                title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,16)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
+                <span class="label">不详</span></#if></td>
             <td class=""
                 title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label">不详</span></#if></td>
@@ -347,27 +352,30 @@
                 <span class="label">不详</span></#if></td>
 
             <td class="center">
+            <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
+            <#--||loginUser.role='MANAGER'-->
+                <span class="btn-group">
                 <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& (customer.ownerUserId)??
-                && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR'
-                && customer.groupId?? && loginUser.groupId??
-                && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'
-                ||loginUser.role='MANAGER')>
-                <span class="btn-group"><a href="/customer/update/${customer.id?c}" class="btn btn-minier"
-                                           title="编辑"><span class="fa fa-paint-brush"></span></a>
-
+                && loginUser.id==customer.ownerUserId)||loginUser.role='ADMIN' )>
+                    <a href="${context.contextPath}/customer/update/${customer.id?c}" class="btn btn-minier"
+                       title="编辑"><span class="fa fa-paint-brush"></span></a>
+                </#if>
+                    <#if loginUser.role?? && ['ADMIN','TELADMIN']?seq_contains(loginUser.role)>
+                        <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
+                           class="btn btn-minier" title="编辑"><span class="fa fa-paint-brush"></span></a>
+                    </#if>
                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                         <button form="from-remove-customer-${customer_index}"
                                 href="${context.contextPath}/customer/remove"
-                                class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
-                                title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"> <span
-                                class="fa fa-trash"> </span>
+                                class="remove-control btn btn-minier ${customer.discard?then('btn-pink','btn-success')}"
+                                title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span class="fa fa-trash"> </span>
                         </button>
-                                            <form id="from-remove-customer-${customer_index}"
-                                                  action="${context.contextPath}/customer/remove" method="post"
-                                                  style="display: none;"><input type="hidden" name="id"
-                                                                                value="${customer.id?c}">
-                                            </form></#if>
-                </#if>
+                    <form id="from-remove-customer-${customer_index}"
+                          action="${context.contextPath}/customer/remove" method="post"
+                          style="display: none;"><input type="hidden" name="id"
+                                                        value="${customer.id?c}">
+                    </form>
+                    </#if>
             </span>
             </td>
         </tr>

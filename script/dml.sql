@@ -21,3 +21,6 @@ SELECT
 FROM country
 ORDER BY name DESC
 LIMIT #{offset}, #{size};
+
+ALTER TABLE customer MODIFY COLUMN source_website VARCHAR(2000);
+

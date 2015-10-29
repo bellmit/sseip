@@ -86,6 +86,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
         return customerDao.updateDiscard(id, discard);
     }
 
+    @Override
+    public Boolean updateMemo(Long id, String memo) {
+        return customerDao.updateMemo(id, memo);
+    }
+
     public static void main(String[] args) {
         ApplicationContext ac;
         ac = LocalAcUtil.getAc();

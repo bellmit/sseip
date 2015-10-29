@@ -77,7 +77,7 @@
                             class="label">不详</span></#if>
                     </dd>
                     <dt>联系记录</dt>
-                    <dd><#if (customer.contactRecoreds)??>${customer.contactRecoreds}<#else><span
+                    <dd><#if (customer.contactRecords)??>${customer.contactRecords}<#else><span
                             class="label">不详</span></#if>
                     </dd>
                     <dt>星级</dt>

@@ -43,9 +43,9 @@
                             <dt>名称</dt>
                             <dd><#if (website.name)??>${website.name}<#else><label
                                     class="label label-inverse">不详</label></#if></dd>
-                            <dt>域名</dt>
-                            <dd><#if (website.url)??>${website.url}<#else><label
-                                    class="label label-inverse">不详</label></#if></dd>
+                        <#--<dt>域名</dt>
+                        <dd><#if (website.url)??>${website.url}<#else><label
+                                class="label label-inverse">不详</label></#if></dd>-->
                         </dl>
                     </div>
                 </div>
