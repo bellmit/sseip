@@ -9,7 +9,7 @@
 <div class="main-container">
     <div class="main-content">
         <ul class="breadcrumb">
-            <li><a href="${context.contextPath}/"><span class="fa fa-home"></span>Home</a></li>
+            <li><a href="${context.contextPath}/" target="_top"><span class="fa fa-home"></span>Home</a></li>
             <li class="active"><span class="fa fa-bicycle"></span>患者备注更新<a href=""><span
                     class="fa fa-refresh"></span></a></li>
         </ul>

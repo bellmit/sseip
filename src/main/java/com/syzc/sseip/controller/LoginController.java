@@ -1,6 +1,5 @@
 package com.syzc.sseip.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.Producer;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserLogon;
@@ -111,8 +110,8 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam("captcha") String captcha, User form, @RequestParam("confirmPwd") String confirmPwd, Model model, HttpSession httpSession) {
-        logger.trace(JSON.toJSONString(form, true));
-        logger.trace(captcha);
+//        logger.trace(JSON.toJSONString(form, true));
+//        logger.trace(captcha);
         String kaptcha = (String) httpSession.getAttribute("kaptcha");
 
         if (!captcha.equals(kaptcha)) {
