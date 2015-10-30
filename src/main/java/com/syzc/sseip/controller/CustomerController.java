@@ -1,5 +1,6 @@
 package com.syzc.sseip.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.*;
 import com.syzc.sseip.entity.enumtype.*;
 import com.syzc.sseip.service.*;
@@ -623,6 +624,7 @@ public class CustomerController {
         System.out.println(customerService);
         System.out.println("telAuditDto");
         System.out.println(telAuditDto);
+        System.out.println(JSON.toJSONString(telAuditDto, true));
         if (customerService.updateTelAuditDto(telAuditDto)) {
             model.addAttribute("success", "选项更新完成");
         } else {
