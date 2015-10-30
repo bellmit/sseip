@@ -372,7 +372,7 @@
                                 <div class="col-xs-12">
                             <textarea name="memoItem" class="col-xs-12" style="resize: vertical;"
                                       placeholder="备忘" id="textarea-memo"
-                                      title="备忘">${(customer.memo?xhtml)!''}</textarea>
+                                      title="备忘"></textarea>
                                 </div>
                                 <div class="col-xs-12">
                                 <#if customer.memos?? && customer.memos?size gt 0>

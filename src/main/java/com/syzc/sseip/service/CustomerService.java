@@ -2,6 +2,7 @@ package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.TelAuditDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.Page;
 
@@ -25,4 +26,6 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
     Boolean updateMemo(Long id, String memo);
 
     Boolean addMemo(String memo, Long customerId);
+
+    Boolean updateTelAuditDto(TelAuditDto telAuditDto);
 }

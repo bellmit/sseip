@@ -6,6 +6,7 @@ import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.dao.MemoDao;
 import com.syzc.sseip.entity.Customer;
 import com.syzc.sseip.entity.Memo;
+import com.syzc.sseip.entity.TelAuditDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
@@ -104,6 +105,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
         Memo m = new Memo();
         m.setContent(memo);
         return memoDao.addToCustomer(m, customerId);
+    }
+
+    @Override
+    public Boolean updateTelAuditDto(TelAuditDto telAuditDto) {
+        return customerDao.updateTelAuditDto(telAuditDto);
     }
 
     public static void main(String[] args) {

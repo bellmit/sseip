@@ -613,4 +613,14 @@
     <select id="listAllByCustomer" resultMap="Memo">
         select * from memo where customer_id=#{customerId}
     </select>
+
+    <select id="updateTelAuditDto">
+        update customer set
+        if_report=#{entity.ifReport},
+        valid=#{entity.valid},
+        hospitalization=#{entity.hospitalization},
+        call_state=#{entity.callState},
+        weight=#{entity.weight}
+        where id=#{entity.customerId}
+    </select>
 </mapper>

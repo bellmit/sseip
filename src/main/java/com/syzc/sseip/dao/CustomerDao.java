@@ -1,6 +1,7 @@
 package com.syzc.sseip.dao;
 
 import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.TelAuditDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -77,4 +78,6 @@ public interface CustomerDao extends BaseDao<Customer> {
     Boolean updateDiscard(@Param("id") Long id, @Param("discard") Boolean discard);
 
     Boolean updateMemo(@Param("id") Long id, @Param("memo") String memo);
+
+    Boolean updateTelAuditDto(@Param("entity") TelAuditDto telAuditDto);
 }

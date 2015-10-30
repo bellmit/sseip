@@ -1,12 +1,12 @@
 package com.syzc.sseip.entity;
 
+import com.syzc.sseip.entity.enumtype.CallState;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
+import com.syzc.sseip.entity.enumtype.Weight;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1564478954650903113L;
@@ -49,8 +49,9 @@ public class Customer implements Serializable {
     private Boolean discard;
 
     private Boolean ifReport;
-    //    private Boolean weight;
-    private List<Memo> memos = new LinkedList<>();
+    private Weight weight;
+
+    private CallState callState;
 
     /**
      * 来源网址
@@ -292,5 +293,21 @@ public class Customer implements Serializable {
 
     public void setSourceWebsite(String sourceWebsite) {
         this.sourceWebsite = sourceWebsite;
+    }
+
+    public Weight getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Weight weight) {
+        this.weight = weight;
+    }
+
+    public CallState getCallState() {
+        return callState;
+    }
+
+    public void setCallState(CallState callState) {
+        this.callState = callState;
     }
 }

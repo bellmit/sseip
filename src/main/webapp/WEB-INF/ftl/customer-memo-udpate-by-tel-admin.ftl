@@ -63,14 +63,11 @@
                     <div class="form-group col-lg-5 col-md-7 col-sm-9 col-xs-11 col-xs-offset-1">
                         <label>备注</label>
                         <textarea name="memoItem" id="textarea-memo" form="customer-memo-update-form" placeholder="备注"
-                                  class="form-control" style="resize: vertical;"
-                                  title="备注">${(customer.memo?html)!''}</textarea>
+                                  class="form-control" style="resize: vertical;" title="备注"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-5 col-md-7 col-sm-9 col-xs-11 col-xs-offset-1">
-                        <div>${customer.memos???string('Y','N')}</div>
-                        <div>${(customer.memos?size)!'-1'}</div>
                     <#if customer.memos?? && customer.memos?size gt 0>
                         <div class="well">
                             <ul>
@@ -82,6 +79,74 @@
                             </ul>
                         </div>
                     </#if>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right">有效性</label>
+
+                    <div class="col-xs-2">
+                        <select name="valid" class="col-xs-12">
+                            <option <#if (customer.valid)?? && customer.valid>selected=""</#if> value="1">有效
+                            </option>
+                            <option <#if (customer.valid)?? && !(customer.valid)>selected=""</#if>
+                                    value="0">无效
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="是否报备">报备</label>
+
+                    <div class="col-sm-2">
+                        <select name="ifReport" class="col-xs-12">
+                            <option
+                            <#if !((customer.ifReport)??) || !(customer.ifReport)>selected=""</#if>
+                            value="0">不报备
+                            </option>
+                            <option
+                            <#if (customer.ifReport)?? && customer.ifReport>selected=""</#if>
+                            value="1">报备
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="住院情况">住院</label>
+
+                    <div class="col-sm-2">
+                        <select name="hospitalization" class="col-xs-12" size="3">
+                        <#list hospitalizationTypes as hospitalizationType>
+                            <option
+                                <#if (customer.hospitalization)?? && customer.hospitalization.code=hospitalizationType.code>selected=""</#if>
+                                value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
+                        </#list>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="通话状态">通话状态</label>
+
+                    <div class="col-sm-2">
+                        <select name="callState" class="col-xs-12" size="6">
+                        <#list callStates as callState>
+                            <option
+                                <#if (customer.callState)?? && customer.callState.code=callState.code>selected=""</#if>
+                                value="${callState.code}">${callState}</option>
+                        </#list>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="资源权重">资源权重</label>
+
+                    <div class="col-sm-2">
+                        <select name="weight" class="col-xs-12" size="3">
+                        <#list weights as weight>
+                            <option
+                                <#if (customer.weight)?? && customer.weight.code=weight.code>selected=""</#if>
+                                value="${weight.code}">${weight.weightName}</option>
+                        </#list>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -175,6 +240,7 @@
 
 <script type="text/javascript">
     $(function () {
+        //只读， 显示
         $('.stars-ui-ele').raty({
             noRatedMsg: "它还没有星星",
             starType: 'span',

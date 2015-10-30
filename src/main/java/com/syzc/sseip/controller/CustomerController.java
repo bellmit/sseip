@@ -1,12 +1,7 @@
 package com.syzc.sseip.controller;
 
-import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.Group;
-import com.syzc.sseip.entity.User;
-import com.syzc.sseip.entity.UserDto;
-import com.syzc.sseip.entity.enumtype.HospitalizationType;
-import com.syzc.sseip.entity.enumtype.Role;
-import com.syzc.sseip.entity.enumtype.Sex;
+import com.syzc.sseip.entity.*;
+import com.syzc.sseip.entity.enumtype.*;
 import com.syzc.sseip.service.*;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
@@ -591,13 +586,18 @@ public class CustomerController {
         }
 
         model.addAttribute("customer", customer);
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
+        model.addAttribute("weights", Weight.values());
+        model.addAttribute("callStates", CallState.values());
 
         return "customer-memo-udpate-by-tel-admin";
     }
 
     @RequestMapping(value = "/{id:\\d+}/update-by-tel-admin", method = RequestMethod.POST)
-    public String updateMemo(@PathVariable Long id, String memoItem, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
+    public String updateMemo(@PathVariable("id") Long customerId, TelAuditDto telAuditDto, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        System.out.println(customerId);
+        System.out.println(telAuditDto.getCustomerId());
 
         if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
@@ -606,21 +606,34 @@ public class CustomerController {
         if (referer == null) {
             referer = "/";
         }
-        Customer customer = customerService.get(id);
+        Customer customer = customerService.get(customerId);
         if (customer == null) {
             throw HosException.create("没有这个客户的资料", Level.DEBUG);
         }
 
-        if (memoItem != null && memoItem.length() > 0 && !memoItem.matches("\\s*")) {
-            if (customerService.addMemo(memoItem, id)) {
-                model.addAttribute("success", "更新完成");
+        if (telAuditDto.getMemoItem() != null && telAuditDto.getMemoItem().length() > 0 && !telAuditDto.getMemoItem().matches("\\s*")) {
+            if (customerService.addMemo(telAuditDto.getMemoItem(), customerId)) {
+                model.addAttribute("success", "备注添加完成");
             } else {
-                model.addAttribute("error", "更新失败");
+                model.addAttribute("error", "备注添加失败");
             }
         }
+        telAuditDto.setCustomerId(customerId);
+        System.out.println("customerService");
+        System.out.println(customerService);
+        System.out.println("telAuditDto");
+        System.out.println(telAuditDto);
+        if (customerService.updateTelAuditDto(telAuditDto)) {
+            model.addAttribute("success", "选项更新完成");
+        } else {
+            model.addAttribute("error", "选项更新失败");
+        }
 
-        customer = customerService.get(id);
+        customer = customerService.get(customerId);
         model.addAttribute("customer", customer);
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
+        model.addAttribute("weights", Weight.values());
+        model.addAttribute("callStates", CallState.values());
         model.addAttribute("referer", referer);
 
         return "customer-memo-udpate-by-tel-admin";

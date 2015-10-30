@@ -47,6 +47,8 @@
                 <beans:bean class="com.syzc.sseip.controller.converters.RoleConverter"/>
                 <beans:bean class="com.syzc.sseip.controller.converters.SexConverter"/>
                 <beans:bean class="com.syzc.sseip.controller.converters.WebsiteConverter"/>
+                <beans:bean class="com.syzc.sseip.controller.converters.CallStateConverter"/>
+                <beans:bean class="com.syzc.sseip.controller.converters.WeightConverter"/>
             </beans:set>
         </beans:property>
     </beans:bean>

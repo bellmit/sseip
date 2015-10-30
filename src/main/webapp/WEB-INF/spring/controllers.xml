@@ -30,11 +30,13 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
             <bean class="com.syzc.sseip.controller.AccessLogInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">exception-caught</prop>
-            </props>
-        </property>
-    </bean>
+    <!--
+        <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+            <property name="exceptionMappings">
+                <props>
+                    <prop key="java.lang.Exception">exception-caught</prop>
+                </props>
+            </property>
+        </bean>
+    -->
 </beans>
