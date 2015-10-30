@@ -29,11 +29,60 @@
 
             <div class="space-4"></div>
             <div class="row">
-                <div class="form-group col-lg-5 col-md-7 col-sm-9 col-xs-11 col-xs-offset-1">
-                    <label>备注</label>
-                    <textarea name="memo" id="textarea-memo" form="customer-memo-update-form" placeholder="备注"
-                              class="form-control" style="resize: vertical;"
-                              title="备注">${(customer.memo?html)!''}</textarea>
+            <#if success??>
+                <div class="row">
+                    <div class="col-sm-offset-3 col-sm-4 alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                class="fa fa-times"></span></button>
+                    ${success}</div>
+                </div>
+            </#if>
+            <#if error??>
+                <div class="row">
+                    <div class="col-sm-offset-3 col-sm-4 alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                class="fa fa-times"></span></button>
+                    ${error}</div>
+                </div>
+            </#if>
+            <#if errors??>
+                <#list errors as error>
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-4 alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    class="fa fa-times"></span></button>
+                        ${error}</div>
+                    </div>
+                </#list>
+            </#if>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="row">
+                <div class="row">
+                    <div class="form-group col-lg-5 col-md-7 col-sm-9 col-xs-11 col-xs-offset-1">
+                        <label>备注</label>
+                        <textarea name="memoItem" id="textarea-memo" form="customer-memo-update-form" placeholder="备注"
+                                  class="form-control" style="resize: vertical;"
+                                  title="备注">${(customer.memo?html)!''}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5 col-md-7 col-sm-9 col-xs-11 col-xs-offset-1">
+                        <div>${customer.memos???string('Y','N')}</div>
+                        <div>${(customer.memos?size)!'-1'}</div>
+                    <#if customer.memos?? && customer.memos?size gt 0>
+                        <div class="well">
+                            <ul>
+                                <#list customer.memos as memo>
+                                    <li>${(memo.content?html)!''} -
+                                        <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
+                                    </li>
+                                </#list>
+                            </ul>
+                        </div>
+                    </#if>
+                    </div>
                 </div>
             </div>
             <div class="space-4"></div>

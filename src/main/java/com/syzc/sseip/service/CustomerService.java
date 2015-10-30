@@ -8,7 +8,6 @@ import com.syzc.sseip.util.Page;
 import java.util.Date;
 
 public interface CustomerService extends BaseService<Customer, CustomerDao> {
-
     Page<Customer> listByGroup(Long groupId, Long pageNo, Byte size);
 
     Page<Customer> listByUser(Long userId, Long pageNo, Byte size);
@@ -24,4 +23,6 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
     Boolean updateDiscard(Long id, Boolean discard, Long userId);
 
     Boolean updateMemo(Long id, String memo);
+
+    Boolean addMemo(String memo, Long customerId);
 }

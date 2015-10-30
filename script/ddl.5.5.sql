@@ -103,6 +103,15 @@ CREATE TABLE user_logon (
 )
   ENGINE innodb;
 
+DROP TABLE IF EXISTS memo;
+CREATE TABLE memo (
+  id          INT PRIMARY KEY AUTO_INCREMENT,
+  content     TEXT,
+  added       DATETIME,
+  customer_id INT,
+  CONSTRAINT fk_memo_customer_id_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id)
+);
+
 DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
   id                 INT PRIMARY KEY AUTO_INCREMENT,
@@ -160,4 +169,3 @@ CREATE TABLE customer (
   ENGINE innodb;
 
 TRUNCATE customer;
-

@@ -3,7 +3,9 @@ package com.syzc.sseip.service;
 import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.CustomerDao;
+import com.syzc.sseip.dao.MemoDao;
 import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.Memo;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
@@ -18,11 +20,17 @@ import java.util.Date;
 
 @Service
 public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> implements CustomerService {
+    private MemoDao memoDao;
     private CustomerDao customerDao;
 
     @Resource
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    @Resource
+    public void setMemoDao(MemoDao memoDao) {
+        this.memoDao = memoDao;
     }
 
     @Override
@@ -89,6 +97,13 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     @Override
     public Boolean updateMemo(Long id, String memo) {
         return customerDao.updateMemo(id, memo);
+    }
+
+    @Override
+    public Boolean addMemo(String memo, Long customerId) {
+        Memo m = new Memo();
+        m.setContent(memo);
+        return memoDao.addToCustomer(m, customerId);
     }
 
     public static void main(String[] args) {

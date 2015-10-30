@@ -10,7 +10,13 @@ public class CustomerDaoTestB {
         System.out.println(ac);
         CustomerDao d = (CustomerDao) ac.getBean("customerDao");
 
-        System.out.println(d.updateMemo(1L, "lalala"));
+//        System.out.println(d.updateMemo(1L, "lalala"));
+//        System.out.println(JSON.toJSONString(d.get(1L), true));
+
+        System.out.println("before");
         System.out.println(JSON.toJSONString(d.get(1L), true));
+        System.out.println("after");
+
+        System.exit(0);
     }
 }

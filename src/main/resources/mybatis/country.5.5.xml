@@ -9,6 +9,7 @@
         <result column="a2_code" property="a2Code"/>
         <result column="name" property="name"/>
     </resultMap>
+
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO country (updated,`name`, memo, a2_code) VALUE (now(),#{entity.name}, #{entity.memo}, #{entity.a2Code});
     </insert>

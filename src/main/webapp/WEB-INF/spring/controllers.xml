@@ -18,7 +18,16 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
             <!--<mvc:exclude-mapping path="/login/register"/>-->
             <!--<mvc:exclude-mapping path="/login/captcha"/>-->
             <mvc:exclude-mapping path="/resources/**"/>
-            <bean class="com.syzc.sseip.controller.LoginInteceptor"/>
+            <bean class="com.syzc.sseip.controller.LoginInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--<mvc:exclude-mapping path="/login"/>-->
+            <!--<mvc:exclude-mapping path="/login/logout"/>-->
+            <!--<mvc:exclude-mapping path="/login/register"/>-->
+            <!--<mvc:exclude-mapping path="/login/captcha"/>-->
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="com.syzc.sseip.controller.AccessLogInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

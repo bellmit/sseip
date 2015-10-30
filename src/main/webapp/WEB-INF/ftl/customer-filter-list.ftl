@@ -263,7 +263,7 @@
             <col style="width: 5em;">
             <col style="width: 6.5em;">
             <col style="width: 6.5em;">
-            <col style="width: 5em;">
+            <col style="width: 7em;">
         </colgroup>
         <thead>
         <tr>
@@ -281,7 +281,7 @@
             <th class="text-right">更新时间</th>
             <th class="text-right">创建时间</th>
 
-            <th class="text-right">功能</th>
+            <th class="center">功能</th>
         </tr>
         </thead>
 
@@ -358,11 +358,11 @@
                 <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& (customer.ownerUserId)??
                 && loginUser.id==customer.ownerUserId)||loginUser.role='ADMIN' )>
                     <a href="${context.contextPath}/customer/update/${customer.id?c}" class="btn btn-minier"
-                       title="编辑"><span class="fa fa-paint-brush"></span></a>
+                       title="编辑"><span class="fa fa-newspaper-o"></span></a>
                 </#if>
                     <#if loginUser.role?? && ['ADMIN','TELADMIN']?seq_contains(loginUser.role)>
                         <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
-                           class="btn btn-minier" title="编辑"><span class="fa fa-paint-brush"></span></a>
+                           class="btn btn-minier" title="编辑"><span class="fa fa-phone"></span></a>
                     </#if>
                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                         <button form="from-remove-customer-${customer_index}"

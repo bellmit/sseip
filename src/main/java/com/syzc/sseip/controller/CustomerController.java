@@ -35,7 +35,7 @@ public class CustomerController {
     private static final Logger logger = Logger.getLogger(CustomerController.class);
     public final Byte pageSize = 20;
 
-    private static final Pattern achorHrefPattern = Pattern.compile("[<]a.*?href.*?=.*?\"(http\\S*?)\"", Pattern.DOTALL);
+    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"(?!https?://www10.53kf.com)(http.*?)\"", Pattern.DOTALL);
 
     private CountryService countryService;
     private DiseaseTypeService diseaseTypeService;
@@ -470,7 +470,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.POST)
-    public String update(@PathVariable("id") Long id, Customer customer, @RequestParam(required = false) String referer, Model model, HttpSession session) {
+    public String update(@PathVariable("id") Long id, String memoItem, Customer customer, @RequestParam(required = false) String referer, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
@@ -506,11 +506,20 @@ public class CustomerController {
         }
 
         if (customerService.update(customer)) {
-            customer = customerService.get(id);
             model.addAttribute("success", "更新完成");
         } else {
             model.addAttribute("error", "更新失败");
         }
+
+        if (memoItem != null && memoItem.length() > 0 && !memoItem.matches("\\s*")) {
+            if (customerService.addMemo(memoItem, id)) {
+                model.addAttribute("success", "备注添加完成");
+            } else {
+                model.addAttribute("error", "备注添加失败");
+            }
+        }
+        customer = customerService.get(id);
+
         model.addAttribute("referer", referer);
 
         model.addAttribute("countries", countryService.listAll());
@@ -587,7 +596,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/{id:\\d+}/update-by-tel-admin", method = RequestMethod.POST)
-    public String updateMemo(@PathVariable Long id, String memo, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
+    public String updateMemo(@PathVariable Long id, String memoItem, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
 
         if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
@@ -602,11 +611,14 @@ public class CustomerController {
             throw HosException.create("没有这个客户的资料", Level.DEBUG);
         }
 
-        if (customerService.updateMemo(id, memo)) {
-            model.addAttribute("success", "更新完成");
-        } else {
-            model.addAttribute("error", "更新失败");
+        if (memoItem != null && memoItem.length() > 0 && !memoItem.matches("\\s*")) {
+            if (customerService.addMemo(memoItem, id)) {
+                model.addAttribute("success", "更新完成");
+            } else {
+                model.addAttribute("error", "更新失败");
+            }
         }
+
         customer = customerService.get(id);
         model.addAttribute("customer", customer);
         model.addAttribute("referer", referer);

@@ -1,6 +1,8 @@
 package com.syzc.sseip.entity;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CustomerDto extends Customer implements Serializable {
     private static final long serialVersionUID = -5507854566537408978L;
@@ -11,6 +13,8 @@ public class CustomerDto extends Customer implements Serializable {
     private Country liaisonCountry;
     private Country patientCountry;
     private DiseaseType diseaseType;
+
+    private List<Memo> memos = new LinkedList<>();
 
     public CustomerDto() {
     }
@@ -69,5 +73,17 @@ public class CustomerDto extends Customer implements Serializable {
 
     public void setOwnerUser(User ownerUser) {
         this.ownerUser = ownerUser;
+    }
+
+    public List<Memo> getMemos() {
+        return memos;
+    }
+
+    public void setMemos(List<Memo> memos) {
+        this.memos = memos;
+    }
+
+    public void addMemo(Memo memo) {
+        this.memos.add(memo);
     }
 }

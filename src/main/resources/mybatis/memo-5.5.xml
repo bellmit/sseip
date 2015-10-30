@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syzc.sseip.dao.MemoDao">
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
+    <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
+
+    <cache-ref namespace="com.syzc.sseip.dao.CustomerDao"/>
+
+    <resultMap id="Memo" type="com.syzc.sseip.entity.Memo">
+        <id column="id" property="id"/>
+    </resultMap>
+
+    <insert id="addToCustomer" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT into memo (content, added, customer_id) VALUE (#{entity.content},now(), #{customerId})
+    </insert>
+    <delete id="remove" parameterType="Long">
+        delete from memo where id=#{id}
+    </delete>
+    <select id="get" parameterType="Long" resultMap="Memo">
+        select * from memo where id=#{id}
+    </select>
+
+    <select id="countByCustomer" resultType="Long">
+        select count(1) from memo where customer_id=#{customerId}
+    </select>
+    <select id="listAllByCustomer" resultMap="Memo">
+        select * from memo where customer_id=#{customerId}
+    </select>
+</mapper>

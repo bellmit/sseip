@@ -346,7 +346,7 @@
                         <div class="form-group">
                         <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
                             <div class="col-xs-12">
-                            <textarea name="memo" class="col-xs-12" style="resize: vertical;"
+                            <textarea name="memoItem" class="col-xs-12" style="resize: vertical;"
                                       placeholder="备忘" id="textarea-memo"
                                       title="备忘">${(form.memo?xhtml)!''}</textarea>
                             </div>

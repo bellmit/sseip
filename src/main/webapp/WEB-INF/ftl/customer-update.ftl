@@ -72,7 +72,7 @@
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
                             </button>
                             <a class="btn btn-primary btn-sm" href="${(referer)!''}">
-                                <span class="ace-icon fa fa-back bigger-110"></span>返回列表
+                                <span class="ace-icon fa fa-back bigger-110"></span>返回来源页
                             </a>
                             </span></div>
                         </div>
@@ -370,9 +370,22 @@
                             <div class="form-group">
                             <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
                                 <div class="col-xs-12">
-                            <textarea name="memo" class="col-xs-12" style="resize: vertical;"
+                            <textarea name="memoItem" class="col-xs-12" style="resize: vertical;"
                                       placeholder="备忘" id="textarea-memo"
                                       title="备忘">${(customer.memo?xhtml)!''}</textarea>
+                                </div>
+                                <div class="col-xs-12">
+                                <#if customer.memos?? && customer.memos?size gt 0>
+                                    <div class="well">
+                                        <ul>
+                                            <#list customer.memos as memo>
+                                                <li>${memo.content?html} -
+                                                    <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
+                                                </li>
+                                            </#list>
+                                        </ul>
+                                    </div>
+                                </#if>
                                 </div>
                             </div>
 
@@ -447,7 +460,7 @@
             var ff = function () {
                 //            $('#source-website').text($('#contact-records-editor').html());
                 var i = $('#contact-records-editor').html();
-                var r = /[<]a.*?href.*?=.*?"(\S*?)"/;
+                var r = /[<]a\s.*?href\s*?=\s*?"((?!https?:\/\/www10.53kf.com)\S*?)"/im;
 //            var r = /[<]a.*?href.*?=.*?"(.*?)"/;
                 var res = r.exec(i);
                 if (res != null) {

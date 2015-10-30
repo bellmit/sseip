@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Service
-public class LoginInteceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = Logger.getLogger(LoginController.class);
     @Resource
     UserService userService;
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
@@ -31,7 +35,7 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
                 refer.append('?');
                 refer.append(request.getQueryString());
             }
-            logger.trace(String.format("%d - %s", id, refer.toString()));
+//            logger.trace(String.format("%d - %s", id, refer.toString()));
         }
         if (id == null) {
 /*

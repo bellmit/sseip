@@ -21,7 +21,7 @@
         <result column="if_report" property="ifReport"/>
         <result column="source_website" property="sourceWebsite"/>
     </resultMap>
-    <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto">
+    <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto" extends="Customer">
         <id column="id" property="id"/>
         <result column="liaison_name" property="liaisonName"/>
         <result column="liaison_address" property="liaisonAddress"/>
@@ -46,6 +46,10 @@
         <association property="ownerUser" column="owner_user_id" select="getUser"/>
         <association property="group" column="group_id" select="getGroup"/>
     </resultMap>
+    <resultMap id="CustomerDtoWithMemo" type="com.syzc.sseip.entity.CustomerDto" extends="CustomerDto">
+        <collection property="memos" column="id" select="listAllByCustomer"/>
+    </resultMap>
+
     <resultMap id="Country" type="com.syzc.sseip.entity.Country">
         <id column="id" property="id"/>
         <result column="a2_code" property="a2Code"/>
@@ -66,6 +70,10 @@
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
         <id column="id" property="id"/>
     </resultMap>
+    <resultMap id="Memo" type="com.syzc.sseip.entity.Memo">
+        <id column="id" property="id"/>
+    </resultMap>
+
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO customer (
         added,
@@ -422,7 +430,8 @@
         </choose>
         WHERE id = #{entity.id};
     </update>
-    <select id="get" parameterType="Long" resultMap="CustomerDto">
+    <select id="get" parameterType="Long" resultMap="CustomerDtoWithMemo">
+        <!--<select id="get" parameterType="Long" resultMap="CustomerDto">-->
         SELECT
         *
         FROM
@@ -600,4 +609,8 @@
     <update id="updateMemo">
         UPDATE customer SET memo=#{memo} where id=#{id}
     </update>
+
+    <select id="listAllByCustomer" resultMap="Memo">
+        select * from memo where customer_id=#{customerId}
+    </select>
 </mapper>

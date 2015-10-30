@@ -5,6 +5,8 @@ import com.syzc.sseip.entity.enumtype.Sex;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1564478954650903113L;
@@ -47,6 +49,8 @@ public class Customer implements Serializable {
     private Boolean discard;
 
     private Boolean ifReport;
+    //    private Boolean weight;
+    private List<Memo> memos = new LinkedList<>();
 
     /**
      * 来源网址
