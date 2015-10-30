@@ -17,10 +17,10 @@ public class MemoDaoTest {
         Memo memo;
         memo = new Memo();
         memo.setContent("abcdefg");
- /*       System.out.println(d.addToCustomer(memo, 1L));
+        System.out.println(JSON.toJSONString(d.get(memo.getId()), true));
+        System.out.println(d.addToCustomer(memo, 1L));
         System.out.println(memo.getId());
         System.out.println(JSON.toJSONString(d.get(memo.getId()), true));
-*/
 
         System.exit(0);
     }

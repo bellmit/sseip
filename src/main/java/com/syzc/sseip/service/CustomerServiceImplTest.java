@@ -1,6 +1,5 @@
 package com.syzc.sseip.service;
 
-import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.Customer;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
@@ -51,6 +50,15 @@ public class CustomerServiceImplTest {
         c.setId(6L);
 //        System.out.println(s.update(c));
 
-        System.out.println(JSON.toJSONString(s.get(1L), true));
+//        System.out.println(JSON.toJSONString(s.get(1L), true));
+//        System.out.println(JSON.toJSONString(s.addMemo("lalala", 1L)));
+//        System.out.println(JSON.toJSONString(s.get(1L), true));
+
+        System.out.println(s.get(1L).getAdded());
+        System.out.println(s.get(1L).getHospitalization());
+        System.out.println(s.get(1L).getWeight());
+        System.out.println(s.get(1L).getUserId());
+        System.out.println(s.get(1L).getCallState());
+        System.out.println(s.get(1L).getCallState2());
     }
 }

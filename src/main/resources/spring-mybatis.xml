@@ -57,7 +57,7 @@
                     </array>
                 </property>
         -->
-        <property name="typeHandlersPackage" value="com.syzc.sseip.dao"/>
+        <property name="typeHandlersPackage" value="com.syzc.sseip.dao.handler"/>
     </bean>
 
     <!-- 配置dao -->

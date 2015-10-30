@@ -12,14 +12,12 @@ public enum CallState {
     }
 
     public int getCode() {
+        System.out.println("gg");
         return code;
     }
 
-    public static CallState get(String codeStr) {
-        return map.get(codeStr);
-    }
-
     public static CallState get(int code) {
+        System.out.println("gg");
         return map.get(Integer.toString(code));
     }
 
@@ -32,8 +30,8 @@ public enum CallState {
     }
 
     public static void main(String[] args) {
-        System.out.println(CallState.get("3"));
-        System.out.println(CallState.get("4"));
-        System.out.println(CallState.get("5"));
+        System.out.println(CallState.get(3));
+        System.out.println(CallState.get(4));
+        System.out.println(CallState.get(5));
     }
 }

@@ -80,4 +80,6 @@ public interface CustomerDao extends BaseDao<Customer> {
     Boolean updateMemo(@Param("id") Long id, @Param("memo") String memo);
 
     Boolean updateTelAuditDto(@Param("entity") TelAuditDto telAuditDto);
+
+    Integer queryCallState(Long id);
 }

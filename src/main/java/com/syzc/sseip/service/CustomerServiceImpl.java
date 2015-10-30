@@ -13,6 +13,7 @@ import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.PageUtil;
 import com.syzc.sseip.util.exception.AuthException;
 import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.Date;
 
 @Service
 public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> implements CustomerService {
+    private static final Logger logger = Logger.getLogger(CustomerServiceImpl.class);
     private MemoDao memoDao;
     private CustomerDao customerDao;
 
@@ -109,6 +111,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
 
     @Override
     public Boolean updateTelAuditDto(TelAuditDto telAuditDto) {
+        logger.trace("enter updateTelAuditDto");
+        System.out.println("customerDao");
+        System.out.println(customerDao);
         return customerDao.updateTelAuditDto(telAuditDto);
     }
 
