@@ -22,8 +22,8 @@ public class DummyCustomer {
         System.out.println(new Date());
         final int bulkCount = 30000;
         ArrayList<Customer> list = new ArrayList<>(bulkCount + 7);
-        int size = 600000;
-//        int size = 60;
+//        int size = 600000;
+        int size = 3;
         dates = RandomDate.genSortedDates(size);
         for (int i = 0; i < size; i++) {
 //        for (int i = 0; i < 600; i++) {

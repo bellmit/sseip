@@ -1,6 +1,5 @@
 package com.syzc.sseip.service;
 
-import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.UserDao;
 import com.syzc.sseip.entity.User;
@@ -114,8 +113,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     }
 
     @Override
-    public User login(String userName, String password) {
-        return userDao.login(userName, password);
+    public User login(String userName, String password, String ip) {
+        return userDao.login(userName, password, ip);
     }
 
     @Override
@@ -130,12 +129,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
 
     @Override
     public Boolean saveLogonInfo(UserLogon userLogon) {
-        if (!userDao.updateUserLogon(userLogon)) {
-            if (!userDao.insertUserLogon(userLogon)) {
-                return false;
-            }
+        return userDao.insertUserLogon(userLogon);
+    }
+
+    @Override
+    public Page<UserLogon> listUserLogonByUser(Long userId, Long pageNo, Short size) {
+        Long count = userDao.countUserLogonByUser(userId);
+        Page page;
+        page = PageUtil.make(pageNo, (long) size, count);
+        if (count > 0) {
+            page.setList(userDao.listUserLogonByUser(userId, page.getRowOffset(), (short) page.getPageSize()));
         }
-        return true;
+        return page;
     }
 
     public static void main(String[] args) {

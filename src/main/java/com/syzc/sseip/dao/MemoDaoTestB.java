@@ -1,4 +1,4 @@
-package com.syzc.sseip.dao.handler;
+package com.syzc.sseip.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.MemoDao;
@@ -6,7 +6,7 @@ import com.syzc.sseip.entity.Memo;
 import com.syzc.sseip.util.LocalAcUtil;
 import org.springframework.context.ApplicationContext;
 
-public class MemoDaoTest {
+public class MemoDaoTestB {
     public static void main(String[] args) {
         ApplicationContext ac = LocalAcUtil.getAc();
         MemoDao d = (MemoDao) ac.getBean("memoDao");

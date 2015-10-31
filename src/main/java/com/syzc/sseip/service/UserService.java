@@ -29,11 +29,13 @@ public interface UserService extends BaseService<User, UserDao> {
 
     Boolean changeGroup(Long userId, Long groupId);
 
-    User login(String userName, String password);
+    User login(String userName, String password, String ip);
 
     Boolean updateRole(Long userId, Role role);
 
     Role getRole(Long userId);
 
     Boolean saveLogonInfo(UserLogon userLogon);
+
+    Page<UserLogon> listUserLogonByUser(Long userId, Long pageNo, Short size);
 }

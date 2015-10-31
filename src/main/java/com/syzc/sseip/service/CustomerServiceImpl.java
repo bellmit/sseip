@@ -111,10 +111,14 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
 
     @Override
     public Boolean updateTelAuditDto(TelAuditDto telAuditDto) {
-        logger.trace("enter updateTelAuditDto");
-        System.out.println("customerDao");
-        System.out.println(customerDao);
-        return customerDao.updateTelAuditDto(telAuditDto);
+//        logger.trace("enter updateTelAuditDto");
+//        System.out.println("customerDao");
+//        System.out.println(customerDao);
+//        System.out.println(JSON.toJSONString(telAuditDto, true));
+        Boolean r = customerDao.updateTelAuditDto(telAuditDto);
+//        System.out.println("updateTelAuditDto - 1");
+//        System.out.println(r);
+        return r;
     }
 
     public static void main(String[] args) {

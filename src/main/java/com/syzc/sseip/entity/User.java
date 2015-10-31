@@ -19,6 +19,8 @@ public class User implements Serializable {
     private Role role;
     private Long groupId;
 
+    private String limitedIp;
+
     public User() {
     }
 
@@ -108,5 +110,13 @@ public class User implements Serializable {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
+    }
+
+    public String getLimitedIp() {
+        return limitedIp;
+    }
+
+    public void setLimitedIp(String limitedIp) {
+        this.limitedIp = limitedIp;
     }
 }

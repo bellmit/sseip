@@ -16,8 +16,7 @@ public class AccessLogInterceptor extends HandlerInterceptorAdapter {
     @Resource
     UserService userService;
 
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
 //        HandlerMethod hm = (HandlerMethod) handler;
         //可能是 DefaultServletHttpRequestHandler， 找不到对应的， 转而寻找静态资源。
@@ -40,10 +39,14 @@ public class AccessLogInterceptor extends HandlerInterceptorAdapter {
         return super.preHandle(request, response, handler);
     }
 
+/*
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         HttpSession session = request.getSession();
-        Long id = (Long) session.getAttribute("loginUserId");
+        Long id = null;
+        if (session != null) {
+            id = (Long) session.getAttribute("loginUserId");
+        }
 
         StringBuilder refer = new StringBuilder();
         {
@@ -59,4 +62,5 @@ public class AccessLogInterceptor extends HandlerInterceptorAdapter {
             }
         }
     }
+*/
 }

@@ -1,6 +1,5 @@
 package com.syzc.sseip.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.*;
 import com.syzc.sseip.entity.enumtype.*;
 import com.syzc.sseip.service.*;
@@ -224,6 +223,11 @@ public class CustomerController {
             @RequestParam(required = false) Boolean ifReport,
             @PathVariable("page") Long pageNo, Model model, HttpSession session, HttpServletRequest request) {
 
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        if (loginUser.getRole() != Role.EMPLOYEE) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
         Date till = null;
         Date since = null;
         if (dateRange != null && dateRange.length == 2) {
@@ -236,12 +240,8 @@ public class CustomerController {
 
 //        System.out.println(Arrays.asList(sex, website, accessPointType, diseaseType, faraway, emergency, groupId, userId));
 
-        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-
         Page<Customer> page;
-        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE) {
-            throw AuthException.create("没有权限", Level.DEBUG);
-        }
+
         page = customerService.listByFilter(since, till, websiteId, tel, name, countryId, loginUser.getId(), email,
                 diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, pageSize);
 
@@ -425,7 +425,8 @@ public class CustomerController {
     public String update(@PathVariable("id") Long id, @RequestParam(required = false) String referer, Model model, HttpSession session, HttpServletRequest request) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+//        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+        if (loginUser.getRole() != Role.EMPLOYEE) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -469,7 +470,8 @@ public class CustomerController {
     public String update(@PathVariable("id") Long id, String memoItem, Customer customer, @RequestParam(required = false) String referer, Model model, HttpSession session) {
 
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+//        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
+        if (loginUser.getRole() != Role.EMPLOYEE) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -537,18 +539,24 @@ public class CustomerController {
         if (newOwnerUserId == null) {
             throw HosException.create("目标用户不能为空", Level.DEBUG);
         }
-//        System.out.println(Arrays.toString(customerIds));
-        String referer = request.getHeader("Referer");
 
         User loginUser = (User) session.getAttribute("loginUser");
+        if (loginUser == null || loginUser.getRole() == null || loginUser.getRole() == Role.EMPLOYEE) {
+            throw AuthException.create("没有权限", Level.TRACE);
+        }
+
+//        System.out.println(Arrays.toString(customerIds));
+        String referer = request.getHeader("Referer");
 
         Long count = customerService.passOn(customerIds, newOwnerUserId, loginUser.getId());
 
         User user = userService.get(newOwnerUserId);
+/*
         session.setAttribute("newOwnerUserId", newOwnerUserId);
         session.setAttribute("user", user);
         session.setAttribute("customerIds", customerIds);
         session.setAttribute("passedCount", count);
+*/
 
 //        session.setAttribute("referer", referer);
 
@@ -575,7 +583,7 @@ public class CustomerController {
     public String updateMemo(@PathVariable Long id, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
 
-        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
+        if (loginUser.getRole() != Role.TELADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
         if (referer == null) {
@@ -597,10 +605,12 @@ public class CustomerController {
     @RequestMapping(value = "/{id:\\d+}/update-by-tel-admin", method = RequestMethod.POST)
     public String updateMemo(@PathVariable("id") Long customerId, TelAuditDto telAuditDto, @RequestParam(required = false) String referer, Model model, HttpServletRequest request, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+/*
         System.out.println(customerId);
         System.out.println(telAuditDto.getCustomerId());
+*/
 
-        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
+        if (loginUser.getRole() != Role.TELADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -612,26 +622,42 @@ public class CustomerController {
             throw HosException.create("没有这个客户的资料", Level.DEBUG);
         }
 
-        if (telAuditDto.getMemoItem() != null && telAuditDto.getMemoItem().length() > 0 && !telAuditDto.getMemoItem().matches("\\s*")) {
+//        System.out.println("1");
+//        System.out.println(telAuditDto);
+//        System.out.println(telAuditDto.getMemoItem());
+//        System.out.println(telAuditDto.getMemoItem().matches("\\s*"));
+//        telAuditDto.getMemoItem().length() > 0
+        if (telAuditDto.getMemoItem() != null && !telAuditDto.getMemoItem().matches("\\s*")) {
+//            System.out.println("2");
             if (customerService.addMemo(telAuditDto.getMemoItem(), customerId)) {
+//                System.out.println("3");
                 model.addAttribute("success", "备注添加完成");
             } else {
+//                System.out.println("4");
                 model.addAttribute("error", "备注添加失败");
             }
         }
+//        System.out.println("5");
         telAuditDto.setCustomerId(customerId);
+/*
         System.out.println("customerService");
         System.out.println(customerService);
         System.out.println("telAuditDto");
         System.out.println(telAuditDto);
         System.out.println(JSON.toJSONString(telAuditDto, true));
+*/
+//        System.out.println("6");
+//        System.out.println(customerService);
         if (customerService.updateTelAuditDto(telAuditDto)) {
+//            System.out.println("7");
             model.addAttribute("success", "选项更新完成");
         } else {
+//            System.out.println("8");
             model.addAttribute("error", "选项更新失败");
         }
 
         customer = customerService.get(customerId);
+//        System.out.println("9");
         model.addAttribute("customer", customer);
         model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("weights", Weight.values());

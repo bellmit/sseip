@@ -85,7 +85,8 @@
                     <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right">有效性</label>
 
                     <div class="col-xs-2">
-                        <select name="valid" id="customer-memo-update-form" class="col-xs-12">
+                        <select name="valid" form="customer-memo-update-form" id="customer-memo-update-form"
+                                class="col-xs-12">
                             <option <#if (customer.valid)?? && customer.valid>selected=""</#if> value="1">有效
                             </option>
                             <option <#if (customer.valid)?? && !(customer.valid)>selected=""</#if>
@@ -98,7 +99,8 @@
                     <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="是否报备">报备</label>
 
                     <div class="col-sm-2">
-                        <select name="ifReport" id="customer-memo-update-form" class="col-xs-12">
+                        <select name="ifReport" form="customer-memo-update-form" id="customer-memo-update-form"
+                                class="col-xs-12">
                             <option
                             <#if !((customer.ifReport)??) || !(customer.ifReport)>selected=""</#if>
                             value="0">不报备
@@ -114,7 +116,8 @@
                     <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="住院情况">住院</label>
 
                     <div class="col-sm-2">
-                        <select name="hospitalization" id="customer-memo-update-form" class="col-xs-12" size="3">
+                        <select name="hospitalization" form="customer-memo-update-form" id="customer-memo-update-form"
+                                class="col-xs-12" size="3">
                         <#list hospitalizationTypes as hospitalizationType>
                             <option
                                 <#if (customer.hospitalization)?? && customer.hospitalization.code=hospitalizationType.code>selected=""</#if>
@@ -127,7 +130,8 @@
                     <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="通话状态">通话状态</label>
 
                     <div class="col-sm-2">
-                        <select name="callState" id="customer-memo-update-form" class="col-xs-12" size="6">
+                        <select name="callState" form="customer-memo-update-form" id="customer-memo-update-form"
+                                class="col-xs-12" size="6">
                         <#list callStates as callState>
                             <option
                                 <#if (customer.callState)?? && customer.callState.code=callState.code>selected=""</#if>
@@ -140,7 +144,8 @@
                     <label class="col-sm-1 col-xs-offset-1 control-label no-padding-right" title="资源权重">资源权重</label>
 
                     <div class="col-sm-2">
-                        <select name="weight" id="customer-memo-update-form" class="col-xs-12" size="3">
+                        <select name="weight" form="customer-memo-update-form" id="customer-memo-update-form"
+                                class="col-xs-12" size="3">
                         <#list weights as weight>
                             <option
                                 <#if (customer.weight)?? && customer.weight.code=weight.code>selected=""</#if>

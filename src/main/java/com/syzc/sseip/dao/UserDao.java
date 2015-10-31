@@ -34,7 +34,7 @@ public interface UserDao extends BaseDao<User> {
 
     Boolean existUsername(String username);
 
-    User login(@Param("username") String userName, @Param("password") String password);
+    User login(@Param("username") String userName, @Param("password") String password, @Param("ip") String ip);
 
     Boolean updateGroup(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
@@ -45,4 +45,8 @@ public interface UserDao extends BaseDao<User> {
     Boolean insertUserLogon(@Param("userLogon") UserLogon userLogon);
 
     Boolean updateUserLogon(@Param("userLogon") UserLogon userLogon);
+
+    List<UserLogon> listUserLogonByUser(@Param("id") Long id, @Param("offset") Long offset, @Param("size") Short size);
+
+    Long countUserLogonByUser(@Param("id") Long id);
 }

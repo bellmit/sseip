@@ -231,17 +231,14 @@
 
 
 <#--<div class="page-header position-relative">-->
-    <div><span class="col-md-2"><span class="btn-group btn-corner"><a
-            href="${context.contextPath}/customer/add"
-            target="_self"
-            style="color:#FFF;text-decoration:none;"
-            title="填写资源"
-            class="btn btn-info btn-sm"><span class="fa fa-file"></span></a><a href=""
-                                                                               style="color:#FFF;text-decoration:none;"
-                                                                               class="btn btn-info btn-sm"
-                                                                               title="刷新列表"><span
+    <div><span class="col-md-2"><span class="btn-group btn-corner"><#if ['EMPLOYEE']?seq_contains(loginUser.role)><a
+            href="${context.contextPath}/customer/add" target="_self" style="color:#FFF;text-decoration:none;"
+            title="填写资源" class="btn btn-info btn-sm"><span class="fa fa-file"></span></a></#if><a href=""
+                                                                                                  style="color:#FFF;text-decoration:none;"
+                                                                                                  class="btn btn-info btn-sm"
+                                                                                                  title="刷新列表"><span
             class="fa fa-refresh"></span></a></span></span> <span
-            class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if> </span>
+            class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
     </div>
     <table id="sample-table-1"
            class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
@@ -249,37 +246,37 @@
         <colgroup class="row">
         <#--1-->
         <#--<col style="width: 5em;">-->
-            <col style="width: 13em;">
-            <col style="width: 11em;">
+            <col style="width: 10em;">
+            <col style="width: 8em;">
             <col class="">
         <#--4    -->
             <col style="width: 3em;">
             <col style="width: 9em;">
-            <col style="width: 9em;">
-            <col <#--style="width: 11em;"-->> <#--备注-->
+            <col style="width: 10.3em;">
+        <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
             <col style="width: 3em;">
         <#--8-->
-            <col style="width: 5em;">
-            <col style="width: 5em;">
-            <col style="width: 6.5em;">
-            <col style="width: 6.5em;">
+            <col style="width: 5.3em;">
+            <col style="width: 5.3em;">
+            <col style="width: 10.4em;">
+            <col style="width: 10.4em;">
             <col style="width: 7em;">
         </colgroup>
         <thead>
         <tr>
         <#--<th class="text-right">ID</th>-->
-            <th class="text-right">姓名</th>
-            <th class="text-right">国家</th>
-            <th class="text-right">症状</th>
-            <th class="text-right" title="是否住院">住院</th>
-            <th class="text-right">所属网站组</th>
-            <th class="text-right">来源网站</th>
-            <th class="text-right">备注</th>
-            <th class="text-right" title="是否报备">报备</th>
-            <th class="text-right">所属人</th>
-            <th class="text-right">提交人</th>
-            <th class="text-right">更新时间</th>
-            <th class="text-right">创建时间</th>
+            <th class="">姓名</th>
+            <th class="">国家</th>
+            <th class="">症状</th>
+            <th class="" title="是否住院">住院</th>
+            <th class="">所属网站组</th>
+            <th class="">来源网站</th>
+        <#--<th class="">备注</th>-->
+            <th class="" title="是否报备">报备</th>
+            <th class="">所属人</th>
+            <th class="">提交人</th>
+            <th class="">更新时间</th>
+            <th class="">创建时间</th>
 
             <th class="center">功能</th>
         </tr>
@@ -288,8 +285,8 @@
         <tbody>
         <#list page.list as customer>
         <tr>
-        <#--<td class="text-right">${customer.id?c}</td>-->
-            <td class="text-right"
+        <#--<td class="">${customer.id?c}</td>-->
+            <td class=""
                 <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
                 <div>
                     <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
@@ -305,71 +302,67 @@
                  data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                  style="font-size: 7px"></div>-->
             </td>
-            <td class="text-right"<#if customer.patientCountry??>
+            <td class=""<#if customer.patientCountry??>
                 title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></span></#if></td>
             <td class=""
                 title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
+            <td class=""
                 title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
                 <#switch customer.hospitalization>
-                    <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
-                        <#break>
-                    <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span>
-                        <#break>
-                    <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span>
-                        <#break>
+                    <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span><#break>
+                    <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span><#break>
+                    <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span><#break>
                 </#switch>
             <#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
+            <td class=""
                 title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
+            <td class=""
                 title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,16)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
+        <#--<td class=""
+            title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
+            <span class="label"><span class="fa fa-question"></span></#if></td>-->
             <td class=""
-                title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
                 title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
             <span class="fa bigger-140 fa-circle-o-notch green"></#if><#else> <span class="label"><span
                     class="fa fa-question"></span></#if></td>
-        <#--<td class="text-right"
+        <#--<td class=""
             title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
             <span class="label">不详</span></#if></td>-->
-            <td class="text-right"
+            <td class=""
                 title="${(customer.ownerUser.realName)!''}"><#if (customer.ownerUser.realName)??><#if customer.ownerUser.realName?length gt 8>${customer.ownerUser.realName?substring(0,5)+'...'}<#else>${customer.ownerUser.realName}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
+            <td class=""
                 title="${(customer.user.realName)!''}"><#if (customer.user.realName)??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
-                <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('M.dd HH:mm')}<#else>
+            <td class=""
+                <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm:ss')}<#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
-            <td class="text-right"
-                <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('M.dd HH:mm')}<#else>
+            <td class=""
+                <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm:ss')}<#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>
 
             <td class="center">
             <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
             <#--||loginUser.role='MANAGER'-->
                 <span class="btn-group">
-                <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& (customer.ownerUserId)??
-                && loginUser.id==customer.ownerUserId)||loginUser.role='ADMIN' )>
-                    <a href="${context.contextPath}/customer/update/${customer.id?c}" class="btn btn-minier"
-                       title="编辑"><span class="fa fa-newspaper-o"></span></a>
-                </#if>
-                    <#if loginUser.role?? && ['ADMIN','TELADMIN']?seq_contains(loginUser.role)>
+                    <#if loginUser.role?? && ['TELADMIN']?seq_contains(loginUser.role)>
+
                         <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
-                           class="btn btn-minier" title="编辑"><span class="fa fa-phone"></span></a>
+                           class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-140"> </span> </a>
                     </#if>
                     <#if ['ADMIN']?seq_contains(loginUser.role)>
+                        <a class="" href="${context.contextPath}/customer/get/${customer.id}"><span
+                                class="fa fa-newspaper-o bigger-140"></span></a>
+                    </#if>
+                    <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>
                         <button form="from-remove-customer-${customer_index}"
-                                href="${context.contextPath}/customer/remove"
-                                class="remove-control btn btn-minier ${customer.discard?then('btn-pink','btn-success')}"
-                                title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span class="fa fa-trash"> </span>
+                                class="remove-control btn btn-minier btn-pink" title="已提交删除"> <span
+                                class="fa fa-trash"> </span>
                         </button>
                     <form id="from-remove-customer-${customer_index}"
                           action="${context.contextPath}/customer/remove" method="post"
@@ -378,17 +371,27 @@
                     </form>
                     </#if>
             </span>
+            <#--
+                                <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                    <button form="from-remove-customer-${customer_index}"
+                                            href="${context.contextPath}/customer/remove"
+                                            class="remove-control btn btn-minier ${customer.discard?then('btn-pink','btn-success')}"
+                                            title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span class="fa fa-trash"> </span>
+                                    </button>
+                                <form id="from-remove-customer-${customer_index}"
+                                      action="${context.contextPath}/customer/remove" method="post"
+                                      style="display: none;"><input type="hidden" name="id"
+                                                                    value="${customer.id?c}">
+                                </form>
+                                </#if>
+            -->
             </td>
         </tr>
         </#list>
         </tbody>
     </table>
-    <div><span class="col-md-2"><span class="btn-group btn-corner"><a href="${context.contextPath}/customer/add"
-                                                                      target="_self"
-                                                                      style="color:#FFF;text-decoration:none;"
-                                                                      title="填写资源" class="btn btn-info btn-sm"><span
-            class="fa fa-file"></span></a><a href="" style="color:#FFF;text-decoration:none;"
-                                             class="btn btn-info btn-sm" title="刷新列表"><span
+    <div><span class="col-md-2"><span class="btn-group btn-corner"><a href="" style="color:#FFF;text-decoration:none;"
+                                                                      class="btn btn-info btn-sm" title="刷新列表"><span
             class="fa fa-refresh"></span></a></span></span>
                                 <span class="col-md-10">
                                 <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>

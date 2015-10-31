@@ -62,7 +62,7 @@ public class LoginController {
             return "/login";
         }
         String addr = request.getRemoteAddr();
-        User login = userService.login(username, password);
+        User login = userService.login(username, password, addr);
         if (login == null) {
             model.addAttribute("error", "用户名或者密码有错误，是不是忘了。");
 //        ContextLoader.getCurrentWebApplicationContext().getServletContext().getServletContextName()
@@ -70,7 +70,7 @@ public class LoginController {
         }
         UserLogon userLogon;
         userLogon = new UserLogon();
-        userLogon.setLastIP(request.getRemoteAddr());
+        userLogon.setIp(request.getRemoteAddr());
         userLogon.setUserId(login.getId());
         userService.saveLogonInfo(userLogon);
 

@@ -54,11 +54,10 @@
                                         <a class="btn btn-minier" href="${context.contextPath}/group/edit/${group.id}"
                                            title="编辑"><span class="fa fa-pencil-square"></span></a>
                                     </#if>
-                                        <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER'||
-                                        ((loginUser.groupId)??&&loginUser.groupId==group.id))>
+                                        <#if loginUser.role?? && loginUser.role='ADMIN'>
                                             <a class="btn btn-minier"
-                                               href="${context.contextPath}/group/user-list/${group.id}/1"
-                                               title="用户列表"><span class="fa fa-list"></span></a>
+                                               href="${context.contextPath}/group/user-list/${group.id}/1" title="用户列表"><span
+                                                    class="fa fa-list"></span></a>
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                             <button type="submit" title="删除" class="remove-control btn btn-minier"

@@ -2,6 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
+    <title>用户个人登录历史</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -12,7 +13,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa fa-child"></span>用户列表</li>
+            <li class="active"><span class="fa fa-child"></span>用户个人登录历史</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -41,7 +42,6 @@
                                 <th class="text-right">用户名</th>
                                 <th class="text-right">真实姓名</th>
                                 <th class="text-right">年龄</th>
-                            <#--<th class="text-right">身份证号</th>-->
                                 <th class="text-right">地址</th>
                                 <th class="text-right">电话</th>
                                 <th class="text-right">注册时间</th>

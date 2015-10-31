@@ -12,28 +12,24 @@
         <result column="real_name" property="realName"/>
         <result column="group_id" property="groupId"/>
         <result column="id_number" property="idNumber"/>
+        <result column="limited_ip" property="limitedIp"/>
         <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
     </resultMap>
-    <resultMap id="UserDto" type="com.syzc.sseip.entity.UserDto">
-        <id column="id" property="id"/>
-        <result column="real_name" property="realName"/>
-        <result column="group_id" property="groupId"/>
-        <result column="id_number" property="idNumber"/>
-        <result column="role" property="role" typeHandler="com.syzc.sseip.dao.handler.RoleHandler"/>
+    <resultMap id="UserDto" type="com.syzc.sseip.entity.UserDto" extends="User">
         <association property="group" column="group_id" select="getGroup"/>
-        <association property="userLogon" column="id" select="getUserLogonByUser"/>
+        <association property="lastUserLogon" column="id" select="getLastUserLogon"/>
     </resultMap>
     <resultMap id="Group" type="com.syzc.sseip.entity.Group">
         <id column="id" property="id"/>
     </resultMap>
     <resultMap id="UserLogon" type="com.syzc.sseip.entity.UserLogon">
         <id column="id" property="id"/>
-        <result column="last_sign_in" property="lastSignIn"/>
-        <result column="last_ip" property="lastIP"/>
-        <result column="last_mac_addr" property="lastMacAddr"/>
+        <result column="logged_on" property="loggedOn"/>
+        <result column="user_id" property="userId"/>
     </resultMap>
+
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
-        INSERT INTO user (added,username, password, real_name, age,id_number, address,phone,role,group_id)
+        INSERT INTO user (added,username, password, real_name, age,id_number, address,phone,role,group_id,limited_ip)
         VALUE
         (
         now(),
@@ -61,6 +57,11 @@
         ,
         <choose>
             <when test="entity.groupId!=null and entity.groupId!=''">#{entity.groupId}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.limitedIp!=null and entity.limitedIp!=''">#{entity.limitedIp}</when>
             <otherwise>NULL</otherwise>
         </choose>
         );
@@ -105,16 +106,7 @@
     </update>
     <select id="get" resultMap="UserDto">
         SELECT
-        id,
-        username,
-        real_name,
-        age,
-        id_number,
-        address,
-        phone,
-        added,
-        role,
-        group_id
+        *
         FROM user
         WHERE id = #{userId};
     </select>
@@ -124,46 +116,19 @@
     </select>
     <select id="list" resultMap="UserDto">
         SELECT
-        id,
-        username,
-        real_name,
-        age,
-        id_number,
-        address,
-        phone,
-        added,
-        role,
-        group_id
+        *
         FROM user order by id DESC
         LIMIT #{offset}, #{size};
     </select>
     <select id="listAll" resultMap="UserDto">
         SELECT
-        id,
-        username,
-        real_name,
-        age,
-        id_number,
-        address,
-        phone,
-        added,
-        role,
-        group_id
+        *
         FROM user order by real_name DESC
     </select>
 
     <select id="listByGroup" resultMap="UserDto">
         SELECT
-        id,
-        username,
-        real_name,
-        age,
-        id_number,
-        address,
-        phone,
-        added,
-        role,
-        group_id
+        *
         FROM user where group_id=#{groupId}
         order by id DESC
         LIMIT #{offset}, #{size};
@@ -173,16 +138,7 @@
     </select>
     <select id="listByRole" resultMap="UserDto">
         SELECT
-        id,
-        username,
-        real_name,
-        age,
-        id_number,
-        address,
-        phone,
-        added,
-        role,
-        group_id
+        *
         FROM user where role=#{role}
         order by id DESC
         LIMIT #{offset}, #{size};
@@ -230,20 +186,11 @@
     </select>
     <select id="login" resultMap="UserDto">
         SELECT
-        id,
-        username,
-        password,
-        real_name,
-        age,
-        id_number,
-        address,
-        phone,
-        added,
-        role,
-        group_id
+        *
         FROM user
-        WHERE username = #{username} AND
-        password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        where username = #{username}
+        AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        AND (isnull(limited_ip) OR limited_ip=#{ip})
         limit 1;
     </select>
     <update id="updateGroup">
@@ -270,18 +217,30 @@
         FROM `group`
         WHERE id = #{id};
     </select>
-    <select id="getUserLogonByUser" parameterType="Long" resultMap="UserLogon">
+
+    <select id="listUserLogonByUser" resultMap="UserLogon">
+SELECT *
+FROM user_logon
+WHERE user_id = #{id}
+ORDER BY id DESC limit #{offset},#{size}
+    </select>
+    <select id="countUserLogonByUser" resultType="Long">
+SELECT count(1)
+FROM user_logon
+WHERE user_id = #{id}
+    </select>
+    <select id="getLastUserLogon" parameterType="Long" resultMap="UserLogon">
         SELECT *
         FROM user_logon
-        WHERE user_id = #{id};
+        WHERE user_id = #{id} order by id desc limit 1;
     </select>
     <insert id="insertUserLogon">
-INSERT INTO user_logon (last_sign_in, user_id, last_mac_addr, last_ip)
-  VALUE (now(), #{userLogon.userId}, #{userLogon.lastMacAddr}, #{userLogon.lastIP});
+INSERT INTO user_logon (logged_on, user_id, ip)
+VALUE (now(), #{userLogon.userId}, #{userLogon.ip});
     </insert>
     <update id="updateUserLogon">
 UPDATE user_logon
-SET last_sign_in=now(),last_mac_addr = #{userLogon.lastMacAddr}, last_ip = #{userLogon.lastIP}
+SET logged_on=now(), ip = #{userLogon.ip}
 where user_id= #{userLogon.userId}
     </update>
 </mapper>

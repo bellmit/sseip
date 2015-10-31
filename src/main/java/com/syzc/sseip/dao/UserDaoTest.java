@@ -1,6 +1,5 @@
 package com.syzc.sseip.dao;
 
-import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.util.LocalAcUtil;
@@ -29,7 +28,7 @@ public class UserDaoTest {
 //        System.out.println(JSON.toJSONString(d.get(u.getId()), true));
 
         User user;
-//        System.out.println(JSON.toJSONString(d.login("abc", "abc"), true));
+//        System.out.println(JSON.toJSONString(d.login("abc", "abc", null), true));
 
 //        System.out.println(d.remove(1L));
 
@@ -43,8 +42,15 @@ public class UserDaoTest {
 //        u.setPhone("133315333152");
 //        System.out.println(d.update(u));
 
-//        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));
-//        System.out.println(d.count());
+/*
+        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));
+        System.out.println(d.count());
+*/
+
+/*
+        System.out.println(JSON.toJSONString(d.list(50L, (byte) 10), true));
+        System.out.println(d.count());
+*/
 
 //        System.out.println(JSON.toJSONString(d.listByGroup(1L, 0L, (byte) 10), true));
 //        System.out.println(d.countByGroup(1L));
@@ -67,19 +73,22 @@ public class UserDaoTest {
 
 //        System.out.println(d.getRole(3L));
 
-        System.out.println(JSON.toJSONString(d.get(3L), true));
+//        System.out.println(JSON.toJSONString(d.get(3L), true));
 
         UserLogon userLogon;
         userLogon = new UserLogon();
-        userLogon.setLastIP("987");
-        userLogon.setLastMacAddr("abcde");
+        userLogon.setIp("987");
         userLogon.setUserId(7L);
-//        d.insertUserLogon(userLogon);
+//        System.out.println(d.insertUserLogon(userLogon));
 
         userLogon = new UserLogon();
-        userLogon.setLastIP("ffddee");
-        userLogon.setLastMacAddr("339988");
+        userLogon.setIp("ffddee");
         userLogon.setUserId(7L);
-        System.out.println(d.updateUserLogon(userLogon));
+//        System.out.println(d.updateUserLogon(userLogon));
+
+//        System.out.println(JSON.toJSONString(d.listUserLogonByUser(52L, 0L, (short) 100), true));
+//        System.out.println(JSON.toJSONString(d.listUserLogonByUser(51L, 0L, (short) 100), true));
+        System.out.println(d.countUserLogonByUser(51L));
+        System.out.println(d.countUserLogonByUser(52L));
     }
 }

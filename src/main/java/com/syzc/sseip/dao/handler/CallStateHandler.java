@@ -19,22 +19,16 @@ public class CallStateHandler implements TypeHandler<CallState> {
 
     @Override
     public CallState getResult(ResultSet rs, String columnName) throws SQLException {
-        System.out.println("g");
-        System.out.println(rs.getInt(columnName));
         return CallState.get(rs.getInt(columnName));
     }
 
     @Override
     public CallState getResult(ResultSet rs, int columnIndex) throws SQLException {
-        System.out.println("g");
-        System.out.println(rs.getInt(columnIndex));
         return CallState.get(rs.getInt(columnIndex));
     }
 
     @Override
     public CallState getResult(CallableStatement cs, int columnIndex) throws SQLException {
-        System.out.println("g");
-        System.out.println(cs.getInt(columnIndex));
         return CallState.get(cs.getInt(columnIndex));
     }
 }

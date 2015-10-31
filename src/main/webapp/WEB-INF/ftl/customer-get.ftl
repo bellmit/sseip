@@ -73,12 +73,20 @@
                             class="label">不详</span></#if>
                     </dd>
                     <dt>备忘</dt>
-                    <dd><#if (customer.memo)??>${customer.memo}<#else><span
-                            class="label">不详</span></#if>
-                    </dd>
+                    <dd><#if customer.memos?? && customer.memos?size gt 0>
+                        <div class="well">
+                            <ul><#list customer.memos as memo>
+                                <li>${(memo.content?html)!''} -
+                                    <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
+                                </li>
+                            </#list>
+                            </ul>
+                        </div>
+                    </#if></dd>
                     <dt>联系记录</dt>
-                    <dd><#if (customer.contactRecords)??>${customer.contactRecords}<#else><span
-                            class="label">不详</span></#if>
+                    <dd><#if (customer.contactRecords)??>
+                        <div class="well">${customer.contactRecords}</div><#else>
+                        <span class="label">不详</span></#if>
                     </dd>
                     <dt>星级</dt>
                     <dd><#if (customer.stars)??>${customer.stars}<#else><span

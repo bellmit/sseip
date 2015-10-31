@@ -59,6 +59,7 @@ public class CustomerServiceImplTest {
         System.out.println(s.get(1L).getWeight());
         System.out.println(s.get(1L).getUserId());
         System.out.println(s.get(1L).getCallState());
-        System.out.println(s.get(1L).getCallState2());
+        System.out.println(s.get(2L).getCallState());
+//        System.out.println(s.get(1L).getCallState2());
     }
 }

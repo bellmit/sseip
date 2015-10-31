@@ -7,9 +7,8 @@ public class UserLogon implements Serializable {
     private static final long serialVersionUID = 5419204435606519473L;
     private Long id;
     private Long userId;
-    private Date lastSignIn;
-    private String lastIP;
-    private String lastMacAddr;
+    private Date loggedOn;
+    private String ip;
 
     public UserLogon() {
     }
@@ -30,27 +29,19 @@ public class UserLogon implements Serializable {
         this.userId = userId;
     }
 
-    public Date getLastSignIn() {
-        return lastSignIn;
+    public Date getLoggedOn() {
+        return loggedOn;
     }
 
-    public void setLastSignIn(Date lastSignIn) {
-        this.lastSignIn = lastSignIn;
+    public void setLoggedOn(Date loggedOn) {
+        this.loggedOn = loggedOn;
     }
 
-    public String getLastIP() {
-        return lastIP;
+    public String getIp() {
+        return ip;
     }
 
-    public void setLastIP(String lastIP) {
-        this.lastIP = lastIP;
-    }
-
-    public String getLastMacAddr() {
-        return lastMacAddr;
-    }
-
-    public void setLastMacAddr(String lastMacAddr) {
-        this.lastMacAddr = lastMacAddr;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

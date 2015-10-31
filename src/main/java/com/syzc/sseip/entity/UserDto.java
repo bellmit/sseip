@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class UserDto extends User implements Serializable {
     private static final long serialVersionUID = 2042209216352215111L;
     private Group group;
-    private UserLogon userLogon;
+    private UserLogon lastUserLogon;
 
     public UserDto() {
     }
@@ -18,11 +18,11 @@ public class UserDto extends User implements Serializable {
         this.group = group;
     }
 
-    public UserLogon getUserLogon() {
-        return userLogon;
+    public UserLogon getLastUserLogon() {
+        return lastUserLogon;
     }
 
-    public void setUserLogon(UserLogon userLogon) {
-        this.userLogon = userLogon;
+    public void setLastUserLogon(UserLogon lastUserLogon) {
+        this.lastUserLogon = lastUserLogon;
     }
 }

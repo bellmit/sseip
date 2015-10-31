@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.Group;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserDto;
+import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.GroupService;
 import com.syzc.sseip.service.UserService;
@@ -131,7 +132,7 @@ public class UserController {
             throw HosException.create("删除用户操作没有执行成功", Level.WARN);
         }
     }*/
-    
+
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String removeUserPost(@RequestParam("id") Long userId, HttpServletRequest request, HttpSession session) {
 
@@ -324,5 +325,21 @@ public class UserController {
 
         model.addAttribute("user", user);
         return "/profile-self";
+    }
+
+    @RequestMapping(value = "/{userId:\\d+}/log-on-history/{pageNo:\\d+}")
+    public String logOnHistory(@PathVariable Long userId, @PathVariable Long pageNo, Model model, HttpSession session) {
+        User login = (User) session.getAttribute("loginUser");
+
+        if (login.getRole() != Role.ADMIN) {
+            throw HosException.create("没有权限", Level.TRACE);
+        }
+        User user = userService.get(userId);
+        Page<UserLogon> page = userService.listUserLogonByUser(userId, pageNo, (short) pageSize);
+
+        model.addAttribute("user", user);
+        model.addAttribute("page", page);
+
+        return "/user-individual-logon-history";
     }
 }

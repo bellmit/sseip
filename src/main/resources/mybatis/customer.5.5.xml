@@ -20,8 +20,7 @@
         <result column="group_id" property="groupId"/>
         <result column="if_report" property="ifReport"/>
         <result column="source_website" property="sourceWebsite"/>
-        <!--<result column="call_state" property="callState" typeHandler="com.syzc.sseip.dao.handler.CallStateHandler"/>-->
-        <!--<result column="call_state" property="callState2"/>-->
+        <result column="call_state" property="callState"/>
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto" extends="Customer">
         <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
@@ -34,7 +33,6 @@
     </resultMap>
     <resultMap id="CustomerDtoWithMemo" type="com.syzc.sseip.entity.CustomerDto" extends="CustomerDto">
         <result column="call_state" property="callState"/>
-        <result column="call_state" property="callState2"/>
         <collection property="memos" column="id" select="listAllByCustomer"/>
     </resultMap>
 
@@ -601,7 +599,7 @@
         select * from memo where customer_id=#{customerId}
     </select>
 
-    <select id="updateTelAuditDto">
+    <update id="updateTelAuditDto">
         update customer set
         if_report=#{entity.ifReport},
         valid=#{entity.valid},
@@ -609,8 +607,8 @@
         call_state=#{entity.callState},
         weight=#{entity.weight}
         where id=#{entity.customerId}
-    </select>
-    <select id="queryCallState" resultType="Integer">
+    </update>
+    <select id="getCallState" resultType="Integer">
         select call_state from customer where id=#{id}
     </select>
 </mapper>
