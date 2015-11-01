@@ -295,8 +295,8 @@
                         <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                     <#else>
                         <#if (customer.liaisonName)??>
-                        ${customer.liaisonName}<#else><span
-                                class="label"><span class="fa fa-question"></span></#if>
+                        ${customer.liaisonName}<#else><#--<span
+                                class="label"><span class="fa fa-question"></span>--></#if>
                     </#if>
                 </div>
             <#--<div class="stars-ui-ele btn-minier rating"
@@ -305,10 +305,10 @@
             </td>
             <td class=""<#if customer.patientCountry??>
                 title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class=""
                 title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class="" title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
                 <#switch customer.hospitalization>
                     <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
@@ -319,33 +319,32 @@
                         <#break>
                 </#switch>
             <#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class=""
                 title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,8)+'...'}<#else>${customer.website.name}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class=""
                 title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,16)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
         <#--<td class=""
             title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
             <span class="label"><span class="fa fa-question"></span></#if></td>-->
             <td class=""
                 title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
-                <span class="fa bigger-140 fa-circle-o-notch green"></span></#if><#else> <span class="label"><span
-                    class="fa fa-question"></span></#if>
+                <span class="fa bigger-140 fa-circle-o-notch green"></span></#if><#else><#--<span class="label"><span class="fa fa-question"></span></span>--></#if>
             </td>
         <#--<td class=""
             title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
             <span class="label"><span class="fa fa-question"></span></#if></td>-->
             <td class=""
                 title="${(customer.user.realName)!''}"><#if ((customer.user.realName))??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class=""
                 <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm:ss')}<#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
                 <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm:ss')}<#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
 
             <td class="center">
                 <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
