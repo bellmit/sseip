@@ -24,19 +24,21 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa light-red fa-table"></span>个人资源一览</li>
+            <li class="active"><span class="fa light-red fa-table"></span>全部资源一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
 
+<#--折叠栏开始-->
     <div class="accordion-style1 panel-group" id="accordion" style="margin-bottom: 4px;">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseOne">
-                    <span data-icon-show="ace-icon fa fa-plus-square" data-icon-hide="ace-icon fa fa-minus-square-o"
-                          class="ace-icon fa fa-plus-square"></span>
+                            <span data-icon-show="ace-icon fa fa-plus-square"
+                                  data-icon-hide="ace-icon fa fa-minus-square-o"
+                                  class="bigger-110 ace-icon fa fa-plus-square"></span>
                         筛选条件
                     </a>
                 </h4>
@@ -50,24 +52,45 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        <div class="col-sm-12">
 
-                                            <input name="name" class="filters col-md-2 text-right green" type="text"
+                                        <div class="col-sm-12"><input class="filters col-md-4" id="date-range"
+                                                                      placeholder="日期时间范围"
+                                                                      title="选择日期时间范围"
+                                                                      value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+                                            <input form="filter-form" name="dateRange" type="hidden"
+                                                   id="date-range-input"
+                                                   style="display: none;"
+                                                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
+
+                                            <input name="stars" id="form-stars" type="hidden" form="filter-form"
+                                                   value="${(RequestParameters.stars)!'0'}"/>
+
+                                            <div class="filters rating inline" id="stars-ui"
+                                                 data-init-score="${(RequestParameters.stars)!'0'}"
+                                                 title="筛选意向程度星级"></div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input class="filters col-md-2 text-right green" name="name" type="text"
                                                    form="filter-form"
-                                                   title="筛选患者咨询人姓名"
-                                                   placeholder="患者或咨询人姓名"/>
-                                            <input name="email" class="filters col-md-2 text-right green"
-                                                   type="email"
-                                                   form="filter-form"
-                                                   title="电子邮件地址"
-                                                   placeholder="电子邮件地址"/>
-                                            <input name="tel" class="filters col-md-2 text-right green" type="tel"
+                                                   title="筛选或患者咨询人的姓名"
+                                                   placeholder="患者或咨询人的姓名" value="${(RequestParameters.name)!''}"/>
+                                            <input class="filters col-md-2 text-right green" name="email"
+                                                   type="email" form="filter-form" title="电子邮件地址"
+                                                   placeholder="电子邮件地址" value="${(RequestParameters.email)!''}"/>
+                                            <input class="filters col-md-2 text-right green" name="tel" type="tel"
                                                    form="filter-form"
                                                    title="筛选电话"
-                                                   placeholder="电话"/>
-
-                                            <select name="countryId" class="filters col-md-2 text-right pink"
-                                                    form="filter-form" title="筛选患者或咨询人国家">
+                                                   placeholder="电话" value="${(RequestParameters.tel)!''}"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <select class="filters col-md-2 text-right pink" name="countryId"
+                                                    form="filter-form"
+                                                    title="筛选患者或咨询人的国家">
                                                 <option
                                                 <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
                                                 value="">患者或咨询人的国家
@@ -78,9 +101,8 @@
                                                     value="${country.id?c}">${country.name}</option>
                                             </#list>
                                             </select>
-                                            <select name="diseaseTypeId" class="filters col-md-2 text-right orange"
-                                                    form="filter-form"
-                                                    title="筛选疾病类型">
+                                            <select class="filters col-md-2 text-right orange" name="diseaseTypeId"
+                                                    form="filter-form" title="筛选疾病类型">
                                                 <option
                                                 <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
                                                 value="">疾病类型
@@ -91,12 +113,12 @@
                                                     value="${diseaseType.id?c}">${diseaseType.name}</option>
                                             </#list>
                                             </select>
-                                            <select name="websiteId" class="filters col-md-2 text-right green"
-                                                    form="filter-form"
-                                                    title="选择网站">
+                                            <select class="filters col-md-2 text-right green" name="websiteId"
+                                                    form="filter-form" title="选择网站">
                                                 <option
                                                 <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
-                                                value="">网站
+                                                value="">
+                                                    选择网站
                                                 </option>
                                             <#list websites as website>
                                                 <option
@@ -104,26 +126,27 @@
                                                     value="${website.id?c}">${website.name}</option>
                                             </#list>
                                             </select>
-
-                                            <select name="valid" class="filters col-md-2 text-right brown"
-                                                    form="filter-form"
-                                                    title="筛选是否有效">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <select class="filters col-md-2 text-right brown" name="valid"
+                                                    form="filter-form" title="筛选是否有效">
                                                 <option
-                                                <#if !((RequestParameters.faraway)??) || RequestParameters.faraway=''>selected</#if>
+                                                <#if !((RequestParameters.valid)??) || RequestParameters.valid=''>selected</#if>
                                                 value="">是否有效
                                                 </option>
                                                 <option
-                                                <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='1'>selected</#if>
+                                                <#if (RequestParameters.valid)?? && RequestParameters.valid=='1'>selected</#if>
                                                 value="1">有效
                                                 </option>
                                                 <option
-                                                <#if (RequestParameters.faraway)?? && RequestParameters.faraway=='0'>selected</#if>
+                                                <#if (RequestParameters.valid)?? && RequestParameters.valid=='0'>selected</#if>
                                                 value="0">无效
                                                 </option>
                                             </select>
-                                            <select name="hospitalization" class="filters col-md-2 text-right pink"
-                                                    form="filter-form"
-                                                    title="筛选住院类型">
+                                            <select class="filters col-md-2 text-right pink" name="hospitalization"
+                                                    form="filter-form" title="筛选住院类型">
                                                 <option
                                                 <#if !(RequestParameters.hospitalization)??||RequestParameters.hospitalization=''>selected</#if>
                                                 value="">住院类型
@@ -135,8 +158,7 @@
                                             </#list>
                                             </select>
                                             <select class="filters col-md-2 text-right brown" name="discard"
-                                                    form="filter-form"
-                                                    title="筛选是否提交删除">
+                                                    form="filter-form" title="筛选是否提交删除">
                                                 <option
                                                 <#if !((RequestParameters.discard)??) || RequestParameters.discard=''>selected</#if>
                                                 value="">是否提交删除
@@ -150,7 +172,10 @@
                                                 value="0">未提交删除
                                                 </option>
                                             </select>
-
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
                                             <select name="ifReport" class="filters col-md-2 text-right brown"
                                                     form="filter-form"
                                                     title="筛选是否报备">
@@ -167,42 +192,19 @@
                                                 value="0">不报备
                                                 </option>
                                             </select>
-
-                                            <input name="stars" id="form-stars" type="hidden" form="filter-form"
-                                                   value="${(RequestParameters.stars)!'0'}"/>
-
-                                            <div class="filters col-md-2 inline" id="stars-ui"
-                                                 data-init-score="${(RequestParameters.stars)!'0'}"
-                                                 title="意向的星级"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <input class="filters col-md-4" id="date-range"
-                                                   placeholder="日期时间范围"
-                                                   title="选择日期时间范围"
-                                                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
-                                            <input form="filter-form" name="dateRange" type="hidden"
-                                                   id="date-range-input"
-                                                   style="display: none;"
-                                                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                        <#--
-                                                                        <input name="stars" class="col-md-2 text-right green" type="text" form="filter-form"
-                                                                               title="意向程度"
-                                                                               placeholder="意向程度"/>
-                                        -->
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
+                                            <select class="filters col-md-2 text-right pink2"
+                                                    name="userId" form="filter-form"
+                                                    title="筛选所属人">
+                                                <option
+                                                <#if !(RequestParameters.userId)?? || RequestParameters.userId=''>selected</#if>
+                                                value="">所属人
+                                                </option>
+                                            <#list users as user>
+                                                <option
+                                                    <#if (RequestParameters.userId)?? && RequestParameters.userId==user.id?string>selected</#if>
+                                                    value="${user.id?c}">${(user.group.name + ' - ')!''}${(user.realName)!'佚名'}</option>
+                                            </#list>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +215,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <a href="" class="filters btn btn-xs col-md-2 btn-warning">重置条件</a>
-                            <a href="${context.contextPath}/customer/filter-own/1"
+                            <a href="${context.contextPath}/customer/filter/1"
                                class="filters btn btn-xs col-md-2 btn-grey">重新搜索</a>
                             <button type="submit" class="filters btn btn-xs col-md-2 btn-info"
                                     form="filter-form">查询
@@ -225,57 +227,53 @@
             </div>
         </div>
     </div>
-    <div><span class="col-md-2"><span class="btn-group btn-corner"><a
-            href="${context.contextPath}/customer/add"
-            target="_self"
-            style="color:#FFF;text-decoration:none;"
-            title="填写资源"
-            class="btn btn-info btn-sm"><span class="fa fa-file"></span></a><a
-            href="" style="color:#FFF;text-decoration:none;" class="btn btn-info btn-sm"
-            title="刷新列表"><span class="fa fa-refresh"></span></a></span></span>
-                                <span class="col-md-10">
-                                <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
-                                </span>
-    </div>
+<#--折叠栏结束-->
 
-    <table id="customer-table-1"
+
+<#--<div class="page-header position-relative">-->
+    <div><span class="col-md-2"><span class="btn-group btn-corner"><#if ['EMPLOYEE']?seq_contains(loginUser.role)><a
+            href="${context.contextPath}/customer/add" target="_self" style="color:#FFF;text-decoration:none;"
+            title="填写资源" class="btn btn-info btn-sm"><span class="fa fa-file"></span></a></#if><a href=""
+                                                                                                  style="color:#FFF;text-decoration:none;"
+                                                                                                  class="btn btn-info btn-sm"
+                                                                                                  title="刷新列表"><span
+            class="fa fa-refresh"></span></a></span></span> <span
+            class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
+    </div>
+    <table id="sample-table-1"
            class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
            style="word-wrap: break-word;table-layout:fixed">
         <colgroup class="row">
         <#--1-->
-            <col style="width: 3.5em;">
+        <#--<col style="width: 5em;">-->
             <col style="width: 10em;">
             <col style="width: 8em;">
             <col class="">
-        <#--5    -->
-            <col style="width: 4em;">
-            <col style="width: 10em;">
-            <col style="width: 10em;">
-        <#--<col >--> <#--style="width: 11em;"--> <#--备注-->
+        <#--4    -->
             <col style="width: 3em;">
-        <#--9-->
+            <col style="width: 10em;">
+            <col style="width: 10.3em;">
+        <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
+            <col style="width: 3em;">
+        <#--8-->
+            <col style="width: 5.3em;">
             <col style="width: 5.3em;">
             <col style="width: 10.4em;">
             <col style="width: 10.4em;">
             <col style="width: 7em;">
-        <#--<col class="col-sm-1">
-        <col class="col-sm-2">
-        <col class="col-sm-2">
-        <col class="col-sm-2">
-        <col class="col-sm-2">
-        <col class="col-sm-1">
-        <col class="col-sm-2">-->
         </colgroup>
         <thead>
         <tr>
-            <th class="text-right"><input type="checkbox" id="check-all"></th>
+        <#--<th class="text-right">ID</th>-->
             <th class="">姓名</th>
             <th class="">国家</th>
             <th class="">症状</th>
             <th class="" title="是否住院">住院</th>
             <th class="">所属网站组</th>
             <th class="">来源网站</th>
+        <#--<th class="">备注</th>-->
             <th class="" title="是否报备">报备</th>
+            <th class="">所属人</th>
             <th class="">提交人</th>
             <th class="">更新时间</th>
             <th class="">创建时间</th>
@@ -287,11 +285,7 @@
         <tbody>
         <#list page.list as customer>
         <tr>
-            <td class="text-right id-col">
-            <#--${customer.id?c}--><input type="checkbox" class="checkbox-each-id" name="customer-ids"
-                                          value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
-            <#--<label style="width: 100%;"></label>-->
-            </td>
+        <#--<td class="">${customer.id?c}</td>-->
             <td class=""
                 <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
                 <div>
@@ -300,8 +294,8 @@
                         <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                     <#else>
                         <#if (customer.liaisonName)??>
-                        ${customer.liaisonName}<#else><#--<span
-                                class="label"><span class="fa fa-question"></span>--></#if>
+                        ${customer.liaisonName}<#else><span
+                                class="label">不详</span></#if>
                     </#if>
                 </div>
             <#--<div class="stars-ui-ele btn-minier rating"
@@ -310,40 +304,39 @@
             </td>
             <td class=""<#if customer.patientCountry??>
                 title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
-            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-            <td class=""
-                title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
-            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-            <td class="center" title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+            <td title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+            <td title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
                 <#switch customer.hospitalization>
-                    <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
-                        <#break>
-                    <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span>
-                        <#break>
-                    <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span>
-                        <#break>
+                    <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span><#break>
+                    <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span><#break>
+                    <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span><#break>
                 </#switch>
             <#else>
-            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
-                title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,8)+'...'}<#else>${customer.website.name}</#if><#else>
-            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
+                title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
                 title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,16)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
-            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
         <#--<td class=""
-            title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
+            title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
             <span class="label"><span class="fa fa-question"></span></#if></td>-->
-            <td class="center"
+            <td class=""
                 title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
-                <span class="fa bigger-140 fa-circle-o-notch green"></span></#if><#else><#--<span class="label"><span class="fa fa-question"></span></span>--></#if>
+            <span class="fa bigger-140 fa-circle-o-notch green"></#if><#else><#--<span class="label"><span class="fa fa-question"></span></span>--></#if>
             </td>
         <#--<td class=""
             title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
-            <span class="label"><span class="fa fa-question"></span></#if></td>-->
+            <span class="label">不详</span></#if></td>-->
             <td class=""
-                title="${(customer.user.realName)!''}"><#if ((customer.user.realName))??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
-            <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
+                title="${(customer.ownerUser.realName)!''}"><#if (customer.ownerUser.realName)??><#if customer.ownerUser.realName?length gt 8>${customer.ownerUser.realName?substring(0,5)+'...'}<#else>${customer.ownerUser.realName}</#if><#else>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+            <td class=""
+                title="${(customer.user.realName)!''}"><#if (customer.user.realName)??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
+            <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
                 <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm:ss')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
@@ -351,66 +344,54 @@
                 <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm:ss')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
 
-            <td class="">
-                <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                    <span class="btn-group"><a class="btn btn-minier" href="/customer/update/${customer.id?c}"
-                                               title="编辑"><span class="fa fa-paint-brush bigger-140"></span></a>
+            <td class="center">
+            <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
+            <#--||loginUser.role='MANAGER'-->
+                <span class="btn-group">
+                    <#if loginUser.role?? && ['TELADMIN']?seq_contains(loginUser.role)>
 
-                    <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
-                        <form action="${context.contextPath}/customer/remove" method="post"
-                              style="display: inline;"><input type="hidden" name="id"
-                                                              value="${customer.id?c}">
-                            <button class="btn btn-minier"
-                                    href="${context.contextPath}/customer/remove"><span
-                                    class="fa fa-trash"></span></button>
-                        </form></#if>-->
-                        <button form="from-discard-customer-${customer_index}"
-                                class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
-                                title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
-                                class="fa fa-eraser bigger-140"></span>
+                        <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
+                           class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-140"> </span> </a>
+                    </#if>
+                    <#if ['ADMIN']?seq_contains(loginUser.role)>
+                        <a class="btn btn-minier" href="${context.contextPath}/customer/get/${customer.id}"><span
+                                class="fa fa-newspaper-o bigger-140"></span></a>
+                    </#if>
+                    <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>
+                        <button form="from-remove-customer-${customer_index}"
+                                class="remove-control btn btn-minier btn-pink" title="已提交删除"><span
+                                class="fa fa-trash"> </span>
                         </button>
-                    <form id="from-discard-customer-${customer_index}"
-                          action="${context.contextPath}/customer/update-discard" method="post"
-                          style="display: none;"><input type="hidden" name="id"
-                                                        value="${customer.id?c}"><input
-                            type="hidden" name="discard"
-                            value="${customer.discard?string('0','1')}">
+                    <form id="from-remove-customer-${customer_index}" action="${context.contextPath}/customer/remove"
+                          method="post" style="display: none;"><input type="hidden" name="id" value="${customer.id?c}">
                     </form>
-                </span>
-                </#if>
+                    </#if>
+            </span>
+            <#--
+                                <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                    <button form="from-remove-customer-${customer_index}"
+                                            href="${context.contextPath}/customer/remove"
+                                            class="remove-control btn btn-minier ${customer.discard?then('btn-pink','btn-success')}"
+                                            title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span class="fa fa-trash"> </span>
+                                    </button>
+                                <form id="from-remove-customer-${customer_index}"
+                                      action="${context.contextPath}/customer/remove" method="post"
+                                      style="display: none;"><input type="hidden" name="id"
+                                                                    value="${customer.id?c}">
+                                </form>
+                                </#if>
+            -->
             </td>
         </tr>
         </#list>
         </tbody>
     </table>
-
-    <div>
-<span class="col-md-1">
-<span class="btn-group btn-corner"><a href="${context.contextPath}/customer/add" target="_self" title="填写资源"
-                                      class="btn btn-info btn-sm"><span class="fa fa-file"></span></a><a href=""
-                                                                                                         class="btn btn-info btn-sm"
-                                                                                                         title="刷新列表"><span
-        class="fa fa-refresh"></span></a></span></span>
-        <select name="new-owner-user-id" class="filters col-md-2 text-right pink2" form="pass-on-form" title="转交给用户">
-            <option
-            <#if (RequestParameters.newOwnerUserId)!''=''>selected</#if>
-            value="">转交给用户
-            </option>
-        <#list users as user>
-            <option
-                <#if (RequestParameters.newOwnerUserId)!''==user.id?string>selected</#if>
-                value="${user.id?c}"
-                title="${(user.group.name + ' - ')!''}${user.realName}">${(user.group.name + ' - ')!''}${user.realName}</option>
-        </#list>
-        </select>
-        <button type="submit" class="filters btn btn-xs col-md-2 text-right btn-warning"
-                form="pass-on-form">转交给用户
-        </button>
-        <form style="display: none;" id="pass-on-form" method="post"
-              action="${context.contextPath}/customer/pass"></form>
-<span class="col-md-7">
-<#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
-</span>
+    <div><span class="col-md-2"><span class="btn-group btn-corner"><a href="" style="color:#FFF;text-decoration:none;"
+                                                                      class="btn btn-info btn-sm" title="刷新列表"><span
+            class="fa fa-refresh"></span></a></span></span>
+                                <span class="col-md-10">
+                                <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+                                </span>
     </div>
 </div>
 <#include "/common/common_js.ftl">
@@ -431,6 +412,7 @@
             noRatedMsg: "它只读，它还没有星星",
             starType: 'span',
             hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            space: false,
             score: function () {
                 return $(this).attr('data-init-score');
             },
@@ -483,26 +465,6 @@
 //            l = start;//用于调试
             $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
         });
-
-        $('#check-all').change(function (e) {
-            $('.checkbox-each-id').prop('checked', $('#check-all').prop('checked'));
-        });
-
-        /**
-         * 两个事件，用于阻止checkbox事件冒泡，和绑定td点击事件；附加对全选的td点击事件绑定
-         */
-        $('.checkbox-each-id,#check-all').click(function (e) {
-            e.stopPropagation();
-        });
-        $('.id-col').click(function (e) {
-            var i = $('.checkbox-each-id', this);
-            i.prop('checked', !i.prop('checked'));
-            e.stopPropagation();
-        });
-        $('th:first').click(function (e) {
-            $('#check-all').click();
-            e.stopPropagation();
-        });
         $('.btn').tooltip();
 
         $(".remove-control").click(function (e) {
@@ -529,10 +491,11 @@
             );
         });
 
-    <#--<#if dateRange?? && dateRange?size gt 0 >-->
+
+    <#if dateRange?? && dateRange?size gt 0 >
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->
     <#--$('#date-range-input').val([${dateRange[0]?long?c}, ${dateRange[1]?long?c}].join());-->
-    <#--</#if>-->
+    </#if>
     });
 </script>
 </body>

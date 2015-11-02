@@ -27,14 +27,14 @@
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
                                style="word-wrap: break-word;table-layout:fixed">
                             <colgroup class="row">
-                                <col class="col-md-1">
+                                <#--<col class="col-md-1">-->
                                 <col class="col-md-2">
                                 <col class="col-md-7">
                                 <col class="col-md-2">
                             </colgroup>
                             <thead>
                             <tr>
-                                <th class="text-right">id</th>
+                                <#--<th class="text-right">id</th>-->
                                 <th class="text-right">名称</th>
                                 <th class="text-right">描述</th>
                                 <th class="center">功能</th>
@@ -44,7 +44,7 @@
                             <tbody>
                             <#list page.list as group>
                             <tr>
-                                <td class="text-right">${group.id}</td>
+                                <#--<td class="text-right">${group.id}</td>-->
                                 <td class="text-right">${group.name}</td>
                                 <td class="text-right"><#if group.description??>${group.description}<#else>
                                     <span>没有写</span></#if></td>

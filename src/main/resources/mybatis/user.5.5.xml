@@ -133,6 +133,9 @@
         order by id DESC
         LIMIT #{offset}, #{size};
     </select>
+    <select id="listAllByGroup" resultMap="UserDto">
+        select * from user where group_id=#{groupId} limit 1000;
+    </select>
     <select id="countByGroup" resultType="Long">
         select count(1) from user where group_id=#{groupId}
     </select>
@@ -243,4 +246,5 @@ UPDATE user_logon
 SET logged_on=now(), ip = #{userLogon.ip}
 where user_id= #{userLogon.userId}
     </update>
+
 </mapper>

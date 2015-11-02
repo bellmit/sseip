@@ -61,25 +61,26 @@
                                     <a href="${context.contextPath}/user/profile/${user.id}" class="list_link"
                                        title="查看资料"><span class="fa fa-eye"></span></a></#if></td>
                                 <td class="text-right">${user.realName}</td>
-                                <td class="text-right"><#if user.age??>${user.age}<#else><span>没有写</span></#if>
+                                <td class="text-right"><#if user.age??>${user.age}<#else><span class="label"><span
+                                        class="fa fa-question"></span></span></#if>
                                 </td>
 
                             <#--<td class="text-right"><#if user.idNumber??>${user.idNumber}<#else>
                                 <span class="label">没有写</span></#if>
                             </td>-->
                                 <td class="text-right"><#if user.address??>${user.address}<#else>
-                                    <span class="label">没有写</span></#if>
+                                    <span class="label"><span class="fa fa-question"></span></span></#if>
                                 </td>
                                 <td class="text-right"><#if user.phone??>${user.phone}<#else>
-                                    <span class="label">没有写</span></#if>
+                                    <span class="label"><span class="fa fa-question"></span></span></#if>
                                 </td>
                                 <td class="text-right"><#if user.added??>${user.added?string("yyyy-MM-dd,HH:mm:ss")}<#else>
-                                    <span class="label">没有写</span></#if></td>
+                                    <span class="label"><span class="fa fa-question"></span></span></#if></td>
 
                                 <td class="text-right"><#if (user.lastUserLogon.loggedOn)??>${user.lastUserLogon.loggedOn?string("yyyy-MM-dd HH:mm:ss")}<#else>
-                                    <span class="label">没有写</span></#if></td>
+                                    <span class="label"><span class="fa fa-question"></span></span></#if></td>
                                 <td class="text-right"><#if (user.lastUserLogon.ip)??>${user.lastUserLogon.ip}<#else>
-                                    <span class="label">没有写</span></#if>
+                                    <span class="label"></span></#if>
                                 </td>
                             <#--
                                                             <td class="text-right"><#if (user.userLogon.lastMacAddr)??>${user.userLogon.lastMacAddr}<#else>
@@ -87,14 +88,14 @@
                             -->
 
                                 <td class="text-right"><#if (user.group.name)??>${user.group.name}<#else>
-                                    <span class="label">没有写</span></#if>
+                                    <span class="label"><span class="fa fa-question"></span></span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                                         <a href="${context.contextPath}/group/user-update/${user.id}"
                                            title="变更部门"><span class="fa fa-gear"></span></a>
                                     </#if>
                                 </td>
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
-                                    <span class="label">没有写</span></#if>
+                                    <span class="label"><span class="fa fa-question"></span></span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')><a
                                             href="${context.contextPath}/role/updaterole/${user.id}" title="变更角色"><span
                                             class="fa fa-gear"></span></a></#if>

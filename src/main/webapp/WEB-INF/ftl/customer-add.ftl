@@ -302,7 +302,8 @@
                                     <label class="col-sm-2 control-label no-padding-right" title="住院情况">住院</label>
 
                                     <div class="col-sm-10">
-                                        <select name="hospitalization" class="col-xs-12" size="3">
+                                        <select name="hospitalization" class="col-xs-12" size="3"
+                                                style="overflow-y: hidden;">
                                         <#list hospitalizationTypes as hospitalizationType>
                                             <option
                                                 <#if (form.hospitalization)?? && form.hospitalization.code=hospitalizationType.code>selected=""</#if>
@@ -424,7 +425,16 @@
             var ff = function () {
                 //            $('#source-website').text($('#contact-records-editor').html());
                 var i = $('#contact-records-editor').html();
-                var r = /[<]a.*?href.*?=.*?"(\S*?)"/;
+                /**
+                 * extract full url from a anchor tag
+                 * @type {RegExp}
+                 */
+//                var r = /[<]a.*?href.*?=.*?"(\S*?)"/;
+                /**
+                 * extract only domain from a anchor tag
+                 * @type {RegExp}
+                 */
+                var r = /[<]a\s.*?href\s*?=\s*?"https?:\/\/(?!www10.53kf.com)(\S*?)[?#;\/"]/im;
 //            var r = /[<]a.*?href.*?=.*?"(.*?)"/;
                 var res = r.exec(i);
                 if (res != null) {

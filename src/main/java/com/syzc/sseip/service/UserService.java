@@ -6,6 +6,8 @@ import com.syzc.sseip.entity.UserLogon;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.util.Page;
 
+import java.util.List;
+
 public interface UserService extends BaseService<User, UserDao> {
 //    User add(User user);
 
@@ -38,4 +40,6 @@ public interface UserService extends BaseService<User, UserDao> {
     Boolean saveLogonInfo(UserLogon userLogon);
 
     Page<UserLogon> listUserLogonByUser(Long userId, Long pageNo, Short size);
+
+    List<User> listAllByGroup(Long groupId);
 }

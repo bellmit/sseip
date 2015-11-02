@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements UserService {
@@ -141,6 +142,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
             page.setList(userDao.listUserLogonByUser(userId, page.getRowOffset(), (short) page.getPageSize()));
         }
         return page;
+    }
+
+    @Override
+    public List<User> listAllByGroup(Long groupId) {
+        return userDao.listAllByGroup(groupId);
     }
 
     public static void main(String[] args) {

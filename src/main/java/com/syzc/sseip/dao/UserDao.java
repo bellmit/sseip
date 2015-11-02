@@ -49,4 +49,7 @@ public interface UserDao extends BaseDao<User> {
     List<UserLogon> listUserLogonByUser(@Param("id") Long id, @Param("offset") Long offset, @Param("size") Short size);
 
     Long countUserLogonByUser(@Param("id") Long id);
+
+    // limit 1000
+    List<User> listAllByGroup(Long groupId);
 }

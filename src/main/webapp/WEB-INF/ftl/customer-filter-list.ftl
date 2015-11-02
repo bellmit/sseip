@@ -53,26 +53,8 @@
                                 <div class="col-sm-12">
                                     <div class="row">
 
-                                        <div class="col-sm-12"><input class="filters col-md-4" id="date-range"
-                                                                      placeholder="日期时间范围"
-                                                                      title="选择日期时间范围"
-                                                                      value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
-                                            <input form="filter-form" name="dateRange" type="hidden"
-                                                   id="date-range-input"
-                                                   style="display: none;"
-                                                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
-
-                                            <input name="stars" id="form-stars" type="hidden" form="filter-form"
-                                                   value="${(RequestParameters.stars)!'0'}"/>
-
-                                            <div class="filters rating inline" id="stars-ui"
-                                                 data-init-score="${(RequestParameters.stars)!'0'}"
-                                                 title="筛选意向程度星级"></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-12">
+
                                             <input class="filters col-md-2 text-right green" name="name" type="text"
                                                    form="filter-form"
                                                    title="筛选或患者咨询人的姓名"
@@ -84,10 +66,7 @@
                                                    form="filter-form"
                                                    title="筛选电话"
                                                    placeholder="电话" value="${(RequestParameters.tel)!''}"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
+
                                             <select class="filters col-md-2 text-right pink" name="countryId"
                                                     form="filter-form"
                                                     title="筛选患者或咨询人的国家">
@@ -126,10 +105,7 @@
                                                     value="${website.id?c}">${website.name}</option>
                                             </#list>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
+
                                             <select class="filters col-md-2 text-right brown" name="valid"
                                                     form="filter-form" title="筛选是否有效">
                                                 <option
@@ -172,10 +148,7 @@
                                                 value="0">未提交删除
                                                 </option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
+
                                             <select name="ifReport" class="filters col-md-2 text-right brown"
                                                     form="filter-form"
                                                     title="筛选是否报备">
@@ -205,6 +178,36 @@
                                                     value="${user.id?c}">${(user.group.name + ' - ')!''}${(user.realName)!'佚名'}</option>
                                             </#list>
                                             </select>
+
+                                            <div class="filters col-md-2 inline" id="stars-ui"
+                                                 data-init-score="${(RequestParameters.stars)!'0'}"
+                                                 title="筛选意向程度星级"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <input class="filters col-md-4" id="date-range" placeholder="日期时间范围"
+                                                   title="选择日期时间范围"
+                                                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+                                            <input form="filter-form" name="dateRange" type="hidden"
+                                                   id="date-range-input" style="display: none;"
+                                                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
+                                            <input name="stars" id="form-stars" type="hidden" form="filter-form"
+                                                   value="${(RequestParameters.stars)!'0'}"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +254,7 @@
             <col class="">
         <#--4    -->
             <col style="width: 3em;">
-            <col style="width: 9em;">
+            <col style="width: 10em;">
             <col style="width: 10.3em;">
         <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
             <col style="width: 3em;">
@@ -305,11 +308,9 @@
             <td class=""<#if customer.patientCountry??>
                 title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-            <td class=""
-                title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
+            <td title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 26>${customer.symptom?substring(0,26)+'...'}<#else>${customer.symptom}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-            <td class=""
-                title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
+            <td class="center" title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
                 <#switch customer.hospitalization>
                     <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span><#break>
                     <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span><#break>
@@ -326,7 +327,7 @@
         <#--<td class=""
             title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
             <span class="label"><span class="fa fa-question"></span></#if></td>-->
-            <td class=""
+            <td class="center"
                 title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
             <span class="fa bigger-140 fa-circle-o-notch green"></#if><#else><#--<span class="label"><span class="fa fa-question"></span></span>--></#if>
             </td>
@@ -346,7 +347,7 @@
                 <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm:ss')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
 
-            <td class="center">
+            <td class="">
             <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
             <#--||loginUser.role='MANAGER'-->
                 <span class="btn-group">

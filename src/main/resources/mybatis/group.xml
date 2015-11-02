@@ -35,7 +35,7 @@
         `id`,
         `name`,
         `description`
-        FROM `group` order by id desc
+        FROM `group` order by id
         LIMIT #{offset}, #{size};
     </select>
     <select id="count" resultType="Long">

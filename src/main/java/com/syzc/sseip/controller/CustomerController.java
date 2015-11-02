@@ -30,7 +30,8 @@ public class CustomerController {
     private static final Logger logger = Logger.getLogger(CustomerController.class);
     public final Byte pageSize = 20;
 
-    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"(?!https?://www10.53kf.com)(http.*?)\"", Pattern.DOTALL);
+    //    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!www10.53kf.com)(\\S*?)/|\"", Pattern.DOTALL);
+    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!www10.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
 
     private CountryService countryService;
     private DiseaseTypeService diseaseTypeService;
@@ -257,7 +258,11 @@ public class CustomerController {
             }
         }
 */
-        users = userService.listAll();
+        if (loginUser.getGroupId() != null) {
+            users = userService.listAllByGroup(loginUser.getGroupId());
+        } else {
+            users = new ArrayList<>();
+        }
 
         String query = request.getQueryString();
         model.addAttribute("query", query);
@@ -402,10 +407,10 @@ public class CustomerController {
             if (m.find()) {
                 customer.setSourceWebsite(m.group(1));
             } else {
-                System.out.println("source website not found");
+//                System.out.println("source website not found");
             }
         } else {
-            System.out.println("contact records null");
+//            System.out.println("contact records null");
         }
 
         User user = (User) session.getAttribute("loginUser");
@@ -497,10 +502,10 @@ public class CustomerController {
             if (m.find()) {
                 customer.setSourceWebsite(m.group(1));
             } else {
-                System.out.println("source website not found");
+//                System.out.println("source website not found");
             }
         } else {
-            System.out.println("contact records null");
+//            System.out.println("contact records null");
         }
 
         if (customerService.update(customer)) {

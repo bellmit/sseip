@@ -28,7 +28,7 @@
                                class="table table-striped table-bordered table-hover table-condensed table-responsive"
                                style="word-wrap: break-word;table-layout:fixed">
                             <colgroup class="row">
-                                <col class="col-xs-2">
+                                <#--<col class="col-xs-2">-->
                                 <col class="col-xs-2">
                                 <col class="col-xs-2">
                                 <col class="col-xs-2">
@@ -37,7 +37,7 @@
                             </colgroup>
                             <thead>
                             <tr>
-                                <th class="text-right">id</th>
+                                <#--<th class="text-right">id</th>-->
                                 <th class="text-right">名称</th>
                                 <th class="text-right">备注</th>
                                 <th class="text-right">ISO 3166-1, Alpha-2 code</th>
@@ -49,7 +49,7 @@
                             <tbody>
                             <#list page.list as country>
                             <tr>
-                                <td class="text-right">${country.id}</td>
+                                <#--<td class="text-right">${country.id}</td>-->
                                 <td class="text-right"><#if (country.name)??>${country.name}<#else><span class="label">不详</span></#if>
                                 </td>
                                 <td class="text-right"><#if (country.memo)??>${country.memo}<#else><span class="label">不详</span></#if>
