@@ -539,14 +539,17 @@ public class CustomerController {
     //目前只有普通用户操作； dao更新操作只执行对应当前登录用户id的项
     @RequestMapping(value = "/pass", method = RequestMethod.POST)
     public String passOn(@RequestParam("new-owner-user-id") Long
-                                 newOwnerUserId, @RequestParam("customer-ids") Long[] customerIds, Model model, HttpSession
+                                 newOwnerUserId, @RequestParam(value = "customer-ids", required = false) Long[] customerIds, Model model, HttpSession
                                  session, HttpServletRequest request) {
         if (newOwnerUserId == null) {
             throw HosException.create("目标用户不能为空", Level.DEBUG);
         }
+        if (customerIds == null || customerIds.length == 0) {
+            throw HosException.create("选中患者资料数量为空", Level.DEBUG);
+        }
 
         User loginUser = (User) session.getAttribute("loginUser");
-        if (loginUser == null || loginUser.getRole() == null || loginUser.getRole() == Role.EMPLOYEE) {
+        if (loginUser == null || loginUser.getRole() == null || loginUser.getRole() != Role.EMPLOYEE) {
             throw AuthException.create("没有权限", Level.TRACE);
         }
 
