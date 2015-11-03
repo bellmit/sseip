@@ -77,7 +77,7 @@
                                             <#list countries as country>
                                                 <option
                                                     <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
-                                                    value="${country.id?c}">${country.name}</option>
+                                                    value="${country.id?c}">${country.a2Code} - ${country.name}</option>
                                             </#list>
                                             </select>
                                             <select class="filters col-md-2 text-right orange" name="diseaseTypeId"
@@ -322,7 +322,7 @@
                 title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
-                title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,16)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
+                title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,15)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
         <#--<td class=""
             title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>

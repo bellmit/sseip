@@ -138,7 +138,8 @@
                                                         <label class="col-sm-1 control-label no-padding-right">咨询人国家</label>
 
                                                         <div class="col-sm-11">
-                                                            <select name="liaisonCountryId" class="col-xs-12" size="6">
+                                                            <select name="liaisonCountryId"
+                                                                    class="col-xs-12 select2-ui">
                                                                 <option
                                                                 <#if !(customer.liaisonCountryId)?? >selected=""</#if>
                                                                 value="">未知
@@ -146,7 +147,8 @@
                                                             <#list countries as country>
                                                                 <option
                                                                     <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
-                                                                    value="${country.id}">${country.name}</option>
+                                                                    value="${country.id}">${country.a2Code}
+                                                                    - ${country.name}</option>
                                                             </#list>
                                                             </select>
                                                         </div>
@@ -344,7 +346,7 @@
                                             住院</label>
 
                                         <div class="col-sm-10">
-                                            <select name="hospitalization" class="col-xs-12" size="3">
+                                            <select name="hospitalization" class="col-xs-12">
                                             <#list hospitalizationTypes as hospitalizationType>
                                                 <option
                                                     <#if (customer.hospitalization)?? && customer.hospitalization.code=hospitalizationType.code>selected=""</#if>
@@ -359,7 +361,7 @@
                                         <label class="col-sm-2 control-label no-padding-right">疾病 类型</label>
 
                                         <div class="col-sm-10">
-                                            <select name="diseaseTypeId" class="col-xs-12" size="6">
+                                            <select name="diseaseTypeId" class="col-xs-12 select2-ui">
                                             <#list diseaseTypes as diseaseType>
                                                 <option
                                                     <#if (customer.diseaseTypeId)?? && customer.diseaseTypeId=diseaseType.id>selected=""</#if>
@@ -378,7 +380,7 @@
                                         <label class="col-sm-2 control-label no-padding-right">患者 国家</label>
 
                                         <div class="col-sm-10">
-                                            <select name="patientCountryId" class="col-xs-12" size="6">
+                                            <select name="patientCountryId" class="col-xs-12 select2-ui">
                                                 <option
                                                 <#if !(customer.patientCountryId)?? >selected=""</#if>
                                                 value="">未知
@@ -386,7 +388,7 @@
                                             <#list countries as country>
                                                 <option
                                                     <#if (customer.patientCountryId)?? && customer.patientCountryId=country.id>selected=""</#if>
-                                                    value="${country.id}">${country.name}</option>
+                                                    value="${country.id}">${country.a2Code} - ${country.name}</option>
                                             </#list>
                                             </select>
                                         </div>
@@ -397,7 +399,7 @@
                                         <label class="col-sm-2 control-label no-padding-right">网站 群组</label>
 
                                         <div class="col-sm-10">
-                                            <select name="websiteId" class="col-xs-12" size="6">
+                                            <select name="websiteId" class="col-xs-12 select2-ui">
                                             <#list websites as website>
                                                 <option
                                                     <#if (customer.websiteId)?? && customer.websiteId=website.id>selected=""</#if>
@@ -488,6 +490,8 @@
 </div>
 <#include "/common/common_js.ftl">
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
+<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
+
 <script type="text/javascript" src="${context.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
 
@@ -496,6 +500,7 @@
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
+<script src="${context.contextPath}/resources/self/select2/js/select2.full.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -554,6 +559,7 @@
         $('#customer-update-form').on('submit', function () {
             $('#contact-records').val($('#contact-records-editor').html());
         });
+        $('.select2-ui').select2();
         $("#customer-update-form").cmsvalidate();
     });
 </script>

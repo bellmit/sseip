@@ -11,7 +11,8 @@ CREATE TABLE `group` (
   name        VARCHAR(128),
   description TEXT(512)
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 CREATE TABLE user (
   id         INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,7 +30,8 @@ CREATE TABLE user (
   CONSTRAINT fk_user_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
     ON DELETE SET NULL
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 /*CREATE TABLE customer (
   id                INT PRIMARY KEY AUTO_INCREMENT,
@@ -56,7 +58,6 @@ CREATE TABLE user (
 );
 */
 
-USE sseip;
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   id      INT PRIMARY KEY AUTO_INCREMENT,
@@ -65,33 +66,38 @@ CREATE TABLE country (
   updated DATETIME,
   a2_code CHAR(4)
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 CREATE TABLE website (
   id   INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(64),
   url  VARCHAR(128)
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 CREATE TABLE disease_type (
   id     INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(64)
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 /*CREATE TABLE access_point_type (
   id     INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(16)
 );
 */
+DROP TABLE IF EXISTS user_role;
 CREATE TABLE user_role (
   id      INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
   role    INT,
   CONSTRAINT fk_user_role_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 CREATE TABLE user_logon (
   id        INT PRIMARY KEY AUTO_INCREMENT,
@@ -101,7 +107,8 @@ CREATE TABLE user_logon (
   CONSTRAINT fk_user_logon_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
     ON DELETE CASCADE
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 DROP TABLE IF EXISTS memo;
 CREATE TABLE memo (
@@ -110,7 +117,9 @@ CREATE TABLE memo (
   added       DATETIME,
   customer_id INT,
   CONSTRAINT fk_memo_customer_id_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id)
-);
+)
+  ENGINE innodb
+  CHAR SET 'utf8';
 
 DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
@@ -169,6 +178,7 @@ CREATE TABLE customer (
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
     ON DELETE SET NULL
 )
-  ENGINE innodb;
+  ENGINE innodb
+  CHAR SET 'utf8';
 
-TRUNCATE customer;
+# TRUNCATE customer;
