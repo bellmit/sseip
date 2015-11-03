@@ -71,11 +71,10 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                           data-parent="#accordion"
-                                           href="#collapseOne">
-                            <span data-icon-show="ace-icon fa fa-plus-square"
-                                  data-icon-hide="ace-icon fa fa-minus-square-o"
-                                  class="bigger-110 ace-icon fa fa-plus-square"></span>展开补充咨询人信息</a>
+                                           data-parent="#accordion" href="#collapseOne">
+                                            <span data-icon-show="ace-icon fa fa-plus-square"
+                                                  data-icon-hide="ace-icon fa fa-minus-square-o"
+                                                  class="bigger-110 ace-icon fa fa-plus-square"></span>展开补充咨询人信息</a>
                                     </h4>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse">
@@ -90,7 +89,8 @@
                                                     <div class="col-xs-10">
                                                         <input name="liaisonName" type="text" size="30"
                                                                class="col-xs-12"
-                                                               placeholder="咨询人姓名" value="${(form.liaisonName)!''}"/>
+                                                               placeholder="咨询人姓名"
+                                                               value="${(customer.liaisonName)!''}"/>
                                                     </div>
                                                 </div>
 
@@ -100,7 +100,8 @@
                                                     <div class="col-xs-10">
                                                         <input name="liaisonAddress" type="text" size="30"
                                                                class="col-xs-12"
-                                                               placeholder="咨询人地址" value="${(form.liaisonAddress)!''}"/>
+                                                               placeholder="咨询人地址"
+                                                               value="${(customer.liaisonAddress)!''}"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -109,7 +110,8 @@
                                                     <div class="col-xs-10">
                                                         <input name="relationship" type="text" size="30"
                                                                class="col-xs-12"
-                                                               placeholder="咨患关系" value="${(form.relationship)!''}"/>
+                                                               placeholder="咨患关系"
+                                                               value="${(customer.relationship)!''}"/>
                                                     </div>
                                                 </div>
 
@@ -122,12 +124,12 @@
                                                     <div class="col-sm-11">
                                                         <select name="liaisonCountryId" class="col-xs-12" size="6">
                                                             <option
-                                                            <#if !(form.liaisonCountryId)?? >selected=""</#if>
+                                                            <#if !(customer.liaisonCountryId)?? >selected=""</#if>
                                                             value="">未知
                                                             </option>
                                                         <#list countries as country>
                                                             <option
-                                                                <#if (form.liaisonCountryId)?? && form.liaisonCountryId=country.id>selected=""</#if>
+                                                                <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
                                                                 value="${country.id}">${country.name}</option>
                                                         </#list>
                                                         </select>
@@ -155,7 +157,7 @@
 
                             <div class="col-xs-11">
                                 <input name="patientName" type="text" size="30" class="col-xs-12"
-                                       placeholder="患者姓名" value="${(form.patientName)!''}" title="患者姓名"/>
+                                       placeholder="患者姓名" value="${(customer.patientName)!''}" title="患者姓名"/>
                             </div>
                         </div>
 
@@ -166,7 +168,7 @@
                                 <select class="col-sm-12" name="sex">
                                 <#list sexTypes as sexType>
                                     <option value="${sexType.code}"
-                                            <#if ((form.sex.code)!-1)=sexType.code>selected=""</#if>>${sexType.textName}</option>
+                                            <#if ((customer.sex.code)!-1)=sexType.code>selected=""</#if>>${sexType.textName}</option>
                                 </#list>
                                 </select>
                             </div>
@@ -178,17 +180,20 @@
 
                             <div class="col-sm-2">
                                 <input class="col-sm-12" name="age" type="number" placeholder="年龄"
-                                       value="${(form.age)!''}"/>
+                                       value="${(customer.age)!''}"/>
                             </div>
 
 
-                            <label class="col-sm-1 control-label no-padding-right">紧急 </label>
+                            <label class="col-sm-1 control-label no-padding-right">紧急</label>
 
                             <div class="col-sm-2">
                                 <select name="emergency" class="col-xs-12" title="是否紧急">
-                                    <option <#if (form.emergency)?? && form.emergency>selected=""</#if> value="1">紧急
+                                    <option <#if (customer.emergency)?? && customer.emergency>selected=""</#if>
+                                            value="1">紧急
                                     </option>
-                                    <option <#if !((form.emergency)??) || !(form.emergency)>selected=""</#if> value="0">
+                                    <option
+                                    <#if !((customer.emergency)??) || !(customer.emergency)>selected=""</#if>
+                                    value="0">
                                         不紧急
                                     </option>
                                 </select>
@@ -198,120 +203,65 @@
 
                             <div class="col-xs-2">
                                 <select name="valid" class="col-xs-12">
-                                    <option <#if (form.valid)?? && form.valid>selected=""</#if> value="1">有效</option>
-                                    <option <#if (form.valid)?? && !(form.valid)>selected=""</#if> value="0">无效</option>
+                                    <option <#if (customer.valid)?? && customer.valid>selected=""</#if> value="1">有效
+                                    </option>
+                                    <option <#if (customer.valid)?? && !(customer.valid)>selected=""</#if>
+                                            value="0">无效
+                                    </option>
                                 </select>
                             </div>
 
                         </div>
 
                         <div class="form-group">
-                            <label class="col-xs-1 control-label no-padding-right">地址</label>
+                            <label class="col-sm-1 control-label no-padding-right">地址</label>
 
-                            <div class="col-xs-11">
-                                <input name="patientAddress" type="text" size="30" class="col-xs-12"
-                                       placeholder="患者地址" value="${(form.patientAddress)!''}"/>
+                            <div class="col-sm-11">
+                                <input name="patientAddress" type="text" size="30" class="col-sm-12"
+                                       placeholder="患者地址" value="${(customer.patientAddress)!''}"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-xs-1 control-label no-padding-right">Email</label>
+                            <label class="col-sm-1 control-label no-padding-right">Email</label>
 
-                            <div class="col-xs-11">
-                                <input name="email" type="email" size="30" class="col-xs-12"
-                                       placeholder="邮件地址" value="${(form.email)!''}"/>
-                            </div>
-
+                            <div class="col-sm-11"><input name="email" type="email" size="30" class="col-sm-12"
+                                                          placeholder="邮件地址" value="${(customer.email)!''}"/></div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label no-padding-right">电话 </label>
+                    <#--<div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right">电话 </label>
 
-                            <div class="col-xs-5">
-                                <input name="tel" type="tel" size="30" class="col-xs-12"
-                                       placeholder="电话" value="${(form.tel)!''}"/>
-                            </div>
-
-                            <label class="col-xs-1 control-label no-padding-right" title="患者意向">意向</label>
-
-                            <div class="col-xs-5">
-                                <input name="stars" id="form-stars" type="hidden" value="${(form.stars)!'3'}"/>
-
-                                <div id="stars-ui" data-init-score="${(form.stars)!'3'}" class="rating inline"
-                                     title="意向的星级"></div>
-                            </div>
-
+                        <div class="col-xs-5">
+                            <input name="tel" type="tel" size="30" class="col-xs-12"
+                                   placeholder="电话" value="${(customer.tel)!''}"/>
                         </div>
+
+                        <label class="col-xs-1 control-label no-padding-right" title="患者意向">意向</label>
+
+                        <div class="col-xs-5">
+                            <input name="stars" id="form-stars" type="hidden" value="${(customer.stars)!'3'}"/>
+
+                            <div id="stars-ui" data-init-score="${(customer.stars)!'3'}" class="rating inline"
+                                 title="意向的星级"></div>
+                        </div>
+
+                    </div>-->
 
                         <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label no-padding-right">患者国家</label>
+                                    <label class="col-sm-2 control-label no-padding-right">电话 </label>
 
                                     <div class="col-sm-10">
-                                        <select name="patientCountryId" class="col-xs-12" size="6">
-                                            <option
-                                            <#if !(form.patientCountryId)?? >selected=""</#if>
-                                            value="">未知
-                                            </option>
-                                        <#list countries as country>
-                                            <option
-                                                <#if (form.patientCountryId)?? && form.patientCountryId=country.id>selected=""</#if>
-                                                value="${country.id}">${country.name}</option>
-                                        </#list>
-                                        </select>
+                                        <input name="tel" type="tel" size="30" class="col-xs-12"
+                                               placeholder="电话" value="${(customer.tel)!''}"/>
                                     </div>
+
                                 </div>
+
                             </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label no-padding-right">网站</label>
-
-                                    <div class="col-sm-10">
-                                        <select name="websiteId" class="col-xs-12" size="6">
-                                        <#list websites as website>
-                                            <option
-                                                <#if (form.websiteId)?? && form.websiteId=website.id>selected=""</#if>
-                                                value="${website.id}">${website.name}</option>
-                                        </#list>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    <#--行结束-->
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label no-padding-right">疾病类型</label>
-
-                                    <div class="col-sm-10">
-                                        <select name="diseaseTypeId" class="col-xs-12" size="6">
-                                        <#list diseaseTypes as diseaseType>
-                                            <option
-                                                <#if (form.diseaseTypeId)?? && form.diseaseTypeId=diseaseType.id>selected=""</#if>
-                                                value="${diseaseType.id}">${diseaseType.name}</option>
-                                        </#list>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label no-padding-right" title="住院情况">住院</label>
-
-                                    <div class="col-sm-10">
-                                        <select name="hospitalization" class="col-xs-12" size="3"
-                                                style="overflow-y: hidden;">
-                                        <#list hospitalizationTypes as hospitalizationType>
-                                            <option
-                                                <#if (form.hospitalization)?? && form.hospitalization.code=hospitalizationType.code>selected=""</#if>
-                                                value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
-                                        </#list>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label no-padding-right" title="是否报备">报备</label>
 
@@ -330,55 +280,190 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" title="患者意向">意向</label>
+
+                                    <div class="col-sm-10">
+                                        <input name="stars" id="form-stars" type="hidden"
+                                               value="${(customer.stars)!'3'}"/>
+
+                                        <div id="stars-ui" data-init-score="${(customer.stars)!'3'}"
+                                             class="rating inline"
+                                             title="意向的星级"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <div class="form-group">
+                                <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
+                                    <label class="col-sm-1 control-label no-padding-right">症状</label>
+
+                                    <div class="col-sm-11">
+                                            <textarea name="symptom" class="col-sm-12" style="resize: vertical;"
+                                                      placeholder="症状" id="textarea-symptom"
+                                                      title="症状">${(customer.symptom?xhtml)!''}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <#--行结束-->
                     <#--行结束-->
 
                     </div>
                 <#--第一列结束-->
 
                     <div class="col-xs-6">
-                        <div class="form-group">
-                        <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
-                            <div class="col-xs-12">
-                            <textarea name="symptom" class="col-xs-12" style="resize: vertical;"
-                                      placeholder="症状" id="textarea-symptom"
-                                      title="症状">${(form.symptom?xhtml)!''}</textarea>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" title="住院情况">是否
+                                        住院</label>
+
+                                    <div class="col-sm-10">
+                                        <select name="hospitalization" class="col-xs-12" size="3">
+                                        <#list hospitalizationTypes as hospitalizationType>
+                                            <option
+                                                <#if (customer.hospitalization)?? && customer.hospitalization.code=hospitalizationType.code>selected=""</#if>
+                                                value="${hospitalizationType.code}">${hospitalizationType.textName}</option>
+                                        </#list>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                        <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
-                            <div class="col-xs-12">
-                            <textarea name="memoItem" class="col-xs-12" style="resize: vertical;"
-                                      placeholder="备忘" id="textarea-memo"
-                                      title="备忘">${(form.memo?xhtml)!''}</textarea>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">疾病 类型</label>
+
+                                    <div class="col-sm-10">
+                                        <select name="diseaseTypeId" class="col-xs-12" size="6">
+                                        <#list diseaseTypes as diseaseType>
+                                            <option
+                                                <#if (customer.diseaseTypeId)?? && customer.diseaseTypeId=diseaseType.id>selected=""</#if>
+                                                value="${diseaseType.id}">${diseaseType.name}</option>
+                                        </#list>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                            <#--<span id="source-website" title="来源网址" class="col-xs-12"></span>-->
-                                <label title="来源网址" class="col-xs-12">来源网址: <span id="source-website"
-                                                                                  class="gold"></span></label>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">患者 国家</label>
+
+                                    <div class="col-sm-10">
+                                        <select name="patientCountryId" class="col-xs-12" size="6">
+                                            <option
+                                            <#if !(customer.patientCountryId)?? >selected=""</#if>
+                                            value="">未知
+                                            </option>
+                                        <#list countries as country>
+                                            <option
+                                                <#if (customer.patientCountryId)?? && customer.patientCountryId=country.id>selected=""</#if>
+                                                value="${country.id}">${country.name}</option>
+                                        </#list>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">网站 群组</label>
 
-                        <div class="row" title="通讯记录">
-                            <div class="col-xs-12">
-                                <input name="contactRecords" id="contact-records" type="hidden"
-                                       value="${(form.contactRecords?xhtml)!''}"/>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="wysiwyg-editor" id="contact-records-editor"
-                                             title="通讯记录">${(form.contactRecords)!''}</div>
+                                    <div class="col-sm-10">
+                                        <select name="websiteId" class="col-xs-12" size="6">
+                                        <#list websites as website>
+                                            <option
+                                                <#if (customer.websiteId)?? && customer.websiteId=website.id>selected=""</#if>
+                                                value="${website.id}">${website.name}</option>
+                                        </#list>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
+
                 <#--第二列结束-->
                 </div>
             <#--第一大行结束-->
+
+                <div class="row">
+                    <div class="col-sm-6" title="通讯记录">
+
+                        <div class="row">
+                            <div class="col-sm-11 col-sm-offset-1">
+                                <label>通讯记录</label>
+                            </div>
+                            <div class="col-sm-11 col-sm-offset-1">
+                            <#--<span id="source-website" title="来源域名" class="col-xs-12"></span>-->
+                                <label title="来源域名">来源域名: <span id="source-website" class="gold"></span></label>
+                            <#--<div class="col-xs-12">
+                            </div>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-11 col-sm-offset-1">
+                                <div class="wysiwyg-editor"
+                                     id="contact-records-editor">${(customer.contactRecords)!''}</div>
+                            </div>
+
+                        </div>
+
+                        <input name="contactRecords" id="contact-records" type="hidden"
+                               value="${(customer.contactRecords?xhtml)!''}"/>
+
+                    <#--<div class="row" title="通讯记录">
+                        <div class="col-sm-11 col-sm-offset-1">
+                        </div>
+                    </div>-->
+                    </div>
+
+                    <div class="col-sm-6">
+                    <#--<label class="col-xs-1 control-label no-padding-right"></label>-->
+                        <div class="row">
+                            <div class="col-sm-11 col-sm-offset-1">
+                                <label>备忘</label>
+                            </div>
+                            <div class="col-sm-11 col-sm-offset-1">
+                            <textarea name="memoItem" class="col-xs-12" style="resize: vertical;"
+                                      placeholder="备忘" id="textarea-memo"
+                                      title="备忘"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-11 col-sm-offset-1">
+                            <#if (customer.memos)?? && customer.memos?size gt 0>
+                                <div class="well">
+                                    <ul>
+                                        <#list customer.memos as memo>
+                                            <li>${memo.content?html} -
+                                                <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
+                                            </li>
+                                        </#list>
+                                    </ul>
+                                </div>
+                            </#if>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        </div>
+
+                    </div>
+
+                </div>
 
             </form>
         </div>

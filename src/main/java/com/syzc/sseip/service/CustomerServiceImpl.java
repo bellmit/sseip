@@ -81,7 +81,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     }
 
     @Override
-    public Long passOn(Long[] ids, Long userId, Long currUserId) {
+    public Long updateOwner(Long[] ids, Long userId, Long currUserId) {
         return customerDao.updateOwnUserIds(ids, userId, currUserId);
     }
 

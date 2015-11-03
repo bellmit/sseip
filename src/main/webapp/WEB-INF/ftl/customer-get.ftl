@@ -20,7 +20,7 @@
                 <div class="bigger-110">
 
                     <div class="row">
-                        <table class="col-xs-12" border="1" style="table-layout: fixed;">
+                        <table class="col-xs-12" border="1" style="table-layout: fixed;word-wrap: break-word;">
                             <tr>
                                 <th class="green">患者姓名</th>
                                 <td><#if (customer.patientName)??>${customer.patientName}</#if></td>
@@ -205,23 +205,30 @@
                         <div class="col-sm-6">
                             <dl>
                                 <dt>备忘</dt>
-                                <dd><#if customer.memos?? && customer.memos?size gt 0>
-                                    <div class="well" style="max-height: 20em;overflow: auto">
-                                        <ul><#list customer.memos as memo>
-                                            <li>${(memo.content?html)!''} -
-                                                <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
-                                            </li></#list>
+                                <dd>
+                                    <div class="well" style="height: 20em;overflow: auto">
+                                    <#if customer.memos?? && customer.memos?size gt 0>
+                                        <ul>
+                                            <#list customer.memos as memo>
+                                                <li>${(memo.content?html)!''} -
+                                                    <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
+                                                </li></#list>
                                         </ul>
-                                    </div></#if></dd>
+                                    </#if>
+                                    </div>
+                                </dd>
 
                             </dl>
                         </div>
                         <div class="col-sm-6">
                             <dl>
                                 <dt>联系记录</dt>
-                                <dd><#if (customer.contactRecords)??>
-                                    <div class="well"
-                                         style="max-height: 20em;overflow: auto">${customer.contactRecords}</div></#if>
+                                <dd>
+                                    <div class="well" style="height: 20em;overflow: auto">
+                                    <#if (customer.contactRecords)??>
+                                    ${customer.contactRecords}
+                                </#if>
+                                    </div>
                                 </dd>
                             </dl>
                         </div>

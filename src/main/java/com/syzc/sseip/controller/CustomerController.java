@@ -538,9 +538,9 @@ public class CustomerController {
 
     //目前只有普通用户操作； dao更新操作只执行对应当前登录用户id的项
     @RequestMapping(value = "/pass", method = RequestMethod.POST)
-    public String passOn(@RequestParam("new-owner-user-id") Long
-                                 newOwnerUserId, @RequestParam(value = "customer-ids", required = false) Long[] customerIds, Model model, HttpSession
-                                 session, HttpServletRequest request) {
+    public String updateOwner(@RequestParam("new-owner-user-id") Long
+                                          newOwnerUserId, @RequestParam(value = "customer-ids", required = false) Long[] customerIds, Model model, HttpSession
+                                          session, HttpServletRequest request) {
         if (newOwnerUserId == null) {
             throw HosException.create("目标用户不能为空", Level.DEBUG);
         }
@@ -556,7 +556,7 @@ public class CustomerController {
 //        System.out.println(Arrays.toString(customerIds));
         String referer = request.getHeader("Referer");
 
-        Long count = customerService.passOn(customerIds, newOwnerUserId, loginUser.getId());
+        Long count = customerService.updateOwner(customerIds, newOwnerUserId, loginUser.getId());
 
         User user = userService.get(newOwnerUserId);
 /*

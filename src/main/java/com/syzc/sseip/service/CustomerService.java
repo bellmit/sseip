@@ -19,7 +19,7 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
 
 //    Page<Customer> listByFilter(Sex sex, Website website, AccessPointType accessPointType, DiseaseType diseaseType, Boolean faraway, Boolean emergency, Date since, Date till, Long groupId, Long userId, Long pageNo, Byte size);
 
-    Long passOn(Long[] ids, Long userId, Long currUserId);
+    Long updateOwner(Long[] ids, Long userId, Long currUserId);
 
     Boolean updateDiscard(Long id, Boolean discard, Long userId);
 
