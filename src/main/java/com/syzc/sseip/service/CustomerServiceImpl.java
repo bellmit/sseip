@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> implements CustomerService {
@@ -103,10 +104,15 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
     }
 
     @Override
-    public Boolean addMemo(String memo, Long customerId) {
+    public Boolean addMemo(String memo, Long customerId, Long userId) {
         Memo m = new Memo();
         m.setContent(memo);
-        return memoDao.addToCustomer(m, customerId);
+        return memoDao.addToCustomer(m, customerId, userId);
+    }
+
+    @Override
+    public List<Memo> listAllMemo(Long customerId) {
+        return memoDao.listAllByCustomer(customerId);
     }
 
     @Override

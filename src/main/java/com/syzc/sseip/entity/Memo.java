@@ -8,6 +8,7 @@ public class Memo implements Serializable {
     private Long id;
     private String content;
     private Date added;
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -31,5 +32,13 @@ public class Memo implements Serializable {
 
     public void setAdded(Date added) {
         this.added = added;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

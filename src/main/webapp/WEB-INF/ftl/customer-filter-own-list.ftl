@@ -25,7 +25,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa light-red fa-table"></span>个人资源一览</li>
+            <li class="active">资源列表</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -67,8 +67,11 @@
                                                    title="筛选电话"
                                                    placeholder="电话"/>
 
-                                            <select name="countryId" class="filters col-md-2 text-right pink"
-                                                    form="filter-form" title="筛选患者或咨询人国家">
+                                            <div class="col-md-2" style="padding: 0; margin: 0;"><select
+                                                    name="countryId"
+                                                    class="filters text-right pink select2-ui"
+                                                    form="filter-form" title="筛选患者或咨询人国家"
+                                                    style="width:100%;">
                                                 <option
                                                 <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
                                                 value="">患者或咨询人的国家
@@ -79,9 +82,11 @@
                                                     value="${country.id?c}">${country.a2Code} - ${country.name}</option>
                                             </#list>
                                             </select>
-                                            <select name="diseaseTypeId"
-                                                    class="filters col-md-2 text-right orange"
-                                                    form="filter-form"
+                                            </div>
+                                            <div class="col-md-2" style="padding: 0; margin: 0;"><select
+                                                    name="diseaseTypeId"
+                                                    class="filters col-md-2 text-right orange select2-ui"
+                                                    form="filter-form" style="width:100%;"
                                                     title="筛选疾病类型">
                                                 <option
                                                 <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
@@ -92,9 +97,10 @@
                                                     <#if (RequestParameters.diseaseTypeId)?? && RequestParameters.diseaseTypeId==diseaseType.id?string>selected</#if>
                                                     value="${diseaseType.id?c}">${diseaseType.name}</option>
                                             </#list>
-                                            </select>
-                                            <select name="websiteId" form="filter-form" title="选择网站"
-                                                    class="filters col-md-2 text-right green">
+                                            </select></div>
+                                            <div class="col-md-2" style="padding: 0; margin: 0;"><select
+                                                    name="websiteId" form="filter-form" title="选择网站" style="width:100%;"
+                                                    class="filters col-md-2 text-right green select2-ui">
                                                 <option
                                                 <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
                                                 value="">网站
@@ -104,7 +110,7 @@
                                                     <#if (RequestParameters.websiteId)?? && RequestParameters.websiteId==website.id?string>selected</#if>
                                                     value="${website.id?c}">${website.name}</option>
                                             </#list>
-                                            </select>
+                                            </select></div>
 
                                             <select name="valid" class="filters col-md-2 text-right brown"
                                                     form="filter-form"
@@ -239,13 +245,16 @@
                                 </span>
     </div>
 
+    <div id="msg-container">
+
+    </div>
     <table id="customer-table-1"
            class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
            style="word-wrap: break-word;table-layout:fixed">
         <colgroup class="row">
         <#--1-->
-            <col style="width: 3.5em;">
-            <col style="width: 10em;">
+        <#--<col style="width: 3.5em;">-->
+            <col style="width: 13.5em;">
             <col style="width: 8em;">
             <col class="">
         <#--5    -->
@@ -269,8 +278,8 @@
         </colgroup>
         <thead>
         <tr>
-            <th class="text-right"><input type="checkbox" id="check-all"></th>
-            <th class="">姓名</th>
+        <#--<th class="text-right"><input type="checkbox" id="check-all"></th>-->
+            <th class=""><input type="checkbox" id="check-all">姓名</th>
             <th class="">国家</th>
             <th class="">症状</th>
             <th class="" title="是否住院">住院</th>
@@ -288,23 +297,27 @@
         <tbody>
         <#list page.list as customer>
         <tr>
-            <td class="text-right id-col">
-            <#--${customer.id?c}--><input type="checkbox" class="checkbox-each-id" name="customer-ids"
-                                          value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
-            <#--<label style="width: 100%;"></label>-->
-            </td>
-            <td class=""
+        <#--<td class="text-right id-col">-->
+        <#--${customer.id?c}-->
+        <#--<input type="checkbox" class="checkbox-each-id" name="customer-ids"
+               value="${customer.id?c}" form="pass-on-form" style="margin: 0;">-->
+        <#--<label style="width: 100%;"></label>-->
+        <#--</td>-->
+            <td class="checkbox-control"
                 <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
-                <div>
-                    <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
-                    <#if (customer.patientName)??>
-                        <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
-                    <#else>
-                        <#if (customer.liaisonName)??>
-                        ${customer.liaisonName}<#else><#--<span
+                <input type="checkbox" class="checkbox-each-id" name="customer-ids"
+                       value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
+
+                <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
+                <#if (customer.patientName)??>
+                    <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
+                <#else>
+                    <#if (customer.liaisonName)??>
+                    ${customer.liaisonName}<#else><#--<span
                                 class="label"><span class="fa fa-question"></span>--></#if>
-                    </#if>
-                </div>
+                </#if>
+
+            <#--<div></div>-->
             <#--<div class="stars-ui-ele btn-minier rating"
                  data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                  style="font-size: 7px"></div>-->
@@ -392,7 +405,11 @@
                                                                                                          class="btn btn-info btn-sm"
                                                                                                          title="刷新列表"><span
         class="fa fa-refresh"></span></a></span></span>
-        <select name="new-owner-user-id" class="filters col-md-2 text-right pink2" form="pass-on-form" title="转交给用户">
+
+        <div class="col-md-2" style="padding:0;margin:0;"><select name="new-owner-user-id"
+                                                                  class="filters text-right pink2 select2-ui"
+                                                                  form="pass-on-form" style="width:100%;"
+                                                                  title="转交给用户">
             <option
             <#if (RequestParameters.newOwnerUserId)!''=''>selected</#if>
             value="">转交给用户
@@ -404,6 +421,7 @@
                 title="${(user.group.name + ' - ')!''}${user.realName}">${(user.group.name + ' - ')!''}${user.realName}</option>
         </#list>
         </select>
+        </div>
         <button type="submit" class="filters btn btn-xs col-md-2 text-right btn-warning"
                 form="pass-on-form">转交给用户
         </button>
@@ -422,7 +440,7 @@
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
-<script src="${context.contextPath}/resources/self/select2/js/select2.full.min.js"></script>
+<script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
@@ -496,7 +514,8 @@
         $('.checkbox-each-id,#check-all').click(function (e) {
             e.stopPropagation();
         });
-        $('.id-col').click(function (e) {
+//        $('.id-col').click(function (e) {
+        $('.checkbox-control').click(function (e) {
             var i = $('.checkbox-each-id', this);
             i.prop('checked', !i.prop('checked'));
             e.stopPropagation();
@@ -532,6 +551,21 @@
         });
 
         $('.select2-ui').select2();
+
+        $('#pass-on-form').submit(function () {
+            var msg = [];
+            if ($('.checkbox-each-id:checked').size() == 0) {
+                msg.push('至少选中一个！');
+            }
+//            $('select[name=new-owner-user-id]').val()
+            if ($('select[name=new-owner-user-id]').val() == '') {
+                msg.push('选择转交用户！');
+            }
+            if (msg.length > 0) {
+                alert(msg.join('\n'));
+                return false;
+            }
+        });
 
     <#--<#if dateRange?? && dateRange?size gt 0 >-->
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->

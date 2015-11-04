@@ -59,6 +59,9 @@
     <resultMap id="Memo" type="com.syzc.sseip.entity.Memo">
         <id column="id" property="id"/>
     </resultMap>
+    <resultMap id="MemoDto" type="com.syzc.sseip.entity.MemoDto" extends="Memo">
+        <association property="user" column="user_id" select="getUser"/>
+    </resultMap>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO customer (
@@ -595,7 +598,7 @@
         UPDATE customer SET memo=#{memo} where id=#{id}
     </update>
 
-    <select id="listAllByCustomer" resultMap="Memo">
+    <select id="listAllByCustomer" resultMap="MemoDto">
         select * from memo where customer_id=#{customerId}
     </select>
 

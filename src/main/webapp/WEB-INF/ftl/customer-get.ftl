@@ -20,90 +20,93 @@
                 <div class="bigger-110">
 
                     <div class="row">
-                        <table class="col-xs-12" border="1" style="table-layout: fixed;word-wrap: break-word;">
-                            <tr>
-                                <th class="green">患者姓名</th>
-                                <td><#if (customer.patientName)??>${customer.patientName}</#if></td>
-                                <th>患者国家</th>
-                                <td><#if (customer.patientCountry.name)??>${customer.patientCountry.name}</#if>
-                                </td>
-                                <th>咨询人国家</th>
-                                <td><#if (customer.liaisonCountry.name)??>${customer.liaisonCountry.name}</#if>
-                                </td>
-                                <th>创建日期</th>
-                                <td><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
-                            </tr>
-                            <tr>
-                                <th>患者性别</th>
-                                <td><#if (customer.sex)??>${customer.sex.textName}</#if>
-                                </td>
-                                <th>是否住院</th>
-                                <td><#if customer.hospitalization??>${customer.hospitalization.textName}</#if></td>
-                                <th>咨患关系</th>
-                                <td><#if (customer.relationship)??>${customer.relationship}</#if>
-                                </td>
-                                <th>更新日期</th>
-                                <td><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
-                            </tr>
-                            <tr>
-                                <th class="green">患者年龄</th>
-                                <td><#if (customer.age)??>${customer.age}</#if></td>
-                                <th>是否紧急</th>
-                                <td><#if customer.emergency??>${customer.emergency?then('紧急','不紧急')}</#if></td>
-                                <th>所属网站组</th>
-                                <td><#if (customer.website)??>${customer.website.name}</#if>
-                                </td>
-                                <th>提交人</th>
-                                <td><#if (customer.user.realName)??>${customer.user.realName}</#if></td>
-                            </tr>
-                            <tr>
-                                <th class="green">病种诊断</th>
-                                <td><#if (customer.diseaseType)??>${customer.diseaseType.name}</#if></td>
-                                <th>电子邮件</th>
-                                <td><#if (customer.email)??>${customer.email}</#if></td>
-                                <th>来源网址</th>
-                                <td><#if (customer.sourceWebsite)??>${customer.sourceWebsite}</#if></td>
-                                <th>所属人</th>
-                                <td><#if (customer.ownerUser.realName)??>${customer.ownerUser.realName}</#if></td>
-                            </tr>
-                            <tr>
-                                <th>症状</th>
-                                <td><#if (customer.symptom)??>${customer.symptom}</#if>
-                                </td>
-                                <th class="green">电话</th>
-                                <td><#if (customer.tel)??>${customer.tel}</#if></td>
-                                <th>星级</th>
-                                <td><#if (customer.stars)??>
-                                    <div class="stars-ui-ele btn-minier rating"
-                                         data-init-score="${(customer.stars)!'0'}"
-                                         title="意向的星级" style="font-size: 7px"></div></#if>
-                                </td>
-                                <th>所属部门</th>
-                                <td><#if (customer.group.name)??>${customer.group.name}</#if></td>
-                            </tr>
-                            <tr>
-                                <th class="green">患者地址</th>
-                                <td><#if (customer.patientAddress)??>${customer.patientAddress}</#if>
-                                </td>
-                                <th>咨询人姓名</th>
-                                <td><#if (customer.liaisonName)??>${customer.liaisonName}</#if></td>
-                                <th>有效性</th>
-                                <td><#if (customer.valid)??>${customer.valid?string('有效','无效')}</#if></td>
-                                <th>通话状态</th>
-                                <td><#if (customer.callState)??>${customer.callState}</#if></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td></td>
-                                <th>咨询人地址</th>
-                                <td><#if (customer.liaisonAddress)??>${customer.liaisonAddress}</#if></td>
-                                <th>是否提交删除</th>
-                                <td><#if (customer.discard)??>${customer.discard?string('已提交删除','未提交删除')}</#if></td>
-                                <th>权重</th>
-                                <td><#if (customer.weight)??>${customer.weight.weightName}</#if></td>
-                            </tr>
-                        </table>
                         <div class="col-xs-12">
+                            <table class="table table-striped table-hover smaller-90"
+                                   style="table-layout: fixed;word-wrap: break-word;">
+                                <tr>
+                                    <th class="text-danger">患者姓名</th>
+                                    <td><#if (customer.patientName)??>${customer.patientName}</#if></td>
+                                    <th>患者国家</th>
+                                    <td><#if (customer.patientCountry.name)??>${customer.patientCountry.name}</#if>
+                                    </td>
+                                    <th>咨询人国家</th>
+                                    <td><#if (customer.liaisonCountry.name)??>${customer.liaisonCountry.name}</#if>
+                                    </td>
+                                    <th>创建日期</th>
+                                    <td><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>患者性别</th>
+                                    <td><#if (customer.sex)??>${customer.sex.textName}</#if>
+                                    </td>
+                                    <th>是否住院</th>
+                                    <td><#if customer.hospitalization??>${customer.hospitalization.textName}</#if></td>
+                                    <th>咨患关系</th>
+                                    <td><#if (customer.relationship)??>${customer.relationship}</#if>
+                                    </td>
+                                    <th>更新日期</th>
+                                    <td><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-danger">患者年龄</th>
+                                    <td><#if (customer.age)??>${customer.age}</#if></td>
+                                    <th>是否紧急</th>
+                                    <td><#if customer.emergency??>${customer.emergency?then('紧急','不紧急')}</#if></td>
+                                    <th>所属网站组</th>
+                                    <td><#if (customer.website)??>${customer.website.name}</#if>
+                                    </td>
+                                    <th>提交人</th>
+                                    <td><#if (customer.user.realName)??>${customer.user.realName}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-danger">病种诊断</th>
+                                    <td><#if (customer.diseaseType)??>${customer.diseaseType.name}</#if></td>
+                                    <th>电子邮件</th>
+                                    <td><#if (customer.email)??>${customer.email}</#if></td>
+                                    <th>来源网址</th>
+                                    <td><#if (customer.sourceWebsite)??>${customer.sourceWebsite}</#if></td>
+                                    <th>所属人</th>
+                                    <td><#if (customer.ownerUser.realName)??>${customer.ownerUser.realName}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>症状</th>
+                                    <td><#if (customer.symptom)??>${customer.symptom}</#if>
+                                    </td>
+                                    <th class="text-danger">电话</th>
+                                    <td><#if (customer.tel)??>${customer.tel}</#if></td>
+                                    <th>星级</th>
+                                    <td><#if (customer.stars)??>
+                                        <div class="stars-ui-ele btn-minier rating"
+                                             data-init-score="${(customer.stars)!'0'}"
+                                             title="意向的星级" style="font-size: 7px"></div></#if>
+                                    </td>
+                                    <th>所属部门</th>
+                                    <td><#if (customer.group.name)??>${customer.group.name}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-danger">患者地址</th>
+                                    <td><#if (customer.patientAddress)??>${customer.patientAddress}</#if>
+                                    </td>
+                                    <th>咨询人姓名</th>
+                                    <td><#if (customer.liaisonName)??>${customer.liaisonName}</#if></td>
+                                    <th>有效性</th>
+                                    <td><#if (customer.valid)??>${customer.valid?string('有效','无效')}</#if></td>
+                                    <th>通话状态</th>
+                                    <td><#if (customer.callState)??>${customer.callState}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td></td>
+                                    <th>咨询人地址</th>
+                                    <td><#if (customer.liaisonAddress)??>${customer.liaisonAddress}</#if></td>
+                                    <th>是否提交删除</th>
+                                    <td><#if (customer.discard)??>${customer.discard?string('已提交删除','未提交删除')}</#if></td>
+                                    <th>权重</th>
+                                    <td><#if (customer.weight)??>${customer.weight.weightName}</#if></td>
+                                </tr>
+                            </table>
+                            <div class="col-xs-12">
+                            </div>
                         </div>
                     </div>
                 <#--
@@ -202,35 +205,43 @@
                 -->
 
                     <div class="row">
-                        <div class="col-sm-6">
-                            <dl>
-                                <dt>备忘</dt>
-                                <dd>
-                                    <div class="well" style="height: 20em;overflow: auto">
-                                    <#if customer.memos?? && customer.memos?size gt 0>
-                                        <ul>
-                                            <#list customer.memos as memo>
-                                                <li>${(memo.content?html)!''} -
-                                                    <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
-                                                </li></#list>
-                                        </ul>
-                                    </#if>
-                                    </div>
-                                </dd>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <dl>
+                                        <dt>备注</dt>
+                                        <dd>
+                                            <div class="well" style="height: 20em;overflow: auto">
+                                            <#if customer.memos?? && customer.memos?size gt 0>
+                                                <ul>
+                                                    <#list customer.memos as memo>
+                                                        <li>${memo.content?html} -
+                                                            <span class="text-warning">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
+                                                            -
+                                                            <span class="text-primary">${(memo.user.realName)!''}</span>
+                                                        </li></#list>
+                                                </ul>
+                                            </#if>
+                                            </div>
+                                        </dd>
 
-                            </dl>
-                        </div>
-                        <div class="col-sm-6">
-                            <dl>
-                                <dt>联系记录</dt>
-                                <dd>
-                                    <div class="well" style="height: 20em;overflow: auto">
-                                    <#if (customer.contactRecords)??>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <dl>
+                                        <dt>联系记录</dt>
+                                        <dd>
+                                            <div class="well" style="height: 20em;overflow: auto">
+                                            <#if (customer.contactRecords)??>
                                     ${customer.contactRecords}
                                 </#if>
-                                    </div>
-                                </dd>
-                            </dl>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

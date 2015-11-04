@@ -4,7 +4,7 @@
 <#include "/common/common_css.ftl">
     <title>你已经退出!</title>
 </head>
-<body class="login-layout">
+<body class="login-layout light-login">
 <#--<section class="col-md-offset-3 col-md-6">-->
 <#--<div class="page-content">-->
 <div class="main-container">

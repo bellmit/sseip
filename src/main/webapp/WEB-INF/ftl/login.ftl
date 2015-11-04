@@ -6,7 +6,7 @@
     <title>gz的用户登录</title>
 </head>
 
-<body class="login-layout">
+<body class="login-layout light-login">
 <div class="main-container">
     <div class="main-content">
         <div class="row">

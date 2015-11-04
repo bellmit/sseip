@@ -74,6 +74,8 @@
             </#if>
         </li>
     </#if>
+
+    <#if loginUser?? && loginUser.role=='ADMIN'>
         <li>
             <a href="javascript:;" class="dropdown-toggle"><span class="menu-icon fa fa-hospital-o"></span>
                 <span class="menu-text">平台管理</span>
@@ -91,6 +93,7 @@
                         class="menu-icon fa fa-heartbeat orange"></span>病种管理</a></li>
             </ul>
         </li>
+    </#if>
 
     <#if (loginUser.role)?? && loginUser.role=='ADMIN'>
         <li class="">
@@ -112,6 +115,17 @@
             </ul>
         </li>
     </#if>
+
+        <li>
+            <a href="${context.contextPath}/user/update-password" target="mainFrame"><span
+                    class="menu-icon fa fa-lock"></span><span class="menu-text">修改密码</span>
+            </a>
+        </li>
+        <li>
+            <a href="${context.contextPath}/login/logout" target="_top"><span class="menu-icon fa fa-power-off"></span>
+                <span class="menu-text">退出</span>
+            </a>
+        </li>
     </ul>
     <!-- /.nav-list -->
 

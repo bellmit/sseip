@@ -21,7 +21,11 @@ public class ExceptionController {
 
     @ExceptionHandler({Exception.class, HosException.class})
     public String exp(Exception ex, HttpServletRequest request) {
-        logger.debug(ex);
+        if (ex instanceof HosException) {
+            logger.log(((HosException) ex).getLevel(), ex);
+        } else {
+            logger.debug(ex);
+        }
         request.setAttribute("ex", ex);
         return "exception-caught";
     }

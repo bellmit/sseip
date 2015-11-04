@@ -29,7 +29,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="alert alert-success">
+                    <div class="col-sm-offset-3 col-sm-4 alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                class="fa fa-times"></span></button>
                         顾客资源资料添加完成。
                     </div>
                 </div>
@@ -90,10 +92,6 @@
                             <dd><#if (customer.website)??>${customer.website.name}<#else><span
                                     class="label">不详</span></#if>
                             </dd>
-                            <dt>备忘</dt>
-                            <dd><#if (customer.memo)??>${customer.memo}<#else><span
-                                    class="label">不详</span></#if>
-                            </dd>
                             <dt>星级</dt>
                             <dd><#if (customer.stars)??>${customer.stars}<#else><span
                                     class="label">不详</span></#if>
@@ -128,8 +126,8 @@
                     <a class="btn btn-info" href="${context.contextPath}/customer/add">
                         <span class="ace-icon fa fa-edit bigger-110"></span>继续添加
                     </a>
-                    <a class="btn btn-info" href="javascript:;">
-                        <span class="ace-icon fa fa-eye bigger-110"></span>查看提交内容
+                    <a class="btn btn-info" href="${context.contextPath}/customer/update/${customer.id}">
+                        <span class="ace-icon fa fa-eye bigger-110"></span>编辑提交内容
                     </a>
                 </div>
             </div>

@@ -515,7 +515,7 @@ public class CustomerController {
         }
 
         if (memoItem != null && memoItem.length() > 0 && !memoItem.matches("\\s*")) {
-            if (customerService.addMemo(memoItem, id)) {
+            if (customerService.addMemo(memoItem, id, loginUser.getId())) {
                 model.addAttribute("success", "备注添加完成");
             } else {
                 model.addAttribute("error", "备注添加失败");
@@ -534,6 +534,19 @@ public class CustomerController {
         model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("customer", customer);
         return "customer-update";
+    }
+
+    @RequestMapping(value = "/append-memo", method = RequestMethod.POST)
+    public String addMemo(String memoItem, Long customerId, Model model, HttpSession session) {
+        Long loginUserId = (Long) session.getAttribute("loginUserId");
+        boolean state = false;
+        try {
+            state = customerService.addMemo(memoItem, customerId, loginUserId);
+        } catch (Exception e) {
+            logger.debug(e);
+        }
+        model.addAttribute("memos", customerService.listAllMemo(customerId));
+        return "customer-update-memo-fragment";
     }
 
     //目前只有普通用户操作； dao更新操作只执行对应当前登录用户id的项
@@ -637,7 +650,7 @@ public class CustomerController {
 //        telAuditDto.getMemoItem().length() > 0
         if (telAuditDto.getMemoItem() != null && !telAuditDto.getMemoItem().matches("\\s*")) {
 //            System.out.println("2");
-            if (customerService.addMemo(telAuditDto.getMemoItem(), customerId)) {
+            if (customerService.addMemo(telAuditDto.getMemoItem(), customerId, loginUser.getId())) {
 //                System.out.println("3");
                 model.addAttribute("success", "备注添加完成");
             } else {

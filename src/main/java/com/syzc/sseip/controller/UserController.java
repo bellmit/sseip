@@ -342,4 +342,29 @@ public class UserController {
 
         return "/user-individual-logon-history";
     }
+
+    @RequestMapping(value = "update-password", method = RequestMethod.GET)
+    public String updatePassword(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        model.addAttribute("user", user);
+        return "user-update-password";
+    }
+
+    @RequestMapping(value = "update-password", method = RequestMethod.POST)
+    public String updatePassword(String oldPassword, String newPassword, String confirmPassword, HttpSession session) {
+        if (!newPassword.equals(confirmPassword)) {
+            throw HosException.create("确认密码不匹配", Level.DEBUG);
+        }
+/*
+        if (newPassword.length()<6) {
+            throw HosException.create("新密码长度太小", Level.DEBUG);
+        }
+*/
+        Long userId = (Long) session.getAttribute("loginUserId");
+        if (userService.updatePassword(userId, oldPassword, newPassword)) {
+            return "redirect:/";
+        } else {
+            throw HosException.create("密码更改失败", Level.DEBUG);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.syzc.sseip.dao;
 
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserLogon;
+import com.syzc.sseip.entity.UserLogonDto;
 import com.syzc.sseip.entity.enumtype.Role;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -52,4 +53,6 @@ public interface UserDao extends BaseDao<User> {
 
     // limit 1000
     List<User> listAllByGroup(Long groupId);
+
+    List<UserLogonDto> listUserLogon(@Param("query") UserLogonQueryDto query, @Param("offset") Long offset, @Param("size") Short size);
 }

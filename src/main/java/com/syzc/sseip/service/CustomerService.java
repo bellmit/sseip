@@ -2,11 +2,13 @@ package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.Memo;
 import com.syzc.sseip.entity.TelAuditDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.Page;
 
 import java.util.Date;
+import java.util.List;
 
 public interface CustomerService extends BaseService<Customer, CustomerDao> {
     Page<Customer> listByGroup(Long groupId, Long pageNo, Byte size);
@@ -25,7 +27,9 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
 
     Boolean updateMemo(Long id, String memo);
 
-    Boolean addMemo(String memo, Long customerId);
+    Boolean addMemo(String memo, Long customerId, Long userId);
+
+    List<Memo> listAllMemo(Long customerId);
 
     Boolean updateTelAuditDto(TelAuditDto telAuditDto);
 }

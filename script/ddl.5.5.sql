@@ -18,7 +18,7 @@ CREATE TABLE user (
   id         INT PRIMARY KEY AUTO_INCREMENT,
   username   CHAR(64)  NOT NULL UNIQUE,
   password   CHAR(128) NOT NULL,
-  real_name  VARCHAR(64),
+  real_name  CHAR(64),
   age        INT(3),
   id_number  CHAR(20),
   address    TEXT(512),
@@ -116,7 +116,9 @@ CREATE TABLE memo (
   content     TEXT,
   added       DATETIME,
   customer_id INT,
-  CONSTRAINT fk_memo_customer_id_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id)
+  user_id     INT,
+  CONSTRAINT fk_memo_customer_id_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id),
+  CONSTRAINT fk_memo_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 )
   ENGINE innodb
   CHAR SET 'utf8';

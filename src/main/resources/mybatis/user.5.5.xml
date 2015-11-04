@@ -27,6 +27,9 @@
         <result column="logged_on" property="loggedOn"/>
         <result column="user_id" property="userId"/>
     </resultMap>
+    <resultMap id="UserLogonDto" type="com.syzc.sseip.entity.UserLogon" extends="UserLogon">
+        <association property="user" column="user_id" select="get"/>
+    </resultMap>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO user (added,username, password, real_name, age,id_number, address,phone,role,group_id,limited_ip)
@@ -222,15 +225,15 @@
     </select>
 
     <select id="listUserLogonByUser" resultMap="UserLogon">
-SELECT *
-FROM user_logon
-WHERE user_id = #{id}
-ORDER BY id DESC limit #{offset},#{size}
+        SELECT *
+        FROM user_logon
+        WHERE user_id = #{id}
+        ORDER BY id DESC limit #{offset},#{size}
     </select>
     <select id="countUserLogonByUser" resultType="Long">
-SELECT count(1)
-FROM user_logon
-WHERE user_id = #{id}
+        SELECT count(1)
+        FROM user_logon
+        WHERE user_id = #{id}
     </select>
     <select id="getLastUserLogon" parameterType="Long" resultMap="UserLogon">
         SELECT *
@@ -238,8 +241,8 @@ WHERE user_id = #{id}
         WHERE user_id = #{id} order by id desc limit 1;
     </select>
     <insert id="insertUserLogon">
-INSERT INTO user_logon (logged_on, user_id, ip)
-VALUE (now(), #{userLogon.userId}, #{userLogon.ip});
+        INSERT INTO user_logon (logged_on, user_id, ip)
+        VALUE (now(), #{userLogon.userId}, #{userLogon.ip});
     </insert>
     <update id="updateUserLogon">
 UPDATE user_logon
@@ -247,4 +250,24 @@ SET logged_on=now(), ip = #{userLogon.ip}
 where user_id= #{userLogon.userId}
     </update>
 
+    <select id="listUserLogon" resultMap="UserLogonDto">
+        select user_logon.* from user_logon join user on "user".id = user_logon.user_id
+        <where>
+            <if test="query.userId!=null">
+                user_id=#{query.userId}
+            </if>
+            <if test="query.realName!=null and query.realName!=''">
+                and real_name=#{query.realName}
+            </if>
+            <if test="query.ip!=null and query.ip!=''">
+                and user_logon.ip=#{query.ip}
+            </if>
+            <if test="query.start!=null">
+                and logged_on &gt;= #{query.start}
+            </if>
+            <if test="query.end!=null">
+                and logged_on &lt;= #{query.start}
+            </if>
+        </where>
+    </select>
 </mapper>
