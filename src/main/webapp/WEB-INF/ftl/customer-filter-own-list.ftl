@@ -5,6 +5,7 @@
 
     <!--daterangepicker-->
     <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
     <style>
         .filters {
             height: 27px;
@@ -78,7 +79,8 @@
                                                     value="${country.id?c}">${country.a2Code} - ${country.name}</option>
                                             </#list>
                                             </select>
-                                            <select name="diseaseTypeId" class="filters col-md-2 text-right orange"
+                                            <select name="diseaseTypeId"
+                                                    class="filters col-md-2 text-right orange"
                                                     form="filter-form"
                                                     title="筛选疾病类型">
                                                 <option
@@ -91,9 +93,8 @@
                                                     value="${diseaseType.id?c}">${diseaseType.name}</option>
                                             </#list>
                                             </select>
-                                            <select name="websiteId" class="filters col-md-2 text-right green"
-                                                    form="filter-form"
-                                                    title="选择网站">
+                                            <select name="websiteId" form="filter-form" title="选择网站"
+                                                    class="filters col-md-2 text-right green">
                                                 <option
                                                 <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
                                                 value="">网站
@@ -421,6 +422,7 @@
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+<script src="${context.contextPath}/resources/self/select2/js/select2.full.min.js"></script>
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
@@ -528,6 +530,8 @@
                     }
             );
         });
+
+        $('.select2-ui').select2();
 
     <#--<#if dateRange?? && dateRange?size gt 0 >-->
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->

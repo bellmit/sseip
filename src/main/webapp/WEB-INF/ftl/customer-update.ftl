@@ -133,28 +133,27 @@
 
                                                 </div>
                                             <#--左列结束-->
-                                                <div class="col-xs-6">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-1 control-label no-padding-right">咨询人国家</label>
+                                            <#--<div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label no-padding-right">咨询人国家</label>
 
-                                                        <div class="col-sm-11">
-                                                            <select name="liaisonCountryId"
-                                                                    class="col-xs-12 select2-ui">
-                                                                <option
-                                                                <#if !(customer.liaisonCountryId)?? >selected=""</#if>
-                                                                value="">未知
-                                                                </option>
-                                                            <#list countries as country>
-                                                                <option
-                                                                    <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
-                                                                    value="${country.id}">${country.a2Code}
-                                                                    - ${country.name}</option>
-                                                            </#list>
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-sm-11">
+                                                        <select name="liaisonCountryId" class="col-sm-12">
+                                                            <option
+                                                            <#if !(customer.liaisonCountryId)?? >selected=""</#if>
+                                                            value="">未知
+                                                            </option>
+                                                        <#list countries as country>
+                                                            <option
+                                                                <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
+                                                                value="${country.id}">${country.a2Code}
+                                                                - ${country.name}</option>
+                                                        </#list>
+                                                        </select>
                                                     </div>
-
                                                 </div>
+
+                                            </div>-->
                                             <#--右列结束-->
                                             </div>
 
@@ -361,7 +360,7 @@
                                         <label class="col-sm-2 control-label no-padding-right">疾病 类型</label>
 
                                         <div class="col-sm-10">
-                                            <select name="diseaseTypeId" class="col-xs-12 select2-ui">
+                                            <select name="diseaseTypeId" class="col-xs-12">
                                             <#list diseaseTypes as diseaseType>
                                                 <option
                                                     <#if (customer.diseaseTypeId)?? && customer.diseaseTypeId=diseaseType.id>selected=""</#if>
@@ -375,31 +374,31 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label no-padding-right">患者 国家</label>
+                            <#--<div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">患者 国家</label>
 
-                                        <div class="col-sm-10">
-                                            <select name="patientCountryId" class="col-xs-12 select2-ui">
-                                                <option
-                                                <#if !(customer.patientCountryId)?? >selected=""</#if>
-                                                value="">未知
-                                                </option>
-                                            <#list countries as country>
-                                                <option
-                                                    <#if (customer.patientCountryId)?? && customer.patientCountryId=country.id>selected=""</#if>
-                                                    value="${country.id}">${country.a2Code} - ${country.name}</option>
-                                            </#list>
-                                            </select>
-                                        </div>
+                                    <div class="col-sm-10">
+                                        <select name="patientCountryId" class="col-xs-12">
+                                            <option
+                                            <#if !(customer.patientCountryId)?? >selected=""</#if>
+                                            value="">未知
+                                            </option>
+                                        <#list countries as country>
+                                            <option
+                                                <#if (customer.patientCountryId)?? && customer.patientCountryId=country.id>selected=""</#if>
+                                                value="${country.id}">${country.a2Code} - ${country.name}</option>
+                                        </#list>
+                                        </select>
                                     </div>
                                 </div>
+                            </div>-->
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label no-padding-right">网站 群组</label>
 
                                         <div class="col-sm-10">
-                                            <select name="websiteId" class="col-xs-12 select2-ui">
+                                            <select name="websiteId" class="col-xs-12">
                                             <#list websites as website>
                                                 <option
                                                     <#if (customer.websiteId)?? && customer.websiteId=website.id>selected=""</#if>
@@ -464,7 +463,8 @@
                             <div class="row">
                                 <div class="col-sm-11 col-sm-offset-1">
                                 <#if (customer.memos)?? && customer.memos?size gt 0>
-                                    <div class="well">
+                                    <div class="well"
+                                         style="min-height:10em;max-height:30em;word-wrap:break-word;overflow-y:auto;">
                                         <ul>
                                             <#list customer.memos as memo>
                                                 <li>${memo.content?html} -
@@ -557,7 +557,7 @@
             });
         }
         $('#customer-update-form').on('submit', function () {
-            $('#contact-records').val($('#contact-records-editor').html());
+            $('#contact-records').val($('#contact-records-editor').cleanHtml());
         });
         $('.select2-ui').select2();
         $("#customer-update-form").cmsvalidate();

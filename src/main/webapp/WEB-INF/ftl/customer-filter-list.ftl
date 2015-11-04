@@ -5,6 +5,8 @@
 
     <!--daterangepicker-->
     <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
+
     <style>
         .filters {
             height: 27px;
@@ -45,6 +47,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
+                <#--填写折叠框内容-->
                 <#--查询条件开始-->
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
@@ -80,7 +83,8 @@
                                                     value="${country.id?c}">${country.a2Code} - ${country.name}</option>
                                             </#list>
                                             </select>
-                                            <select class="filters col-md-2 text-right orange" name="diseaseTypeId"
+                                            <select class="filters col-md-2 text-right orange"
+                                                    name="diseaseTypeId"
                                                     form="filter-form" title="筛选疾病类型">
                                                 <option
                                                 <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
@@ -92,7 +96,8 @@
                                                     value="${diseaseType.id?c}">${diseaseType.name}</option>
                                             </#list>
                                             </select>
-                                            <select class="filters col-md-2 text-right green" name="websiteId"
+                                            <select class="filters col-md-2 text-right greens"
+                                                    name="websiteId"
                                                     form="filter-form" title="选择网站">
                                                 <option
                                                 <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
@@ -231,7 +236,6 @@
         </div>
     </div>
 <#--折叠栏结束-->
-
 
 <#--<div class="page-header position-relative">-->
     <div><span class="col-md-2"><span class="btn-group btn-corner"><#if ['EMPLOYEE']?seq_contains(loginUser.role)><a
@@ -405,6 +409,7 @@
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+<script src="${context.contextPath}/resources/self/select2/js/select2.full.min.js"></script>
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
@@ -493,6 +498,8 @@
                     }
             );
         });
+
+        $('.select2-ui').select2();
 
 
     <#if dateRange?? && dateRange?size gt 0 >
