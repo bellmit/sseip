@@ -5,7 +5,7 @@
     <title>顾客资源细节</title>
 </head>
 <body class="no-skin">
-<div class="main-content-inner">
+<div class="container-fluid">
     <div class="breadcrumbs" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>

@@ -10,7 +10,7 @@
         </li>
         <#if page.totalRows gt 0>
             <#if !page.firstPage>
-                <li><a href="${baseUrl+'/1'}${('?'+query)!''}">1</a></li><#else>
+                <li><a href="${baseUrl}">1</a></li><#else>
                 <li class="active"><span class="">1</span></li></#if>
 
         <#--
@@ -23,7 +23,7 @@
             <#if page.maxPageNo gte 3><#list  (page.pageNo-3>2)?then(page.pageNo-3,2)..(page.pageNo+3 lt page.maxPageNo)?then(page.pageNo+3,page.maxPageNo-1) as i>
                 <#if page.pageNo=i>
                     <li class="active"><span class="">${i?c}</span></li><#else>
-                    <li><a href="${baseUrl+'/'+i?c}${('?'+query)!''}">
+                    <li><a href="${baseUrl}?page=${i?c}">
                         <#switch i >
                             <#case page.pageNo-1>
                                 <span class="fa fa-angle-left"></span>
@@ -46,7 +46,7 @@
         -->
             <#if page.maxPageNo gte 2>
                 <#if !page.lastPage>
-                    <li><a href="${baseUrl+'/'+page.maxPageNo?c}${('?'+query)!''}">${page.maxPageNo?c}</a></li><#else>
+                    <li><a href="${baseUrl}?page=${page.maxPageNo?c}">${page.maxPageNo?c}</a></li><#else>
                     <li class="active"><span class="">${page.maxPageNo?c}</span></li></#if>
 
             </#if>

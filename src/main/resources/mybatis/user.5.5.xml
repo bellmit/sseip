@@ -271,6 +271,9 @@
             <if test="query.realName!=null and query.realName!=''">
                 and `user`.real_name=#{query.realName}
             </if>
+            <if test="query.username!=null and query.username!=''">
+                and `user`.username=#{query.username}
+            </if>
             <if test="query.ip!=null and query.ip!=''">
                 and user_logon.ip=#{query.ip}
             </if>
@@ -281,6 +284,7 @@
                 and user_logon.logged_on &lt;= #{query.end}
             </if>
         </where>
+        order by user_logon.id desc
         limit #{offset},#{size,javaType=Short}
     </select>
     <select id="countFilterUserLogon" resultType="Long">
@@ -291,6 +295,9 @@
             </if>
             <if test="query.realName!=null and query.realName!=''">
                 and `user`.real_name=#{query.realName}
+            </if>
+            <if test="query.username!=null and query.username!=''">
+                and `user`.username=#{query.username}
             </if>
             <if test="query.ip!=null and query.ip!=''">
                 and user_logon.ip=#{query.ip}

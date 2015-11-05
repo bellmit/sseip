@@ -5,6 +5,7 @@ import java.util.Date;
 public class UserLogonQueryDto {
     private Long userId;
     private String realName;
+    private String username;
     private Date start;
     private Date end;
     private String ip;
@@ -47,5 +48,13 @@ public class UserLogonQueryDto {
 
     public void setEnd(Date end) {
         this.end = end;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

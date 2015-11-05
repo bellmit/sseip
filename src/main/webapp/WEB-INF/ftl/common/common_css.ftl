@@ -4,7 +4,8 @@
 <#--<title>双友之春CRM</title>-->
 
 <meta name="description" content="overview &amp; stats"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<#--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/bootstrap.css"/>

@@ -63,11 +63,16 @@
             <#if (loginUser.role)?? && loginUser.role!='EMPTY'>
                 <ul class="submenu">
                     <li class=""><a href="${context.contextPath}/user/list/1" target="mainFrame"><span
-                            class="menu-icon fa fa-child"></span>用户列表<#--<span class="arrow fa fa-angle-down"></span>-->
+                            class="menu-icon fa fa-user-md bigger-120"></span>用户列表<#--<span class="arrow fa fa-angle-down"></span>-->
                     </a></li>
                     <li class="">
                         <a href="${context.contextPath}/role/list" target="mainFrame">
                             <span class="menu-icon fa fa-users"></span>角色列表</a>
+                        <span class="arrow"></span>
+                    </li>
+                    <li class="">
+                        <a href="${context.contextPath}/user/logon-filter" target="mainFrame">
+                            <span class="menu-icon fa fa-clock-o"></span>登录记录</a>
                         <span class="arrow"></span>
                     </li>
                 </ul>

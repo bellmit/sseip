@@ -1,4 +1,4 @@
-<!doctype html>
+<f<!doctype html>
 <html>
 <head>
 <#include "/common/common_css.ftl">
@@ -364,7 +364,7 @@
                     <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>
                         <button form="from-remove-customer-${customer_index}"
                                 class="remove-control btn btn-minier btn-pink" title="已提交删除"><span
-                                class="fa fa-trash"> </span>
+                                class="fa fa-trash bigger-140"> </span>
                         </button>
                     <form id="from-remove-customer-${customer_index}" action="${context.contextPath}/customer/remove"
                           method="post" style="display: none;"><input type="hidden" name="id" value="${customer.id?c}">

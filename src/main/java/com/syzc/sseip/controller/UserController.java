@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,8 +34,8 @@ import java.util.regex.Pattern;
 public class UserController {
     protected static final Pattern idNPattern = Pattern.compile("\\d{17}[\\dxX]");
     private static final Logger logger = Logger.getLogger(UserController.class);
-    public final Byte pageSize = 10;
-    public final Short pageSizeS = 0;
+    public final Byte pageSize = 20;
+    public final Short pageSizeS = 20;
 
     private UserService userService;
     private GroupService groupService;
@@ -373,53 +371,65 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "logon-filter/{queryCombo}")
-    public String filterUserLogonA(String queryCombo, @RequestParam(defaultValue = "1") Long pageNo, Model model, HttpSession session) {
-        String[] arr = queryCombo.split("-", 5);
-        if (arr.length != 5) {
-            System.out.println("!=5");
-            throw HosException.create("查询参数错误", Level.TRACE);
-        }
-        UserLogonQueryDto query = new UserLogonQueryDto();
-        try {
-            if (arr[0].length() > 0)
-                query.setUserId(Long.parseLong(arr[0]));
-            if (arr[1].length() > 0)
-                query.setRealName(URLDecoder.decode(arr[1], "UTF-8"));
-            if (arr[2].length() > 0)
-                query.setStart(new Date(Long.parseLong(arr[2])));
-            if (arr[3].length() > 0)
-                query.setEnd(new Date(Long.parseLong(arr[3])));
-            if (arr[4].length() > 0)
-                query.setIp(URLDecoder.decode(arr[4], "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("UnsupportedEncodingException");
-            throw HosException.create(e, "查询参数错误", Level.TRACE);
-        } catch (NumberFormatException e) {
-            System.out.println("NumberFormatException");
-            throw HosException.create(e, "查询参数错误", Level.TRACE);
-        }
-        System.out.println(JSON.toJSONString(query, true));
-
+    @RequestMapping(value = "logon-filter/{userIdStr},{startStr},{endStr},{realName},{username},{ip}/")
+    public String filterUserLogonA(@RequestParam(value = "page", defaultValue = "1") Long pageNo, @PathVariable String userIdStr, @PathVariable String startStr,
+                                   @PathVariable String endStr, @PathVariable String realName, @PathVariable String username,
+                                   @PathVariable String ip, HttpServletRequest request, Model model, HttpSession session) {
         /*
 Long userId;
 String realName;
+String username;
 Date start;
 Date end;
 String ip;
          */
+//        System.out.println("enter filterUserLogonA");
+//        System.out.println(Arrays.toString(new Object[]{userIdStr, startStr, endStr, realName, username, ip}));
+
+/*
+        String[] arr = queryCombo.split(",", 5);
+        System.out.println(arr.length);
+        if (arr.length != 5) {
+            System.out.println("!=5");
+            throw HosException.create("查询参数错误", Level.TRACE);
+        }
+*/
+        UserLogonQueryDto query = new UserLogonQueryDto();
+        try {
+            if (userIdStr.length() > 0)
+                query.setUserId(Long.parseLong(userIdStr));
+            if (startStr.length() > 0)
+                query.setStart(new Date(Long.parseLong(startStr)));
+            if (endStr.length() > 0)
+                query.setEnd(new Date(Long.parseLong(endStr)));
+            if (realName.length() > 0)
+                query.setRealName(realName);
+            if (ip.length() > 0)
+                query.setIp(ip);
+            if (username.length() > 0)
+                query.setUsername(username);
+//        } catch (UnsupportedEncodingException e) {
+//            System.out.println("UnsupportedEncodingException");
+//            throw HosException.create(e, "查询参数错误", Level.TRACE);
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException");
+            throw HosException.create(e, "查询参数错误", Level.TRACE);
+        }
+//        System.out.println(JSON.toJSONString(query, true));
 
         User user = (User) session.getAttribute("loginUser");
         if (user.getRole() != Role.ADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
         model.addAttribute("page", userService.filterUserLogon(query, pageNo, pageSizeS));
-        model.addAttribute("path", "/user/logon-filter");
+        model.addAttribute("query", query);
+        model.addAttribute("path", request.getRequestURI());
         return "user-logon-filter";
     }
 
     @RequestMapping(value = "logon-filter")
-    public String filterUserLogon(UserLogonQueryDto query, @RequestParam(defaultValue = "1") Long pageNo, Model model, HttpSession session) {
+    public String filterUserLogon(UserLogonQueryDto query, @RequestParam(value = "page", defaultValue = "1") Long pageNo,
+                                  Model model, HttpSession session) {
         /*
             Long userId;
     String realName;

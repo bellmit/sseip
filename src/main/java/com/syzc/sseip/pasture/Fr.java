@@ -69,5 +69,7 @@ String ip;
         query.setIp(URLDecoder.decode(arr[4], "UTF-8"));
 
         System.out.println(JSON.toJSONString(query, true));
+
+        System.out.println(Arrays.toString("1-2-3-4-5-6-7-8-9".split("-", 5)));
     }
 }
