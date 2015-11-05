@@ -250,23 +250,23 @@ SET logged_on=now(), ip = #{userLogon.ip}
 where user_id= #{userLogon.userId}
     </update>
 
-    <select id="listUserLogon" resultMap="UserLogonDto">
-        select user_logon.* from user_logon join user on "user".id = user_logon.user_id
+    <select id="filterUserLogon" resultMap="UserLogonDto">
+        select user_logon.* from user_logon join user on `user`.id = user_logon.user_id
         <where>
             <if test="query.userId!=null">
-                user_id=#{query.userId}
+                user_logon.user_id=#{query.userId}
             </if>
             <if test="query.realName!=null and query.realName!=''">
-                and real_name=#{query.realName}
+                and `user`.real_name=#{query.realName}
             </if>
             <if test="query.ip!=null and query.ip!=''">
                 and user_logon.ip=#{query.ip}
             </if>
             <if test="query.start!=null">
-                and logged_on &gt;= #{query.start}
+                and user_logon.logged_on &gt;= #{query.start}
             </if>
             <if test="query.end!=null">
-                and logged_on &lt;= #{query.start}
+                and user_logon.logged_on &lt;= #{query.till}
             </if>
         </where>
     </select>

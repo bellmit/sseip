@@ -54,5 +54,5 @@ public interface UserDao extends BaseDao<User> {
     // limit 1000
     List<User> listAllByGroup(Long groupId);
 
-    List<UserLogonDto> listUserLogon(@Param("query") UserLogonQueryDto query, @Param("offset") Long offset, @Param("size") Short size);
+    List<UserLogonDto> filterUserLogon(@Param("query") UserLogonQueryDto query, @Param("offset") Long offset, @Param("size") Short size);
 }
