@@ -1,8 +1,10 @@
 package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.UserDao;
+import com.syzc.sseip.dao.UserLogonQueryDto;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserLogon;
+import com.syzc.sseip.entity.UserLogonDto;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.util.Page;
 
@@ -42,4 +44,6 @@ public interface UserService extends BaseService<User, UserDao> {
     Page<UserLogon> listUserLogonByUser(Long userId, Long pageNo, Short size);
 
     List<User> listAllByGroup(Long groupId);
+
+    Page<UserLogonDto> filterUserLogon(UserLogonQueryDto query, Long pageNo, Short size);
 }

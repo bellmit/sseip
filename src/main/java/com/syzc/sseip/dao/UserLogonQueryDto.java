@@ -6,7 +6,7 @@ public class UserLogonQueryDto {
     private Long userId;
     private String realName;
     private Date start;
-    private Date till;
+    private Date end;
     private String ip;
 
     public Long getUserId() {
@@ -33,19 +33,19 @@ public class UserLogonQueryDto {
         this.start = start;
     }
 
-    public Date getTill() {
-        return till;
-    }
-
-    public void setTill(Date till) {
-        this.till = till;
-    }
-
     public String getIp() {
         return ip;
     }
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 }

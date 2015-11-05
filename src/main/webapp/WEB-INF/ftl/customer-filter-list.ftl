@@ -234,7 +234,8 @@
 <#--折叠栏结束-->
 
 <#--<div class="page-header position-relative">-->
-    <div><span class="col-md-2"><span class="btn-group btn-corner"><#if ['EMPLOYEE']?seq_contains(loginUser.role)><a
+    <div class="row"><span class="col-md-2"><span
+            class="btn-group btn-corner"><#if ['EMPLOYEE']?seq_contains(loginUser.role)><a
             href="${context.contextPath}/customer/add" target="_self" style="color:#FFF;text-decoration:none;"
             title="填写资源" class="btn btn-info btn-sm"><span class="fa fa-file"></span></a></#if><a href=""
                                                                                                   style="color:#FFF;text-decoration:none;"
@@ -245,7 +246,7 @@
     </div>
     <table id="sample-table-1"
            class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
-           style="word-wrap: break-word;table-layout:fixed">
+           style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
         <colgroup class="row">
         <#--1-->
         <#--<col style="width: 5em;">-->
@@ -389,12 +390,15 @@
         </#list>
         </tbody>
     </table>
-    <div><span class="col-md-2"><span class="btn-group btn-corner"><a href="" style="color:#FFF;text-decoration:none;"
-                                                                      class="btn btn-info btn-sm" title="刷新列表"><span
-            class="fa fa-refresh"></span></a></span></span>
-                                <span class="col-md-10">
-                                <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
-                                </span>
+    <div class="row">
+        <div class="col-md-2"><span class="btn-group btn-corner"><a href=""
+                                                                    style="color:#FFF;text-decoration:none;"
+                                                                    class="btn btn-info btn-sm"
+                                                                    title="刷新列表"><span
+                class="fa fa-refresh"></span></a></span></div>
+        <div class="col-md-10">
+        <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+        </div>
     </div>
 </div>
 <#include "/common/common_js.ftl">
@@ -405,6 +409,7 @@
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+
 <script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>

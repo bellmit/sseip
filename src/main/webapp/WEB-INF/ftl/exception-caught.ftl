@@ -6,7 +6,7 @@
 <body>
 <div>出错了！</div>
 <#--<div>${ex???string('Y','N')}</div>-->
-<div>${ex???then(ex.message,'')}</div>
+<div>${ex???then((ex.message)!'','')}</div>
 <div>
     <a href="javascript:;" id="back-control">退回去</a>
 </div>

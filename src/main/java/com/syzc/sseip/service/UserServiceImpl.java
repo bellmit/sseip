@@ -2,8 +2,10 @@ package com.syzc.sseip.service;
 
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.UserDao;
+import com.syzc.sseip.dao.UserLogonQueryDto;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.UserLogon;
+import com.syzc.sseip.entity.UserLogonDto;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
@@ -147,6 +149,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     @Override
     public List<User> listAllByGroup(Long groupId) {
         return userDao.listAllByGroup(groupId);
+    }
+
+    @Override
+    public Page<UserLogonDto> filterUserLogon(UserLogonQueryDto query, Long pageNo, Short size) {
+        Long count = userDao.countFilterUserLogon(query);
+        Page page;
+        page = PageUtil.make(pageNo, (long) size, count);
+        if (count > 0) {
+            page.setList(userDao.filterUserLogon(query, page.getRowOffset(), (short) page.getPageSize()));
+        }
+        return page;
     }
 
     public static void main(String[] args) {
