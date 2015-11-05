@@ -47,6 +47,8 @@ public interface UserDao extends BaseDao<User> {
 
     Boolean updateUserLogon(@Param("userLogon") UserLogon userLogon);
 
+    Boolean updateInfo(@Param("entity") User user);
+
     List<UserLogon> listUserLogonByUser(@Param("id") Long id, @Param("offset") Long offset, @Param("size") Short size);
 
     Long countUserLogonByUser(@Param("id") Long id);

@@ -18,7 +18,7 @@
     </style>
 </head>
 <body style="background-color: white">
-<div class="main-content-inner">
+<div class="container-fluid">
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <ul class="breadcrumb">

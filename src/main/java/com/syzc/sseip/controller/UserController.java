@@ -90,17 +90,20 @@ public class UserController {
         /*if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.MANAGER && loginUser.getRole() != Role.EMPLOYEE)) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
-        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE)) {
-            throw AuthException.create("没有权限", Level.DEBUG);
-        }
-
-        if (loginUser.getRole() == Role.EMPLOYEE && !loginUser.getId().equals(userId)) {
+        if (loginUser.getRole() == null || (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.EMPLOYEE)
+                || (loginUser.getRole() == Role.EMPLOYEE && !loginUser.getId().equals(userId))) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
         user.setId(userId);
-        logger.trace(JSON.toJSONString(user, true));
-        if (userService.update(user)) {
+
+        boolean state;
+        if (loginUser.getRole() == Role.EMPLOYEE) {
+            state = userService.updateInfo(user);
+        } else {
+            state = userService.update(user);
+        }
+        if (state) {
             user = userService.get(userId);
             logger.trace(JSON.toJSONString(user, true));
             model.addAttribute("user", user);

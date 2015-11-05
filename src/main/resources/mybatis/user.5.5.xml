@@ -111,6 +111,12 @@
             <when test="entity.groupId!=null and entity.groupId!=''">#{entity.groupId}</when>
             <otherwise>NULL</otherwise>
         </choose>
+        ,
+        limited_ip =
+        <choose>
+            <when test="entity.limitedIp!=null and entity.limitedIp!=''">#{entity.limitedIp}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
         WHERE id = #{entity.id};
     </update>
     <select id="get" resultMap="UserDto">

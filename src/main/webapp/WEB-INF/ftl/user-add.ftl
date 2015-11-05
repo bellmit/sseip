@@ -44,6 +44,8 @@
                         </div>
                     </#list>
                 </#if>
+
+                    <div class="space-4"></div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">用户名(必须是英文): </label>
 
@@ -107,7 +109,7 @@
                                         </div>
                                     </div>
                 -->
-                    
+
                     <div class="space-4"></div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">地址: </label>

@@ -76,6 +76,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     */
 
     @Override
+    public Boolean updateInfo(User user) {
+        return userDao.updateInfo(user);
+    }
+
+    @Override
     public Boolean updatePassword(Long userId, String oldPassword, String newPassword) {
         return userDao.updatePassword(userId, oldPassword, newPassword);
     }
