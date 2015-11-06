@@ -293,7 +293,7 @@
             <td class=""
                 <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
                 <div>
-                    <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
+                    <span class="icon label-minier label-yellow">${(customer.stars)!'0'}</span>
                     <#if (customer.patientName)??>
                         <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                     <#else>
@@ -307,15 +307,15 @@
                  style="font-size: 7px"></div>-->
             </td>
             <td class=""<#if customer.patientCountry??>
-                title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
+                title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 7>${customer.patientCountry.name?substring(0,6)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 24>${customer.symptom?substring(0,24)+'...'}<#else>${customer.symptom}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class="center" title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
                 <#switch customer.hospitalization>
-                    <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span><#break>
-                    <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span><#break>
-                    <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span><#break>
+                    <#case 'YES'><span class="fa bigger fa-hotel text-danger bigger-140"></span><#break>
+                    <#case 'NO'><span class="fa bigger fa-thumbs-o-down text-info bigger-140"></span><#break>
+                    <#case 'DISCHARGE'><span class="fa bigger fa-child text-success bigger-140"></span><#break>
                 </#switch>
             <#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
@@ -342,10 +342,10 @@
                 title="${(customer.user.realName)!''}"><#if (customer.user.realName)??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
-                <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm:ss')}<#else>
+                <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
-                <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm:ss')}<#else>
+                <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
 
             <td class="">
@@ -353,18 +353,17 @@
             <#--||loginUser.role='MANAGER'-->
                 <span class="btn-group">
                     <#if loginUser.role?? && ['TELADMIN']?seq_contains(loginUser.role)>
-
                         <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
-                           class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-140"> </span> </a>
+                           class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-120"> </span> </a>
                     </#if>
                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                         <a class="btn btn-minier" href="${context.contextPath}/customer/get/${customer.id}"><span
-                                class="fa fa-newspaper-o bigger-140"></span></a>
+                                class="fa fa-newspaper-o bigger-120"></span></a>
                     </#if>
                     <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>
                         <button form="from-remove-customer-${customer_index}"
                                 class="remove-control btn btn-minier btn-pink" title="已提交删除"><span
-                                class="fa fa-trash bigger-140"> </span>
+                                class="fa fa-trash bigger-120"> </span>
                         </button>
                     <form id="from-remove-customer-${customer_index}" action="${context.contextPath}/customer/remove"
                           method="post" style="display: none;"><input type="hidden" name="id" value="${customer.id?c}">

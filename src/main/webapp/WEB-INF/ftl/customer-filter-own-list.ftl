@@ -322,7 +322,7 @@
                 <input type="checkbox" class="checkbox-each-id" name="customer-ids"
                        value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
 
-                <span class="badge badge-yellow">${(customer.stars)!'0'}</span>
+                <span class="badge-yellow">${(customer.stars)!'0'}</span>
                 <#if (customer.patientName)??>
                     <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                 <#else>
@@ -337,7 +337,7 @@
                  style="font-size: 7px"></div>-->
             </td>
             <td class=""<#if customer.patientCountry??>
-                title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 18>${customer.patientCountry.name?substring(0,18)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
+                title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 7>${customer.patientCountry.name?substring(0,6)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class=""
                 title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 24>${customer.symptom?substring(0,24)+'...'}<#else>${customer.symptom}</#if><#else>
@@ -373,16 +373,16 @@
                 title="${(customer.user.realName)!''}"><#if ((customer.user.realName))??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
             <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
             <td class=""
-                <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm:ss')}<#else>
+                <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
             <td class=""
-                <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm:ss')}<#else>
+                <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm')}<#else>
             <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
 
             <td class="">
                 <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
                     <span class="btn-group"><a class="btn btn-minier" href="/customer/update/${customer.id?c}"
-                                               title="编辑"><span class="fa fa-paint-brush bigger-140"></span></a>
+                                               title="编辑"><span class="fa fa-paint-brush "></span></a>
 
                     <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
                         <form action="${context.contextPath}/customer/remove" method="post"
@@ -395,7 +395,7 @@
                         <button form="from-discard-customer-${customer_index}"
                                 class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
                                 title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
-                                class="fa fa-eraser bigger-140"></span>
+                                class="fa fa-eraser "></span>
                         </button>
                     <form id="from-discard-customer-${customer_index}"
                           action="${context.contextPath}/customer/update-discard" method="post"

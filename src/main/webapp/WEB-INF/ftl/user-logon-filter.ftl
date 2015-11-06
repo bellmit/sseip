@@ -24,7 +24,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa fa-clock-o"></span>用户登录记录一览</li>
+            <li class="active"><#--<span class="fa fa-clock-o"></span>-->登录记录</li>
         </ul>
     </div>
 
