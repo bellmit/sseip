@@ -37,9 +37,13 @@ public interface UserDao extends BaseDao<User> {
 
     User login(@Param("username") String userName, @Param("password") String password, @Param("ip") String ip);
 
+    User login2(@Param("username") String userName, @Param("password") String password, @Param("ip") byte[] ip);
+
     Boolean updateGroup(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
     Boolean updateRole(@Param("userId") Long userId, @Param("role") Role role);
+
+    Boolean updateLimitedIp(@Param("userId") Long userId, @Param("ip") String ip);
 
     Role getRole(Long id);
 
@@ -59,4 +63,10 @@ public interface UserDao extends BaseDao<User> {
     List<UserLogonDto> filterUserLogon(@Param("query") UserLogonQueryDto query, @Param("offset") Long offset, @Param("size") Short size);
 
     Long countFilterUserLogon(@Param("query") UserLogonQueryDto query);
+
+    Object qqq(@Param("ip") byte[] ip);
+
+    Integer qqq2(@Param("ip") byte[] ip);
+
+    Integer qqq3(@Param("ip") byte[] ip);
 }

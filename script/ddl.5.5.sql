@@ -26,7 +26,8 @@ CREATE TABLE user (
   added      DATETIME,
   role       INT,
   group_id   INT,
-  limited_ip CHAR(40),
+  #   limited_ip CHAR(40),
+  limited_ip VARBINARY(16),
   CONSTRAINT fk_user_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
     ON DELETE SET NULL
 )

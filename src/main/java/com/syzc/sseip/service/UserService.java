@@ -39,6 +39,8 @@ public interface UserService extends BaseService<User, UserDao> {
 
     Boolean updateRole(Long userId, Role role);
 
+    Boolean updateLimitedIp(Long userId, String ip);
+
     Role getRole(Long userId);
 
     Boolean saveLogonInfo(UserLogon userLogon);

@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,6 +80,8 @@ public class UserController {
             throw HosException.create("对应的用户不存在", Level.TRACE);
         }
         model.addAttribute("user", user);
+        model.addAttribute("roleTypes", Role.values());
+        model.addAttribute("groups", groupService.listAll());
         model.addAttribute("referer", referer);
         model.addAttribute("path", "/users/update");
         return "/user-update";
@@ -107,6 +111,8 @@ public class UserController {
             user = userService.get(userId);
             logger.trace(JSON.toJSONString(user, true));
             model.addAttribute("user", user);
+            model.addAttribute("roleTypes", Role.values());
+            model.addAttribute("groups", groupService.listAll());
             model.addAttribute("referer", referer);
             model.addAttribute("path", "/users/update");
             model.addAttribute("success", "修改完成！");
@@ -173,6 +179,7 @@ public class UserController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
+        model.addAttribute("groups", groupService.listAll());
         model.addAttribute("roleTypes", Role.values());
         return "/user-add";
     }
@@ -196,6 +203,13 @@ public class UserController {
             state = false;
         }
 
+        try {
+            InetAddress.getByName(form.getLimitedIp());
+        } catch (UnknownHostException e) {
+            errors.add("IP地址格式错误");
+            state = false;
+        }
+
 /*
         Matcher m = idNPattern.matcher(form.getIdNumber());
         if (!m.matches()) {
@@ -214,6 +228,7 @@ public class UserController {
 
         if (!state) {
 //            System.out.println(JSON.toJSONString(errors, true));
+            model.addAttribute("groups", groupService.listAll());
             model.addAttribute("roleTypes", Role.values());
             model.addAttribute("form", form);
             model.addAttribute("errors", errors);

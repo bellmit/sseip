@@ -31,43 +31,40 @@
     <form id="filter-form" action="javascript:;" role="search" style="display: none;"></form>
     <div class="space-4"></div>
     <div class="row">
-        <div class="col-sm-12">
-            <div class="col-md-2"><input class="filters text-right green" name="userId" type="text"
-                                         form="filter-form" style="width:100%;" title="用户ID" placeholder="用户ID"
-                                         value="${(query.userId?long?c)!''}"/></div>
-            <div class="col-md-2"><input class="filters col-sm-2 text-right green" name="realName" type="text"
-                                         form="filter-form" style="width:100%;" title="用户姓名" placeholder="用户姓名"
-                                         value="${(query.realName)!''}"/></div>
-            <div class="col-md-2"><input class="filters col-sm-2 text-right green" name="username" type="text"
-                                         form="filter-form" style="width:100%;" title="登录名" placeholder="登录名"
-                                         value="${(query.username)!''}"/></div>
-            <div class="col-md-2"><input class="filters col-sm-2 text-right green" name="ip" type="text"
-                                         form="filter-form" style="width:100%;" title="登录IP" placeholder="登录IP"
-                                         value="${(query.ip)!''}"/></div>
+        <div class="col-md-2"><input class="filters text-right green" name="userId" type="text"
+                                     form="filter-form" style="width:100%;" title="用户ID" placeholder="用户ID"
+                                     value="${(query.userId?long?c)!''}"/></div>
+        <div class="col-md-2"><input class="filters col-sm-2 text-right green" name="realName" type="text"
+                                     form="filter-form" style="width:100%;" title="用户姓名" placeholder="用户姓名"
+                                     value="${(query.realName)!''}"/></div>
+        <div class="col-md-2"><input class="filters col-sm-2 text-right green" name="username" type="text"
+                                     form="filter-form" style="width:100%;" title="登录名" placeholder="登录名"
+                                     value="${(query.username)!''}"/></div>
+        <div class="col-md-2"><input class="filters col-sm-2 text-right green" name="ip" type="text"
+                                     form="filter-form" style="width:100%;" title="登录IP" placeholder="登录IP"
+                                     value="${(query.ip)!''}"/></div>
 
-            <div class="col-md-4"><input style="width:100%;" class="filters text-right" id="date-range"
-                                         placeholder="日期时间范围"
-                                         title="选择日期时间范围"
-                                         value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
-            </div>
-            <input form="filter-form" name="dateRange" type="hidden"
-                   id="date-range-input" style="display: none;"
-                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
-            <input form="filter-form" name="start" type="hidden"
-                   id="date-range-input-start" style="display: none;"
-                   value="${(query.start?long?c)!''}" data-init="${(query.start?long?c)!''}">
-            <input form="filter-form" name="till" type="hidden"
-                   id="date-range-input-end" style="display: none;"
-                   value="${(query.end?long?c)!''}" data-init="${(query.end?long?c)!''}">
+        <div class="col-md-4"><input style="width:100%;" class="filters text-right" id="date-range"
+                                     placeholder="日期时间范围"
+                                     title="选择日期时间范围"
+                                     value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
         </div>
+        <input form="filter-form" name="dateRange" type="hidden"
+               id="date-range-input" style="display: none;"
+               value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
+        <input form="filter-form" name="start" type="hidden"
+               id="date-range-input-start" style="display: none;"
+               value="${(query.start?long?c)!''}" data-init="${(query.start?long?c)!''}">
+        <input form="filter-form" name="till" type="hidden"
+               id="date-range-input-end" style="display: none;"
+               value="${(query.end?long?c)!''}" data-init="${(query.end?long?c)!''}">
     </div>
 
     <div class="space-4"></div>
     <div class="row">
-        <div class="col-sm-12">
-            <div class="col-sm-10 col-sm-offset-0">
-            <#--form="filter-form"-->
-                <span class="btn-group btn-corner">
+        <div class="col-sm-10 col-sm-offset-0">
+        <#--form="filter-form"-->
+            <span class="btn-group btn-corner">
                 <a style="filters" href="${context.contextPath}/user/logon-filter"
                    class="btn btn-sm"><span class="fa fa-bulleye"></span>重新搜索
                 </a>
@@ -81,9 +78,8 @@
                         class="btn btn-primary btn-sm"><span class="fa fa-search"></span>查询
                 </button>
                     </span>
-            </div>
-
         </div>
+
     </div>
 
     <div class="space-4"></div>

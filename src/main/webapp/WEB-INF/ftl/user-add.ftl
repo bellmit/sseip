@@ -4,8 +4,8 @@
 <#include "/common/common_css.ftl">
     <title>添加一个新的用户</title>
 </head>
-<body class="no-skin">
-<div class="main-content-inner">
+<body>
+<div class="container-fluid">
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
@@ -49,8 +49,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">用户名(必须是英文): </label>
 
-                        <div class="col-sm-9">
-                            <input name="username" type="text" size="30" class="col-xs-10 col-sm-5"
+                        <div class="col-sm-4">
+                            <input name="username" type="text" size="30" class="form-control"
                                    placeholder="用户名" value="${(form.username)!''}"/>
                         </div>
                     </div>
@@ -59,8 +59,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">用户密码: </label>
 
-                        <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="password" type="password" name="password"
+                        <div class="col-sm-4">
+                            <input class="form-control" id="password" type="password" name="password"
                                    placeholder="用户密码"/>
                         </div>
                     </div>
@@ -69,8 +69,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">确认密码: </label>
 
-                        <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="confirmPwd" name="confirmPwd" type="password"
+                        <div class="col-sm-4">
+                            <input class="form-control" id="confirmPwd" name="confirmPwd" type="password"
                                    placeholder="确认密码"/>
 							<span class="help-inline col-xs-12 col-sm-7">
 								<span class="middle"></span>
@@ -82,8 +82,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">真实姓名: </label>
 
-                        <div class="col-sm-9">
-                            <input name="realName" type="text" size="30" class="col-xs-10 col-sm-5"
+                        <div class="col-sm-4">
+                            <input name="realName" type="text" size="30" class="form-control"
                                    placeholder="真实姓名" value="${(form.realName)!''}"/>
                         </div>
                     </div>
@@ -92,8 +92,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">年龄: </label>
 
-                        <div class="col-sm-9">
-                            <input name="age" type="number" size="30" class="col-xs-10 col-sm-5"
+                        <div class="col-sm-4">
+                            <input name="age" type="number" size="30" class="form-control"
                                    placeholder="年龄" value="${(form.age)!''}"/>
                         </div>
                     </div>
@@ -114,8 +114,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">地址: </label>
 
-                        <div class="col-sm-9">
-                            <input name="address" type="text" size="30" class="col-xs-10 col-sm-5" placeholder="地址"
+                        <div class="col-sm-4">
+                            <input name="address" type="text" size="30" class="form-control" placeholder="地址"
                                    value="${(form.address)!''}"/>
                         <#--<sf:errors class="errorContainer" path="email"/>-->
                         </div>
@@ -125,10 +125,48 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">电话: </label>
 
-                        <div class="col-sm-9">
-                            <input name="phone" type="tel" size="30" class="col-xs-10 col-sm-5" placeholder="电话"
+                        <div class="col-sm-4">
+                            <input name="phone" type="tel" size="30" class="form-control" placeholder="电话"
                                    value="${(form.phone)!''}"/>
                         </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group" title="绑定IP">
+                        <label class="col-sm-3 control-label no-padding-right">绑定IP</label>
+
+                        <div class="col-sm-4">
+                            <input name="limitedIp" type="text" size="30" class="form-control" placeholder="绑定IP"
+                                   value="${(form.limitedIp)!''}"/>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" title="角色">角色</label>
+
+                        <div class="col-sm-4"><select id="role" class="form-control" tabindex="1" name="role"
+                                                      title="角色">
+                        <#assign roleChecked><#if !(form.role)??>checked=""</#if></#assign>
+                            <option ${roleChecked!''}>选择角色</option>
+                        <#list roleTypes as roleType>
+                            <option ${((form.role)?? && form.role.code=roleType.code)?string('selected="selected" ','')}value="${roleType.code}">${roleType.roleName}</option></#list>
+                        </select></div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" title="角色">部门</label>
+
+                        <div class="col-sm-4"><select class="form-control" tabindex="1" name="groupId"
+                                                      title="部门">
+                        <#assign groupChecked><#if !(form.groupId)??>checked=""</#if></#assign>
+
+                            <option ${groupChecked!''}>选择部门</option>
+                        <#list groups as group>
+                            <option ${((form.groupId)?? && form.groupId=group.id)?string('selected="selected" ','')}value="${group.id}">${group.name}</option>
+                        </#list>
+                        </select></div>
                     </div>
 
                 <#--<div class="space-4"></div>

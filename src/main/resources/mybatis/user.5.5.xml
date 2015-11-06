@@ -108,10 +108,11 @@
         ,
         group_id =
         <choose>
-            <when test="entity.groupId!=null and entity.groupId!=''">#{entity.groupId}</when>
-            <otherwise>NULL</otherwise>
+            <when test="entity.groupId==''">NULL</when>
+            <otherwise>#{entity.groupId}</otherwise>
         </choose>
         ,
+        role =#{entity.role},
         limited_ip =
         <choose>
             <when test="entity.limitedIp!=null and entity.limitedIp!=''">#{entity.limitedIp}</when>
@@ -217,6 +218,15 @@
         AND (isnull(limited_ip) OR limited_ip=#{ip})
         limit 1;
     </select>
+    <select id="login2" resultMap="UserDto">
+        SELECT
+        *
+        FROM user
+        where username = #{username}
+        AND password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
+        AND (isnull(limited_ip) OR limited_ip = #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler})
+        limit 1;
+    </select>
     <update id="updateGroup">
         update user set group_id=
         <choose>
@@ -228,6 +238,14 @@
     <!--update user set role=#{role,typeHandler=RoleHandler,javaType=Role} where id=#{userId}-->
     <update id="updateRole">
         update user set role=#{role} where id=#{userId}
+    </update>
+    <update id="updateLimitedIp">
+        update user set limited_ip=
+        <choose>
+            <when test="ip==''">NULL</when>
+            <otherwise>#{ip}</otherwise>
+        </choose>
+        where id=#{userId}
     </update>
     <select id="getRole" resultType="com.syzc.sseip.entity.enumtype.Role">
         select role from user where id=#{id}
@@ -315,5 +333,15 @@
                 and user_logon.logged_on &lt;= #{query.end}
             </if>
         </where>
+    </select>
+
+    <select id="qqq" resultType="_byte[]">
+        select #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler};
+    </select>
+    <select id="qqq2" resultType="Integer">
+        select count(1) from ip where ip= #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
+    </select>
+    <select id="qqq3" resultType="Integer">
+        select count(1) from ip where ip= #{ip,typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
     </select>
 </mapper>

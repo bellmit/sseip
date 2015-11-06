@@ -322,7 +322,7 @@
                 <input type="checkbox" class="checkbox-each-id" name="customer-ids"
                        value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
 
-                <span class="badge-yellow">${(customer.stars)!'0'}</span>
+                <span class="label-yellow">${(customer.stars)!'0'}</span>
                 <#if (customer.patientName)??>
                     <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                 <#else>

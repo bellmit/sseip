@@ -4,8 +4,8 @@
 <#include "/common/common_css.ftl">
     <title>编辑用户的角色</title>
 </head>
-<body class="no-skin">
-<div class="main-content-inner">
+<body class="">
+<div class="container-fluid">
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
@@ -16,24 +16,30 @@
         </script>
 
         <div class="row">
-            <div>
-                <ul class="breadcrumb">
-                    <li>
-                        <span class="ace-icon fa fa-home home-icon"></span>
-                        <a href="${context.contextPath}/" target="_top">Home</a>
-                    </li>
-                    <li><a href="${context.contextPath}/group/list/1">部门列表</a></li>
-                    <li class="active">修改用户<span class="label">${user.realName}</span>的部门</li>
-                </ul>
-            </div>
-            <div>
-                <ul class="breadcrumb">
-                    <li>
-                        <span class="ace-icon fa fa-home home-icon"></span>
-                        <a href="${context.contextPath}/" target="_top">Home</a>
-                    </li>
-                    <li><a href="${context.contextPath}/user/list/1">用户列表</a></li>
-                </ul>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            <li>
+                                <span class="ace-icon fa fa-home home-icon"></span>
+                                <a href="${context.contextPath}/" target="_top">Home</a>
+                            </li>
+                            <li><a href="${context.contextPath}/user/list/1">用户列表</a></li>
+                            <li class="active">修改用户<span class="label">${user.realName}</span>的部门</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            <li>
+                                <span class="ace-icon fa fa-home home-icon"></span>
+                                <a href="${context.contextPath}/" target="_top">Home</a>
+                            </li>
+                            <li><a href="${context.contextPath}/group/list/1">部门列表</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /.breadcrumb -->
@@ -98,17 +104,16 @@
                 </form>
                 <div class="space-4"></div>
                 <div class="clearfix form-actions">
-                    <div class="col-md-offset-3 col-md-9">
+                    <div class="col-md-offset-3 col-md-9"><span class="btn-group btn-corner">
                         <button class="btn btn-info" type="submit" form="group-form">
                             <span class="ace-icon fa fa-check bigger-110"></span>
-                            提交角色修改
+                            提交部门修改
                         </button>
-                        &nbsp; &nbsp; &nbsp;
                         <button class="btn" type="reset">
                             <span class="ace-icon fa fa-undo bigger-110"></span>
                             重置
                         </button>
-                    </div>
+                    </span></div>
                 </div>
             </div>
         </div>

@@ -293,7 +293,7 @@
             <td class=""
                 <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
                 <div>
-                    <span class="icon label-minier label-yellow">${(customer.stars)!'0'}</span>
+                    <span class=" label-minier label-yellow">${(customer.stars)!'0'}</span>
                     <#if (customer.patientName)??>
                         <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
                     <#else>

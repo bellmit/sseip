@@ -131,6 +131,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     }
 
     @Override
+    public Boolean updateLimitedIp(Long userId, String ip) {
+        return userDao.updateLimitedIp(userId, ip);
+    }
+
+    @Override
     public Role getRole(Long userId) {
         return userDao.getRole(userId);
     }
