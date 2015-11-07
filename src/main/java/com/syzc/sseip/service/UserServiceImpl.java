@@ -88,8 +88,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
     }
 
     @Override
-    public Boolean resetPassword(Long userId, String newPassword) {
-        return userDao.resetPassword(userId, newPassword);
+    public Boolean updateResetPassword(Long userId, String newPassword) {
+        return userDao.updateResetPassword(userId, newPassword);
     }
 
     @Override

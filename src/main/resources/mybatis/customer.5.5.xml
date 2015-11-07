@@ -648,4 +648,12 @@
     <select id="getCallState" resultType="Integer">
         select call_state from customer where id=#{id}
     </select>
+
+    <select id="statAllInHospitalCount" resultType="Long">
+select count(1) from customer where hospitalization=1;
+    </select>
+    <select id="statAllReportedCount" resultType="Long">
+select count(1) from customer where if_report=1;
+    </select>
+
 </mapper>

@@ -21,7 +21,7 @@ public interface UserDao extends BaseDao<User> {
 
 //    Boolean updateInfo(@Param("user") User user);
 
-    Boolean resetPassword(@Param("id") Long userId, @Param("password") String password);
+    Boolean updateResetPassword(@Param("id") Long userId, @Param("password") String password);
 
     Boolean updatePassword(@Param("id") Long userId, @Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword);
 

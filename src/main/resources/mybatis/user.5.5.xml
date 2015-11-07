@@ -194,7 +194,7 @@
         </choose>
         WHERE id = #{entity.id};
     </update>
-    <update id="resetPassword">
+    <update id="updateResetPassword">
         UPDATE user
         SET password = sha2(concat('!a1@B2c3D4e5F6g7', #{password}, '#h4$I5j6K7l8M9n0'), 256)
         WHERE id = #{id};

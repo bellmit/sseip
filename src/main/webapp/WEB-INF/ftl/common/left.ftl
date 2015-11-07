@@ -34,6 +34,12 @@
                         <#else>href="${context.contextPath}/customer/filter-own/1"</#if> target="mainFrame"><span
                             class="menu-icon fa fa-table light-red"></span><span class="menu-text">资源查询</span></a></li>
                 </#if>
+
+                <#if ['ADMIN']?seq_contains(loginUser.role)>
+                    <li><a href="/customer/stats" target="mainFrame"><span
+                            class="menu-icon fa fa-line-chart light-red"></span><span class="menu-text">资源查询</span></a>
+                    </li>
+                </#if>
             <#--
                             <#if ['ADMIN','MANAGER','DIRECTOR']?seq_contains(loginUser.role)>
                                 <li><a href="${context.contextPath}/customer/filter/1" target="mainFrame"><span
@@ -93,33 +99,35 @@
                         class="menu-icon fa fa-globe light-blue"></span>国家管理</a></li>
             <#--<li><a href="${context.contextPath}/access-point-type/list/1" target="mainFrame">推广类型一览</a></li>-->
                 <li><a href="${context.contextPath}/website/list/1" target="mainFrame"><span
-                        class="menu-icon fa fa-map-signs orange2"></span>网站管理</a></li>
+                        class="menu-icon fa fa-map-signs orange2"></span>网站群组</a></li>
                 <li><a href="${context.contextPath}/disease-type/list/1" target="mainFrame"><span
                         class="menu-icon fa fa-heartbeat orange"></span>病种管理</a></li>
             </ul>
         </li>
     </#if>
 
-    <#if (loginUser.role)?? && loginUser.role=='ADMIN'>
-        <li class="">
-            <a href="#" class="dropdown-toggle">
-                <span class="menu-icon fa fa-gear"></span>
-                <span class="menu-text">系统设置 </span>
+    <#--
+        <#if (loginUser.role)?? && loginUser.role=='ADMIN'>
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <span class="menu-icon fa fa-gear"></span>
+                    <span class="menu-text">系统设置 </span>
 
-                <span class="arrow fa fa-angle-down"></span>
-            </a>
-            <span class="arrow"></span>
-            <ul class="submenu">
-                <li class="">
-                    <a href="${context.contextPath}/druid" target="mainFrame">
-                        <span class="menu-icon fa fa-caret-right"></span>
-                        Druid Monitor(监听)
-                    </a>
-                    <span class="arrow"></span>
-                </li>
-            </ul>
-        </li>
-    </#if>
+                    <span class="arrow fa fa-angle-down"></span>
+                </a>
+                <span class="arrow"></span>
+                <ul class="submenu">
+                    <li class="">
+                        <a href="${context.contextPath}/druid" target="mainFrame">
+                            <span class="menu-icon fa fa-caret-right"></span>
+                            Druid Monitor(监听)
+                        </a>
+                        <span class="arrow"></span>
+                    </li>
+                </ul>
+            </li>
+        </#if>
+    -->
 
         <li>
             <a href="${context.contextPath}/user/update-password" target="mainFrame"><span

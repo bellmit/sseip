@@ -25,7 +25,7 @@ public interface UserService extends BaseService<User, UserDao> {
 
     Boolean updatePassword(Long userId, String oldPassword, String newPassword);
 
-    Boolean resetPassword(Long userId, String newPassword);
+    Boolean updateResetPassword(Long userId, String newPassword);
 
     Page<User> listByGroup(Long groupId, Long pageNo, Byte size);
 

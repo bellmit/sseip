@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>添加入口网站</title>
+    <title>添加网站群组</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -20,9 +20,9 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/website-type/list/1">入口网站一览</a>
+            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/website-type/list/1">网站群组一览</a>
             </li>
-            <li class="active">添加入口网站</li>
+            <li class="active">添加网站群组</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -72,7 +72,7 @@
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-9">
                             <button class="btn btn-info" type="submit"><span
-                                    class="ace-icon fa fa-plus bigger-110"></span>添加入口网站
+                                    class="ace-icon fa fa-plus bigger-110"></span>添加网站群组
                             </button>
                             <button class="btn" type="reset">
                                 <span class="ace-icon fa fa-undo bigger-110"></span>表单重置

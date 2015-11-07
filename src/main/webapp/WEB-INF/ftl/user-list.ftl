@@ -136,7 +136,13 @@
                                             <button form="form-remove-user-${user_index}"
                                                     class="remove-control btn btn-minier" title="删除"><span
                                                     class="fa fa-trash"></span></button>
-                                        </#if></span>
+                                        </#if>
+                                        <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                            <a href="/user/reset-password/${user.id}" class="btn btn-minier btn-gold"
+                                               title="重置密码"><span
+                                                    class="fa fa-lock"></span></a>
+                                        </#if>
+                                    </span>
 
                                     <form id="form-remove-user-${user_index}"
                                           action="${context.contextPath}/user/remove" method="post"><input type="hidden"

@@ -105,12 +105,12 @@
                                                     </#list>
                                                     </select></div>
                                                     <div class="col-md-2" style="padding: 0; margin: 0;"><select
-                                                            name="websiteId" form="filter-form" title="选择网站"
+                                                            name="websiteId" form="filter-form" title="选择网站群组"
                                                             style="width:100%;"
                                                             class="filters col-md-2 text-right green select2-ui">
                                                         <option
                                                         <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
-                                                        value="">网站
+                                                        value="">网站群组
                                                         </option>
                                                     <#list websites as website>
                                                         <option
@@ -297,8 +297,8 @@
             <th class="">国家</th>
             <th class="">症状</th>
             <th class="" title="是否住院">住院</th>
-            <th class="">所属网站组</th>
-            <th class="">来源网站</th>
+            <th class="">所属网站群组</th>
+            <th class="">来源域名</th>
             <th class="" title="是否报备">报备</th>
             <th class="">提交人</th>
             <th class="">更新时间</th>

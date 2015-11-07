@@ -12,7 +12,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa fa-map-signs orange2"></span>入口网站群组一览</li>
+            <li class="active"><span class="fa fa-map-signs orange2"></span>网站群组一览</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>

@@ -61,7 +61,7 @@ public class UserDaoTest {
 //        System.out.println(JSON.toJSONString(d.listByRole(Role.MANAGER, 0L, (byte) 10), true));
 //        System.out.println(d.countByRole(Role.MANAGER));
 
-//        System.out.println(d.resetPassword(3L, "abc"));
+//        System.out.println(d.updateResetPassword(3L, "abc"));
 //        System.out.println(d.updatePassword(3L, "abc", "abc2"));
 
 //        System.out.println(d.exist("abc3"));

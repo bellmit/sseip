@@ -20,8 +20,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/website/list/1">入口网站一览</a></li>
-            <li class="active">入口网站添加完成</li>
+            <li><a href="${context.contextPath}/website/list/1">网站群组一览</a></li>
+            <li class="active">网站群组添加完成</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
@@ -31,7 +31,7 @@
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="alert alert-success">入口网站添加完成。</div>
+                        <div class="alert alert-success">网站群组添加完成。</div>
                     </div>
                 </div>
                 <div class="row">
@@ -55,7 +55,7 @@
                             <span class="ace-icon fa fa-home bigger-110"></span>回首页
                         </a>
                         <a class="btn btn-info" href="${context.contextPath}/website/list/1">
-                            <span class="ace-icon fa fa-list bigger-110"></span>入口网站一览
+                            <span class="ace-icon fa fa-list bigger-110"></span>网站群组一览
                         </a>
                         <a class="btn btn-info" href="${context.contextPath}/website/add">
                             <span class="ace-icon fa fa-edit bigger-110"></span>继续添加

@@ -5,6 +5,7 @@ import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.dao.MemoDao;
 import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.CustomerStatDto;
 import com.syzc.sseip.entity.Memo;
 import com.syzc.sseip.entity.TelAuditDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
@@ -125,6 +126,14 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
 //        System.out.println("updateTelAuditDto - 1");
 //        System.out.println(r);
         return r;
+    }
+
+    @Override
+    public CustomerStatDto statAll() {
+        CustomerStatDto dto = new CustomerStatDto();
+        dto.setInHospitalCount(customerDao.statAllInHospitalCount());
+        dto.setReportedCount(customerDao.statAllReportedCount());
+        return dto;
     }
 
     public static void main(String[] args) {

@@ -88,7 +88,7 @@
                             <dd><#if (customer.email)??>${customer.email}<#else><span class="label">不详</span></#if></dd>
                             <dt>电话</dt>
                             <dd><#if (customer.tel)??>${customer.tel}<#else><span class="label">不详</span></#if></dd>
-                            <dt>来源网站</dt>
+                            <dt>网站群组</dt>
                             <dd><#if (customer.website)??>${customer.website.name}<#else><span
                                     class="label">不详</span></#if>
                             </dd>

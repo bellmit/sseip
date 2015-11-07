@@ -371,6 +371,9 @@
 
                                         <div class="col-sm-9">
                                             <select name="hospitalization" class="col-sm-12">
+                                                <option<#if !(customer.hospitalization)?? > selected=""</#if> value="">
+                                                    选择是否住院
+                                                </option>
                                             <#list hospitalizationTypes as hospitalizationType>
                                                 <option
                                                     <#if (customer.hospitalization)?? && customer.hospitalization.code=hospitalizationType.code>selected=""</#if>

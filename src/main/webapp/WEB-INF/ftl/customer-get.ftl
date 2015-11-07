@@ -52,7 +52,7 @@
                                     <td><#if (customer.age)??>${customer.age}</#if></td>
                                     <th>是否紧急</th>
                                     <td><#if customer.emergency??>${customer.emergency?then('紧急','不紧急')}</#if></td>
-                                    <th>所属网站组</th>
+                                    <th>所属网站群组</th>
                                     <td><#if (customer.website)??>${customer.website.name}</#if>
                                     </td>
                                     <th>提交人</th>
@@ -63,7 +63,7 @@
                                     <td><#if (customer.diseaseType)??>${customer.diseaseType.name}</#if></td>
                                     <th>电子邮件</th>
                                     <td><#if (customer.email)??>${customer.email}</#if></td>
-                                    <th>来源网址</th>
+                                    <th>来源域名</th>
                                     <td><#if (customer.sourceWebsite)??>${customer.sourceWebsite}</#if></td>
                                     <th>所属人</th>
                                     <td><#if (customer.ownerUser.realName)??>${customer.ownerUser.realName}</#if></td>
@@ -215,7 +215,7 @@
                                             <#if customer.memos?? && customer.memos?size gt 0>
                                                 <ul>
                                                     <#list customer.memos as memo>
-                                                        <li>${memo.content?html} -
+                                                        <li><span class="orange">${memo.content?html}</span> -
                                                             <span class="text-warning">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
                                                             -
                                                             <span class="text-primary">${(memo.user.realName)!''}</span>

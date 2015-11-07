@@ -471,4 +471,41 @@ String ip;
         model.addAttribute("path", "/user/logon-filter");
         return "user-logon-filter";
     }
+
+    @RequestMapping(value = "reset-password/{userId:\\d+}", method = RequestMethod.GET)
+    public String resetPassword(@PathVariable Long userId, String referer, Model model, HttpSession session, HttpServletRequest request) {
+        User currentUser = (User) session.getAttribute("loginUser");
+        if (currentUser.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+        User targetUser = userService.get(userId);
+        if (targetUser == null) {
+            throw HosException.create("用户不存在", Level.DEBUG);
+        }
+        if (referer == null) {
+            referer = request.getHeader("Referer");
+            if (referer == null) {
+                referer = "/";
+            }
+        }
+        model.addAttribute("user", targetUser);
+        model.addAttribute("referer", referer);
+        return "user-password-reset";
+    }
+
+    @RequestMapping(value = "reset-password/{userId:\\d+}", method = RequestMethod.POST)
+    public String resetPassword(@PathVariable Long userId, String referer, String newPassword, String confirmPassword, HttpSession session) {
+        User currentUser = (User) session.getAttribute("loginUser");
+        if (currentUser.getRole() != Role.ADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+        if (userService.updateResetPassword(userId, newPassword)) {
+            if (referer == null) {
+                referer = "/";
+            }
+            return "redirect:" + referer;
+        } else {
+            return String.format("redirect:/user/reset-password/%d?error", userId);
+        }
+    }
 }

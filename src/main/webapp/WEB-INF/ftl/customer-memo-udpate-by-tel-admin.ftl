@@ -200,10 +200,10 @@
                         <dt>是否报备</dt>
                         <dd><#if (customer.ifReport)??>${customer.ifReport?string('是','否')}<#else><span
                                 class="label">未知</span></#if></dd>
-                        <dt>网站组名</dt>
+                        <dt>网站群组</dt>
                         <dd><#if (customer.website.name)??>${customer.website.name}<#else><span
                                 class="label">未知</span></#if></dd>
-                        <dt>来源网址</dt>
+                        <dt>来源域名</dt>
                         <dd><#if (customer.sourceWebsite)??>${customer.sourceWebsite}<#else><span
                                 class="label">未知</span></#if></dd>
                         <dt>疾病类型</dt>

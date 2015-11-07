@@ -687,4 +687,15 @@ public class CustomerController {
 
         return "customer-memo-udpate-by-tel-admin";
     }
+
+    @RequestMapping(value = "/stats")
+    public String stats(Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("loginUser");
+        if (currentUser.getRole() == null || currentUser.getRole() != Role.ADMIN) {
+            throw HosException.create("", Level.DEBUG);
+        }
+        CustomerStatDto stats = customerService.statAll();
+        model.addAttribute("stats", stats);
+        return "customer-stats";
+    }
 }

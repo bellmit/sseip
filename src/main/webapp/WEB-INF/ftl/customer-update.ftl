@@ -377,6 +377,10 @@
 
                                             <div class="col-sm-9">
                                                 <select name="hospitalization" class="col-sm-12">
+                                                    <option<#if !(customer.hospitalization)?? > selected=""</#if>
+                                                                                                value="">
+                                                        选择是否住院
+                                                    </option>
                                                 <#list hospitalizationTypes as hospitalizationType>
                                                     <option
                                                         <#if (customer.hospitalization)?? && customer.hospitalization.code=hospitalizationType.code>selected=""</#if>
@@ -470,7 +474,7 @@
                                                     <ul id="memo-ul-container">
                                                     <#if (customer.memos)?? && customer.memos?size gt 0>
                                                         <#list customer.memos as memo>
-                                                            <li>${memo.content?html} -
+                                                            <li><span class="orange">${memo.content?html}</span> -
                                                                 <span class="text-warning">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
                                                                 -
                                                                 <span class="text-primary">${(memo.user.realName)!''}</span>

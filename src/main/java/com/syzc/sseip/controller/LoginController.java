@@ -82,9 +82,10 @@ public class LoginController {
 //        ContextLoader.getCurrentWebApplicationContext().getServletContext().getServletContextName()
             return "/login";
         }
+
         UserLogon userLogon;
         userLogon = new UserLogon();
-        userLogon.setIp(request.getRemoteAddr());
+        userLogon.setIp(addr);
         userLogon.setUserId(login.getId());
         userService.saveLogonInfo(userLogon);
 

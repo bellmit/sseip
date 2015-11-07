@@ -76,7 +76,7 @@
                                 <dd><#if (customer.website)??>${customer.website.name}</#if>
                                 </dd>
 
-                                <dt>来源网址</dt>
+                                <dt>来源域名</dt>
                                 <dd><#if (customer.sourceWebsite)??>${customer.sourceWebsite}</#if></dd>
                                 <dt>星级</dt>
                                 <dd><#if (customer.stars)??>

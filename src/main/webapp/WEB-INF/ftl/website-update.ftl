@@ -2,7 +2,7 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>更新入口网站信息</title>
+    <title>更新网站群组信息</title>
 </head>
 <body class="no-skin">
 <div class="main-content-inner">
@@ -20,8 +20,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/website/list/1">入口网站一览</a></li>
-            <li class="active">更新入口网站内容</li>
+            <li><a href="${context.contextPath}/website/list/1">网站群组一览</a></li>
+            <li class="active">更新网站群组内容</li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
