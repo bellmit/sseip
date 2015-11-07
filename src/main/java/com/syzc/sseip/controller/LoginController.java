@@ -61,7 +61,21 @@ public class LoginController {
             model.addAttribute("error", "验证码错误");
             return "/login";
         }
-        String addr = request.getRemoteAddr();
+
+        String addr;
+        addr = request.getHeader("X-Real-IP");
+        if (addr == null) {
+            addr = request.getHeader("X-Forwarded-For");
+            if (addr == null) {
+                addr = request.getRemoteAddr();
+            } else {
+                int idx = addr.indexOf(',');
+                if (idx >= 0) {
+                    addr = addr.substring(0, idx);
+                }
+            }
+        }
+
         User login = userService.login(username, password, addr);
         if (login == null) {
             model.addAttribute("error", "用户名或者密码或者接入IP有错误，是不是忘了。");

@@ -84,7 +84,6 @@
         patient_country_id,
         disease_type_id,
         website_id,
-        memo,
         contact_records,
         stars,
         valid,
@@ -100,22 +99,57 @@
         now(),
         #{entity.sex},
         #{entity.age},
-        #{entity.liaisonName},
-        #{entity.liaisonAddress},
-        #{entity.relationship},
-        #{entity.patientName},
-        #{entity.patientAddress},
-        #{entity.symptom},
+        <choose>
+            <when test="entity.liaisonName == ''">NULL</when>
+            <otherwise>#{entity.liaisonName}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.liaisonAddress == ''">NULL</when>
+            <otherwise>#{entity.liaisonAddress}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.relationship == ''">NULL</when>
+            <otherwise>#{entity.relationship}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.patientName == ''">NULL</when>
+            <otherwise>#{entity.patientName}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.patientAddress == ''">NULL</when>
+            <otherwise>#{entity.patientAddress}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.symptom == ''">NULL</when>
+            <otherwise>#{entity.symptom}</otherwise>
+        </choose>
+        ,
         #{entity.hospitalization},
         #{entity.emergency},
-        #{entity.email},
-        #{entity.tel},
+        <choose>
+            <when test="entity.email == ''">NULL</when>
+            <otherwise>#{entity.email}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.tel == ''">NULL</when>
+            <otherwise>#{entity.tel}</otherwise>
+        </choose>
+        ,
         #{entity.liaisonCountryId},
         #{entity.patientCountryId},
         #{entity.diseaseTypeId},
         #{entity.websiteId},
-        #{entity.memo},
-        #{entity.contactRecords},
+        <choose>
+            <when test="entity.contactRecords == ''">NULL</when>
+            <otherwise>#{entity.contactRecords}</otherwise>
+        </choose>
+        ,
         <choose>
             <when test="entity.stars !=null and entity.stars !=0">
                 #{entity.stars}
@@ -130,7 +164,10 @@
         #{entity.userId},
         #{entity.groupId},
         #{entity.ifReport},
-        #{entity.sourceWebsite}
+        <choose>
+            <when test="entity.sourceWebsite == ''">NULL</when>
+            <otherwise>#{entity.sourceWebsite}</otherwise>
+        </choose>
         );
     </insert>
     <insert id="addAll">
@@ -153,7 +190,6 @@
         patient_country_id,
         disease_type_id,
         website_id,
-        memo,
         contact_records,
         stars,
         valid,
@@ -184,7 +220,6 @@
             #{entity.patientCountryId},
             #{entity.diseaseTypeId},
             #{entity.websiteId},
-            #{entity.memo},
             #{entity.contactRecords},
             #{entity.stars},
             #{entity.valid},
@@ -215,7 +250,6 @@
         patient_country_id,
         disease_type_id,
         website_id,
-        memo,
         contact_records,
         stars,
         valid,
@@ -246,7 +280,6 @@
             #{entity.patientCountryId},
             #{entity.diseaseTypeId},
             #{entity.websiteId},
-            #{entity.memo},
             #{entity.contactRecords},
             #{entity.stars},
             #{entity.valid},

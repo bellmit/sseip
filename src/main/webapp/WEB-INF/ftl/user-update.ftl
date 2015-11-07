@@ -134,7 +134,7 @@
                                                       title="角色">
                         <#if !(user.role.code)??><#assign roleChecked>
                             checked=""</#assign><#else><#assign roleChecked></#assign></#if>
-                            <option ${roleChecked!''}>选择角色</option>
+                            <option ${roleChecked!''} value="">选择角色</option>
                         <#list roleTypes as roleType>
                             <option ${(((user.role.code)!(-1))=roleType.code)?string('selected="selected" ','')}value="${roleType.code}">${roleType.roleName}</option></#list>
                         </select></div>
@@ -147,7 +147,7 @@
                         <div class="col-sm-4"><select class="form-control" tabindex="1" name="groupId" title="部门">
                         <#assign groupChecked><#if !(form.groupId)??>checked=""</#if></#assign>
 
-                            <option ${groupChecked!''}>选择部门</option>
+                            <option ${groupChecked!''} value="">选择部门</option>
                         <#list groups as group>
                             <option ${((user.groupId)?? && user.groupId=group.id)?string('selected="selected" ','')}value="${group.id}">${group.name}</option>
                         </#list>

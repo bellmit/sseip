@@ -31,36 +31,13 @@ public class AccessLogInterceptor extends HandlerInterceptorAdapter {
                 refer.append(request.getQueryString());
             }
             if (id == null) {
-                logger.trace(String.format("from %s:%d - Not Login - %s", request.getRemoteAddr(), request.getRemotePort(), refer.toString()));
+                logger.trace(String.format("from %s:%d - (X-Forwarded-For)%s - (X-Real-IP)%s - Not Login - %s",
+                        request.getRemoteAddr(), request.getRemotePort(), request.getHeader("X-Forwarded-For"), request.getHeader("X-Real-IP"), refer.toString()));
             } else {
-                logger.trace(String.format("from %s:%d - user %d - %s", request.getRemoteAddr(), request.getRemotePort(), id, refer.toString()));
+                logger.trace(String.format("from %s:%d - (X-Forwarded-For)%s - (X-Real-IP)%s - user %d - %s",
+                        request.getRemoteAddr(), request.getRemotePort(), request.getHeader("X-Forwarded-For"), request.getHeader("X-Real-IP"), id, refer.toString()));
             }
         }
         return super.preHandle(request, response, handler);
     }
-
-/*
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        HttpSession session = request.getSession();
-        Long id = null;
-        if (session != null) {
-            id = (Long) session.getAttribute("loginUserId");
-        }
-
-        StringBuilder refer = new StringBuilder();
-        {
-            refer.append(request.getRequestURL()); // just a name for login page's redirect
-            if (request.getQueryString() != null) {
-                refer.append('?');
-                refer.append(request.getQueryString());
-            }
-            if (id == null) {
-                logger.trace(String.format("from %s:%d - Not Login - %s - returned", request.getRemoteAddr(), request.getRemotePort(), refer.toString()));
-            } else {
-                logger.trace(String.format("from %s:%d - user %d - %s - returned", request.getRemoteAddr(), request.getRemotePort(), id, refer.toString()));
-            }
-        }
-    }
-*/
 }

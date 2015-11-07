@@ -34,13 +34,21 @@
                     <!-- #section:elements.form -->
                 <#if error??>
                     <div class="row">
-                        <div class="col-sm-offset-3 col-sm-4 alert alert-danger">${error}</div>
+                        <div class="col-sm-offset-3 col-sm-4 alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    class="fa fa-times"></span></button>
+                        ${error}
+                        </div>
                     </div>
                 </#if>
                 <#if errors??>
                     <#list errors as error>
                         <div class="row">
-                            <div class="col-sm-offset-3 col-sm-4 alert alert-danger">${error}</div>
+                            <div class="col-sm-offset-3 col-sm-4 alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        class="fa fa-times"></span></button>
+                            ${error}
+                            </div>
                         </div>
                     </#list>
                 </#if>
@@ -148,7 +156,7 @@
                         <div class="col-sm-4"><select id="role" class="form-control" tabindex="1" name="role"
                                                       title="角色">
                         <#assign roleChecked><#if !(form.role)??>checked=""</#if></#assign>
-                            <option ${roleChecked!''}>选择角色</option>
+                            <option ${roleChecked!''} value="">选择角色</option>
                         <#list roleTypes as roleType>
                             <option ${((form.role)?? && form.role.code=roleType.code)?string('selected="selected" ','')}value="${roleType.code}">${roleType.roleName}</option></#list>
                         </select></div>
@@ -162,7 +170,7 @@
                                                       title="部门">
                         <#assign groupChecked><#if !(form.groupId)??>checked=""</#if></#assign>
 
-                            <option ${groupChecked!''}>选择部门</option>
+                            <option ${groupChecked!''} value="">选择部门</option>
                         <#list groups as group>
                             <option ${((form.groupId)?? && form.groupId=group.id)?string('selected="selected" ','')}value="${group.id}">${group.name}</option>
                         </#list>

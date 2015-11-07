@@ -237,8 +237,15 @@ public class UserController {
         if (form.getRole() == null) {
             form.setRole(Role.EMPTY);
         }
-        form = userService.add(form);
-        return "redirect:/user/list/1";
+        User result;
+        result = userService.add(form);
+        if (result == null) {
+            model.addAttribute("error", "添加用户错误");
+            model.addAttribute("form", result);
+            return "/user-add";
+        } else {
+            return "redirect:/user/list/1";
+        }
     }
 
     @RequestMapping("/list/{page:\\d+}")

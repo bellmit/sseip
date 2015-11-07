@@ -34,9 +34,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserDao> implements U
 
     @Override
     public User add(User user) {
+/*
         if (userDao.existUsername(user.getUsername())) {
             return null;
         }
+*/
         if (!userDao.add(user)) {
             return null;
         }

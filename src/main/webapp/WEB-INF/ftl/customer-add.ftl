@@ -213,6 +213,7 @@
 
                                         <div class="col-sm-8">
                                             <select class="col-sm-12" name="sex">
+                                                <option value="">选择性别</option>
                                             <#list sexTypes as sexType>
                                                 <option value="${sexType.code}"
                                                         <#if ((customer.sex.code)!-1)=sexType.code>selected=""</#if>>${sexType.textName}</option>
