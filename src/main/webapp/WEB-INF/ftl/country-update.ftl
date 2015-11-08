@@ -52,9 +52,18 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">名称</label>
 
-                        <div class="col-sm-9">
-                            <input name="name" type="text" size="30" class="col-xs-10 col-sm-5"
+                        <div class="col-md-9">
+                            <input name="name" type="text" size="30" class="form-control"
                                    placeholder="名称" value="${(country.name)!''}" title="名称"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">名称（英文）</label>
+
+                        <div class="col-md-9">
+                            <input name="nameEn" type="text" size="30" class="form-control"
+                                   placeholder="名称" value="${(country.nameEn)!''}" title="名称"/>
                         </div>
                     </div>
 
@@ -62,8 +71,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">ISO 3166-1, Alpha-2 code</label>
 
-                        <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="description" type="text" name="a2Code"
+                        <div class="col-md-9">
+                            <input class="form-control" id="description" type="text" name="a2Code"
                                    placeholder="ISO 3166-1, Alpha-2 code" value="${(country.a2Code)!''}"
                                    title="ISO 3166-1, Alpha-2 code"/>
                         </div>
@@ -74,7 +83,7 @@
                         <label class="col-sm-3 control-label no-padding-right">备注</label>
 
                         <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" id="description" type="text" name="memo"
+                            <input class="form-control" id="description" type="text" name="memo"
                                    placeholder="备注" title="备注" value="${(country.memo)!''}"/>
                         </div>
                     </div>

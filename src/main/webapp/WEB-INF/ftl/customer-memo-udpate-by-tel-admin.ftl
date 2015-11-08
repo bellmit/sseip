@@ -72,7 +72,7 @@
                         <div class="well">
                             <ul>
                                 <#list customer.memos as memo>
-                                    <li>${(memo.content?html)!''} -
+                                    <li><span class="blue">${(memo.content?html)!''}</span> -
                                         <span class="red">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
                                     </li>
                                 </#list>

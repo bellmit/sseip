@@ -83,8 +83,8 @@
                                         <#list countries as country>
                                             <option
                                                 <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
-                                                value="${country.id?c}">${country.a2Code}
-                                                - ${country.name}</option>
+                                                value="${country.id?c}">${country.a2Code} - ${country.name}
+                                                - ${country.nameEn}</option>
                                         </#list>
                                         </select></div>
                                         <div class="col-sm-2" style="padding: 0; margin: 0;"><select

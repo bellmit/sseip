@@ -9,9 +9,13 @@ public class CountryDaoTest {
         CountryDao d = (CountryDao) LocalAcUtil.getAc().getBean("countryDao");
         System.out.println(d);
 
+/*
         for (Country c : d.listAll()) {
             System.out.println(JSON.toJSONString(c, true));
         }
+*/
+        
+        System.out.println(JSON.toJSONString(d.listAll(), true));
 
 //        System.out.println(d.count());
 //        System.out.println(JSON.toJSONString(d.list(0L, (byte) 10), true));

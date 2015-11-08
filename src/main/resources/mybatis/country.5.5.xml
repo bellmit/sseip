@@ -11,10 +11,30 @@
         <id column="id" property="id"/>
         <result column="a2_code" property="a2Code"/>
         <result column="name" property="name"/>
+        <result column="name_en" property="nameEn"/>
     </resultMap>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="entity.id">
-        INSERT INTO country (updated,`name`, memo, a2_code) VALUE (now(),#{entity.name}, #{entity.memo}, #{entity.a2Code});
+        INSERT INTO country (updated,`name`, memo, a2_code, name_en) VALUE (now(),
+        <choose>
+            <when test="entity.name == ''">null</when>
+            <otherwise>#{entity.name}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.memo == ''">null</when>
+            <otherwise>#{entity.memo}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.a2Code == ''">null</when>
+            <otherwise>#{entity.a2Code}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.nameEn == ''">null</when>
+            <otherwise>#{entity.nameEn}</otherwise>
+        </choose>
     </insert>
     <delete id="remove" parameterType="Long">
         delete from country WHERE id=#{id}
@@ -25,46 +45,44 @@
         updated=now(),
         name =
         <choose>
-            <when test="entity.name!=null and entity.name!=''">#{entity.name}</when>
-            <otherwise>NULL</otherwise>
+            <when test="entity.name==''">NULL</when>
+            <otherwise>#{entity.name}</otherwise>
         </choose>
         ,
         memo =
         <choose>
-            <when test="entity.memo!=null and entity.memo!=''">#{entity.memo}</when>
-            <otherwise>NULL</otherwise>
+            <when test="entity.memo==''">NULL</when>
+            <otherwise>#{entity.memo}</otherwise>
         </choose>
         ,
         a2_code =
         <choose>
-            <when test="entity.a2Code!=null and entity.a2Code!=''">#{entity.a2Code}</when>
-            <otherwise>NULL</otherwise>
+            <when test="entity.a2Code==''">NULL</when>
+            <otherwise>#{entity.a2Code}</otherwise>
+        </choose>
+        ,
+        name_en=
+        <choose>
+            <when test="entity.nameEn == ''">null</when>
+            <otherwise>#{entity.nameEn}</otherwise>
         </choose>
         WHERE id = #{entity.id};
     </update>
     <select id="get" parameterType="Long" resultMap="Country">
 SELECT
-  id,
-  memo,
-  `name`,
-  a2_code,
-  updated
+*
 FROM country
 WHERE id = #{id};
     </select>
     <select id="exist" parameterType="Long" resultType="Boolean">
-SELECT
-  count(1)
-FROM country
-WHERE id = #{id};
+        SELECT
+        count(1)
+        FROM country
+        WHERE id = #{id};
     </select>
     <select id="list" resultMap="Country">
 SELECT
-  id,
-  memo,
-  `name`,
-  a2_code,
-  updated
+*
 FROM country
 ORDER BY `a2_code`
 LIMIT #{offset}, #{size};
@@ -76,11 +94,7 @@ FROM country;
     </select>
     <select id="listAll" resultMap="Country">
         SELECT
-        id,
-        memo,
-        `name`,
-        a2_code,
-        updated
+*
         FROM country
         ORDER BY `a2_code`
     </select>

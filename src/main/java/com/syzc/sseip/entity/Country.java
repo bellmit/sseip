@@ -7,6 +7,7 @@ public class Country implements Serializable {
     private static final long serialVersionUID = -5921564059019831771L;
     private Long id;
     private String name;
+    private String nameEn;
     private String a2Code;
     private String memo;
     private Date updated;
@@ -52,5 +53,13 @@ public class Country implements Serializable {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    public String getNameEn() {
+        return nameEn;
+    }
+
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 }

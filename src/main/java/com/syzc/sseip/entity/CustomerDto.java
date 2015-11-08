@@ -16,6 +16,8 @@ public class CustomerDto extends Customer implements Serializable {
 
     private List<Memo> memos = new LinkedList<>();
 
+    private RevisitSchedule revisitSchedule;
+
     public CustomerDto() {
     }
 
@@ -85,5 +87,13 @@ public class CustomerDto extends Customer implements Serializable {
 
     public void addMemo(Memo memo) {
         this.memos.add(memo);
+    }
+
+    public RevisitSchedule getRevisitSchedule() {
+        return revisitSchedule;
+    }
+
+    public void setRevisitSchedule(RevisitSchedule revisitSchedule) {
+        this.revisitSchedule = revisitSchedule;
     }
 }

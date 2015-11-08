@@ -86,7 +86,7 @@
                                                             <option
                                                                 <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
                                                                 value="${country.id?c}">${country.a2Code}
-                                                                - ${country.name}</option>
+                                                                - ${country.name} - ${country.nameEn}</option>
                                                         </#list>
                                                         </select>
                                                         </div>
@@ -267,7 +267,7 @@
         </div>
         <table id="customer-table-1"
                class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
-               style="word-wrap: break-word;table-layout:fixed">
+               style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
             <colgroup class="row">
             <#--1-->
             <#--<col style="width: 3.5em;">-->
@@ -439,9 +439,11 @@
             </#list>
             </select>
             </div>
-            <button type="submit" class="filters btn btn-xs col-md-2 text-right btn-warning"
-                    form="pass-on-form">转交给用户
-            </button>
+            <div class="col-md-2"><span class="btn-group btn-corner"><button type="submit"
+                                                                             class="filters btn btn-xs text-right btn-warning"
+                                                                             form="pass-on-form">转交给用户
+            </button></span></div>
+
             <form style="display: none;" id="pass-on-form" method="post"
                   action="${context.contextPath}/customer/pass"></form>
 <span class="col-md-7">

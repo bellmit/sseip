@@ -20,7 +20,8 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/country/list/1"><span class="fa fa-globe"></span>国家管理</a>
+            <li><span class="ace-icon fa fa-list"></span><a href="${context.contextPath}/country/list/1"><span
+                    class="fa fa-globe"></span>国家管理</a>
             </li>
             <li class="active">添加国家</li>
         </ul>
@@ -54,8 +55,17 @@
                         <label class="col-sm-3 control-label no-padding-right">名称</label>
 
                         <div class="col-sm-9">
-                            <input name="name" type="text" size="30" class="col-xs-10 col-sm-5"
+                            <input name="name" type="text" size="30" class="form-control"
                                    placeholder="名称" title="名称" value="${(form.name)!''}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">名称（英文）</label>
+
+                        <div class="col-sm-9">
+                            <input name="nameEn" type="text" size="30" class="form-control"
+                                   placeholder="名称" title="名称" value="${(form.nameEn)!''}"/>
                         </div>
                     </div>
 
@@ -64,8 +74,8 @@
                         <label class="col-sm-3 control-label no-padding-right">备注</label>
 
                         <div class="col-sm-9">
-                            <input name="memo" type="text" size="30" class="col-xs-10 col-sm-5"
-                                   placeholder="备注" title="备注" value="${(form.a2Code)!''}"/>
+                            <input name="memo" type="text" size="30" class="form-control"
+                                   placeholder="备注" title="备注" value="${(form.memo)!''}"/>
                         </div>
                     </div>
 
@@ -74,9 +84,9 @@
                         <label class="col-sm-3 control-label no-padding-right">ISO 3166-1, Alpha-2 code</label>
 
                         <div class="col-sm-9">
-                            <input name="a2Code" type="text" size="30" class="col-xs-10 col-sm-5"
-                                   placeholder="ISO 3166-1, Alpha-2 code" title="ISO 3166-1, Alpha-2 code"
-                                   value="${(form.memo)!''}"/>
+                            <input name="a2Code" type="text" size="30" class="form-control"
+                                   placeholder="ISO 3166-1 Alpha-2 code" title="ISO 3166-1 Alpha-2 code"
+                                   value="${(form.a2Code)!''}"/>
                         </div>
                     </div>
 

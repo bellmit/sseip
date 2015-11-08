@@ -20,7 +20,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/country/list/1"><span class="fa fa-globe"></span>国家管理</a></li>
+            <li><a href="${context.contextPath}/country/list/1"><span class="fa fa-globe"></span>国家一览</a></li>
             <li class="active">添加完成</li>
         </ul>
         <!-- /.breadcrumb -->
@@ -31,7 +31,7 @@
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="alert alert-success">国家添加完成。</div>
+                        <div class="alert alert-success">国家条目添加完成。</div>
                     </div>
                 </div>
                 <div class="row">
@@ -41,6 +41,8 @@
                             <dd>${country.id}</dd>
                             <dt>名称</dt>
                             <dd>${country.name}</dd>
+                            <dt>名称（英文）</dt>
+                            <dd>${country.nameEn}</dd>
                             <dt>ISO 3166-1, Alpha-2 code</dt>
                             <dd>${country.a2Code}</dd>
                         </dl>

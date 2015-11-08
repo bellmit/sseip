@@ -1,16 +1,18 @@
 package com.syzc.sseip.entity;
 
+import java.util.List;
+
 public class ExampleEntity {
-    private String name;
+    private List<ExampleSubEntity> es;
 
     public ExampleEntity() {
     }
 
-    public String getName() {
-        return name;
+    public List<ExampleSubEntity> getEs() {
+        return es;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEs(List<ExampleSubEntity> es) {
+        this.es = es;
     }
 }

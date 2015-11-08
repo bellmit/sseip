@@ -13,6 +13,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login/**"/>
+            <mvc:exclude-mapping path="/pasture/**"/>
             <!--<mvc:exclude-mapping path="/login"/>-->
             <!--<mvc:exclude-mapping path="/login/logout"/>-->
             <!--<mvc:exclude-mapping path="/login/register"/>-->

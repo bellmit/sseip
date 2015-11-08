@@ -64,11 +64,12 @@ CREATE TABLE user (
 
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
-  id      INT PRIMARY KEY AUTO_INCREMENT,
-  `name`  VARCHAR(64),
-  memo    TEXT(512),
-  updated DATETIME,
-  a2_code CHAR(4)
+  id        INT PRIMARY KEY AUTO_INCREMENT,
+  `name`    VARCHAR(64),
+  `name_en` VARCHAR(64),
+  memo      TEXT(512),
+  updated   DATETIME,
+  a2_code   CHAR(4)
 )
   ENGINE innodb
   CHAR SET 'utf8';
