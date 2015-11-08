@@ -37,7 +37,7 @@
 
                 <#if ['ADMIN']?seq_contains(loginUser.role)>
                     <li><a href="/customer/stats" target="mainFrame"><span
-                            class="menu-icon fa fa-line-chart light-red"></span><span class="menu-text">资源查询</span></a>
+                            class="menu-icon fa fa-line-chart light-red"></span><span class="menu-text">资源统计</span></a>
                     </li>
                 </#if>
             <#--

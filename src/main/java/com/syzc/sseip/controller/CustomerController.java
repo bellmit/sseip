@@ -423,7 +423,8 @@ public class CustomerController {
 
         model.addAttribute("customer", customer);
         // with info label, and links to user console, own role's customer list, or "/", and "add more", and show page with authorized edit links...
-        return "customer-added";
+//        return "customer-added";
+        return "redirect:/customer/filter-own/1";
     }
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.GET)
