@@ -35,6 +35,7 @@
             <when test="entity.nameEn == ''">null</when>
             <otherwise>#{entity.nameEn}</otherwise>
         </choose>
+        )
     </insert>
     <delete id="remove" parameterType="Long">
         delete from country WHERE id=#{id}
