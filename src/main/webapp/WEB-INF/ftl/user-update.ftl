@@ -172,7 +172,7 @@
 </div>
 <#include "/common/common_js.ftl">
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
-<script type="text/javascript" src="${context.contextPath}/resources/js/jquery-1.7.2.min.js"></script>
+<#--<script type="text/javascript" src="${context.contextPath}/resources/js/jquery-1.7.2.min.js"></script>-->
 <script type="text/javascript" src="${context.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
 <script type="text/javascript">
@@ -183,6 +183,5 @@
         });
     });
 </script>
-
 </body>
 </html>

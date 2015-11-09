@@ -464,7 +464,7 @@
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
                                                 <div class="wysiwyg-editor"
-                                                     id="contact-records-editor">${(customer.contactRecords)!''}</div>
+                                                     id="contact-records-editor">${(customer.contactRecords?html)!''}</div>
                                             </div>
 
                                         </div>
@@ -506,14 +506,14 @@
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
 
-<script type="text/javascript" src="${context.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
-<#--<script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>-->
+<script type="text/javascript" src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>
+<script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
 <script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
 
@@ -540,7 +540,14 @@
             onInitialize: true,
             animate: false
         });
-        $('#contact-records-editor').ace_wysiwyg();
+//        $('#contact-records-editor').ace_wysiwyg();
+        {
+            var t = $('#contact-records-editor').ace_wysiwyg();
+            t.on('paste', function (e) {
+                t.append('<br>');
+            });
+        }
+
         {
             var ff = function () {
                 //            $('#source-website').text($('#contact-records-editor').html());
@@ -571,7 +578,7 @@
             });
         }
         $('#customer-add-form').on('submit', function () {
-            $('#contact-records').val($('#contact-records-editor').cleanHtml());
+            $('#contact-records').val($('#contact-records-editor').cleanHtml() + '<br>');
         });
         $('.select2-ui').select2();
         $("#customer-add-form").cmsvalidate();
