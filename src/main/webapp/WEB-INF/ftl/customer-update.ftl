@@ -493,7 +493,7 @@
                                                             class='glyphicon glyphicon-pencil'></span></a>-->
                                                         <a class="btn btn-default" data-edit="clearformat"
                                                            title="Clear Formatting"
-                                                           onClick="$('#contact-records-editor').html($('#contact-records-editor').text());"><span
+                                                           onClick="$('#contact-records-editor').text($('#contact-records-editor').text());"><span
                                                                 class="glyphicon glyphicon-fire"></span></a>
                                                         <a class="btn btn-default"
                                                            data-edit="inserthtml &lt;span&gt;hello world&lt;/span&gt;"
@@ -603,17 +603,16 @@
             onInitialize: true,
             animate: false,
         });
-        $('#contact-records-editor').ace_wysiwyg();
         {
-//            $('#contact-records-editor').wysiwyg();
-            var t = $('#contact-records-editor').ace_wysiwyg();
+            var t = $('#contact-records-editor').wysiwyg();
+//            var t = $('#contact-records-editor').ace_wysiwyg();
             t.on('paste', function (e) {
 //                t.append('<br>');
 
                 var pastedHtml;
                 console.log(e);
                 if (window.clipboardData && window.clipboardData.getData) { // IE
-                    pastedHtml = window.clipboardData.getData('text/html');
+                    pastedHtml = window.clipboardData.getData('Html');
                     console.log('ie');
                     alert('ie');
                 } else {

@@ -462,6 +462,31 @@
                                         <div class="row">
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
+                                                <div class="btn-toolbar smaller-80" data-role="editor-toolbar"
+                                                     data-target="#contact-records-editor">
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-default" data-edit="undo"
+                                                           title="Undo (Ctrl/Cmd+Z)"><span
+                                                                class="ace-icon fa fa-undo"></span></a>
+                                                        <a class="btn btn-default" data-edit="redo"
+                                                           title="Redo (Ctrl/Cmd+Y)"><span class="fa fa-repeat"></span></a>
+                                                    <#--<a class="btn btn-default" data-edit="html"
+                                                       title="Clear Formatting"><span
+                                                            class='glyphicon glyphicon-pencil'></span></a>-->
+                                                        <a class="btn btn-default" data-edit="clearformat"
+                                                           title="Clear Formatting"
+                                                           onClick="$('#contact-records-editor').text($('#contact-records-editor').text());"><span
+                                                                class="glyphicon glyphicon-fire"></span></a>
+                                                        <a class="btn btn-default"
+                                                           data-edit="inserthtml &lt;span&gt;hello world&lt;/span&gt;"
+                                                           title="填充断行"><span class="fa fa-code"></span></a>
+                                                        <a class="btn btn-default" title="编辑源码"
+                                                           data-edit="html"><span
+                                                                class="glyphicon glyphicon-pencil"></span></a>
+                                                        <a class="btn btn-default" title="读取剪切板"
+                                                           id="readClipboard"><span class="fa fa-paste"></span></a>
+                                                    </div>
+                                                </div>
                                                 <div class="wysiwyg-editor"
                                                      id="contact-records-editor">${(customer.contactRecords?html)!''}</div>
                                             </div>
@@ -541,16 +566,17 @@
         });
 //        $('#contact-records-editor').ace_wysiwyg();
         {
-            $('#contact-records-editor').wysiwyg();
-            var t = $('#contact-records-editor').ace_wysiwyg({toolbar: {}});
+            var t = $('#contact-records-editor').wysiwyg();
+//            var t = $('#contact-records-editor').ace_wysiwyg();
             t.on('paste', function (e) {
 //                t.append('<br>');
 
                 var pastedHtml;
                 console.log(e);
                 if (window.clipboardData && window.clipboardData.getData) { // IE
-                    pastedHtml = window.clipboardData.getData('text/html');
+                    pastedHtml = window.clipboardData.getData('Html');
                     console.log('ie');
+                    alert('ie');
                 } else {
                     pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
                     console.log('non ie');
