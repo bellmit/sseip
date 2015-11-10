@@ -345,8 +345,7 @@
                                                     </option>
                                                     <option
                                                     <#if !((customer.emergency)??) || !(customer.emergency)>selected=""</#if>
-                                                    value="0">
-                                                        不紧急
+                                                    value="0">不紧急
                                                     </option>
                                                 </select>
                                             </div>
@@ -503,10 +502,10 @@
     </div>
 </div>
 <#include "/common/common_js.ftl">
-<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
+<#--<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>-->
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
 
-<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
+<#--<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>-->
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
 <#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
@@ -542,9 +541,24 @@
         });
 //        $('#contact-records-editor').ace_wysiwyg();
         {
-            var t = $('#contact-records-editor').ace_wysiwyg();
+            $('#contact-records-editor').wysiwyg();
+            var t = $('#contact-records-editor').ace_wysiwyg({toolbar: {}});
             t.on('paste', function (e) {
+//                t.append('<br>');
+
+                var pastedHtml;
+                console.log(e);
+                if (window.clipboardData && window.clipboardData.getData) { // IE
+                    pastedHtml = window.clipboardData.getData('text/html');
+                    console.log('ie');
+                } else {
+                    pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
+                    console.log('non ie');
+                }
+                t.append(pastedHtml);
                 t.append('<br>');
+                outer = e;
+                return false;
             });
         }
 
@@ -581,7 +595,7 @@
             $('#contact-records').val($('#contact-records-editor').cleanHtml() + '<br>');
         });
         $('.select2-ui').select2();
-        $("#customer-add-form").cmsvalidate();
+//        $("#customer-add-form").cmsvalidate();
     });
 </script>
 </body>

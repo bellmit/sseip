@@ -485,7 +485,7 @@
                                                     <div class="btn-group">
                                                         <a class="btn btn-default" data-edit="undo"
                                                            title="Undo (Ctrl/Cmd+Z)"><span
-                                                                class="fa fa-undo"></span></a>
+                                                                class="ace-icon fa fa-undo"></span></a>
                                                         <a class="btn btn-default" data-edit="redo"
                                                            title="Redo (Ctrl/Cmd+Y)"><span class="fa fa-repeat"></span></a>
                                                     <#--<a class="btn btn-default" data-edit="html"
@@ -497,18 +497,17 @@
                                                                 class="glyphicon glyphicon-fire"></span></a>
                                                         <a class="btn btn-default"
                                                            data-edit="inserthtml &lt;span&gt;hello world&lt;/span&gt;"
-                                                           title="填充HTML片"><span
-                                                                class="fa fa-code"></span></a>
-                                                        <a class="btn btn-default" title="Clear Formatting"
+                                                           title="填充断行"><span class="fa fa-code"></span></a>
+                                                        <a class="btn btn-default" title="编辑源码"
                                                            data-edit="html"><span
                                                                 class="glyphicon glyphicon-pencil"></span></a>
+                                                        <a class="btn btn-default" title="读取剪切板"
+                                                           id="readClipboard"><span class="fa fa-paste"></span></a>
                                                     </div>
-
                                                 </div>
                                                 <div class="wysiwyg-editor" id="contact-records-editor"
                                                      style="overflow-y:scroll;"
                                                      data-placeholder="联系记录">${(customer.contactRecords)!''}</div>
-
 
                                             <#--<div class="wysiwyg-editor"
                                                  id="contact-records-editor"
@@ -566,10 +565,10 @@
     </div>
 </div>
 <#include "/common/common_js.ftl">
-<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>
+<#--<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>-->
 <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
 
-<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
+<#--<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>-->
 
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
 <#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
@@ -604,12 +603,27 @@
             onInitialize: true,
             animate: false,
         });
-//        $('#contact-records-editor').ace_wysiwyg();
+        $('#contact-records-editor').ace_wysiwyg();
         {
-            $('#contact-records-editor').wysiwyg({toolbar: {}});
-            var t = $('#contact-records-editor').ace_wysiwyg({toolbar: {}});
+//            $('#contact-records-editor').wysiwyg();
+            var t = $('#contact-records-editor').ace_wysiwyg();
             t.on('paste', function (e) {
+//                t.append('<br>');
+
+                var pastedHtml;
+                console.log(e);
+                if (window.clipboardData && window.clipboardData.getData) { // IE
+                    pastedHtml = window.clipboardData.getData('text/html');
+                    console.log('ie');
+                    alert('ie');
+                } else {
+                    pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
+                    console.log('non ie');
+                }
+                t.append(pastedHtml);
                 t.append('<br>');
+                outer = e;
+                return false;
             });
         }
 
@@ -664,8 +678,24 @@
 //            alert('collapse!');
 //        });
 
-        $("#customer-update-form").cmsvalidate();
+//        $("#customer-update-form").cmsvalidate();
+
+        /*
+                {
+                    var t = $('#contact-records-editor');
+                    $('#readClipboard').click(function (e) {
+                        var pastedHtml;
+                        if (window.clipboardData && window.clipboardData.getData) { // IE
+                            pastedHtml = window.clipboardData.getData('text/html');
+                        } else {
+                            pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
+                        }
+                        t.append(pastedHtml);
+                    });
+                }
+        */
     });
+    var outer;
 </script>
 </body>
 </html>

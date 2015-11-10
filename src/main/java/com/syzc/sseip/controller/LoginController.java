@@ -100,7 +100,8 @@ public class LoginController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "/logout";
+//        return "/logout";
+        return "redirect:/login";
     }
 
     @RequestMapping("/captcha")
