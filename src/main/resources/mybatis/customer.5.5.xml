@@ -465,7 +465,7 @@
         *
         FROM
         customer
-        order by updated desc
+        order by added desc
         LIMIT #{offset}, #{size}
     </select>
     <select id="listByFilter" resultMap="CustomerDto">
@@ -517,7 +517,7 @@
                 and added&lt;=#{till}
             </if>
         </where>
-        order by updated desc
+        order by added desc
         LIMIT #{offset}, #{size, javaType=Byte}
     </select>
     <select id="countByFilter" resultType="Long">
@@ -580,7 +580,7 @@
         FROM
         customer
         WHERE user_id=#{userId}
-        order by updated desc
+        order by added desc
         LIMIT #{offset}, #{size}
     </select>
     <select id="countByUser" parameterType="Long" resultType="Long">
@@ -592,7 +592,7 @@
         FROM
         customer
         WHERE group_id=#{groupId}
-        order by updated desc
+        order by added desc
         LIMIT #{offset}, #{size}
     </select>
     <select id="countByGroup" parameterType="Long" resultType="Long">

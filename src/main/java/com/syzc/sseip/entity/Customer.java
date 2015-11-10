@@ -53,6 +53,8 @@ public class Customer implements Serializable {
 
     private CallState callState;
 
+    private Date revisitDate;
+
     /**
      * 来源网址
      */
@@ -309,5 +311,13 @@ public class Customer implements Serializable {
 
     public void setCallState(CallState callState) {
         this.callState = callState;
+    }
+
+    public Date getRevisitDate() {
+        return revisitDate;
+    }
+
+    public void setRevisitDate(Date revisitDate) {
+        this.revisitDate = revisitDate;
     }
 }

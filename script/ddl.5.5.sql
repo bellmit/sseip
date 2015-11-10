@@ -154,6 +154,7 @@ CREATE TABLE customer (
 
   added              DATETIME,
   updated            DATETIME,
+  revisitDate        DATETIME,
 
   memo               TEXT,
   contact_records    TEXT,

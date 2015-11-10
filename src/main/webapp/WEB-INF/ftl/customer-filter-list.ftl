@@ -245,13 +245,14 @@
                 class="fa fa-refresh"></span></a></span></span> <span
                 class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
         </div>
-        <table id="sample-table-1"
-               class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
+        <table class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
                style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
             <colgroup class="row">
             <#--1-->
             <#--<col style="width: 5em;">-->
                 <col style="width: 10em;">
+                <col style="width:5em;">
+                <col style="width:3em;">
                 <col style="width: 8em;">
                 <col class="">
             <#--4    -->
@@ -271,6 +272,8 @@
             <tr>
             <#--<th class="text-right">ID</th>-->
                 <th class="">姓名</th>
+                <th class="">通话</th>
+                <th class="">年龄</th>
                 <th class="">国家</th>
                 <th class="">症状</th>
                 <th class="" title="是否住院">住院</th>
@@ -307,6 +310,8 @@
                      data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                      style="font-size: 7px"></div>-->
                 </td>
+                <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
+                <td title="${(customer.age)!''}">${(customer.age)!''}</td>
                 <td class=""<#if customer.patientCountry??>
                     title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 7>${customer.patientCountry.name?substring(0,6)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
                 <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>

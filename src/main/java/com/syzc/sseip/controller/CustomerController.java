@@ -420,11 +420,17 @@ public class CustomerController {
         //should complete the operation. if failed, some exception should be thrown, about customed "CustomerAddFailException"
         customer = customerService.add(customer);
 //        System.out.println(JSON.toJSONString(customer, true));
+        if (customer == null) {
+            throw HosException.create("添加出错", Level.DEBUG);
+        } else {
+            model.addAttribute("success", "");
+            return "redirect:/customer/add";
+        }
 
-        model.addAttribute("customer", customer);
+//        model.addAttribute("customer", customer);
         // with info label, and links to user console, own role's customer list, or "/", and "add more", and show page with authorized edit links...
 //        return "customer-added";
-        return "redirect:/customer/filter-own/1";
+//        return "redirect:/customer/filter-own/1";
     }
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.GET)
@@ -509,19 +515,24 @@ public class CustomerController {
 //            System.out.println("contact records null");
         }
 
-        if (customerService.update(customer)) {
-            model.addAttribute("success", "更新完成");
-        } else {
-            model.addAttribute("error", "更新失败");
-        }
-
         if (memoItem != null && memoItem.length() > 0 && !memoItem.matches("\\s*")) {
             if (customerService.addMemo(memoItem, id, loginUser.getId())) {
-                model.addAttribute("success", "备注添加完成");
+//                model.addAttribute("success", "备注添加完成");
             } else {
-                model.addAttribute("error", "备注添加失败");
+//                model.addAttribute("error", "备注添加失败");
             }
         }
+
+        if (customerService.update(customer)) {
+//            model.addAttribute("success", "更新完成");
+            if (referer == null || referer.equals("")) {
+                referer = "/customer/filter-own/1";
+            }
+            return "redirect:" + referer;
+        } else {
+//            model.addAttribute("error", "更新失败");
+        }
+
         customer = customerService.get(id);
 
         model.addAttribute("referer", referer);
@@ -534,6 +545,8 @@ public class CustomerController {
 
         model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("customer", customer);
+
+//        return "customer-update";
         return "customer-update";
     }
 

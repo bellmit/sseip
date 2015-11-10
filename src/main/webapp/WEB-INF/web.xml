@@ -5,6 +5,10 @@
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0"
          metadata-complete="true">
+    <session-config>
+        <session-timeout>750</session-timeout>
+    </session-config>
+
 
     <context-param>
         <param-name>contextConfigLocation</param-name>

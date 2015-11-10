@@ -31,9 +31,9 @@
 
     <div class="page-content">
         <div class="row">
-        <#if success??>
+        <#if (RequestParameters.success)??>
             <div class="row">
-                <div class="col-sm-offset-3 col-sm-4 alert alert-success">${success}</div>
+                <div class="col-sm-offset-3 col-sm-4 alert alert-success">执行完成</div>
             </div>
         </#if>
         <#if error??>

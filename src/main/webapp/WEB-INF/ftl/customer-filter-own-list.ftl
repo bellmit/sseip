@@ -272,6 +272,8 @@
             <#--1-->
             <#--<col style="width: 3.5em;">-->
                 <col style="width: 13.5em;">
+                <col style="width:5em;">
+                <col style="width:3em;">
                 <col style="width: 8em;">
                 <col class="">
             <#--5    -->
@@ -297,6 +299,8 @@
             <tr>
             <#--<th class="text-right"><input type="checkbox" id="check-all"></th>-->
                 <th class=""><input type="checkbox" id="check-all">姓名</th>
+                <th class="">通话</th>
+                <th class="">年龄</th>
                 <th class="">国家</th>
                 <th class="">症状</th>
                 <th class="" title="是否住院">住院</th>
@@ -339,6 +343,8 @@
                      data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                      style="font-size: 7px"></div>-->
                 </td>
+                <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
+                <td title="${(customer.age)!''}">${(customer.age)!''}</td>
                 <td class=""<#if customer.patientCountry??>
                     title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 7>${customer.patientCountry.name?substring(0,6)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
                 <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
