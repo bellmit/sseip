@@ -22,6 +22,8 @@
         <result column="if_report" property="ifReport"/>
         <result column="source_website" property="sourceWebsite"/>
         <result column="call_state" property="callState"/>
+        <result column="email_sent" property="emailSent"/>
+        <result column="revisit_date" property="revisitDate"/>
     </resultMap>
     <resultMap id="CustomerDto" type="com.syzc.sseip.entity.CustomerDto" extends="Customer">
         <association property="liaisonCountry" column="liaison_country_id" select="getCountry"/>
@@ -91,7 +93,9 @@
         owner_user_id,
         group_id,
         if_report,
-        source_website
+        source_website,
+        email_sent,
+        revisit_date
         )
         VALUES
         (
@@ -168,6 +172,9 @@
             <when test="entity.sourceWebsite == ''">NULL</when>
             <otherwise>#{entity.sourceWebsite}</otherwise>
         </choose>
+        ,
+        #{entity.emailSent},
+        #{entiry.revisitDate}
         );
     </insert>
     <insert id="addAll">
@@ -197,7 +204,9 @@
         owner_user_id,
         group_id,
         if_report,
-        source_website
+        source_website,
+        email_sent,
+        revisit_date
         )
         VALUES
         <foreach collection="entities" item="entity" separator=",">
@@ -227,7 +236,9 @@
             #{entity.userId},
             #{entity.groupId},
             #{entity.ifReport},
-            #{entity.sourceWebsite}
+            #{entity.sourceWebsite},
+            #{entity.emailSent},
+            #{entiry.revisitDate}
             )
         </foreach>
     </insert>
@@ -258,7 +269,9 @@
         group_id,
         added,
         if_report,
-        source_website
+        source_website,
+        email_sent,
+        revisit_date
         )
         VALUES
         <foreach collection="entities" item="entity" separator=",">
@@ -288,7 +301,9 @@
             #{entity.groupId},
             #{entity.added},
             #{entity.ifReport},
-            #{entity.sourceWebsite}
+            #{entity.sourceWebsite},
+            #{entity.emailSent},
+            #{entiry.revisitDate}
             )
         </foreach>
     </insert>
@@ -451,6 +466,9 @@
             <when test="entity.ifReport!=null">#{entity.ifReport}</when>
             <otherwise>NULL</otherwise>
         </choose>
+        ,
+        email_sent=#{entity.emailSent},
+        revisit_date=#{entiry.revisitDate}
         WHERE id = #{entity.id};
     </update>
     <select id="get" parameterType="Long" resultMap="CustomerDtoWithMemo">

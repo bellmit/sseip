@@ -256,6 +256,7 @@
             <#--1-->
             <#--<col style="width: 5em;">-->
                 <col style="width: 10em;">
+                <col style="width:3em;">
                 <col style="width:5em;">
                 <col style="width:3em;">
                 <col style="width: 8em;">
@@ -277,6 +278,7 @@
             <tr>
             <#--<th class="text-right">ID</th>-->
                 <th class="">姓名</th>
+                <th class="">发邮</th>
                 <th class="">通话</th>
                 <th class="">年龄</th>
                 <th class="">国家</th>
@@ -315,6 +317,9 @@
                      data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                      style="font-size: 7px"></div>-->
                 </td>
+                <td class="center"
+                    title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
+                    <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
                 <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
                 <td title="${(customer.age)!''}">${(customer.age)!''}</td>
                 <td class=""<#if customer.patientCountry??>
@@ -414,9 +419,10 @@
 </div>
 
 <#include "/common/common_js.ftl">
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>-->
+<#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>-->
 <script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
@@ -424,7 +430,6 @@
 
 <script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
 
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
 <script>
     var l;

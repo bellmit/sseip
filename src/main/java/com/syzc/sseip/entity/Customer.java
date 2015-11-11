@@ -60,6 +60,8 @@ public class Customer implements Serializable {
      */
     private String sourceWebsite;
 
+    private Boolean emailSent;
+
     //    private Date calledTime;
 
     public Customer() {
@@ -319,5 +321,13 @@ public class Customer implements Serializable {
 
     public void setRevisitDate(Date revisitDate) {
         this.revisitDate = revisitDate;
+    }
+
+    public Boolean getEmailSent() {
+        return emailSent;
+    }
+
+    public void setEmailSent(Boolean emailSent) {
+        this.emailSent = emailSent;
     }
 }

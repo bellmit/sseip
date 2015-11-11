@@ -390,6 +390,29 @@
                                     </div>
 
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                        <#--<label class="col-md-4 control-label no-padding-right">紧急</label>-->
+
+                                            <div class="col-md-12">
+                                                <select name="emailSent" class="form-control" title="是否发送了邮件">
+                                                    <option
+                                                    <#if (customer.emailSent)?? && customer.emailSent>selected=""</#if>
+                                                    value="1">邮件已发送
+                                                    </option>
+                                                    <option
+                                                    <#if !((customer.emailSent)??) || !(customer.emailSent)>selected=""</#if>
+                                                    value="0">邮件未发送
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <#--第四行结束-->
+
                             </div>
                         <#--第一列结束-->
                         </div>

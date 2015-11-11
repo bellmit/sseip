@@ -276,6 +276,7 @@
             <#--1-->
             <#--<col style="width: 3.5em;">-->
                 <col style="width: 13.5em;">
+                <col style="width:3em;">
                 <col style="width:5em;">
                 <col style="width:3em;">
                 <col style="width: 8em;">
@@ -303,6 +304,7 @@
             <tr>
             <#--<th class="text-right"><input type="checkbox" id="check-all"></th>-->
                 <th class=""><input type="checkbox" id="check-all">姓名</th>
+                <th class="">发邮</th>
                 <th class="">通话</th>
                 <th class="">年龄</th>
                 <th class="">国家</th>
@@ -347,6 +349,9 @@
                      data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                      style="font-size: 7px"></div>-->
                 </td>
+                <td class="center"
+                    title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
+                    <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
                 <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
                 <td title="${(customer.age)!''}">${(customer.age)!''}</td>
                 <td class=""<#if customer.patientCountry??>
@@ -355,7 +360,8 @@
                 <td class=""
                     title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 24>${customer.symptom?substring(0,24)+'...'}<#else>${customer.symptom}</#if><#else>
                 <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-                <td class="center" title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
+                <td class="center"
+                    title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
                     <#switch customer.hospitalization>
                         <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
                             <#break>

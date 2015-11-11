@@ -2,6 +2,11 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
+
+    <!--daterangepicker-->
+    <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
+
     <title>顾客资料编辑</title>
     <style>
         .form-group {
@@ -409,6 +414,80 @@
                                     </div>
 
                                 </div>
+                            <#--第三行结束-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                        <#--<label class="col-md-2 control-label no-padding-right"></label>-->
+
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-sm btn-default"
+                                                                type="button">
+                                                            <span class="ace-icon fa fa-calendar bigger-110"></span>Go!
+                                                        </button>
+                                                    </span>
+
+                                                    <div class="input-icon input-icon-right ">
+                                                        <input type="date" class="form-control"/>
+                                                    <#--class="form-control input-mask-date"-->
+                                                    <#--<input type="date" name="revisitDate" class="form-control"
+                                                           placeholder="回访日期"/>-->
+                                                        <span class="ace-icon fa fa-calendar green"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <#--<div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default"
+                                                            type="button">
+                                                        <span class="ace-icon fa fa-calendar bigger-110"></span>Go!
+                                                    </button>
+                                                </span>
+                                                <input class="form-control input-mask-date" type="date"/>
+                                            </div>
+                                        </div>-->
+
+                                        <#--<div class="col-md-12">
+                                            <div class="input-icon input-icon-right ">
+                                                <input type="date" name="revisitDate" class="form-control"
+                                                       placeholder="回访日期"/>
+                                                <span class="ace-icon fa fa-calendar green"></span>
+                                            </div>
+                                        </div>-->
+
+                                        <#--<div class="col-md-12">
+                                            <input name="revisitDate" type="date" class="form-control"
+                                                   placeholder="回访日期" value="${(customer.revisitDate)!''}"
+                                                   title="回访日期"/>
+                                        </div>-->
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                        <#--<label class="col-md-4 control-label no-padding-right">紧急</label>-->
+
+                                            <div class="col-md-12">
+                                                <select name="emailSent" class="form-control" title="是否发送了邮件">
+                                                    <option
+                                                    <#if (customer.emailSent)?? && customer.emailSent>selected=""</#if>
+                                                    value="1">邮件已发送
+                                                    </option>
+                                                    <option
+                                                    <#if !((customer.emailSent)??) || !(customer.emailSent)>selected=""</#if>
+                                                    value="0">邮件未发送
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <#--第四行结束-->
+
                             </div>
                         <#--第一列结束-->
                         </div>
@@ -566,18 +645,24 @@
 </div>
 <#include "/common/common_js.ftl">
 <#--<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>-->
-<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
 
 <#--<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>-->
 
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
 <#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
-<script type="text/javascript" src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>
+<#--<script src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>-->
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
 <script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>
+
+<!--daterangepicker-->
+<script src="${context.contextPath}/resources/self/moment.min.js"></script>
+<script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+
 <script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
+
 
 <script type="text/javascript">
     $(function () {

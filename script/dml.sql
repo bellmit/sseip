@@ -24,3 +24,7 @@ LIMIT #{offset}, #{size};
 
 ALTER TABLE customer MODIFY COLUMN source_website VARCHAR(2000);
 
+ALTER TABLE customer MODIFY COLUMN contact_records LONGTEXT;
+
+ALTER TABLE customer ADD COLUMN revisit_date DATETIME;
+

@@ -6,7 +6,7 @@
          version="3.0"
          metadata-complete="true">
     <session-config>
-        <session-timeout>750</session-timeout>
+        <session-timeout>420</session-timeout>
     </session-config>
 
 

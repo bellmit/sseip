@@ -115,19 +115,6 @@ CREATE TABLE user_logon (
   ENGINE innodb
   CHAR SET 'utf8';
 
-DROP TABLE IF EXISTS memo;
-CREATE TABLE memo (
-  id          INT PRIMARY KEY AUTO_INCREMENT,
-  content     TEXT,
-  added       DATETIME,
-  customer_id INT,
-  user_id     INT,
-  CONSTRAINT fk_memo_customer_id_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id),
-  CONSTRAINT fk_memo_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
-)
-  ENGINE innodb
-  CHAR SET 'utf8';
-
 DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
   id                 INT PRIMARY KEY AUTO_INCREMENT,
@@ -154,10 +141,10 @@ CREATE TABLE customer (
 
   added              DATETIME,
   updated            DATETIME,
-  revisitDate        DATETIME,
+  revisit_date       DATETIME,
 
   memo               TEXT,
-  contact_records    TEXT,
+  contact_records    LONGTEXT,
 
   discard            TINYINT(1)      DEFAULT FALSE,
 
@@ -173,6 +160,8 @@ CREATE TABLE customer (
   call_state         TINYINT(1),
   weight             TINYINT(1),
 
+  email_sent         TINYINT(1),
+
   CONSTRAINT fk_customer_liaison_country_id_country_id FOREIGN KEY (liaison_country_id) REFERENCES country (id)
     ON DELETE SET NULL,
   CONSTRAINT fk_customer_patient_country_id_country_id FOREIGN KEY (patient_country_id) REFERENCES country (id)
@@ -185,6 +174,19 @@ CREATE TABLE customer (
     ON DELETE SET NULL,
   CONSTRAINT fk_customer_group_id_group_id FOREIGN KEY (group_id) REFERENCES `group` (id)
     ON DELETE SET NULL
+)
+  ENGINE innodb
+  CHAR SET 'utf8';
+
+DROP TABLE IF EXISTS memo;
+CREATE TABLE memo (
+  id          INT PRIMARY KEY AUTO_INCREMENT,
+  content     TEXT,
+  added       DATETIME,
+  customer_id INT,
+  user_id     INT,
+  CONSTRAINT fk_memo_customer_id_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id),
+  CONSTRAINT fk_memo_user_id_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 )
   ENGINE innodb
   CHAR SET 'utf8';
