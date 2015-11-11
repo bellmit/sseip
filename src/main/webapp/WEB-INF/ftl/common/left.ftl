@@ -1,5 +1,5 @@
 <!-- #section:basics/sidebar -->
-<div id="sidebar" class="sidebar responsive">
+<div id="sidebar" class="sidebar responsive" style="width: 125px;">
     <ul class="nav nav-list">
     <#--<li class="active">
         <a href="${context.contextPath}/">

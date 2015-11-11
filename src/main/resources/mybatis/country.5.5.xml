@@ -5,7 +5,7 @@
     <!--<cache type="org.mybatis.caches.memcached.MemcachedCache"/>-->
     <!--<cache type="org.mybatis.caches.redis.RedisCache"/>-->
 
-    <cache-ref namespace="com.syzc.sseip.dao.CustomerDao"/>
+    <!--<cache-ref namespace="com.syzc.sseip.dao.CustomerDao"/>-->
 
     <resultMap id="Country" type="com.syzc.sseip.entity.Country">
         <id column="id" property="id"/>

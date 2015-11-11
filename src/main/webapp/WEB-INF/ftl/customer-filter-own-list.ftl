@@ -14,6 +14,10 @@
             padding-left: 5px;
             padding-right: 5px;
         }
+
+        #customer-table-1 td {
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -277,15 +281,15 @@
                 <col style="width: 8em;">
                 <col class="">
             <#--5    -->
-                <col style="width: 4em;">
+                <col style="width: 3em;">
                 <col style="width: 10em;">
                 <col style="width: 10em;">
             <#--<col >--> <#--style="width: 11em;"--> <#--备注-->
                 <col style="width: 3em;">
             <#--9-->
-                <col style="width: 5.3em;">
-                <col style="width: 10.4em;">
-                <col style="width: 10.4em;">
+                <col style="width: 4.3em;">
+                <col style="width: 9.3em;">
+                <col style="width: 9.3em;">
                 <col style="width: 7em;">
             <#--<col class="col-sm-1">
             <col class="col-sm-2">

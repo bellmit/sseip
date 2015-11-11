@@ -15,7 +15,7 @@
         }
     </script>
 <#include "/common/left.ftl">
-    <div class="main-content">
+    <div class="main-content" style="margin-left:125px;">
     <#if ['ADMIN','TELADMIN']?seq_contains(loginUser.role)>
         <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter/1"
                 style="margin:0 auto;width:100%;height:100%;"></iframe>
