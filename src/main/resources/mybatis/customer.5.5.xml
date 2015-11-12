@@ -486,6 +486,50 @@
         order by added desc
         LIMIT #{offset}, #{size}
     </select>
+    <select id="listRevisitTodayByUser" resultMap="CustomerDto">
+        select * from customer where user_id=#{userId} and revisit_date = current_date
+        order by revisit_date desc
+        limit #{offset},#{size}
+    </select>
+    <select id="countRevisitTodayByUser" resultType="Long">
+        select count(1) from customer where user_id=#{userId} and revisit_date = current_date
+    </select>
+    <select id="listRevisitByUserDate" resultMap="CustomerDto">
+        select * from customer
+        <where>
+            <if test="userId != null">
+                user_id=#{userId}
+            </if>
+            <if test="start">
+                and revisit_date &gt;= #{start}
+            </if>
+            <if test="end">
+                and revisit_date &lt;= #{end}
+            </if>
+            <if test="start == null and end == null">
+                and not isnull(revisit_date)
+            </if>
+        </where>
+        order by revisit_date desc
+        limit #{offset},#{size}
+    </select>
+    <select id="countRevisitByUserDate" resultType="Long">
+        select count(1) from customer
+        <where>
+            <if test="userId != null">
+                user_id=#{userId}
+            </if>
+            <if test="start">
+                and revisit_date &gt;= #{start}
+            </if>
+            <if test="end">
+                and revisit_date &lt;= #{end}
+            </if>
+            <if test="start == null and end == null">
+                and not isnull(revisit_date)
+            </if>
+        </where>
+    </select>
     <select id="listByFilter" resultMap="CustomerDto">
         SELECT
         *
@@ -537,12 +581,6 @@
         </where>
         order by added desc
         LIMIT #{offset}, #{size, javaType=Byte}
-    </select>
-    <select id="getRevisitTodayListByUser" resultMap="CustomerDto">
-        select * from customer where user_id=#{userId} and revisit_date = current_date limit #{offset},#{size}
-    </select>
-    <select id="countRevisitTodayByUser" resultMap="CustomerDto">
-        select count(1) from customer where user_id=#{userId} and revisit_date = current_date
     </select>
     <select id="countByFilter" resultType="Long">
         SELECT

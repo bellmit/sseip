@@ -53,6 +53,12 @@
                     <li><a href="${context.contextPath}/customer/add" target="mainFrame"><span
                             class="menu-icon fa fa-file-o light-grey"></span><span class="menu-text">添加资源</span></a>
                     </li>
+                    <li><a href="${context.contextPath}/customer/revisit/today" target="mainFrame"><span
+                            class="menu-icon fa fa-envelope-o"></span><span class="menu-text">今日回访</span></a></li>
+                    <li><a href="${context.contextPath}/customer/revisit/week" target="mainFrame"><span
+                            class="menu-icon fa fa-envelope-o"></span><span class="menu-text">本周回访</span></a></li>
+                    <li><a href="${context.contextPath}/customer/revisit/month" target="mainFrame"><span
+                            class="menu-icon fa fa-envelope-o"></span><span class="menu-text">本月回访</span></a></li>
                 </#if>
             </ul>
         </#if>

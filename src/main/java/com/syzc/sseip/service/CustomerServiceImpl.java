@@ -19,6 +19,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -134,6 +135,56 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
         dto.setInHospitalCount(customerDao.statAllInHospitalCount());
         dto.setReportedCount(customerDao.statAllReportedCount());
         return dto;
+    }
+
+    @Override
+    public Page<Customer> pageRevisitTodayByUser(Long userId, Long pageNo, Integer size) {
+        Long count = customerDao.countRevisitTodayByUser(userId);
+        Page<Customer> page = PageUtil.make(pageNo, (long) size, count);
+        page.setList(customerDao.listRevisitTodayByUser(userId, page.getRowOffset(), ((int) (page.getPageSize()))));
+        return page;
+    }
+
+    @Override
+    public Page<Customer> pageRevisitWeekByUser(Long userId, Long pageNo, Integer size) {
+        Date date = new Date();
+        /*
+        一周内, i = (8 - i) % 7;
+         */
+        Calendar c = Calendar.getInstance();
+//        c.add(Calendar.DAY_OF_YEAR, (8 - Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) % 7);
+        c.setFirstDayOfWeek(Calendar.MONDAY);
+        c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+
+        Long count = customerDao.countRevisitByUserDate(userId, date, c.getTime());
+        Page<Customer> page = PageUtil.make(pageNo, (long) size, count);
+        page.setList(customerDao.listRevisitByUserDate(userId, date, c.getTime(), page.getRowOffset(), ((int) (page.getPageSize()))));
+        return page;
+    }
+
+    @Override
+    public Page<Customer> pageRevisitMonthByUser(Long userId, Long pageNo, Integer size) {
+        Date date = new Date();
+        /*
+        计算月末
+         */
+        Calendar c;
+        c = Calendar.getInstance();
+        c.add(Calendar.MONTH, 1);
+        c.set(Calendar.DAY_OF_MONTH, 0);
+
+        Long count = customerDao.countRevisitByUserDate(userId, date, c.getTime());
+        Page<Customer> page = PageUtil.make(pageNo, (long) size, count);
+        page.setList(customerDao.listRevisitByUserDate(userId, date, c.getTime(), page.getRowOffset(), ((int) (page.getPageSize()))));
+        return page;
+    }
+
+    @Override
+    public Page<Customer> pageRevisitByUserDate(Long userId, Date start, Date end, Long pageNo, Integer size) {
+        Long count = customerDao.countRevisitByUserDate(userId, start, end);
+        Page<Customer> page = PageUtil.make(pageNo, (long) size, count);
+        page.setList(customerDao.listRevisitByUserDate(userId, start, end, page.getRowOffset(), ((int) (page.getPageSize()))));
+        return page;
     }
 
     public static void main(String[] args) {

@@ -53,13 +53,13 @@ public interface CustomerDao extends BaseDao<Customer> {
                        @Param("ifReport") Boolean ifReport
     );
 
-    List<Customer> getRevisitTodayListByUser(@Param("userId") Long userId, @Param("offset") Long offset, @Param("size") Integer size);
+    List<Customer> listRevisitTodayByUser(@Param("userId") Long userId, @Param("offset") Long offset, @Param("size") Integer size);
 
-    List<Customer> countRevisitTodayByUser(@Param("userId") Long userId);
+    Long countRevisitTodayByUser(@Param("userId") Long userId);
 
-    List<Customer> getRevisitListByUserDate(@Param("userId") Long userId, @Param("start") Date start, @Param("end") Date end, @Param("offset") Long offset, @Param("size") Integer size);
+    List<Customer> listRevisitByUserDate(@Param("userId") Long userId, @Param("start") Date start, @Param("end") Date end, @Param("offset") Long offset, @Param("size") Integer size);
 
-    List<Customer> countRevisitListByUserDate(@Param("userId") Long userId, @Param("start") Date start, @Param("end") Date end);
+    Long countRevisitByUserDate(@Param("userId") Long userId, @Param("start") Date start, @Param("end") Date end);
 
     /*
         List<Customer> listByFilter(@Param("sex") Sex sex, @Param("website") Website website,

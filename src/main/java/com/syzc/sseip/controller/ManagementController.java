@@ -1,10 +1,10 @@
 package com.syzc.sseip.controller;
 
 import com.syzc.sseip.entity.User;
+import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -25,17 +25,24 @@ public class ManagementController {
         return "/index";
     }
 
+    @RequestMapping(value = "/default")
+    public String defaultPage(HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+        if (user.getRole() == Role.ADMIN || user.getRole() == Role.TELADMIN) {
+            return "redirect:/customer/filter/1";
+        } else if (user.getRole() == Role.EMPLOYEE) {
+            return "redirect:/customer/filter-own/1";
+        }
+        return "redirect:about:blank";
+    }
+
     @RequestMapping(value = "/")
     public String indexRoot() {
         return "redirect:/welcome";
     }
 
     @RequestMapping(value = "profile")
-    public String profile(Model model, HttpSession session) {
-        User loginUser = (User) session.getAttribute("loginUser");
-        Long logonId = loginUser.getId();
-        User user = userService.get(logonId);
-        model.addAttribute("user", user);
+    public String profile() {
         return "/self-profile";
     }
 }

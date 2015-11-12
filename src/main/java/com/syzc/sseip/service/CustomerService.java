@@ -35,4 +35,12 @@ public interface CustomerService extends BaseService<Customer, CustomerDao> {
     Boolean updateTelAuditDto(TelAuditDto telAuditDto);
 
     CustomerStatDto statAll();
+
+    Page<Customer> pageRevisitTodayByUser(Long userId, Long pageNo, Integer size);
+
+    Page<Customer> pageRevisitWeekByUser(Long userId, Long pageNo, Integer size);
+
+    Page<Customer> pageRevisitMonthByUser(Long userId, Long pageNo, Integer size);
+
+    Page<Customer> pageRevisitByUserDate(Long userId, Date start, Date end, Long pageNo, Integer size);
 }

@@ -295,9 +295,30 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/revisit/today")
-    public String revisitTodayList(@RequestParam(required = false, defaultValue = "1", value = "page") Long pageNo) {
-        
+    public String revisitTodayList(@RequestParam(required = false, defaultValue = "1", value = "page") Long pageNo, HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loginUserId");
+        Page<Customer> page = customerService.pageRevisitTodayByUser(userId, pageNo, (int) pageSize);
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/customer/revisit/today");
         return "customer-revisit-today-list";
+    }
+
+    @RequestMapping(value = "/revisit/week")
+    public String revisitWeekList(@RequestParam(required = false, defaultValue = "1", value = "page") Long pageNo, HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loginUserId");
+        Page<Customer> page = customerService.pageRevisitWeekByUser(userId, pageNo, (int) pageSize);
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/customer/revisit/week");
+        return "customer-revisit-week-list";
+    }
+
+    @RequestMapping(value = "/revisit/month")
+    public String revisitMonthList(@RequestParam(required = false, defaultValue = "1", value = "page") Long pageNo, HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loginUserId");
+        Page<Customer> page = customerService.pageRevisitMonthByUser(userId, pageNo, (int) pageSize);
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/customer/revisit/month");
+        return "customer-revisit-month-list";
     }
 
     @RequestMapping(value = "/by-group/{group:\\d+}/{page:\\d+}")

@@ -45,7 +45,7 @@ INSERT INTO user (username, password, real_name, age, address, phone, role, grou
   VALUE
   (#{entity.username},
    sha2(concat('!a1@B2c3D4e5F6g7', #{entity.password}, '#h4$I5j6K7l8M9n0'), 256),
-   #{entity.realName},
+    #{entity.realName},
    #{entity.age},
    #{entity.address},
    #{entity.phone},

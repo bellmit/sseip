@@ -39,17 +39,17 @@
                     <a href="${context.contextPath}/profile" data-toggle="dropdown" href="#" class="dropdown-toggle">
                     <#--<img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
                          alt="Jason's Photo"/>-->
-                    <#if loginUser.role='ADMIN'>
+                    <#if ((Session.loginUser.role)!'')='ADMIN'>
                         <span class="fa fa-user-secret bigger-250 dark"></span>
                     <#else>
-                        <#if loginUser.role='TELADMIN'>
+                        <#if ((Session.loginUser.role)!'')='TELADMIN'>
                             <span class="fa fa-phone-square bigger-250 dark"></span>
                         <#else>
                             <span class="fa fa-user-md bigger-250"></span>
                         </#if>
                     </#if>
                         <span class="user-info"><small>
-                            欢迎, <#--${(loginUser.role.roleName)!''}--></small> ${(loginUser.realName)!''}</span>
+                            欢迎, <#--${(loginUser.role.roleName)!''}--></small> ${(Session.loginUser.realName)!''}</span>
                         <span class="ace-icon fa fa-caret-down"></span>
                     </a>
 
