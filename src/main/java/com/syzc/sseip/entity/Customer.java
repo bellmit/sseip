@@ -4,6 +4,7 @@ import com.syzc.sseip.entity.enumtype.CallState;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Weight;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -53,6 +54,7 @@ public class Customer implements Serializable {
 
     private CallState callState;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date revisitDate;
 
     /**

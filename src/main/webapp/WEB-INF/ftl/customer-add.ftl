@@ -3,6 +3,8 @@
 <head>
 <#include "/common/common_css.ftl">
     <title>填写顾客资料</title>
+    <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
+    <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
     <style>
         .form-group {
             margin-bottom: 4px;
@@ -392,6 +394,64 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                        <#--<label class="col-md-2 control-label no-padding-right"></label>-->
+
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-sm btn-default" type="button"
+                                                                id="revisit-date-clear">清除
+                                                        </button>
+                                                    <#--<span class="ace-icon fa fa-calendar bigger-110"></span>-->
+                                                    </span>
+
+                                                    <div class="input-icon input-icon-right ">
+                                                        <input type="date" class="form-control" title="选择下次回访日期"
+                                                               id="revisit-date-picker" placeholder="选择下次回访日期"
+                                                               value="${(customer.revisitDate?string("yyyy年MM月dd日"))!''}"/>
+                                                    <#--class="form-control input-mask-date"-->
+                                                    <#--<input type="date" name="revisitDate" class="form-control"
+                                                           placeholder="回访日期"/>-->
+                                                        <span class="ace-icon fa fa-calendar red2"></span>
+                                                    </div>
+                                                    <input type="hidden" id="revisit-date-field" name="revisitDate"
+                                                           data-init-value="${(customer.revisitDate?string("yyyy-MM-dd"))!''}">
+                                                    data-init-value="${(customer.revisitDate?string("yyyy-MM-dd"))!''}">
+                                                <#--${(customer.revisitDate?long?c)!''}-->
+                                                </div>
+                                            </div>
+
+                                        <#--<div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default"
+                                                            type="button">
+                                                        <span class="ace-icon fa fa-calendar bigger-110"></span>Go!
+                                                    </button>
+                                                </span>
+                                                <input class="form-control input-mask-date" type="date"/>
+                                            </div>
+                                        </div>-->
+
+                                        <#--<div class="col-md-12">
+                                            <div class="input-icon input-icon-right ">
+                                                <input type="date" name="revisitDate" class="form-control"
+                                                       placeholder="回访日期"/>
+                                                <span class="ace-icon fa fa-calendar green"></span>
+                                            </div>
+                                        </div>-->
+
+                                        <#--<div class="col-md-12">
+                                            <input name="revisitDate" type="date" class="form-control"
+                                                   placeholder="回访日期" value="${(customer.revisitDate)!''}"
+                                                   title="回访日期"/>
+                                        </div>-->
+
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-2">
                                         <div class="form-group">
                                         <#--<label class="col-md-4 control-label no-padding-right">紧急</label>-->
@@ -551,18 +611,23 @@
 </div>
 <#include "/common/common_js.ftl">
 <#--<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/css/validate/main.css"/>-->
-<link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
 
 <#--<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>-->
 
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
 <#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
+<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
+<script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
 
-<script type="text/javascript" src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>
-<script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>
+<#--<script type="text/javascript" src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>-->
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
+<script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>
+
 <script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
+
+<!--daterangepicker-->
+<script src="${context.contextPath}/resources/self/moment.min.js"></script>
+<script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -644,6 +709,37 @@
             $('#contact-records').val($('#contact-records-editor').cleanHtml() + '<br>');
         });
         $('.select2-ui').select2();
+
+        $('#revisit-date-picker').daterangepicker({
+            "autoUpdateInput": false,
+            "singleDatePicker": true,
+            "showDropdowns": true,
+            "showWeekNumbers": true,
+            "locale": {
+                "format": "YYYY-MM-DD",
+                "separator": " - ",
+                "applyLabel": "Apply",
+                "cancelLabel": "Cancel",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+                "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                "firstDay": 1
+            },
+            "linkedCalendars": false,
+            "minDate": moment().format('YYYY-MM-DD'),
+            "maxDate": moment().add(6, 'months').format('YYYY-MM-DD')
+        }, function (start, end, label) {
+            $('#revisit-date-picker').val(start.format('YYYY年MM月DD日'));
+            $('#revisit-date-field').val(start.format('YYYY-MM-DD'));
+//            $('#revisit-date-field').val(start.unix() * 1000);
+        });
+        $('#revisit-date-clear').click(function (e) {
+            $('#revisit-date-picker').val('');
+            $('#revisit-date-field').val('');
+        });
+
 //        $("#customer-add-form").cmsvalidate();
     });
 </script>

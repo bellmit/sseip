@@ -28,3 +28,5 @@ ALTER TABLE customer MODIFY COLUMN contact_records LONGTEXT;
 
 ALTER TABLE customer ADD COLUMN revisit_date DATETIME;
 
+ALTER TABLE customer MODIFY COLUMN revisit_date DATE;
+

@@ -174,7 +174,7 @@
         </choose>
         ,
         #{entity.emailSent},
-        #{entiry.revisitDate}
+        #{entity.revisitDate}
         );
     </insert>
     <insert id="addAll">
@@ -238,7 +238,7 @@
             #{entity.ifReport},
             #{entity.sourceWebsite},
             #{entity.emailSent},
-            #{entiry.revisitDate}
+            #{entity.revisitDate}
             )
         </foreach>
     </insert>
@@ -303,7 +303,7 @@
             #{entity.ifReport},
             #{entity.sourceWebsite},
             #{entity.emailSent},
-            #{entiry.revisitDate}
+            #{entity.revisitDate}
             )
         </foreach>
     </insert>
@@ -468,7 +468,7 @@
         </choose>
         ,
         email_sent=#{entity.emailSent},
-        revisit_date=#{entiry.revisitDate}
+        revisit_date=#{entity.revisitDate}
         WHERE id = #{entity.id};
     </update>
     <select id="get" parameterType="Long" resultMap="CustomerDtoWithMemo">
@@ -537,6 +537,12 @@
         </where>
         order by added desc
         LIMIT #{offset}, #{size, javaType=Byte}
+    </select>
+    <select id="getRevisitTodayListByUser" resultMap="CustomerDto">
+        select * from customer where user_id=#{userId} and revisit_date = current_date limit #{offset},#{size}
+    </select>
+    <select id="countRevisitTodayByUser" resultMap="CustomerDto">
+        select count(1) from customer where user_id=#{userId} and revisit_date = current_date
     </select>
     <select id="countByFilter" resultType="Long">
         SELECT
@@ -668,10 +674,10 @@
     </select>
 
     <select id="statAllInHospitalCount" resultType="Long">
-select count(1) from customer where hospitalization=1;
+        select count(1) from customer where hospitalization=1;
     </select>
     <select id="statAllReportedCount" resultType="Long">
-select count(1) from customer where if_report=1;
+        select count(1) from customer where if_report=1;
     </select>
 
 </mapper>

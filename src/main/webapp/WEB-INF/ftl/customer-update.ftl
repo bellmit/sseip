@@ -4,8 +4,8 @@
 <#include "/common/common_css.ftl">
 
     <!--daterangepicker-->
-    <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
     <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
+    <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
 
     <title>顾客资料编辑</title>
     <style>
@@ -423,19 +423,25 @@
                                             <div class="col-md-12">
                                                 <div class="input-group">
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-sm btn-default"
-                                                                type="button">
-                                                            <span class="ace-icon fa fa-calendar bigger-110"></span>Go!
+                                                        <button class="btn btn-sm btn-default" type="button"
+                                                                id="revisit-date-clear">清除
                                                         </button>
+                                                    <#--<span class="ace-icon fa fa-calendar bigger-110"></span>-->
                                                     </span>
 
                                                     <div class="input-icon input-icon-right ">
-                                                        <input type="date" class="form-control"/>
+                                                        <input type="date" class="form-control" title="选择下次回访日期"
+                                                               id="revisit-date-picker" placeholder="选择下次回访日期"
+                                                               value="${(customer.revisitDate?string("yyyy年MM月dd日"))!''}"/>
                                                     <#--class="form-control input-mask-date"-->
                                                     <#--<input type="date" name="revisitDate" class="form-control"
                                                            placeholder="回访日期"/>-->
-                                                        <span class="ace-icon fa fa-calendar green"></span>
+                                                        <span class="ace-icon fa fa-calendar red2"></span>
                                                     </div>
+                                                    <input type="hidden" id="revisit-date-field" name="revisitDate"
+                                                           value="${(customer.revisitDate?string("yyyy-MM-dd"))!''}"
+                                                           data-init-value="${(customer.revisitDate?string("yyyy-MM-dd"))!''}">
+                                                <#--${(customer.revisitDate?long?c)!''}-->
                                                 </div>
                                             </div>
 
@@ -504,7 +510,7 @@
                                             <div class="col-md-12">
                                                 <label>备注</label> <span class="btn-group btn-corner"><a
                                                     class="btn btn-success btn-minier" id="memo-submit-control"><span
-                                                    class="ace-icon fa fa-plus bigger-110"></span>提交
+                                                    class="ace-icon fa fa-plus bigger-110"></span>提交备注
                                             </a></span></div>
                                         </div>
 
@@ -657,12 +663,11 @@
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
 <script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>
 
+<script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
+
 <!--daterangepicker-->
 <script src="${context.contextPath}/resources/self/moment.min.js"></script>
 <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
-
-<script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
-
 
 <script type="text/javascript">
     $(function () {
@@ -756,6 +761,37 @@
             }, 'html');
             $('#textarea-memo').val('');
         })
+
+        $('#revisit-date-picker').daterangepicker({
+            "autoUpdateInput": false,
+            "singleDatePicker": true,
+            "showDropdowns": true,
+            "showWeekNumbers": true,
+            "startDate": "2012-11-06",
+            "locale": {
+                "format": "YYYY-MM-DD",
+                "separator": " - ",
+                "applyLabel": "Apply",
+                "cancelLabel": "Cancel",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+                "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                "firstDay": 1
+            },
+            "linkedCalendars": false,
+            "minDate": moment().format('YYYY-MM-DD'),
+            "maxDate": moment().add(6, 'months').format('YYYY-MM-DD')
+        }, function (start, end, label) {
+            $('#revisit-date-picker').val(start.format('YYYY年MM月DD日'));
+            $('#revisit-date-field').val(start.format('YYYY-MM-DD'));
+//            $('#revisit-date-field').val(start.unix() * 1000);
+        });
+        $('#revisit-date-clear').click(function (e) {
+            $('#revisit-date-picker').val('');
+            $('#revisit-date-field').val('');
+        });
 
 //        $('#accordion').on('shown.bs.collapse', function () {
 //            $('.select2-ui').select2();

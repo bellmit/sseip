@@ -294,6 +294,12 @@ public class CustomerController {
         return "customer-filter-own-list";
     }
 
+    @RequestMapping(value = "/revisit/today")
+    public String revisitTodayList(@RequestParam(required = false, defaultValue = "1", value = "page") Long pageNo) {
+        
+        return "customer-revisit-today-list";
+    }
+
     @RequestMapping(value = "/by-group/{group:\\d+}/{page:\\d+}")
     public String listByGroup(@PathVariable("group") Long groupId, @PathVariable("page") Long pageNo, Model model) {
         Page<Customer> page = customerService.listByGroup(groupId, pageNo, pageSize);
