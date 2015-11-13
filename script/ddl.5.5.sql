@@ -144,7 +144,7 @@ CREATE TABLE customer (
   revisit_date       DATE,
 
   memo               TEXT,
-  contact_records    LONGTEXT,
+  contact_records    MEDIUMTEXT,
 
   discard            TINYINT(1)      DEFAULT FALSE,
 

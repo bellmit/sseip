@@ -1,7 +1,7 @@
 <table id="customer-table-1"
        class="table table-striped table-hover table-condensed table-responsive smaller-90"
        style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
-    <#--table-bordered-->
+<#--table-bordered-->
     <colgroup class="row">
     <#--1-->
     <#--<col style="width: 3.5em;">-->

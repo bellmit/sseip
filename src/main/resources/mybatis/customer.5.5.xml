@@ -487,18 +487,18 @@
         LIMIT #{offset}, #{size}
     </select>
     <select id="listRevisitTodayByUser" resultMap="CustomerDto">
-        select * from customer where user_id=#{userId} and revisit_date = current_date
+        select * from customer where owner_user_id=#{userId} and revisit_date = current_date
         order by revisit_date desc
         limit #{offset},#{size}
     </select>
     <select id="countRevisitTodayByUser" resultType="Long">
-        select count(1) from customer where user_id=#{userId} and revisit_date = current_date
+        select count(1) from customer where owner_user_id=#{userId} and revisit_date = current_date
     </select>
     <select id="listRevisitByUserDate" resultMap="CustomerDto">
         select * from customer
         <where>
             <if test="userId != null">
-                user_id=#{userId}
+                owner_user_id=#{userId}
             </if>
             <if test="start">
                 and revisit_date &gt;= #{start}
@@ -517,7 +517,7 @@
         select count(1) from customer
         <where>
             <if test="userId != null">
-                user_id=#{userId}
+                owner_user_id=#{userId}
             </if>
             <if test="start">
                 and revisit_date &gt;= #{start}
@@ -601,7 +601,7 @@
                 and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
             </if>
             <if test="userId != null">
-                and user_id=#{userId}
+                and owner_user_id=#{userId}
             </if>
             <if test="email!=null and email!=''">
                 and email=#{email}
@@ -641,12 +641,12 @@
         *
         FROM
         customer
-        WHERE user_id=#{userId}
+        WHERE owner_user_id=#{userId}
         order by added desc
         LIMIT #{offset}, #{size}
     </select>
     <select id="countByUser" parameterType="Long" resultType="Long">
-        select count(id) from customer WHERE user_id=#{userId}
+        select count(id) from customer WHERE owner_user_id=#{userId}
     </select>
     <select id="listByGroup" resultMap="CustomerDto">
         SELECT

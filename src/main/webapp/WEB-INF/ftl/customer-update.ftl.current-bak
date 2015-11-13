@@ -2,9 +2,12 @@
 <html>
 <head>
 <#include "/common/common_css.ftl">
-    <title>填写顾客资料</title>
+
+    <!--daterangepicker-->
     <link rel="stylesheet" type="text/css" href="${context.contextPath}/resources/self/select2/css/select2.css"/>
     <link rel="stylesheet" href="${context.contextPath}/resources/self/daterangepicker.css"/>
+
+    <title>顾客资料编辑</title>
     <style>
         .form-group {
             margin-bottom: 4px;
@@ -12,7 +15,8 @@
     </style>
 </head>
 <body>
-<div class="container-fluid"><!-- #section:basics/content.breadcrumbs -->
+<div class="container-fluid">
+    <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try {
@@ -26,62 +30,79 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li class="active"><span class="fa fa-file-o light-grey"></span>添加资源</li>
+            <li class="active">更新客户资源资料 <a href="" title="刷新"><span class="fa fa-refresh"></span></a></li>
         </ul>
         <!-- /.breadcrumb -->
     </div>
 
     <div class="page-content">
         <div class="row">
-        <#if (RequestParameters.success)??>
+        <#if success??>
             <div class="row">
-                <div class="col-sm-offset-3 col-sm-4 alert alert-success">执行完成</div>
+                <div class="col-sm-offset-3 col-sm-4 alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            class="fa fa-times"></span></button>
+                ${success}</div>
             </div>
         </#if>
         <#if error??>
             <div class="row">
-                <div class="col-sm-offset-3 col-sm-4 alert alert-danger">${error}</div>
+                <div class="col-sm-offset-3 col-sm-4 alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            class="fa fa-times"></span></button>
+                ${error}</div>
             </div>
         </#if>
         <#if errors??>
             <#list errors as error>
                 <div class="row">
-                    <div class="col-sm-offset-3 col-sm-4 alert alert-danger">${error}</div>
+                    <div class="col-sm-offset-3 col-sm-4 alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                class="fa fa-times"></span></button>
+                    ${error}</div>
                 </div>
             </#list>
         </#if>
         </div>
+    <#--警示行结束-->
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
             <#--左列-->
-                <form method="post" class="form-horizontal" id="customer-add-form">
-                    <div class="col-sm-12">
+                <form method="post" class="form-horizontal" id="customer-update-form">
+                    <div class="col-md-12"><input name="referer"
+                                                  type="hidden"
+                                                  value="${(referer)!'/'}"/>
 
                         <div class="row">
-                            <div class="col-sm-offset-1 col-sm-11">
+                            <div class="col-md-offset-1 col-md-11">
                                 <div style="margin-bottom: 4px;"><span class="btn-group btn-corner">
                             <button class="btn btn-success btn-sm" type="submit">
                                 <span class="ace-icon fa fa-plus bigger-110"></span>提交
                             </button>
                             <button class="btn btn-warning btn-sm" type="reset">
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
-                            </button></span></div>
+                            </button>
+                            <a class="btn btn-primary btn-sm" href="${(referer)!''}">
+                                <span class="ace-icon fa fa-back bigger-110"></span>返回来源页
+                            </a>
+                            </span></div>
                             </div>
                         </div>
                         <div class="space-4"></div>
 
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-md-12">
                             <#--折叠栏开始-->
                                 <div class="accordion-style1 panel-group" id="accordion">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                                   data-parent="#accordion" href="#collapseOne">
-                                            <span data-icon-show="ace-icon fa fa-plus-square"
-                                                  data-icon-hide="ace-icon fa fa-minus-square-o"
-                                                  class="bigger-110 ace-icon fa fa-plus-square"></span>展开补充咨询人信息</a>
+                                                   data-parent="#accordion"
+                                                   href="#collapseOne">
+                            <span data-icon-show="ace-icon fa fa-plus-square"
+                                  data-icon-hide="ace-icon fa fa-minus-square-o"
+                                  class="bigger-110 ace-icon fa fa-plus-square"></span>展开补充咨询人信息</a>
                                             </h4>
                                         </div>
                                         <div id="collapseOne" class="panel-collapse collapse">
@@ -143,6 +164,7 @@
 
                                                     </div>
                                                 <#--左列结束-->
+                                                <#--右列结束-->
                                                 </div>
 
                                             <#--折叠栏内容结束-->
@@ -154,7 +176,6 @@
                             </div>
                         </div>
 
-                    <#--资料填写主题内容行-->
                         <div class="row">
                             <div class="col-md-12">
 
@@ -327,8 +348,8 @@
                                                 <#list countries as country>
                                                     <option
                                                         <#if (customer.patientCountryId)?? && customer.patientCountryId=country.id>selected=""</#if>
-                                                        value="${country.id}">${country.a2Code} - ${country.name}
-                                                        - ${country.nameEn}</option>
+                                                        value="${country.id}">${country.a2Code}
+                                                        - ${country.name} - ${country.nameEn}</option>
                                                 </#list>
                                                 </select>
                                             </div>
@@ -347,7 +368,8 @@
                                                     </option>
                                                     <option
                                                     <#if !((customer.emergency)??) || !(customer.emergency)>selected=""</#if>
-                                                    value="0">不紧急
+                                                    value="0">
+                                                        不紧急
                                                     </option>
                                                 </select>
                                             </div>
@@ -392,7 +414,7 @@
                                     </div>
 
                                 </div>
-
+                            <#--第三行结束-->
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -417,6 +439,7 @@
                                                         <span class="ace-icon fa fa-calendar red2"></span>
                                                     </div>
                                                     <input type="hidden" id="revisit-date-field" name="revisitDate"
+                                                           value="${(customer.revisitDate?string("yyyy-MM-dd"))!''}"
                                                            data-init-value="${(customer.revisitDate?string("yyyy-MM-dd"))!''}">
                                                 <#--${(customer.revisitDate?long?c)!''}-->
                                                 </div>
@@ -430,7 +453,7 @@
                                                         <span class="ace-icon fa fa-calendar bigger-110"></span>Go!
                                                     </button>
                                                 </span>
-                                                <input class="form-control input-mask-date" type="date"/>4
+                                                <input class="form-control input-mask-date" type="date"/>
                                             </div>
                                         </div>-->
 
@@ -450,7 +473,6 @@
 
                                         </div>
                                     </div>
-
                                     <div class="col-md-2">
                                         <div class="form-group">
                                         <#--<label class="col-md-4 control-label no-padding-right">紧急</label>-->
@@ -486,12 +508,10 @@
                                         <div class="row">
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
-                                                <label>备注</label>
-                                            <#--<span class="btn-group btn-corner"><a
-                                                class="btn btn-success btn-minier" id="memo-submit-control"><span
-                                                class="ace-icon fa fa-plus bigger-110"></span>提交
-                                        </a></span>-->
-                                            </div>
+                                                <label>备注</label> <span class="btn-group btn-corner"><a
+                                                    class="btn btn-success btn-minier" id="memo-submit-control"><span
+                                                    class="ace-icon fa fa-plus bigger-110"></span>提交备注
+                                            </a></span></div>
                                         </div>
 
                                         <div class="row">
@@ -535,8 +555,7 @@
                                         <#--col-sm-offset-1-->
                                             <div class="col-md-12">
                                             <#--<span id="source-website" title="来源域名" class="col-xs-12"></span>-->
-                                                <label title="来源域名">来源域名: <span id="source-website"
-                                                                                class="gold"></span></label>
+                                                <label title="来源域名">来源域名: <span id="source-website" class="gold"></span></label>
                                             <#--<div class="col-xs-12">
                                             </div>-->
                                             </div>
@@ -544,6 +563,7 @@
                                         <div class="row">
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
+
                                                 <div class="btn-toolbar smaller-80" data-role="editor-toolbar"
                                                      data-target="#contact-records-editor">
                                                     <div class="btn-group">
@@ -562,50 +582,69 @@
                                                         <a class="btn btn-default"
                                                            data-edit="inserthtml &lt;span&gt;hello world&lt;/span&gt;"
                                                            title="填充断行"><span class="fa fa-code"></span></a>
-                                                        <a class="btn btn-default" title="编辑源码"
-                                                           data-edit="html"><span
+                                                        <a class="btn btn-default" title="编辑源码" data-edit="html"><span
                                                                 class="glyphicon glyphicon-pencil"></span></a>
                                                         <a class="btn btn-default" title="读取剪切板"
                                                            id="readClipboard"><span class="fa fa-paste"></span></a>
                                                     </div>
                                                 </div>
-                                                <div class="wysiwyg-editor"
-                                                     id="contact-records-editor">${(customer.contactRecords?html)!''}</div>
+                                                <div class="wysiwyg-editor" id="contact-records-editor"
+                                                     style="overflow-y:scroll;"
+                                                     data-placeholder="联系记录">${(customer.contactRecords)!''}</div>
+
+                                            <#--<div class="wysiwyg-editor"
+                                                 id="contact-records-editor"
+                                                 style="overflow-y:scroll;">${(customer.contactRecords)!''}</div>-->
+                                            <#--</div>-->
+
                                             </div>
 
-                                        </div>
+                                            <input name="contactRecords" id="contact-records" type="hidden"
+                                                   value="${(customer.contactRecords?html)!''}"/>
 
-                                        <input name="contactRecords" id="contact-records" type="hidden"
-                                               value="${(customer.contactRecords)!''}"/>
-
-                                    <#--<div class="row" title="通讯记录">
-                                        <div class="col-sm-11 col-sm-offset-1">
+                                        <#--<div class="row" title="通讯记录">
+                                            <div class="col-sm-11 col-sm-offset-1">
+                                            </div>
+                                        </div>-->
                                         </div>
-                                    </div>-->
                                     </div>
+
                                 </div>
-
                             </div>
-                        </div>
 
-                        <div class="space-4"></div>
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-11">
-                                <div style="margin-bottom: 4px;"><span class="btn-group btn-corner">
+                            <div class="space-4"></div>
+                            <div class="row">
+                                <div class="col-sm-offset-1 col-sm-11">
+                                    <div style="margin-bottom: 4px;"><span class="btn-group btn-corner">
                             <button class="btn btn-success btn-sm" type="submit">
                                 <span class="ace-icon fa fa-plus bigger-110"></span>提交
                             </button>
                             <button class="btn btn-warning btn-sm" type="reset">
                                 <span class="ace-icon fa fa-undo bigger-110"></span>重置
-                            </button></span></div>
+                            </button>
+                            <a class="btn btn-primary btn-sm" href="${(referer)!''}">
+                                <span class="ace-icon fa fa-back bigger-110"></span>返回来源页
+                            </a>
+                            </span></div>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
                 </form>
             </div>
         </div>
-        <!-- /.row -->
+    <#--表格行结束-->
+    <#--text-->
+    <#--<div class="row">
+        <div class="col-sm-12">
+            <form id="f1234" action="/customer/append-memo" method="post">
+                <input type="text" name="memoItem">
+                <input type="text" name="customerId">
+                <input form="f1234" type="submit" value="添加">
+            </form>
+        </div>
+    </div>-->
+
     </div>
 </div>
 <#include "/common/common_js.ftl">
@@ -613,12 +652,12 @@
 
 <#--<script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>-->
 
-<#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
 <script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 <script src="${context.contextPath}/resources/ace/assets/js/jquery.hotkeys.js"></script>
+<#--<script src="${context.contextPath}/resources/ace/assets/js/bootstrap-wysiwyg.js"></script>-->
 
-<#--<script type="text/javascript" src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>-->
+<#--<script src="${context.contextPath}/resources/self/jquery.validate.min.js"></script>-->
 <script src="${context.contextPath}/resources/self/autogrow.min.js"></script>
 <script src="${context.contextPath}/resources/self/bootstrap-wysiwyg.min.js"></script>
 
@@ -631,7 +670,7 @@
 <script type="text/javascript">
     $(function () {
         $('#stars-ui').raty({
-            noRatedMsg: "I'am readOnly and I haven't rated yet!",
+            noRatedMsg: "一个没有选中星星的评级框框",
             starType: 'span',
 //            score: 0,
 //            cancel: true,
@@ -646,21 +685,32 @@
 //                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
             }
         });
-        $('#textarea-symptom,#textarea-memo').autogrow({
-//            speed: 100,
+//        $('#textarea-symptom,#textarea-memo').autogrow({
+        $('#textarea-memo').autogrow({
+            speed: 100,
             onInitialize: true,
-            animate: false
+            animate: false,
         });
-//        $('#contact-records-editor').ace_wysiwyg();
         {
             var t = $('#contact-records-editor').wysiwyg();
+//            var t = $('#contact-records-editor').ace_wysiwyg();
             t.on('paste', function (e) {
-                range = document.createRange();
-                range.selectNodeContents(document.getElementById('contact-records-editor'))
-                range.collapse(false);
-                selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
+//                t.append('<br>');
+
+                var pastedHtml;
+                console.log(e);
+                if (window.clipboardData && window.clipboardData.getData) { // IE
+                    pastedHtml = window.clipboardData.getData('Html');
+                    console.log('ie');
+                    alert('ie');
+                } else {
+                    pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
+                    console.log('non ie');
+                }
+                t.append(pastedHtml);
+                t.append('<br>');
+                outer = e;
+                return false;
             });
         }
 
@@ -668,17 +718,18 @@
             var ff = function () {
                 //            $('#source-website').text($('#contact-records-editor').html());
                 var i = $('#contact-records-editor').html();
+//                var r = /[<]a\s.*?href\s*?=\s*?"((?!https?:\/\/www10.53kf.com)\S*?)"/im;
                 /**
-                 * extract full url from a anchor tag
+                 * full url
                  * @type {RegExp}
                  */
-//                var r = /[<]a.*?href.*?=.*?"(\S*?)"/;
+//                var r = /[<]a\s.*?href\s*?=\s*?"((?!https?:\/\/www10.53kf.com)https?:\/\/\S*?(?=\/|$))"/im;
                 /**
-                 * extract only domain from a anchor tag
+                 * only domain
                  * @type {RegExp}
                  */
+//                var r = /[<]a\s.*?href\s*?=\s*?"(?!https?:\/\/www10.53kf.com)https?:\/\/(\S*?)\/|$"/im;
                 var r = /[<]a\s.*?href\s*?=\s*?"https?:\/\/(?!www10.53kf.com)(\S*?)[?#;\/"]/im;
-//            var r = /[<]a.*?href.*?=.*?"(.*?)"/;
                 var res = r.exec(i);
                 if (res != null) {
                     $('#source-website').text(res[1]);
@@ -693,16 +744,28 @@
                 ff();
             });
         }
-        $('#customer-add-form').on('submit', function () {
+        $('#customer-update-form').on('submit', function () {
             $('#contact-records').val($('#contact-records-editor').cleanHtml() + '<br>');
         });
         $('.select2-ui').select2();
+
+        //ajax 提交 备注， 加载返回html片，<li>的列表，填充在<ul>里
+        $('#memo-submit-control').click(function (data) {
+            $.post('/customer/append-memo', {
+                memoItem: $('#textarea-memo').val(),
+                customerId: location.href.substr(location.href.search(/\d+$/))
+            }, function (data) {
+                $('#memo-ul-container').html(data)
+            }, 'html');
+            $('#textarea-memo').val('');
+        })
 
         $('#revisit-date-picker').daterangepicker({
             "autoUpdateInput": false,
             "singleDatePicker": true,
             "showDropdowns": true,
             "showWeekNumbers": true,
+            "startDate": "2012-11-06",
             "locale": {
                 "format": "YYYY-MM-DD",
                 "separator": " - ",
@@ -728,28 +791,29 @@
             $('#revisit-date-field').val('');
         });
 
-//        $("#customer-add-form").cmsvalidate();
+//        $('#accordion').on('shown.bs.collapse', function () {
+//            $('.select2-ui').select2();
+//            alert('collapse!');
+//        });
 
-        {
-            $('#control-append-newline').click(function (e) {
-                t.append("<br>");
+//        $("#customer-update-form").cmsvalidate();
 
+        /*
                 {
-                    $('#contact-records-editor').scrollTop($('#contact-records-editor').prop('scrollHeight'));
-                    $('#contact-records-editor').focus();
+                    var t = $('#contact-records-editor');
+                    $('#readClipboard').click(function (e) {
+                        var pastedHtml;
+                        if (window.clipboardData && window.clipboardData.getData) { // IE
+                            pastedHtml = window.clipboardData.getData('text/html');
+                        } else {
+                            pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
+                        }
+                        t.append(pastedHtml);
+                    });
                 }
-
-                {
-                    range = document.createRange();
-                    range.selectNodeContents(document.getElementById('contact-records-editor'))
-                    range.collapse(false);
-                    selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                }
-            });
-        }
+        */
     });
+    var outer;
 </script>
 </body>
 </html>

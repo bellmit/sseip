@@ -499,9 +499,12 @@ String ip;
         if (currentUser.getRole() != Role.ADMIN) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
+        if (!newPassword.equals(confirmPassword)) {
+            throw HosException.create("确认密码不匹配", Level.DEBUG);
+        }
         if (userService.updateResetPassword(userId, newPassword)) {
             if (referer == null) {
-                referer = "/";
+                referer = "/default";
             }
             return "redirect:" + referer;
         } else {

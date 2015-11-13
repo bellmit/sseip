@@ -16,7 +16,7 @@
         }
 
         #customer-table-1 td {
-            padding: 0;
+            padding: 4px 2px;
         }
     </style>
 </head>

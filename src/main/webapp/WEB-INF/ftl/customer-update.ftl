@@ -549,16 +549,8 @@
                                     <div class="col-md-12" title="通讯记录">
 
                                         <div class="row">
-                                        <#--<div class="col-md-12">
-                                            <label>通讯记录</label>
-                                        </div>-->
-                                        <#--col-sm-offset-1-->
                                             <div class="col-md-12">
-                                            <#--<span id="source-website" title="来源域名" class="col-xs-12"></span>-->
-                                                <label title="来源域名">来源域名: <span id="source-website"
-                                                                                class="gold"></span></label>
-                                            <#--<div class="col-xs-12">
-                                            </div>-->
+                                                <label title="来源域名">来源域名: <span id="source-website" class="gold"></span></label>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -580,11 +572,9 @@
                                                            title="Clear Formatting"
                                                            onClick="$('#contact-records-editor').text($('#contact-records-editor').text());"><span
                                                                 class="glyphicon glyphicon-fire"></span></a>
-                                                        <a class="btn btn-default"
-                                                           data-edit="inserthtml &lt;span&gt;hello world&lt;/span&gt;"
-                                                           title="填充断行"><span class="fa fa-code"></span></a>
-                                                        <a class="btn btn-default" title="编辑源码"
-                                                           data-edit="html"><span
+                                                        <a class="btn btn-default" id="control-append-newline"
+                                                           title="结尾填充新行"><span class="fa fa-code"></span></a>
+                                                        <a class="btn btn-default" title="编辑源码" data-edit="html"><span
                                                                 class="glyphicon glyphicon-pencil"></span></a>
                                                         <a class="btn btn-default" title="读取剪切板"
                                                            id="readClipboard"><span class="fa fa-paste"></span></a>
@@ -695,25 +685,42 @@
         });
         {
             var t = $('#contact-records-editor').wysiwyg();
-//            var t = $('#contact-records-editor').ace_wysiwyg();
+            var paste_state = false;
+
             t.on('paste', function (e) {
+                paste_state = true;
+
+                range = document.createRange();
+                range.selectNodeContents(document.getElementById('contact-records-editor'))
+                range.collapse(false);
+                selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+
 //                t.append('<br>');
 
-                var pastedHtml;
-                console.log(e);
-                if (window.clipboardData && window.clipboardData.getData) { // IE
-                    pastedHtml = window.clipboardData.getData('Html');
-                    console.log('ie');
-                    alert('ie');
-                } else {
-                    pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
-                    console.log('non ie');
-                }
-                t.append(pastedHtml);
-                t.append('<br>');
-                outer = e;
-                return false;
+//                if (window.clipboardData && window.clipboardData.getData) { // IE
+//                    pastedHtml = window.clipboardData.getData('Text');
+//                    alert(pastedHtml);
+//                } else {
+//                }
+
+                /*
+                                if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+                                    pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
+                                    if (pastedHtml != '') {
+                                        t.append(pastedHtml);
+                                        t.append('<br>');
+                                        outer = e;
+                                        return false;
+                                    }
+                                }
+                */
             });
+//            t.on('change', function (e) {
+//                alert(paste_state);
+//                paste_state = false;
+//            });
         }
 
         {
@@ -793,27 +800,27 @@
             $('#revisit-date-field').val('');
         });
 
-//        $('#accordion').on('shown.bs.collapse', function () {
-//            $('.select2-ui').select2();
-//            alert('collapse!');
-//        });
-
 //        $("#customer-update-form").cmsvalidate();
 
-        /*
+        {
+            $('#control-append-newline').click(function (e) {
+                t.append("<br>");
+
                 {
-                    var t = $('#contact-records-editor');
-                    $('#readClipboard').click(function (e) {
-                        var pastedHtml;
-                        if (window.clipboardData && window.clipboardData.getData) { // IE
-                            pastedHtml = window.clipboardData.getData('text/html');
-                        } else {
-                            pastedHtml = e.originalEvent.clipboardData.getData('text/html');//e.clipboardData.getData('text/plain');
-                        }
-                        t.append(pastedHtml);
-                    });
+                    $('#contact-records-editor').scrollTop($('#contact-records-editor').prop('scrollHeight'));
+                    $('#contact-records-editor').focus();
                 }
-        */
+
+                {
+                    range = document.createRange();
+                    range.selectNodeContents(document.getElementById('contact-records-editor'));
+                    range.collapse(false);
+                    selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            });
+        }
     });
     var outer;
 </script>
