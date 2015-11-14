@@ -357,7 +357,7 @@
                 <td class=""<#if customer.patientCountry??>
                     title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 7>${customer.patientCountry.name?substring(0,6)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
                 <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-                <td class=""
+                <td class="" style="overflow:hidden;white-space: nowrap"
                     title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 24>${customer.symptom?substring(0,24)+'...'}<#else>${customer.symptom}</#if><#else>
                 <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
                 <td class="center"

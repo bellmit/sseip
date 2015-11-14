@@ -16,6 +16,7 @@
         </ul>
     </div>
 <#--正文开始-->
+    <div class="space-4"></div>
     <form id="update-password-form" method="post" style="display: none;" target="_top"></form>
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
@@ -23,6 +24,18 @@
                 <h3 class="text-success">修改密码</h3>
             </div>
             <div class="well">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-control">
+                            <p class="form-control-static">
+                                用户登录名: <span class="text-primary">${user.username}</span>
+                                姓名: <span class="text-primary">${user.realName}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
                 <div class="row">
                     <div class="col-sm-12">
                         <input type="password" class="add-tooltip form-control" name="oldPassword"

@@ -19,6 +19,7 @@
         </ul>
     </div>
 <#--正文开始-->
+    <div class="space-4"></div>
     <form id="update-password-form" method="post" style="display: none;"><#if referer??><input
             type="hidden" name="referer"
             value="${referer}"/></#if></form>

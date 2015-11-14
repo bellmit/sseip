@@ -13,6 +13,7 @@ import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.PageUtil;
 import com.syzc.sseip.util.exception.AuthException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -107,6 +108,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
 
     @Override
     public Boolean addMemo(String memo, Long customerId, Long userId) {
+        if (StringUtils.isBlank(memo)) {
+            return false;
+        }
+
         Memo m = new Memo();
         m.setContent(memo);
         return memoDao.addToCustomer(m, customerId, userId);

@@ -517,9 +517,8 @@
                                         <div class="row">
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
-                            <textarea name="memoItem" class="form-control" style="resize: vertical;"
-                                      placeholder="备注" id="textarea-memo"
-                                      title="备注"></textarea>
+                                                <textarea name="memoItem" class="form-control" style="resize: vertical;"
+                                                          placeholder="备注" id="textarea-memo" title="备注"></textarea>
                                             </div>
                                         </div>
 
@@ -760,6 +759,9 @@
 
         //ajax 提交 备注， 加载返回html片，<li>的列表，填充在<ul>里
         $('#memo-submit-control').click(function (data) {
+            if ($('#textarea-memo').val().match(/^\s*$/)) {
+                return;
+            }
             $.post('/customer/append-memo', {
                 memoItem: $('#textarea-memo').val(),
                 customerId: location.href.substr(location.href.search(/\d+$/))
@@ -800,7 +802,7 @@
             $('#revisit-date-field').val('');
         });
 
-//        $("#customer-update-form").cmsvalidate();
+        //        $("#customer-update-form").cmsvalidate();
 
         {
             $('#control-append-newline').click(function (e) {
@@ -821,8 +823,8 @@
                 }
             });
         }
-    });
-    var outer;
+    })
+    ;
 </script>
 </body>
 </html>

@@ -559,8 +559,7 @@
                                                            title="Clear Formatting"
                                                            onClick="$('#contact-records-editor').text($('#contact-records-editor').text());"><span
                                                                 class="glyphicon glyphicon-fire"></span></a>
-                                                        <a class="btn btn-default"
-                                                           data-edit="inserthtml &lt;span&gt;hello world&lt;/span&gt;"
+                                                        <a class="btn btn-default" id="control-append-newline"
                                                            title="填充断行"><span class="fa fa-code"></span></a>
                                                         <a class="btn btn-default" title="编辑源码"
                                                            data-edit="html"><span
