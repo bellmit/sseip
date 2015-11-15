@@ -430,7 +430,7 @@
                                                     </span>
 
                                                     <div class="input-icon input-icon-right ">
-                                                        <input type="date" class="form-control" title="选择下次回访日期"
+                                                        <input type="text" class="form-control" title="选择下次回访日期"
                                                                id="revisit-date-picker" placeholder="选择下次回访日期"
                                                                value="${(customer.revisitDate?string("yyyy年MM月dd日"))!''}"/>
                                                     <#--class="form-control input-mask-date"-->
@@ -526,18 +526,9 @@
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
                                                 <div class="well"
-                                                     style="min-height:10em;max-height:30em;word-wrap:break-word;overflow-y:auto;">
-                                                    <ul id="memo-ul-container">
-                                                    <#if (customer.memos)?? && customer.memos?size gt 0>
-                                                        <#list customer.memos as memo>
-                                                            <li><span class="blue">${memo.content?html}</span> -
-                                                                <span class="text-warning">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
-                                                                -
-                                                                <span class="text-primary">${(memo.user.realName)!''}</span>
-                                                            </li>
-                                                        </#list>
-                                                    </#if>
-                                                    </ul>
+                                                     style="min-height:10em;max-height:30em;word-wrap:break-word;overflow-y:auto;"
+                                                     id="memo-ul-container">
+                                                <#include "customer-update-memo-fragment.ftl">
                                                 </div>
                                             </div>
                                         </div>
@@ -766,7 +757,7 @@
                 memoItem: $('#textarea-memo').val(),
                 customerId: location.href.substr(location.href.search(/\d+$/))
             }, function (data) {
-                $('#memo-ul-container').html(data)
+                $('#memo-ul-container').html(data);
             }, 'html');
             $('#textarea-memo').val('');
         })

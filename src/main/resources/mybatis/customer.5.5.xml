@@ -530,7 +530,7 @@
             </if>
         </where>
     </select>
-    <select id="listByFilter" resultMap="CustomerDto">
+    <select id="listByFilter" resultMap="CustomerDtoWithMemo">
         SELECT
         *
         FROM
@@ -551,8 +551,8 @@
             <if test="userId != null">
                 and owner_user_id=#{userId}
             </if>
-            <if test="email!=null and email!=''">
-                and email=#{email}
+            <if test="email!=null and email!= ''">
+                and email like CONCAT('%','${email}','%')
             </if>
             <if test="diseaseTypeId != null">
                 and disease_type_id=#{diseaseTypeId}
@@ -603,10 +603,10 @@
             <if test="userId != null">
                 and owner_user_id=#{userId}
             </if>
-            <if test="email!=null and email!=''">
-                and email=#{email}
+            <if test="email!= null and email!= ''">
+                and email like CONCAT('%','${email}','%')
             </if>
-            <if test="diseaseTypeId != null">
+            <if test="diseaseTypeId!=null">
                 and disease_type_id=#{diseaseTypeId}
             </if>
             <if test="valid != null">

@@ -6,6 +6,7 @@ import com.syzc.sseip.service.*;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.Page;
 import com.syzc.sseip.util.exception.AuthException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -354,7 +355,7 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
 
-        if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
+        if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getOwnerUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -384,7 +385,7 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
 
-        /*if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
+        /*if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getOwnerUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
         if (customer == null) {
@@ -420,7 +421,7 @@ public class CustomerController {
 
     // must be a dto, request receiver
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(Customer customer, Model model, HttpSession session) {
+    public String add(String memoItem, Customer customer, Model model, HttpSession session) {
 
 //        System.out.println(JSON.toJSONString(customer, true));
 
@@ -450,9 +451,15 @@ public class CustomerController {
         if (customer == null) {
             throw HosException.create("添加出错", Level.DEBUG);
         } else {
+            // 添加 memoItem 备注栏
+            if (!StringUtils.isBlank(memoItem)) {
+                customerService.addMemo(memoItem, customer.getId(), user.getId());
+            }
+
             model.addAttribute("success", "");
             return "redirect:/customer/add";
         }
+
 
 //        model.addAttribute("customer", customer);
         // with info label, and links to user console, own role's customer list, or "/", and "add more", and show page with authorized edit links...
@@ -481,7 +488,7 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
 
-        if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getUserId())) {
+        if (loginUser.getRole() == Role.EMPLOYEE && customer != null && !loginUser.getId().equals(customer.getOwnerUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
@@ -521,7 +528,7 @@ public class CustomerController {
             throw AuthException.create("没有权限", Level.DEBUG);
         }*/
 
-        if (loginUser.getRole() == Role.EMPLOYEE && oldCustomer != null && !loginUser.getId().equals(oldCustomer.getUserId())) {
+        if (loginUser.getRole() == Role.EMPLOYEE && oldCustomer != null && !loginUser.getId().equals(oldCustomer.getOwnerUserId())) {
             throw AuthException.create("没有权限", Level.DEBUG);
         }
 
