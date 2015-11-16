@@ -1,4 +1,4 @@
-<f<!doctype html>
+<!doctype html>
 <html>
 <head>
 <#include "/common/common_css.ftl">
@@ -18,6 +18,12 @@
 
         #customer-table-1 td {
             padding: 4px 2px;
+        }
+
+        .customer-list-table td {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden
         }
     </style>
 </head>
@@ -39,8 +45,8 @@
 
         <div class="row">
 
-            <div class="col-md-4"><input class="filters form-control" id="date-range"
-                                         placeholder="日期时间范围" title="选择日期时间范围"
+            <div class="col-md-4"><input class="filters form-control" id="date-range" placeholder="日期时间范围"
+                                         title="选择日期时间范围"
                                          value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
             </div>
             <input form="filter-form" name="dateRange" type="hidden"
@@ -258,20 +264,22 @@
                 class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
         </div>
         <table id="customer-table-1"
-               class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90"
+               class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90 customer-list-table"
                style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
             <colgroup class="row">
             <#--1-->
             <#--<col style="width: 5em;">-->
-                <col style="width: 10em;">
-                <col style="width:3em;">
-                <col style="width:5em;">
-                <col style="width:3em;">
+                <col style="width: 7em;">
                 <col style="width: 8em;">
+                <col style="width: 3em;">
+                <col style="width:3em;">
+                <col style="width:4.5em;">
+                <col style="width:3em;">
+                <col style="width: 6em;">
                 <col class="">
             <#--4    -->
                 <col style="width: 3em;">
-                <col style="width: 10em;">
+                <col style="width: 7em;">
                 <col style="width: 10.3em;">
             <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
                 <col style="width: 3em;">
@@ -286,6 +294,8 @@
             <tr>
             <#--<th class="text-right">ID</th>-->
                 <th class="">姓名</th>
+                <th class="">邮箱</th>
+                <th class="">性别</th>
                 <th class="">发邮</th>
                 <th class="">通话</th>
                 <th class="">年龄</th>
@@ -309,33 +319,33 @@
             <#list page.list as customer>
             <tr>
             <#--<td class="">${customer.id?c}</td>-->
-                <td class=""
-                    <#if (customer.patientName)??>title="${customer.patientName}"</#if>>
-                    <div>
-                        <span class=" label-minier label-yellow">${(customer.stars)!'0'}</span>
-                        <#if (customer.patientName)??>
-                            <#if customer.patientName?length gt 18>${customer.patientName?substring(0,18)+'...'}<#else>${customer.patientName}</#if>
-                        <#else>
-                            <#if (customer.liaisonName)??>
-                            ${customer.liaisonName}<#else><span
-                                    class="label">不详</span></#if>
-                        </#if>
-                    </div>
+                <td title="${(customer.patientName)!''}">
+                    <span class=" label-minier label-yellow">${(customer.stars)!'0'}</span>
+                    <#if (customer.patientName)??>${customer.patientName}<#else>
+                        <#if (customer.liaisonName)??>${customer.liaisonName}<#else><span
+                                class="label">不详</span></#if></#if>
+
                 <#--<div class="stars-ui-ele btn-minier rating"
                      data-init-score="${(customer.stars)!'0'}" title="意向的星级"
                      style="font-size: 7px"></div>-->
                 </td>
+
+                <td data-toggle="tooltip" title="${(customer.email)!''}">${(customer.email)!''}</td>
+                <#assign color><#switch (customer.sex)!''><#case 'FEMALE'>red<#break><#case 'MALE'>
+                    blue<#break></#switch></#assign>
+                <#assign faClass><#switch (customer.sex)!''><#case 'FEMALE'>fa-female<#break><#case 'MALE'>
+                    fa-male<#break></#switch></#assign>
+                <td class="center ${color}" title="${(customer.sex.textName)!''}"><span
+                        class="bigger-150 fa ${faClass}"></span></td>
+
                 <td class="center"
                     title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
                     <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
                 <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
                 <td title="${(customer.age)!''}">${(customer.age)!''}</td>
-                <td class=""<#if customer.patientCountry??>
-                    title="${customer.patientCountry.name}"</#if>><#if customer.patientCountry??><#if (customer.patientCountry.name)?length gt 7>${customer.patientCountry.name?substring(0,6)+'...'}<#else>${customer.patientCountry.name}</#if><#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td style="overflow:hidden;white-space: nowrap"
-                    title="${(customer.symptom)!''}"><#if customer.symptom??><#if (customer.symptom)?length gt 24>${customer.symptom?substring(0,24)+'...'}<#else>${customer.symptom}</#if><#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+                <td title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
+                <td data-toggle="tooltip"
+                    title="${(customer.symptom)!''}"><#if customer.symptom??>${customer.symptom}</#if></td>
                 <td class="center" title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
                     <#switch customer.hospitalization>
                         <#case 'YES'><span class="fa bigger fa-hotel text-danger bigger-140"></span><#break>
@@ -344,34 +354,21 @@
                     </#switch>
                 <#else>
                 <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td class=""
-                    title="${(customer.website.name)!''}"><#if customer.website??><#if customer.website.name?length gt 8>${customer.website.name?substring(0,5)+'...'}<#else>${customer.website.name}</#if><#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td class=""
-                    title="${(customer.sourceWebsite)!''}"><#if customer.sourceWebsite??><#if customer.sourceWebsite?length gt 16>${customer.sourceWebsite?substring(0,15)+'...'}<#else>${customer.sourceWebsite}</#if><#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+                <td title="${(customer.website.name)!''}">${(customer.website.name)!''}</td>
+                <td title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>
             <#--<td class=""
                 title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>-->
                 <td class="center"
-                    title="<#if (customer.ifReport)??>${customer.ifReport?string('报备','不报备')}</#if>"><#if (customer.ifReport)??><#if customer.ifReport>
-                <span class="fa bigger-140 fa-circle-o-notch green"></#if><#else><#--<span class="label"><span class="fa fa-question"></span></span>--></#if>
-                </td>
+                    title="${(customer.ifReport?string('报备','不报备'))!''}"><#if (customer.ifReport)?? && customer.ifReport>
+                    <span class="fa bigger-140 fa-circle-o-notch green"></#if></td>
             <#--<td class=""
                 title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
                 <span class="label">不详</span></#if></td>-->
-                <td class=""
-                    title="${(customer.ownerUser.realName)!''}"><#if (customer.ownerUser.realName)??><#if customer.ownerUser.realName?length gt 8>${customer.ownerUser.realName?substring(0,5)+'...'}<#else>${customer.ownerUser.realName}</#if><#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td class=""
-                    title="${(customer.user.realName)!''}"><#if (customer.user.realName)??><#if customer.user.realName?length gt 8>${customer.user.realName?substring(0,5)+'...'}<#else>${customer.user.realName}</#if><#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td class=""
-                    <#if customer.updated??>title="${customer.updated?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.updated??>${customer.updated?string('yyyy.MM.dd HH:mm')}<#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td class=""
-                    <#if customer.added??>title="${customer.added?string('yyyy.MM.dd HH:mm:ss')}"</#if>><#if customer.added??>${customer.added?string('yyyy.MM.dd HH:mm')}<#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+                <td title="${(customer.ownerUser.realName)!''}">${(customer.ownerUser.realName)!''}</td>
+                <td title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
+                <td title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>
+                <td title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 
                 <td class="">
                 <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
@@ -393,6 +390,13 @@
                     <form id="from-remove-customer-${customer_index}" action="${context.contextPath}/customer/remove"
                           method="post" style="display: none;"><input type="hidden" name="id" value="${customer.id?c}">
                     </form>
+                        </#if>
+                        <#if (customer.memos)?? &&customer.memos?size &gt; 0>
+                            <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
+                            <button class="btn btn-info btn-minier" data-toggle="tooltip" data-placement="left"
+                                    data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
+                                    class="fa fa-info"></span>&nbsp;
+                            </button>
                         </#if>
             </span>
                 <#--
@@ -500,7 +504,7 @@
 //            l = start;//用于调试
             $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
         });
-        $('.btn').tooltip();
+//        $('.btn').tooltip();
 
         $(".remove-control").click(function (e) {
             e.preventDefault();
@@ -528,11 +532,21 @@
 
         $('.select2-ui').select2();
 
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger: 'click',
+            html: true
+//            ,
+//            selector: ':parent'
+            ,
+            container: 'body'
+        });
 
-    <#if dateRange?? && dateRange?size gt 0 >
+        $('#another-d-picker').daterangepicker();
+
+    <#--<#if dateRange?? && dateRange?size gt 0 >-->
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->
     <#--$('#date-range-input').val([${dateRange[0]?long?c}, ${dateRange[1]?long?c}].join());-->
-    </#if>
+    <#--</#if>-->
     });
 </script>
 </body>

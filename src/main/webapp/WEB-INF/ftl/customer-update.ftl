@@ -526,7 +526,7 @@
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
                                                 <div class="well"
-                                                     style="min-height:10em;max-height:30em;word-wrap:break-word;overflow-y:auto;"
+                                                     style="min-height:10em;max-height:40em;word-wrap:break-word;overflow-y:auto;"
                                                      id="memo-ul-container">
                                                 <#include "customer-update-memo-fragment.ftl">
                                                 </div>
@@ -571,7 +571,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="wysiwyg-editor" id="contact-records-editor"
-                                                     style="overflow-y:scroll;"
+                                                     style="overflow-y:scroll;height:100em;"
                                                      data-placeholder="联系记录">${(customer.contactRecords)!''}</div>
 
                                             <#--<div class="wysiwyg-editor"
