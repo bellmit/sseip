@@ -9,10 +9,10 @@
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
-            try {
+            /*try {
                 ace.settings.check('breadcrumbs', 'fixed')
             } catch (e) {
-            }
+            }*/
         </script>
 
         <ul class="breadcrumb">

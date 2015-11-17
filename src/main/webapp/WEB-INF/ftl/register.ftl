@@ -9,10 +9,10 @@
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed')
+            /*try {
+                ace.settings.check('breadcrumbs', 'fixed');
             } catch (e) {
-            }
+            }*/
         </script>
 
         <ul class="breadcrumb">
@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                 -->
-                    
+
                     <div class="space-4"></div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">地址: </label>

@@ -213,7 +213,7 @@
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("#addForm").cmsvalidate();
+//        $("#addForm").cmsvalidate();
         $("#refresh").click(function () {
             $('#captcha').attr('src', '${context.contextPath}/captcha?' + Date.now());
         });

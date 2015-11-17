@@ -194,7 +194,6 @@
         };
 
         {
-            var d = new Date();
             $('#date-range').daterangepicker({
                 "autoUpdateInput": false,
                 "format": "YYYY/MM/DD HH",
@@ -214,12 +213,17 @@
                 "timePicker24Hour": true,
                 "timePickerIncrement": 70,
 //            "maxDate": [d.getMonth() + 1, d.getDate() + 1, d.getFullYear()].join('/')
-                "maxDate": [d.getFullYear(), d.getMonth() + 1, d.getDate() + 1].join('-') //当月， 当天的下一天的 0时
+                "maxDate": [moment().year(), moment().month() + 1, moment().date() + 1].join('-')
             }, function (start, end, label) {
 //            console.log('New date range selected: ' + start.format('YYYY-MM-DD HH') + ' to ' + end.format('YYYY-MM-DD HH'));
                 $('#date-range').val([start.format('YYYY年MM月DD日HH点'), ' 到 ', end.format('YYYY年MM月DD日HH点')].join(''));
                 $('#date-range-input-start').val(start.unix() * 1000);
                 $('#date-range-input-end').val(end.unix() * 1000);
+            });
+            $('#date-range').on('cancel.daterangepicker', function (e) {
+                //清除内容
+                $('#date-range').val('');
+                $('#date-range-input').val('');
             });
         }
 
@@ -238,8 +242,7 @@
                     perfix = location.href.substr(0, location.href.search(/\/[^,\/]*?,[^,\/]*?,[^,\/]*?,[^,\/]*?,[^,\/]*?,[^,\/]*?\//));
                 }
             }
-            var url = [perfix, '/', queryCombo, '/'].join('');
-            location = url;
+            location = [perfix, '/', queryCombo, '/'].join('');
             return false;
         });
         $('#btn-filter-reset').click(function () {

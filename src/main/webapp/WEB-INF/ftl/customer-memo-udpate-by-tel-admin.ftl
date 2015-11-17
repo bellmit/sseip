@@ -262,7 +262,7 @@
     $('#textarea-memo').autogrow({
         speed: 100,
         onInitialize: true,
-        animate: false,
+        animate: false
     });
 </script>
 </body>

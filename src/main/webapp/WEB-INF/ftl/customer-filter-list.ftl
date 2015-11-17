@@ -45,22 +45,19 @@
 
         <div class="row">
 
-            <div class="col-md-4"><input class="filters form-control" id="date-range" placeholder="日期时间范围"
-                                         title="选择日期时间范围"
-                                         value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+            <div data-toggle="tooltip-a" class="col-md-4" title="选择日期时间范围"><input class="filters form-control"
+                                                                                  id="date-range" placeholder="日期时间范围"
+                                                                                  value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
             </div>
-            <input form="filter-form" name="dateRange" type="hidden"
-                   id="date-range-input" style="display: none;"
+            <input form="filter-form" name="dateRange" type="hidden" id="date-range-input" style="display: none;"
                    value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
 
-            <div class="col-md-2" style="padding: 0; margin: 0;"><select
-                    class="filters text-right greens select2-ui form-control"
-                    name="websiteId" style="width:100%;"
-                    form="filter-form" title="选择网站群组">
+            <div data-toggle="tooltip-a" class="col-md-2" title="选择网站群组" style="padding: 0; margin: 0;"><select
+                    class="filters text-right greens select2-ui form-control" name="websiteId" style="width:100%;"
+                    form="filter-form">
                 <option
                 <#if !(RequestParameters.websiteId)?? || RequestParameters.websiteId=''>selected</#if>
-                value="">
-                    选择网站群组
+                value="">选择网站群组
                 </option>
             <#list websites as website>
                 <option
@@ -70,7 +67,7 @@
             </select>
             </div>
 
-            <div class="col-md-2"><select class="filters pink2 form-control"
+            <div class="col-md-2"><select data-toggle="tooltip-a" class="filters pink2 form-control"
                                           name="userId" form="filter-form" title="筛选所属人">
                 <option
                 <#if !(RequestParameters.userId)?? || RequestParameters.userId=''>selected</#if>
@@ -83,8 +80,7 @@
             </#list>
             </select></div>
 
-            <div class="col-md-2"><select name="ifReport"
-                                          class="filters brown form-control"
+            <div class="col-md-2"><select data-toggle="tooltip-a" name="ifReport" class="filters brown form-control"
                                           form="filter-form" title="筛选是否报备">
                 <option
                 <#if !((RequestParameters.ifReport)??) || RequestParameters.ifReport=''>selected</#if>
@@ -100,9 +96,8 @@
                 </option>
             </select></div>
 
-            <div class="col-md-2"><select class="filters pink form-control"
-                                          name="hospitalization" form="filter-form"
-                                          title="筛选住院类型">
+            <div class="col-md-2"><select data-toggle="tooltip-a" class="filters pink form-control"
+                                          name="hospitalization" form="filter-form" title="筛选住院类型">
                 <option
                 <#if !(RequestParameters.hospitalization)??||RequestParameters.hospitalization=''>selected</#if>
                 value="">住院类型
@@ -141,22 +136,26 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="col-sm-2"><input class="form-control filters green"
+                                        <div class="col-sm-2"><input data-toggle="tooltip-a"
+                                                                     class="form-control filters green"
                                                                      name="name" type="text"
                                                                      form="filter-form"
                                                                      title="筛选或患者咨询人的姓名"
                                                                      placeholder="患者或咨询人的姓名"
                                                                      value="${(RequestParameters.name)!''}"/></div>
-                                        <div class="col-sm-2"><input class="filters green form-control"
+                                        <div class="col-sm-2"><input data-toggle="tooltip-a"
+                                                                     class="filters green form-control"
                                                                      name="email" type="text" form="filter-form"
                                                                      title="电子邮件地址" placeholder="电子邮件地址"
                                                                      value="${(RequestParameters.email)!''}"/></div>
-                                        <div class="col-sm-2"><input class="filters green form-control"
+                                        <div class="col-sm-2"><input data-toggle="tooltip-a"
+                                                                     class="filters green form-control"
                                                                      name="tel" type="tel" form="filter-form"
                                                                      title="筛选电话" placeholder="电话"
                                                                      value="${(RequestParameters.tel)!''}"/></div>
 
-                                        <div class="col-md-2"><select class="filters brown form-control"
+                                        <div class="col-md-2"><select data-toggle="tooltip-a"
+                                                                      class="filters brown form-control"
                                                                       name="valid" form="filter-form" title="筛选是否有效">
                                             <option
                                             <#if !((RequestParameters.valid)??) || RequestParameters.valid=''>selected</#if>
@@ -172,7 +171,8 @@
                                             </option>
                                         </select></div>
 
-                                        <div class="col-md-2"><select class="filters brown form-control"
+                                        <div class="col-md-2"><select data-toggle="tooltip-a"
+                                                                      class="filters brown form-control"
                                                                       name="discard" form="filter-form"
                                                                       title="筛选是否提交删除">
                                             <option
@@ -189,7 +189,8 @@
                                             </option>
                                         </select></div>
 
-                                        <div class="filters col-md-2 inline" id="stars-ui" title="筛选意向程度星级"
+                                        <div class="filters col-md-2 inline" id="stars-ui"
+                                             title="筛选意向程度星级"
                                              data-init-score="${(RequestParameters.stars)!'0'}"></div>
                                         <input name="stars" id="form-stars" type="hidden" form="filter-form"
                                                value="${(RequestParameters.stars)!'0'}"/>
@@ -199,25 +200,26 @@
                                 <div class="row">
                                     <div class="col-sm-12">
 
-                                        <div class="col-md-2" style="padding: 0; margin: 0;"><select
-                                                class="filters text-right pink select2-ui form-control" name="countryId"
-                                                form="filter-form" style="width:100%" title="筛选患者或咨询人的国家">
-                                            <option
-                                            <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
-                                            value="">患者或咨询人的国家
-                                            </option>
-                                        <#list countries as country>
-                                            <option
-                                                <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
-                                                value="${country.id?c}">${country.a2Code} - ${country.name}
-                                                - ${country.nameEn}</option>
-                                        </#list>
-                                        </select></div>
+                                        <div data-toggle="tooltip-a" class="col-md-2" style="padding: 0; margin: 0;"
+                                             title="筛选患者或咨询人的国家">
+                                            <select class="filters text-right pink select2-ui form-control"
+                                                    name="countryId" form="filter-form" style="width:100%">
+                                                <option
+                                                <#if !(RequestParameters.countryId)??||RequestParameters.countryId=''>selected</#if>
+                                                value="">患者或咨询人的国家
+                                                </option>
+                                            <#list countries as country>
+                                                <option
+                                                    <#if (RequestParameters.countryId)?? && RequestParameters.countryId==country.id?string>selected</#if>
+                                                    value="${country.id?c}">${country.a2Code} - ${country.name}
+                                                    - ${country.nameEn}</option>
+                                            </#list>
+                                            </select></div>
 
-                                        <div class="col-md-2" style="padding: 0; margin: 0;"><select
+                                        <div data-toggle="tooltip-a" class="col-md-2" style="padding: 0; margin: 0;"
+                                             title="筛选疾病类型"><select
                                                 class="filters text-right orange select2-ui form-control"
-                                                name="diseaseTypeId" style="width:100%;"
-                                                form="filter-form" title="筛选疾病类型">
+                                                name="diseaseTypeId" style="width:100%;" form="filter-form">
                                             <option
                                             <#if !(RequestParameters.diseaseTypeId)?? ||RequestParameters.diseaseTypeId=''>selected</#if>
                                             value="">疾病类型
@@ -319,7 +321,7 @@
             <#list page.list as customer>
             <tr>
             <#--<td class="">${customer.id?c}</td>-->
-                <td title="${(customer.patientName)!''}">
+                <td title="${(customer.patientName)!''}" data-toggle="tooltip">
                     <span class=" label-minier label-yellow">${(customer.stars)!'0'}</span>
                     <#if (customer.patientName)??>${customer.patientName}<#else>
                         <#if (customer.liaisonName)??>${customer.liaisonName}<#else><span
@@ -330,7 +332,8 @@
                      style="font-size: 7px"></div>-->
                 </td>
 
-                <td data-toggle="tooltip" title="${(customer.email)!''}">${(customer.email)!''}</td>
+                <td data-toggle="tooltip" title="${(customer.email)!''}"
+                    data-toggle="tooltip">${(customer.email)!''}</td>
                 <#assign color><#switch (customer.sex)!''><#case 'FEMALE'>red<#break><#case 'MALE'>
                     blue<#break></#switch></#assign>
                 <#assign faClass><#switch (customer.sex)!''><#case 'FEMALE'>fa-female<#break><#case 'MALE'>
@@ -343,7 +346,8 @@
                     <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
                 <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
                 <td title="${(customer.age)!''}">${(customer.age)!''}</td>
-                <td title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
+                <td data-toggle="tooltip"
+                    title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
                 <td data-toggle="tooltip"
                     title="${(customer.symptom)!''}"><#if customer.symptom??>${customer.symptom}</#if></td>
                 <td class="center" title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
@@ -354,8 +358,8 @@
                     </#switch>
                 <#else>
                 <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td title="${(customer.website.name)!''}">${(customer.website.name)!''}</td>
-                <td title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>
+                <td data-toggle="tooltip" title="${(customer.website.name)!''}">${(customer.website.name)!''}</td>
+                <td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>
             <#--<td class=""
                 title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>-->
@@ -365,10 +369,13 @@
             <#--<td class=""
                 title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
                 <span class="label">不详</span></#if></td>-->
-                <td title="${(customer.ownerUser.realName)!''}">${(customer.ownerUser.realName)!''}</td>
-                <td title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
-                <td title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>
-                <td title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
+                <td data-toggle="tooltip"
+                    title="${(customer.ownerUser.realName)!''}">${(customer.ownerUser.realName)!''}</td>
+                <td data-toggle="tooltip" title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
+                <td data-toggle="tooltip"
+                    title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>
+                <td data-toggle="tooltip"
+                    title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 
                 <td class="">
                 <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
@@ -465,7 +472,7 @@
 //            score: 0,
             cancel: true,
             cancelHint: '零意向',
-            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+            hints: ['好', '很好', '非常好', '棒极了', 'YEAH'],
             space: false,
             score: function () {
                 return $(this).attr('data-init-score');
@@ -476,7 +483,6 @@
             }
         });
 
-        var d = new Date();
         $('#date-range').daterangepicker({
             "autoUpdateInput": false,
             "format": "YYYY/MM/DD HH",
@@ -496,7 +502,7 @@
             "timePicker24Hour": true,
             "timePickerIncrement": 70,
 //            "maxDate": [d.getMonth() + 1, d.getDate() + 1, d.getFullYear()].join('/')
-            "maxDate": [d.getFullYear(), d.getMonth() + 1, d.getDate() + 1].join('-')
+            "maxDate": [moment().year(), moment().month() + 1, moment().date() + 1].join('-')
         }, function (start, end, label) {
 //            console.log('New date range selected: ' + start.format('YYYY-MM-DD HH') + ' to ' + end.format('YYYY-MM-DD HH'));
 //            console.log(start);
@@ -504,6 +510,12 @@
 //            l = start;//用于调试
             $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
         });
+        $('#date-range').on('cancel.daterangepicker', function (e) {
+            //清除内容
+            $('#date-range').val('');
+            $('#date-range-input').val('');
+        });
+
 //        $('.btn').tooltip();
 
         $(".remove-control").click(function (e) {
@@ -533,13 +545,14 @@
         $('.select2-ui').select2();
 
         $('[data-toggle="tooltip"]').tooltip({
-            trigger: 'click',
+            trigger: 'click hover',
             html: true
 //            ,
 //            selector: ':parent'
             ,
             container: 'body'
         });
+        $('[data-toggle="tooltip-a"]').tooltip({trigger: 'hover'});
 
         $('#another-d-picker').daterangepicker();
 

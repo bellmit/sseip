@@ -9,10 +9,10 @@
     <!-- #section:basics/content.breadcrumbs -->
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
-            try {
+            /*try {
                 ace.settings.check('breadcrumbs', 'fixed')
             } catch (e) {
-            }
+            }*/
         </script>
 
         <div class="row">
@@ -177,7 +177,7 @@
 <script type="text/javascript" src="${context.contextPath}/resources/js/core/jquery.cms.validate.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("#addForm").cmsvalidate();
+//        $("#addForm").cmsvalidate();
         $("#refresh").click(function () {
             $('#captcha').attr('src', '${context.contextPath}/captcha?' + Date.now());
         });

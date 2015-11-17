@@ -94,37 +94,37 @@
                                                             <div class="form-group">
                                                             <#--<label class="col-md-2 control-label no-padding-right">姓名</label>-->
 
-                                                                <div class="col-md-12">
-                                                                    <input name="liaisonName" type="text" size="30"
-                                                                           class="form-control" placeholder="咨询人姓名"
-                                                                           title="咨询人姓名"
-                                                                           value="${(customer.liaisonName)!''}"/>
-                                                                </div>
+                                                                <input data-toggle="tooltip-a" name="liaisonName"
+                                                                       type="text" size="30" class="form-control"
+                                                                       placeholder="咨询人姓名" title="咨询人姓名"
+                                                                       value="${(customer.liaisonName)!''}"/>
+
+                                                            <#--<div class="col-md-12">
+                                                            </div>-->
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-3">
+                                                        <div data-toggle="tooltip-a" class="col-md-3" title="咨询人国家">
                                                             <div class="form-group">
                                                             <#--<label class="col-md-2 control-label no-padding-right">国家</label>-->
 
-                                                                <div class="col-md-12">
-                                                                    <select name="liaisonCountryId"
-                                                                            class="form-control select2-ui"
-                                                                            style="width:100%"
-                                                                            title="咨询人国家">
-                                                                        <option
-                                                                        <#if !(customer.liaisonCountryId)?? >selected=""</#if>
-                                                                        value="">选择咨询人国家
-                                                                        </option>
-                                                                    <#list countries as country>
-                                                                        <option
-                                                                            <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
-                                                                            value="${country.id}">${country.a2Code}
-                                                                            - ${country.name}
-                                                                            - ${country.nameEn}</option>
-                                                                    </#list>
-                                                                    </select>
-                                                                </div>
+                                                                <select name="liaisonCountryId"
+                                                                        class="form-control select2-ui"
+                                                                        style="width:100%">
+                                                                    <option value=""
+                                                                            <#if !(customer.liaisonCountryId)?? >selected=""</#if>>
+                                                                        选择咨询人国家
+                                                                    </option>
+                                                                <#list countries as country>
+                                                                    <option
+                                                                        <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
+                                                                        value="${country.id}">${country.a2Code}
+                                                                        - ${country.name}
+                                                                        - ${country.nameEn}</option>
+                                                                </#list>
+                                                                </select>
+                                                            <#--<div class="col-md-12">
+                                                            </div>-->
                                                             </div>
                                                         </div>
 
@@ -133,10 +133,10 @@
                                                             <#--<label class="col-md-2 control-label no-padding-right">关系 </label>-->
 
                                                                 <div class="col-md-12">
-                                                                    <input name="relationship" type="text" size="30"
-                                                                           class="form-control" placeholder="咨患关系"
-                                                                           value="${(customer.relationship)!''}"
-                                                                           title="咨患关系"/>
+                                                                    <input data-toggle="tooltip-a" name="relationship"
+                                                                           type="text" size="30" class="form-control"
+                                                                           placeholder="咨患关系" title="咨患关系"
+                                                                           value="${(customer.relationship)!''}"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -164,9 +164,9 @@
                                         <#--<label class="col-md-2 control-label no-padding-right">姓名</label>-->
 
                                             <div class="col-md-12">
-                                                <input name="patientName" type="text" size="30" class="form-control"
-                                                       placeholder="患者姓名" value="${(customer.patientName)!''}"
-                                                       title="患者姓名"/>
+                                                <input data-toggle="tooltip-a" name="patientName" type="text" size="30"
+                                                       class="form-control" placeholder="患者姓名"
+                                                       value="${(customer.patientName)!''}" title="患者姓名"/>
                                             </div>
                                         </div>
                                     </div>
@@ -175,17 +175,19 @@
                                         <#--<label class="col-sm-2 control-label no-padding-right">年龄 </label>-->
 
                                             <div class="col-md-12">
-                                                <input class="form-control" name="age" type="number" placeholder="年龄"
-                                                       title="年龄" value="${(customer.age)!''}"/>
+                                                <input data-toggle="tooltip-a" class="form-control" name="age"
+                                                       type="number" placeholder="年龄" title="年龄"
+                                                       value="${(customer.age)!''}"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                         <#--<label class="col-md-2 control-label no-padding-right">性别</label>-->
 
                                             <div class="col-md-12">
-                                                <select class="form-control" name="sex" title="性别">
+                                                <select data-toggle="tooltip-a" class="form-control" name="sex"
+                                                        title="性别">
                                                     <option value="">选择性别</option>
                                                 <#list sexTypes as sexType>
                                                     <option value="${sexType.code}"
@@ -195,12 +197,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                         <#--<label class="col-md-2 control-label no-padding-right">症状</label>-->
 
                                             <div class="col-md-12">
-                                                <input name="symptom" class="form-control" placeholder="症状" title="症状"
+                                                <input data-toggle="tooltip-a" name="symptom" class="form-control"
+                                                       placeholder="症状" title="症状"
                                                        value="${(customer.symptom?xhtml)!''}">
                                             </div>
                                         </div>
@@ -214,8 +217,8 @@
                                         <#--<label class="col-sm-2 control-label no-padding-right">Email</label>-->
 
                                             <div class="col-md-12">
-                                                <input name="email" type="email" class="form-control"
-                                                       placeholder="电子邮件地址" title="电子邮件地址"
+                                                <input data-toggle="tooltip-a" name="email" type="email"
+                                                       class="form-control" placeholder="电子邮件地址" title="电子邮件地址"
                                                        value="${(customer.email)!''}"/></div>
                                         </div>
 
@@ -225,18 +228,19 @@
                                         <#--<label class="col-sm-2 control-label no-padding-right">电话 </label>-->
 
                                             <div class="col-md-12">
-                                                <input name="tel" type="tel" size="30" class="form-control" title="电话号码"
-                                                       placeholder="电话号码" value="${(customer.tel)!''}"/>
+                                                <input data-toggle="tooltip-a" name="tel" type="tel" size="30"
+                                                       class="form-control" title="电话号码" placeholder="电话号码"
+                                                       value="${(customer.tel)!''}"/>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div data-toggle="tooltip-a" class="col-md-2" title="网站群组">
                                         <div class="form-group">
                                         <#--<label class="col-sm-2 control-label no-padding-right">群组</label>-->
 
                                             <div class="col-md-12">
-                                                <select name="websiteId" class="form-control select2-ui" title="网站群组"
+                                                <select name="websiteId" class="form-control select2-ui"
                                                         style="width:100%;">
                                                     <option <#if (customer.websiteId)??>selected=""</#if> value="">
                                                         选择网站群组
@@ -257,7 +261,8 @@
                                                title="是否报备">报备</label>-->
 
                                             <div class="col-md-12">
-                                                <select name="ifReport" class="form-control" title="是否报备">
+                                                <select data-toggle="tooltip-a" name="ifReport" class="form-control"
+                                                        title="是否报备">
                                                     <option
                                                     <#if !((customer.ifReport)??) || !(customer.ifReport)>selected=""</#if>
                                                     value="0">不报备
@@ -276,7 +281,8 @@
                                         <#--<label class="col-sm-3 control-label no-padding-right">有效性</label>-->
 
                                             <div class="col-md-12">
-                                                <select name="valid" class="form-control" title="是否有效">
+                                                <select data-toggle="tooltip-a" name="valid" class="form-control"
+                                                        title="是否有效">
                                                     <option <#if (customer.valid)?? && customer.valid>selected=""</#if>
                                                             value="1">有效
                                                     </option>
@@ -292,13 +298,13 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div data-toggle="tooltip-a" class="col-md-3" title="疾病类型">
                                         <div class="form-group">
                                         <#--<label class="col-sm-3 control-label no-padding-right">疾病类型</label>-->
 
                                             <div class="col-md-12">
                                                 <select name="diseaseTypeId" class="form-control select2-ui"
-                                                        title="疾病类型" style="width:100%;">
+                                                        style="width:100%;">
                                                     <option <#if !(customer.diseaseTypeId)??>selected=""</#if> value="">
                                                         选择疾病类型
                                                     </option>
@@ -313,13 +319,13 @@
 
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div data-toggle="tooltip-a" class="col-md-3" title="患者国家">
                                         <div class="form-group">
                                         <#--<label class="col-sm-2 control-label no-padding-right">地址</label>-->
 
                                             <div class="col-md-12">
                                                 <select name="patientCountryId" class="form-control select2-ui"
-                                                        style="width:100%;" title="患者国家">
+                                                        style="width:100%;">
                                                     <option
                                                     <#if !(customer.patientCountryId)?? >selected=""</#if>
                                                     value="">选择患者国家
@@ -340,7 +346,8 @@
                                         <#--<label class="col-md-4 control-label no-padding-right">紧急</label>-->
 
                                             <div class="col-md-12">
-                                                <select name="emergency" class="form-control" title="是否紧急">
+                                                <select data-toggle="tooltip-a" name="emergency" class="form-control"
+                                                        title="是否紧急">
                                                     <option
                                                     <#if (customer.emergency)?? && customer.emergency>selected=""</#if>
                                                     value="1">紧急
@@ -360,7 +367,8 @@
                                                title="住院情况">是否住院</label>-->
 
                                             <div class="col-md-12">
-                                                <select name="hospitalization" class="form-control" title="是否住院">
+                                                <select data-toggle="tooltip-a" name="hospitalization"
+                                                        class="form-control" title="是否住院">
                                                     <option<#if !(customer.hospitalization)?? > selected=""</#if>
                                                                                                 value="">
                                                         选择是否住院
@@ -375,7 +383,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div data-toggle="tooltip-a" class="col-md-2">
                                         <div class="form-group" title="患者意向">
                                         <#--<label class="col-sm-3 control-label no-padding-right"
                                                title="患者意向">意向</label>-->
@@ -407,9 +415,10 @@
                                                     <#--<span class="ace-icon fa fa-calendar bigger-110"></span>-->
                                                     </span>
 
-                                                    <div class="input-icon input-icon-right ">
-                                                        <input type="text" class="form-control" title="选择下次回访日期"
-                                                               id="revisit-date-picker" placeholder="选择下次回访日期"
+                                                    <div data-toggle="tooltip-a" class="input-icon input-icon-right"
+                                                         title="选择下次回访日期">
+                                                        <input type="text" class="form-control" id="revisit-date-picker"
+                                                               placeholder="选择下次回访日期"
                                                                value="${(customer.revisitDate?string("yyyy年MM月dd日"))!''}"/>
                                                     <#--class="form-control input-mask-date"-->
                                                     <#--<input type="date" name="revisitDate" class="form-control"
@@ -456,7 +465,8 @@
                                         <#--<label class="col-md-4 control-label no-padding-right">紧急</label>-->
 
                                             <div class="col-md-12">
-                                                <select name="emailSent" class="form-control" title="是否发送了邮件">
+                                                <select data-toggle="tooltip-a" name="emailSent" class="form-control"
+                                                        title="是否发送了邮件">
                                                     <option
                                                     <#if (customer.emailSent)?? && customer.emailSent>selected=""</#if>
                                                     value="1">邮件已发送
@@ -497,9 +507,9 @@
                                         <div class="row">
                                         <#--col-md-offset-1-->
                                             <div class="col-md-12">
-                            <textarea name="memoItem" class="form-control" style="resize: vertical;"
-                                      placeholder="备注" id="textarea-memo"
-                                      title="备注"></textarea>
+                                                <textarea data-toggle="tooltip-a" name="memoItem" class="form-control"
+                                                          style="resize: vertical;" placeholder="备注" id="textarea-memo"
+                                                          title="备注"></textarea>
                                             </div>
                                         </div>
 
@@ -547,29 +557,30 @@
                                                 <div class="btn-toolbar smaller-80" data-role="editor-toolbar"
                                                      data-target="#contact-records-editor">
                                                     <div class="btn-group">
-                                                        <a class="btn btn-default" data-edit="undo"
-                                                           title="Undo (Ctrl/Cmd+Z)"><span
+                                                        <a data-toggle="tooltip-a" class="btn btn-default"
+                                                           data-edit="undo" title="反悔 (Ctrl/Cmd+Z)"><span
                                                                 class="ace-icon fa fa-undo"></span></a>
-                                                        <a class="btn btn-default" data-edit="redo"
-                                                           title="Redo (Ctrl/Cmd+Y)"><span class="fa fa-repeat"></span></a>
+                                                        <a data-toggle="tooltip-a" class="btn btn-default"
+                                                           data-edit="redo" title="撤销 (Ctrl/Cmd+Y)"><span
+                                                                class="fa fa-repeat"></span></a>
                                                     <#--<a class="btn btn-default" data-edit="html"
                                                        title="Clear Formatting"><span
                                                             class='glyphicon glyphicon-pencil'></span></a>-->
-                                                        <a class="btn btn-default" data-edit="clearformat"
-                                                           title="Clear Formatting"
+                                                        <a data-toggle="tooltip-a" class="btn btn-default"
+                                                           data-edit="clearformat" title="清除格式"
                                                            onClick="$('#contact-records-editor').text($('#contact-records-editor').text());"><span
                                                                 class="glyphicon glyphicon-fire"></span></a>
-                                                        <a class="btn btn-default" id="control-append-newline"
-                                                           title="填充断行"><span class="fa fa-code"></span></a>
-                                                        <a class="btn btn-default" title="编辑源码"
+                                                        <a data-toggle="tooltip-a" class="btn btn-default"
+                                                           id="control-append-newline"
+                                                           title="结尾填充新行"><span class="fa fa-code"></span></a>
+                                                        <a data-toggle="tooltip-a" class="btn btn-default" title="源码编辑"
                                                            data-edit="html"><span
                                                                 class="glyphicon glyphicon-pencil"></span></a>
-                                                        <a class="btn btn-default" title="读取剪切板"
-                                                           id="readClipboard"><span class="fa fa-paste"></span></a>
                                                     </div>
                                                 </div>
-                                                <div class="wysiwyg-editor"
-                                                     id="contact-records-editor">${(customer.contactRecords?html)!''}</div>
+                                                <div data-toggle="tooltip-a" class="wysiwyg-editor"
+                                                     id="contact-records-editor" title="聊天记录粘贴"
+                                                     data-placeholder="聊天记录">${(customer.contactRecords?html)!''}</div>
                                             </div>
 
                                         </div>
@@ -655,7 +666,7 @@
             var t = $('#contact-records-editor').wysiwyg();
             t.on('paste', function (e) {
                 range = document.createRange();
-                range.selectNodeContents(document.getElementById('contact-records-editor'))
+                range.selectNodeContents(document.getElementById('contact-records-editor'));
                 range.collapse(false);
                 selection = window.getSelection();
                 selection.removeAllRanges();
@@ -740,7 +751,7 @@
 
                 {
                     range = document.createRange();
-                    range.selectNodeContents(document.getElementById('contact-records-editor'))
+                    range.selectNodeContents(document.getElementById('contact-records-editor'));
                     range.collapse(false);
                     selection = window.getSelection();
                     selection.removeAllRanges();
@@ -748,6 +759,9 @@
                 }
             });
         }
+
+        $('[data-toggle="tooltip-a"]').tooltip({trigger: 'hover'});
+
     });
 </script>
 </body>
