@@ -223,6 +223,13 @@
             <artifactId>spring-tx</artifactId>
             <version>4.2.1.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>sscrm</finalName>
