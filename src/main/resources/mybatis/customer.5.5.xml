@@ -695,7 +695,7 @@
     </update>
 
     <select id="listAllByCustomer" resultMap="MemoDto">
-        select * from memo where customer_id=#{customerId}
+        select * from memo where customer_id=#{customerId} order by added
     </select>
 
     <update id="updateTelAuditDto">

@@ -34,12 +34,12 @@
         select count(1) from memo where customer_id=#{customerId}
     </select>
     <select id="listAllByCustomer" resultMap="MemoDto">
-        select * from memo where customer_id=#{customerId}
+        select * from memo where customer_id=#{customerId} order by added
     </select>
     <select id="getUser" resultMap="User">
         SELECT
         *
         FROM user
-        WHERE id = #{userId};
+        WHERE id = #{userId}
     </select>
 </mapper>
