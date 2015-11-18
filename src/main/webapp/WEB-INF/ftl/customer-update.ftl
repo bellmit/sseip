@@ -583,10 +583,10 @@
                                                                 class="glyphicon glyphicon-pencil"></span></a>
                                                     </div>
                                                 </div>
-                                                <div data-toggle="tooltip-a" class="wysiwyg-editor"
-                                                     id="contact-records-editor" style="overflow-y:scroll;height:100em;"
-                                                     title="聊天记录粘贴"
-                                                     data-placeholder="聊天记录">${(customer.contactRecords)!''}</div>
+                                            <#--wysiwyg-editor-->
+                                                <div data-toggle="tooltip-a" class="wysiwyg-editor" title="聊天记录粘贴"
+                                                     id="contact-records-editor" data-placeholder="聊天记录"
+                                                     style="word-wrap:break-word;overflow-y:auto;height:auto;max-height:60em;min-height:8em;">${(customer.contactRecords)!''}</div>
 
                                             <#--<div class="wysiwyg-editor"
                                                  id="contact-records-editor"

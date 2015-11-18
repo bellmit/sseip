@@ -40,12 +40,12 @@
                     <#--<img class="nav-user-photo" src="${context.contextPath}/resources/ace/assets/avatars/user.jpg"
                          alt="Jason's Photo"/>-->
                     <#if ((Session.loginUser.role)!'')='ADMIN'>
-                        <span class="fa fa-user-secret bigger-250 dark"></span>
+                        <span class="fa fa-user-secret bigger-250 dark" style="margin-top: 5px"></span>
                     <#else>
                         <#if ((Session.loginUser.role)!'')='TELADMIN'>
-                            <span class="fa fa-phone-square bigger-250 dark"></span>
+                            <span class="fa fa-phone-square bigger-250 dark" style="margin-top: 5px"></span>
                         <#else>
-                            <span class="fa fa-user-md bigger-250"></span>
+                            <span class="fa fa-user-md bigger-250" style="margin-top: 5px"></span>
                         </#if>
                     </#if>
                         <span class="user-info"><small>

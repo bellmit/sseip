@@ -7,6 +7,8 @@
 <#--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/bootstrap.css"/>
 <#--<link rel="stylesheet" href="${context.contextPath}/resources/ace/assets/css/font-awesome.css"/>-->
