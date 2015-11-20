@@ -22,6 +22,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Y {
+    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!\\w+.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
+
     public static void main(String[] args) throws IOException, ParseException {
         String p = "C:/Users/TechUser/Documents/yingwen2.csv";
         File pf = new File(p);
@@ -51,6 +53,7 @@ public class Y {
             // website group
             // initial owner
             // memo list
+
             customer.setHospitalization(HospitalizationType.NO);
             customer.setWeight(Weight.get(weightConverter(r.get("quanzhong"))));
             customer.setRevisitDate(revisitDateParser(r.get("hfTime")));
@@ -59,8 +62,15 @@ public class Y {
             customer.setEmergency(!r.get("sfjj").equals("0"));
             // disease type
             customer.setUpdated(revisitDateParser(r.get("LastTime")));
-            customer.setSourceWebsite(r.get("strurl"));
 
+            if (customer.getContactRecords() != null) {
+                Matcher m = achorHrefPattern.matcher(customer.getContactRecords());
+                if (m.find()) {
+                    customer.setSourceWebsite(m.group(1));
+                } else {
+//                System.out.println("source website not found");
+                }
+            }
 
 //            System.out.println(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
 //            System.out.println(JSON.toJSONString(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed())));
@@ -75,7 +85,7 @@ public class Y {
 //            System.out.println(customer.getEmergency());
 
 //            System.out.println(customer.getUpdated());
-            System.out.println(customer.getSourceWebsite());
+//            System.out.println(customer.getSourceWebsite());
             if (r.getRecordNumber() % 10 == -1) {
                 break;
             }

@@ -32,7 +32,7 @@ public class CustomerController {
     public final Byte pageSize = 20;
 
     //    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!www10.53kf.com)(\\S*?)/|\"", Pattern.DOTALL);
-    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!www10.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
+    private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!\\w+.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
 
     private CountryService countryService;
     private DiseaseTypeService diseaseTypeService;

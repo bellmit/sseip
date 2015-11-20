@@ -211,17 +211,10 @@
                                     <dl>
                                         <dt>备注</dt>
                                         <dd>
-                                            <div class="well" style="height: 20em;overflow: auto">
-                                            <#if customer.memos?? && customer.memos?size gt 0>
-                                                <ul>
-                                                    <#list customer.memos as memo>
-                                                        <li><span class="orange">${memo.content?html}</span> -
-                                                            <span class="text-warning">${memo.added?string('yyyy-MM-dd HH:mm:ss')}</span>
-                                                            -
-                                                            <span class="text-primary">${(memo.user.realName)!''}</span>
-                                                        </li></#list>
-                                                </ul>
-                                            </#if>
+                                            <div class="well"
+                                                 style="min-height:10em;max-height:40em;word-wrap:break-word;overflow-y:auto;"
+                                                 id="memo-ul-container">
+                                            <#include "customer-update-memo-fragment.ftl">
                                             </div>
                                         </dd>
 

@@ -27,8 +27,7 @@ public class Extractor {
         File pf = new File(p);
         Reader reader = new FileReader(pf);
 //                new String[]{"ID", "UserName", "Sex", "Age", "Address", "Tel", "SubTime", "zhengzhuang", "LtRecord", "kfmark", "ZbUserName", "WebAddress", "SubUserName", "mzbeizhu", "sfzy", "quanzhong", "hfTime", "sfyx", "zhuanruren", "zhuanchuren", "zhuanyitime", "zhuanyijilu", "telstatus", "sfsc", "sfjj", "bingzhong", "LastTime", "kfusername", "kfusertel", "kfuseraddr", "kfbeizhu", "strurl", "zystyle", "mzusername", "mzusertel", "mzuseraddr", "sfby", "sfck"}
-        CSVParser ps = CSVFormat.DEFAULT.withHeader(
-        ).parse(reader);
+        CSVParser ps = CSVFormat.DEFAULT.withHeader().parse(reader);
         CSVRecord r;
         Customer customer;
         for (Iterator<CSVRecord> ir = ps.iterator(); ir.hasNext(); ) {
