@@ -233,7 +233,8 @@
                                     <dl>
                                         <dt>联系记录</dt>
                                         <dd>
-                                            <div class="well" style="height: 20em;overflow: auto">
+                                            <div class="well"
+                                                 style="word-wrap:break-word;overflow-y:auto;height:auto;max-height:60em;min-height:8em;">
                                             <#if (customer.contactRecords)??>
                                     ${customer.contactRecords}
                                 </#if>

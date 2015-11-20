@@ -21,7 +21,10 @@ public enum Weight {
         return weightName;
     }
 
-    public static Weight get(int code) {
+    public static Weight get(Integer code) {
+        if (code == null) {
+            return null;
+        }
         return map.get(code);
     }
 

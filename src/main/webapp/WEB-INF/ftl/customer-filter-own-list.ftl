@@ -305,12 +305,15 @@
             <#--5    -->
                 <col style="width: 3em;">
                 <col style="width: 7em;">
-                <col style="width: 10em;">
+            <#--<col style="width: 10em;">-->
             <#--<col >--> <#--style="width: 11em;"--> <#--备注-->
+            <#--报备-->
                 <col style="width: 3em;">
             <#--9-->
+            <#--提交人-->
                 <col style="width: 4.3em;">
-                <col style="width: 9.3em;">
+            <#--更新时间-->
+            <#--<col style="width: 9.3em;">-->
                 <col style="width: 9.3em;">
                 <col style="width: 7em;">
             <#--<col class="col-sm-1">
@@ -334,10 +337,10 @@
                 <th class="">症状</th>
                 <th class="" title="是否住院">住院</th>
                 <th class="">所属网站群组</th>
-                <th class="">来源域名</th>
+            <#--<th class="">来源域名</th>-->
                 <th class="" title="是否报备">报备</th>
                 <th class="">提交人</th>
-                <th class="">更新时间</th>
+            <#--<th class="">更新时间</th>-->
                 <th class="">创建时间</th>
 
                 <th class="center">功能</th>
@@ -398,7 +401,8 @@
                 <td data-toggle="tooltip"
                     title="${(customer.website.name)!''}"><#if customer.website??>${(customer.website.name)!''}<#else>
                 <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-                <td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>
+            <#--来源域名-->
+            <#--<td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>-->
             <#--<td class=""
                 title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>-->
@@ -409,8 +413,9 @@
                 title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>-->
                 <td data-toggle="tooltip" title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
-                <td data-toggle="tooltip"
-                    title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>
+            <#--更新时间-->
+            <#--<td data-toggle="tooltip"
+                title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>-->
                 <td data-toggle="tooltip"
                     title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 

@@ -16,6 +16,9 @@ public enum CallState {
     }
 
     public static CallState get(Integer code) {
+        if (code == null) {
+            return null;
+        }
         return map.get(code);
     }
 

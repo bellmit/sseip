@@ -24,7 +24,10 @@ public enum Role {
         return roleName;
     }
 
-    public static Role get(int code) {
+    public static Role get(Integer code) {
+        if (code == null) {
+            return null;
+        }
         return map.get(code);
     }
 

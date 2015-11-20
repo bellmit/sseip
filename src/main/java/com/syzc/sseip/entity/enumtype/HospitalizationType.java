@@ -21,7 +21,10 @@ public enum HospitalizationType {
         return textName;
     }
 
-    public static HospitalizationType get(int code) {
+    public static HospitalizationType get(Integer code) {
+        if (code == null) {
+            return null;
+        }
         return map.get(code);
     }
 

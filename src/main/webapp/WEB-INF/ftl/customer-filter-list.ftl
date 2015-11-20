@@ -281,14 +281,15 @@
                 <col class="">
             <#--4    -->
                 <col style="width: 3em;">
-                <col style="width: 7em;">
+            <#--来源域名-->
+            <#--<col style="width: 7em;">-->
                 <col style="width: 10.3em;">
             <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
                 <col style="width: 3em;">
             <#--8-->
                 <col style="width: 4.3em;">
                 <col style="width: 4.3em;">
-                <col style="width: 9.3em;">
+            <#--<col style="width: 9.3em;">-->
                 <col style="width: 9.3em;">
                 <col style="width: 7em;">
             </colgroup>
@@ -305,12 +306,12 @@
                 <th class="">症状</th>
                 <th class="" title="是否住院">住院</th>
                 <th class="">所属网站群组</th>
-                <th class="">来源域名</th>
+            <#--<th class="">来源域名</th>-->
             <#--<th class="">备注</th>-->
                 <th class="" title="是否报备">报备</th>
                 <th class="">所属人</th>
                 <th class="">提交人</th>
-                <th class="">更新时间</th>
+            <#--<th class="">更新时间</th>-->
                 <th class="">创建时间</th>
 
                 <th class="center">功能</th>
@@ -359,7 +360,8 @@
                 <#else>
                 <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
                 <td data-toggle="tooltip" title="${(customer.website.name)!''}">${(customer.website.name)!''}</td>
-                <td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>
+            <#--来源域名-->
+            <#--<td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>-->
             <#--<td class=""
                 title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
                 <span class="label"><span class="fa fa-question"></span></#if></td>-->
@@ -372,8 +374,10 @@
                 <td data-toggle="tooltip"
                     title="${(customer.ownerUser.realName)!''}">${(customer.ownerUser.realName)!''}</td>
                 <td data-toggle="tooltip" title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
-                <td data-toggle="tooltip"
-                    title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>
+
+            <#--<td data-toggle="tooltip"
+                title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>-->
+
                 <td data-toggle="tooltip"
                     title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 

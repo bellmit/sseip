@@ -23,7 +23,10 @@ public enum Sex {
         return textName;
     }
 
-    public static Sex get(int code) {
+    public static Sex get(Integer code) {
+        if (code == null) {
+            return null;
+        }
         return map.get(code);
     }
 
