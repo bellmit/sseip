@@ -44,7 +44,7 @@ public class Y {
             customer.setPatientName(r.get("UserName"));
             customer.setSex(sexConverter(r.get("Sex")));
             customer.setAge(ageConverter(r.get("Age")));
-            // country ignore for now
+            // country ignore for now; mix addr & kf addr, or only addr
             //tel & country mixed
             customer.setAdded(subTimeParser(r.get("SubTime")));
             customer.setSymptom(r.get("zhengzhuang"));

@@ -7,39 +7,36 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MemoExtractorPracticeB {
+public class MemoExtractorPracticeBImpr {
     public static void main(String[] args) throws IOException {
-        Pattern p1, pDel, pOnlyDate;
-        p1 = Pattern.compile("^(.*?)[<].*?[>][(](\\d.*?)[)][<].*?[>]([^<].*?)[<]", Pattern.DOTALL);
+//        PrintStream ps = new PrintStream(new BufferedOutputStream(new FileOutputStream("e:/sout.txt")));
+//        System.setOut(ps);
 
 //        </br>客服(2014-07-06 11:40:16)删除此记录
-//        pDel = Pattern.compile("[<]/br[>]客服[(]\\d+-\\d+-\\d+[)]删除此记录\\s*", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
-        pDel = Pattern.compile("[<]/br[>]客服\\(\\d+-\\d+-\\d+ \\d+:\\d+:\\d+\\)删除此记录\\s*", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
-
-//        2014/05/12 11:14:43
-        pOnlyDate = Pattern.compile("\\d{4}/\\d{2}/\\d{2} \\d{2}:\\d{2}:\\d{2}", Pattern.DOTALL);
+//        pDel = Pattern.compile("[<]/br[>]客服\\(\\d+-\\d+-\\d+ \\d+:\\d+:\\d+\\)删除此记录\\s*", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
 
 //        (2015-11-11 11:17:16)
-        Pattern pMemoEntry;
+        Pattern pMemoEntry, pFullEntry;
         //没有用户名
 //        pMemoEntry = Pattern.compile("(^|(([<]br\\s*/[>])|([<]/\\s*br[>]))*)[\r\n]*" +
 //                "(.*?)([<][^/>]+[>])+[(]\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}[)]([<]/[^/>]+[>])+", Pattern.DOTALL);
+
         //没有
         pMemoEntry = Pattern.compile("(^|(([<]br\\s*/[>])|([<]/\\s*br[>]))*)[\r\n]*" +
-                "(.*?)([<][^/>]+[>])+[(]\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}[)]([<]/[^/>]+[>])+([<][^/>]+[>])+.*?([<]/[^/>]+[>])+", Pattern.DOTALL);
+                "(?<memo>.*?)([<][^/>]+[>])+[(](?<date>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})[)]([<]/[^/>]+[>])+([<][^/>]+[>])+(?<user>[^<]*)([<]/[^/>]+[>])+", Pattern.DOTALL);
 
-        pMemoEntry = Pattern.compile(
+        pFullEntry = Pattern.compile(
                 "((" + "[<]/br[>]客服\\(\\d+-\\d+-\\d+ \\d+:\\d+:\\d+\\)删除此记录\\s*" + ")|(" + "(^|(([<]br\\s*/[>])|([<]/\\s*br[>]))*)[\r\n]*" +
                         "(.*?)([<][^/>]+[>])+[(]\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}[)]([<]/[^/>]+[>])+([<][^/>]+[>])+.*?([<]/[^/>]+[>])+" + "))"
         );
 
         CSVRecord r;
-        Matcher m;
-        String[] ss;
+        Matcher m, n;
 
 //        System.out.println(p1.pattern());
 //        System.out.println(pDel.pattern());
 //        System.out.println(pOnlyDate.pattern());
+
         for (Iterator<CSVRecord> i = Extractor.ext().iterator(); i.hasNext(); ) {
             r = i.next();
             String memosStr = r.get("mzbeizhu");
@@ -47,12 +44,18 @@ public class MemoExtractorPracticeB {
 
 //            m = pMemoEntry.matcher(memosStr);
 //            m = pDel.matcher(memosStr);
-            m = pMemoEntry.matcher(memosStr);
+            m = pFullEntry.matcher(memosStr);
             System.out.println(r.getRecordNumber());
 //            System.out.println(r.get("ID"));
             while (m.find()) {
-                System.out.println("find:");
-                System.out.println(m.group());
+                n = pMemoEntry.matcher(m.group());
+                if (n.matches()) {
+                    System.out.println("find:");
+                    System.out.println(n.group("memo"));
+                    System.out.println(n.group("date"));
+                    System.out.println(n.group("user"));
+
+                }
             }
 
 /*
@@ -101,6 +104,7 @@ public class MemoExtractorPracticeB {
         }
 
         System.out.println(pMemoEntry.pattern());
-        System.out.println(pDel.pattern());
+
+//        ps.close();
     }
 }
