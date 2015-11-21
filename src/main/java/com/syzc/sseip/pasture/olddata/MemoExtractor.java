@@ -1,5 +1,6 @@
 package com.syzc.sseip.pasture.olddata;
 
+import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.Memo;
 import org.apache.commons.csv.CSVRecord;
 
@@ -35,9 +36,7 @@ public class MemoExtractor {
                 memo.setContent(n.group("memo"));
                 memo.setAdded(sdf.parse(n.group("date")));
                 memo.setUserId(UserExtractor.get(n.group("user")));
-//                System.out.println("here 1");
                 if (UserExtractor.get(n.group("user")) == null && n.group("user") != null && n.group("user").trim().length() > 0) {
-//                    System.out.println("here 2");
 //                    System.out.println(n.group("user").length());
 //                    System.out.println(n.group("user"));
 //                    System.exit(1);
@@ -61,7 +60,7 @@ public class MemoExtractor {
             String memosStr = r.get("mzbeizhu");
             System.out.println(r.getRecordNumber());
             extract(memosStr);
-//            System.out.println(JSON.toJSONString(extract(memosStr), true));
+            System.out.println(JSON.toJSONString(extract(memosStr), true));
         }
         System.out.println(ss);
 //        ps.close();

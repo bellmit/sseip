@@ -1,6 +1,6 @@
 package com.syzc.sseip.pasture.olddata;
 
-import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.CustomerDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Weight;
@@ -37,13 +37,14 @@ public class Y {
 
 
         CSVRecord r;
-        Customer customer;
+        CustomerDto customer;
 
         Set<String> ds = new HashSet<>();
         Set<Integer> uids = new HashSet<>();
+        Matcher m;
         for (Iterator<CSVRecord> ir = ps.iterator(); ir.hasNext(); ) {
             r = ir.next();
-            customer = new Customer();
+            customer = new CustomerDto();
 //            System.out.println(r.getRecordNumber());
 
             customer.setPatientName(r.get("UserName"));
@@ -51,10 +52,10 @@ public class Y {
             customer.setAge(ageConverter(r.get("Age")));
             // country ignore for now; mix addr & kf addr, or only addr
             //tel & country mixed
+            // kfuseraddr (indu), Address 是国家名字
             customer.setAdded(subTimeParser(r.get("SubTime")));
             customer.setSymptom(r.get("zhengzhuang"));
             customer.setContactRecords(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
-            // memo list
 
             customer.setHospitalization(HospitalizationType.NO);
             customer.setWeight(Weight.get(weightConverter(r.get("quanzhong"))));
@@ -62,17 +63,17 @@ public class Y {
             customer.setValid(!r.get("sfyx").equals("0"));
             customer.setDiscard(!r.get("sfsc").equals("0"));
             customer.setEmergency(!r.get("sfjj").equals("0"));
-            // disease type
             customer.setUpdated(revisitDateParser(r.get("LastTime")));
 
             if (customer.getContactRecords() != null) {
-                Matcher m = achorHrefPattern.matcher(customer.getContactRecords());
+                m = achorHrefPattern.matcher(customer.getContactRecords());
                 if (m.find()) {
                     customer.setSourceWebsite(m.group(1));
                 } else {
 //                System.out.println("source website not found");
                 }
             }
+
 //            System.out.println(r.get("ZbUserName"));
 //            ds.add(r.get("ZbUserName"));
 //            ds.add(r.get("SubUserName"));
@@ -87,6 +88,9 @@ public class Y {
             customer.setDiseaseTypeId(DiseaseTExtractor.diseaseTMap.get(r.get("bingzhong")));
             customer.setOwnerUserId(UserExtractor.get(r.get("ZbUserName")));
             customer.setUserId(UserExtractor.get(r.get("SubUserName")));
+
+            //提取备注列表； 参考custoemr id
+            customer.setMemos(MemoExtractor.extract(r.get("mzbeizhu")));
 
             /*if (DiseaseTExtractor.diseaseTMap.get(r.get("bingzhong")) == null && r.get("bingzhong") != null && r.get("bingzhong").length() > 0) {
                 System.out.println(r.get("bingzhong"));
