@@ -8,13 +8,16 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MemoExtractorPractice {
+public class MemoExtractorPracticeB {
     public static void main(String[] args) throws IOException {
         Pattern p1, pDel, pOnlyDate;
         p1 = Pattern.compile("^(.*?)[<].*?[>][(](\\d.*?)[)][<].*?[>]([^<].*?)[<]", Pattern.DOTALL);
         pDel = Pattern.compile("客服[(]\\d+-\\d+-\\d.*?[)]删除此记录", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
 //        2014/05/12 11:14:43
         pOnlyDate = Pattern.compile("\\d{4}/\\d{2}/\\d{2} \\d{2}:\\d{2}:\\d{2}", Pattern.DOTALL);
+
+//        (2015-11-11 11:17:16)
+        Pattern pMemoEntry = Pattern.compile("([<][^/>]+[>])+[(]\\d{4}-\\d{2}-\\d{2}[)]([<]/[^/>]+[>])+", Pattern.DOTALL);
 
         CSVRecord r;
         Matcher m;
@@ -27,7 +30,7 @@ public class MemoExtractorPractice {
             r = i.next();
             String memosStr = r.get("mzbeizhu");
 //            System.out.println(JSON.toJSONString(memosStr));
-            ss = memosStr.split("(([<]br\\s*/\\s*[>])|([<]/br[>])){1,2}[\r\n]*");
+            ss = memosStr.split("(([<]br\\s*/[>])|([<]/\\s*br[>])){1,2}[\r\n]*");
             for (String si : ss) {
                 if (si.length() == 0 || si.matches("\\s*")) {
                     continue;
