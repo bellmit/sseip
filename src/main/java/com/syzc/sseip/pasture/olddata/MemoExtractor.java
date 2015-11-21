@@ -1,18 +1,12 @@
 package com.syzc.sseip.pasture.olddata;
 
-import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.Memo;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +17,7 @@ public class MemoExtractor {
             "((" + "[<]/br[>]客服\\(\\d+-\\d+-\\d+ \\d+:\\d+:\\d+\\)删除此记录\\s*" + ")|(" + pMemoEntry.pattern() + "))"
     );
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    static Set<String> ss = new HashSet<>();
 
     public static List<Memo> extract(String memosStr) throws ParseException {
         Matcher m, n;
@@ -39,6 +34,15 @@ public class MemoExtractor {
                 memo = new Memo();
                 memo.setContent(n.group("memo"));
                 memo.setAdded(sdf.parse(n.group("date")));
+                memo.setUserId(UserExtractor.get(n.group("user")));
+//                System.out.println("here 1");
+                if (UserExtractor.get(n.group("user")) == null && n.group("user") != null && n.group("user").trim().length() > 0) {
+//                    System.out.println("here 2");
+//                    System.out.println(n.group("user").length());
+//                    System.out.println(n.group("user"));
+//                    System.exit(1);
+                    ss.add(n.group("user"));
+                }
                 list.add(memo);
             }
         }
@@ -47,17 +51,19 @@ public class MemoExtractor {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
-        PrintStream ps = new PrintStream(new BufferedOutputStream(new FileOutputStream("e:/sout.txt")));
-        System.setOut(ps);
+//        PrintStream ps = new PrintStream(new BufferedOutputStream(new FileOutputStream("e:/sout.txt")));
+//        System.setOut(ps);
+        System.out.println("here 0");
 
         for (Iterator<CSVRecord> i = Extractor.ext().iterator(); i.hasNext(); ) {
             CSVRecord r;
             r = i.next();
             String memosStr = r.get("mzbeizhu");
             System.out.println(r.getRecordNumber());
-//            extract(memosStr);
-            System.out.println(JSON.toJSONString(extract(memosStr), true));
+            extract(memosStr);
+//            System.out.println(JSON.toJSONString(extract(memosStr), true));
         }
-        ps.close();
+        System.out.println(ss);
+//        ps.close();
     }
 }

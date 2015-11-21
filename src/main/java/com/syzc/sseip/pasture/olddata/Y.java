@@ -17,7 +17,9 @@ import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +38,9 @@ public class Y {
 
         CSVRecord r;
         Customer customer;
+
+        Set<String> ds = new HashSet<>();
+        Set<Integer> uids = new HashSet<>();
         for (Iterator<CSVRecord> ir = ps.iterator(); ir.hasNext(); ) {
             r = ir.next();
             customer = new Customer();
@@ -49,9 +54,6 @@ public class Y {
             customer.setAdded(subTimeParser(r.get("SubTime")));
             customer.setSymptom(r.get("zhengzhuang"));
             customer.setContactRecords(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
-            // owner
-            // website group
-            // initial owner
             // memo list
 
             customer.setHospitalization(HospitalizationType.NO);
@@ -71,6 +73,24 @@ public class Y {
 //                System.out.println("source website not found");
                 }
             }
+//            System.out.println(r.get("ZbUserName"));
+//            ds.add(r.get("ZbUserName"));
+//            ds.add(r.get("SubUserName"));
+
+//            uids.add(UserExtractor.map.get(r.get("ZbUserName")));
+
+            /*if (UserExtractor.map.get(r.get("ZbUserName")) == null && r.get("ZbUserName") != null && r.get("ZbUserName").length() > 0) {
+                System.out.println(r.get("ZbUserName"));
+            }*/
+
+            customer.setWebsiteId(28L);
+            customer.setDiseaseTypeId(DiseaseTExtractor.diseaseTMap.get(r.get("bingzhong")));
+            customer.setOwnerUserId(UserExtractor.get(r.get("ZbUserName")));
+            customer.setUserId(UserExtractor.get(r.get("SubUserName")));
+
+            /*if (DiseaseTExtractor.diseaseTMap.get(r.get("bingzhong")) == null && r.get("bingzhong") != null && r.get("bingzhong").length() > 0) {
+                System.out.println(r.get("bingzhong"));
+            }*/
 
 //            System.out.println(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
 //            System.out.println(JSON.toJSONString(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed())));
@@ -91,6 +111,8 @@ public class Y {
             }
         }
         ps.close();
+//        System.out.println(JSON.toJSONString(ds, true));
+//        System.out.println(JSON.toJSONString(uids, true));
     }
 
     static Sex sexConverter(String str) {
