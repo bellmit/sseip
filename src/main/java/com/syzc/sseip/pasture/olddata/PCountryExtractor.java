@@ -6,9 +6,10 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CountryExtractorPractice {
+public class PCountryExtractor {
     static Map<String, Long> cmap = new HashMap<>(), emap = new HashMap<>();
     static List<String> clist = new LinkedList(), elist = new LinkedList();
     private static Map<String, Pattern> cp = new HashMap<>();
@@ -27,21 +28,43 @@ public class CountryExtractorPractice {
         }
     }
 
-    //    public static Long v(String text) {
-    public static Set<Long> v(String text) {
+    private static Long v(String text) {
+//    public static Set<Long> v(String text) {
         Set<Long> s = new HashSet<>();
         for (String i : clist) {
             if (text.contains(i)) {
-                s.add(cmap.get(i));
+//                s.add(cmap.get(i));
+                return cmap.get(i);
             }
         }
 
         for (String i : elist) {
             if (cp.get(i).matcher(StringUtils.lowerCase(text)).find()) {
-                s.add(emap.get(i));
+//                s.add(emap.get(i));
+                return emap.get(i);
             }
         }
-        return s;
+        return null;
+    }
+
+    private static Pattern pContactCountry = Pattern.compile("IP地址:[&]nbsp;(\\w+)[(]", Pattern.UNICODE_CHARACTER_CLASS);
+
+    public static Long t(CSVRecord c) {
+        Matcher am;
+
+        if (v(c.get("Address")) != null) {
+            return v(c.get("Address"));
+        } else if (v(c.get("kfuseraddr")) != null) {
+            return v(c.get("kfuseraddr"));
+        } else {
+            am = pContactCountry.matcher(c.get("LtRecord"));
+            if (am.find()) {
+                if (v(am.group(1)) != null) {
+                    return v(am.group(1));
+                }
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) throws IOException {
@@ -58,21 +81,40 @@ public class CountryExtractorPractice {
         CSVRecord c;
         Iterator<CSVRecord> ite = Extractor.ext().iterator();
         int cnt = 0;
+//        IP地址:&nbsp;印度
+//        IP地址:&nbsp;印度(
+        Pattern cp = Pattern.compile("IP地址:[&]nbsp;(\\w+)[(]", Pattern.UNICODE_CHARACTER_CLASS);
+        Matcher am;
+        String cty;
+        String cty2;
         for (; ite.hasNext(); ) {
             c = ite.next();
-            /*if (c.get("Address").trim().length() == 0) {
-                cnt++;
+
+/*
+            if (t(c) == null) {
+                System.out.println(c.getRecordNumber());
+                System.out.println(c.get("Address"));
+                System.out.println(c.get("kfuseraddr"));
+            }
+*/
+
+//            System.out.println(t(c));
+
+            /*if (c.get("Address").length() > 0 && !c.get("Address").equals("无") && v(c.get("Address")) == null) {
+                if (c.get("LtRecord").length() > 0) {
+                    am = cp.matcher(c.get("LtRecord"));
+                    if (!am.find()) {
+//                        kfuseraddr
+                        if (c.get("kfuseraddr").length() > 0) {
+                            if (v(c.get("kfuseraddr")) == null) {
+                                System.out.println(c.get("kfuseraddr"));
+                                System.out.println(c.getRecordNumber());
+                            }
+                        }
+                    }
+                }
             }*/
 
-//            if (v(c.get("Address")) != null) {
-            if (v(c.get("Address")).size() > 0) {
-//                System.out.println(c.get("Address"));
-//                System.out.println(v(c.get("Address")));
-            } else {
-                if (c.get("Address").trim().length() > 0) {
-                    System.out.println(c.get("Address"));
-                }
-            }
         }
         System.out.println(cnt);
     }
@@ -196,7 +238,7 @@ public class CountryExtractorPractice {
         cmap.put("以色列", 103L);
         cmap.put("马恩岛", 104L);
         cmap.put("印度", 105L);
-        cmap.put("英属印度洋领地", 106L);
+//        cmap.put("英属印度洋领地", 106L);
         cmap.put("伊拉克", 107L);
         cmap.put("伊朗", 108L);
         cmap.put("冰岛", 109L);
@@ -446,7 +488,7 @@ public class CountryExtractorPractice {
         emap.put("Israel", 103L);
         emap.put("Isle of Man", 104L);
         emap.put("India", 105L);
-        emap.put("British Indian Ocean Territory", 106L);
+//        emap.put("British Indian Ocean Territory", 106L);
         emap.put("Iraq", 107L);
         emap.put("Iran, Islamic Republic of", 108L);
         emap.put("Iceland", 109L);

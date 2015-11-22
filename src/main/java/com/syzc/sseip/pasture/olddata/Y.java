@@ -1,5 +1,6 @@
 package com.syzc.sseip.pasture.olddata;
 
+import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.entity.CustomerDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
@@ -88,9 +89,20 @@ public class Y {
             customer.setDiseaseTypeId(DiseaseTExtractor.diseaseTMap.get(r.get("bingzhong")));
             customer.setOwnerUserId(UserExtractor.get(r.get("ZbUserName")));
             customer.setUserId(UserExtractor.get(r.get("SubUserName")));
+            customer.setPatientCountryId(PCountryExtractor.t(r));
+
+            {
+                String v = r.get("Tel").trim();
+                if (v.length() > 0) {
+                    customer.setEmail(v);
+                    customer.setTel(TelExtractor.extr(v));
+                }
+            }
 
             //提取备注列表； 参考custoemr id
             customer.setMemos(MemoExtractor.extract(r.get("mzbeizhu")));
+
+//            System.out.println(r.get("Address"));
 
             /*if (DiseaseTExtractor.diseaseTMap.get(r.get("bingzhong")) == null && r.get("bingzhong") != null && r.get("bingzhong").length() > 0) {
                 System.out.println(r.get("bingzhong"));
@@ -99,7 +111,8 @@ public class Y {
 //            System.out.println(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
 //            System.out.println(JSON.toJSONString(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed())));
 
-//            System.out.println(JSON.toJSONString(customer, true));
+            System.out.println(JSON.toJSONString(customer, true));
+
 //            System.out.println(JSON.toJSONString(customer.getSymptom()));
 //            System.out.println(customer.getSymptom());
 //            System.out.println(JSON.toJSONString(customer.getRevisitDate()));
@@ -110,6 +123,7 @@ public class Y {
 
 //            System.out.println(customer.getUpdated());
 //            System.out.println(customer.getSourceWebsite());
+
             if (r.getRecordNumber() % 10 == -1) {
                 break;
             }
