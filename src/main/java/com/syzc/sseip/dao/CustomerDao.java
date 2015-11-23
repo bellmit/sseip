@@ -83,6 +83,8 @@ public interface CustomerDao extends BaseDao<Customer> {
 
     Long addAllDummies(@Param("entities") List<Customer> entities);
 
+    Long addOld(@Param("entity") Customer entity);
+
     Boolean updateDiscard(@Param("id") Long id, @Param("discard") Boolean discard);
 
     Boolean updateMemo(@Param("id") Long id, @Param("memo") String memo);

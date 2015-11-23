@@ -242,6 +242,79 @@
             )
         </foreach>
     </insert>
+    <insert id="addOld" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO customer (
+        added,
+        age,
+        contact_records,
+        discard,
+        disease_type_id,
+        email,
+        emergency,
+        hospitalization,
+        owner_user_id,
+        patient_country_id,
+        patient_name,
+        revisit_date,
+        sex,
+        source_website,
+        symptom,
+        tel,
+        updated,
+        user_id,
+        valid,
+        website_id,
+        weight
+        )
+        VALUES
+        (
+        #{entity.added},
+        #{entity.age},
+        <choose>
+            <when test="entity.contactRecords == ''">NULL</when>
+            <otherwise>#{entity.contactRecords}</otherwise>
+        </choose>
+        ,
+        #{entity.discard},
+        #{entity.diseaseTypeId},
+        <choose>
+            <when test="entity.email == ''">NULL</when>
+            <otherwise>#{entity.email}</otherwise>
+        </choose>
+        ,
+        #{entity.emergency},
+        #{entity.hospitalization},
+        #{entity.ownerUserId},
+        #{entity.patientCountryId},
+        <choose>
+            <when test="entity.patientName == ''">NULL</when>
+            <otherwise>#{entity.patientName}</otherwise>
+        </choose>
+        ,
+        #{entity.revisitDate},
+        #{entity.sex},
+        <choose>
+            <when test="entity.sourceWebsite == ''">NULL</when>
+            <otherwise>#{entity.sourceWebsite}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.symptom == ''">NULL</when>
+            <otherwise>#{entity.symptom}</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="entity.tel == ''">NULL</when>
+            <otherwise>#{entity.tel}</otherwise>
+        </choose>
+        ,
+        #{entity.updated},
+        #{entity.userId},
+        #{entity.valid},
+        #{entity.websiteId},
+        #{entity.weight}
+        );
+    </insert>
     <insert id="addAllDummies">
         INSERT INTO customer (
         updated,

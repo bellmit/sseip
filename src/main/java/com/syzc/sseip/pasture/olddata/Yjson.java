@@ -44,6 +44,7 @@ public class Yjson {
         Set<Integer> uids = new HashSet<>();
         Matcher m;
 
+        jw.startArray();
         for (Iterator<CSVRecord> ir = ps.iterator(); ir.hasNext(); ) {
             r = ir.next();
             customer = new CustomerDto();
@@ -113,7 +114,9 @@ public class Yjson {
 //            System.out.println(JSON.toJSONString(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed())));
 
 //            System.out.println(JSON.toJSONString(customer, true));
-            jw.writeObject(customer);
+
+//            jw.writeObject(customer);
+            jw.writeValue(customer);
 
 //            System.out.println(JSON.toJSONString(customer.getSymptom()));
 //            System.out.println(customer.getSymptom());
@@ -134,6 +137,7 @@ public class Yjson {
 */
         }
         ps.close();
+        jw.endArray();
         jw.close();
 
 //        System.out.println(JSON.toJSONString(ds, true));
