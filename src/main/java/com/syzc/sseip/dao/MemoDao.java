@@ -10,6 +10,8 @@ import java.util.List;
 public interface MemoDao extends BaseDao<Memo> {
     Boolean addToCustomer(@Param("entity") Memo memo, @Param("customerId") Long customerId, @Param("userId") Long userId);
 
+    Boolean addToCustomerF(@Param("entity") Memo memo, @Param("customerId") Long customerId);
+
     Long countByCustomer(Long customerId);
 
     List<Memo> listAllByCustomer(Long customerId);

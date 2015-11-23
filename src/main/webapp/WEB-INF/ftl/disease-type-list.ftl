@@ -29,11 +29,11 @@
                             <colgroup class="row">
                                 <col class="col-xs-4">
                                 <col class="col-xs-4">
-                                <#--<col class="col-xs-4">-->
+                                <col class="col-xs-4">
                             </colgroup>
                             <thead>
                             <tr>
-                            <#--<th class="text-right">id</th>-->
+                                <th class="text-right">id</th>
                                 <th class="text-right">名称</th>
                                 <th class="center">功能</th>
                             </tr>
@@ -42,7 +42,7 @@
                             <tbody>
                             <#list page.list as diseaseType>
                             <tr>
-                            <#--<td class="text-right">${diseaseType.id}</td>-->
+                                <td class="text-right">${diseaseType.id}</td>
                                 <td class="text-right"><#if (diseaseType.name)??>${diseaseType.name}<#else><span
                                         class="label">不详</span></#if>
                                 </td>

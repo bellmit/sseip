@@ -1,10 +1,13 @@
 package com.syzc.sseip.pasture.olddata;
 
-import com.alibaba.fastjson.JSON;
+import com.syzc.sseip.dao.CustomerDao;
+import com.syzc.sseip.dao.MemoDao;
 import com.syzc.sseip.entity.CustomerDto;
+import com.syzc.sseip.entity.Memo;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Weight;
+import com.syzc.sseip.util.LocalAcUtil;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -24,10 +27,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Y {
+public class EnWDemo {
     private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!\\w+.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
 
     public static void main(String[] args) throws IOException, ParseException {
+        CustomerDao cd = (CustomerDao) LocalAcUtil.getAc().getBean("customerDao");
+        MemoDao md = (MemoDao) LocalAcUtil.getAc().getBean("memoDao");
+
         String p = "C:/Users/TechUser/Documents/yingwen2.csv";
         File pf = new File(p);
 //        System.out.println(pf.exists());
@@ -112,7 +118,7 @@ public class Y {
 //            System.out.println(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
 //            System.out.println(JSON.toJSONString(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed())));
 
-            System.out.println(JSON.toJSONString(customer, true));
+//            System.out.println(JSON.toJSONString(customer, true));
 
 //            System.out.println(JSON.toJSONString(customer.getSymptom()));
 //            System.out.println(customer.getSymptom());
@@ -124,6 +130,11 @@ public class Y {
 
 //            System.out.println(customer.getUpdated());
 //            System.out.println(customer.getSourceWebsite());
+
+            cd.add(customer);
+            for (Memo memo : customer.getMemos()) {
+                md.addToCustomerF(memo, customer.getId());
+            }
 
             // limit loop count
 /*

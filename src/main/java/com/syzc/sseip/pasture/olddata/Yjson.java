@@ -1,6 +1,6 @@
 package com.syzc.sseip.pasture.olddata;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONWriter;
 import com.syzc.sseip.entity.CustomerDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
@@ -11,10 +11,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,10 +21,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Y {
+public class Yjson {
     private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!\\w+.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
 
     public static void main(String[] args) throws IOException, ParseException {
+        File jf = new File("e:/customer-details.json");
+        JSONWriter jw = new JSONWriter(new BufferedWriter(new FileWriter(jf), 6553600));
+
         String p = "C:/Users/TechUser/Documents/yingwen2.csv";
         File pf = new File(p);
 //        System.out.println(pf.exists());
@@ -112,7 +112,8 @@ public class Y {
 //            System.out.println(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed()));
 //            System.out.println(JSON.toJSONString(Jsoup.clean(r.get("LtRecord"), Whitelist.relaxed())));
 
-            System.out.println(JSON.toJSONString(customer, true));
+//            System.out.println(JSON.toJSONString(customer, true));
+            jw.writeObject(customer);
 
 //            System.out.println(JSON.toJSONString(customer.getSymptom()));
 //            System.out.println(customer.getSymptom());
@@ -133,6 +134,8 @@ public class Y {
 */
         }
         ps.close();
+        jw.close();
+
 //        System.out.println(JSON.toJSONString(ds, true));
 //        System.out.println(JSON.toJSONString(uids, true));
     }

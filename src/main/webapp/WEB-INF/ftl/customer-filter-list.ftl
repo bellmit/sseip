@@ -390,7 +390,7 @@
                            class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-120"> </span> </a>
                     </#if>
                         <#if ['ADMIN']?seq_contains(loginUser.role)>
-                            <a class="btn btn-minier" href="${context.contextPath}/customer/get/${customer.id}"><span
+                            <a class="btn btn-minier" href="${context.contextPath}/customer/get/${customer.id?c}"><span
                                     class="fa fa-newspaper-o bigger-120"></span></a>
                         </#if>
                         <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>

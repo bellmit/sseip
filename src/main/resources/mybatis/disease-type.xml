@@ -49,7 +49,6 @@ SELECT
   id,
   `name`
 FROM disease_type
-ORDER BY `name`
 LIMIT #{offset}, #{size};
     </select>
     <select id="count" resultType="Long">
