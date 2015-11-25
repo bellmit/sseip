@@ -20,13 +20,20 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPOutputStream;
 
 public class Yjson {
     private static final Pattern achorHrefPattern = Pattern.compile("[<]a\\s.*?href\\s*?=\\s*?\"https?://(?!\\w+.53kf.com)(\\S*?)[?#;/\"]", Pattern.DOTALL);
 
     public static void main(String[] args) throws IOException, ParseException {
-        File jf = new File("e:/customer-details.json");
-        JSONWriter jw = new JSONWriter(new BufferedWriter(new FileWriter(jf), 6553600));
+        File jf;
+        jf = new File("e:/customer-details.json.gz");
+
+        JSONWriter jw;
+//        jw = new JSONWriter(new BufferedWriter(new OutputStreamWriter(new GZIPOutputStream(new FileOutputStream(jf))), 6553600));
+
+        GZIPOutputStream gzos = new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(jf), 6553600), true);
+        jw = new JSONWriter(new OutputStreamWriter(gzos));
 
         String p = "C:/Users/TechUser/Documents/yingwen2.csv";
         File pf = new File(p);
@@ -36,7 +43,6 @@ public class Yjson {
 //                new String[]{"ID", "UserName", "Sex", "Age", "Address", "Tel", "SubTime", "zhengzhuang", "LtRecord", "kfmark", "ZbUserName", "WebAddress", "SubUserName", "mzbeizhu", "sfzy", "quanzhong", "hfTime", "sfyx", "zhuanruren", "zhuanchuren", "zhuanyitime", "zhuanyijilu", "telstatus", "sfsc", "sfjj", "bingzhong", "LastTime", "kfusername", "kfusertel", "kfuseraddr", "kfbeizhu", "strurl", "zystyle", "mzusername", "mzusertel", "mzuseraddr", "sfby", "sfck"}
         ).parse(reader);
 
-
         CSVRecord r;
         CustomerDto customer;
 
@@ -44,12 +50,15 @@ public class Yjson {
         Set<Integer> uids = new HashSet<>();
         Matcher m;
 
+        long cnt = 2000;
         jw.startArray();
         for (Iterator<CSVRecord> ir = ps.iterator(); ir.hasNext(); ) {
+            cnt++;
             r = ir.next();
             customer = new CustomerDto();
 //            System.out.println(r.getRecordNumber());
 
+            customer.setId(cnt);
             customer.setPatientName(r.get("UserName"));
             customer.setSex(sexConverter(r.get("Sex")));
             customer.setAge(ageConverter(r.get("Age")));
@@ -138,7 +147,9 @@ public class Yjson {
         }
         ps.close();
         jw.endArray();
-        jw.close();
+//        jw.close();
+        jw.flush();
+        gzos.close();
 
 //        System.out.println(JSON.toJSONString(ds, true));
 //        System.out.println(JSON.toJSONString(uids, true));

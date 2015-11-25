@@ -96,4 +96,12 @@ public interface CustomerDao extends BaseDao<Customer> {
     Long statAllInHospitalCount();
 
     Long statAllReportedCount();
+
+    Long alterAutoIncr();
+
+    Long maxOldsId();
+
+    Long clearOldsRepoCustomers();
+
+    Long clearOldsRepoMemo();
 }

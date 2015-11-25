@@ -24,7 +24,7 @@
         INSERT into memo (content, added, customer_id,user_id) VALUE (#{entity.content},now(),#{customerId},#{userId})
     </insert>
     <insert id="addToCustomerF" useGeneratedKeys="true" keyProperty="entity.id">
-        INSERT into memo (content, added, customer_id,user_id) VALUE (#{entity.content},#{entity.added},#{customerId},#{entity.userId})
+        INSERT into memo (id,content,added,customer_id,user_id) VALUE (#{entity.id},#{entity.content},#{entity.added},#{customerId},#{entity.userId})
     </insert>
     <delete id="remove" parameterType="Long">
         delete from memo where id=#{id}

@@ -22,9 +22,11 @@ public class BatchDumper {
         CustomerDao cd = (CustomerDao) LocalAcUtil.getAc().getBean("customerDao");
         MemoDao md = (MemoDao) LocalAcUtil.getAc().getBean("memoDao");
 
+        cd.alterAutoIncr();
+
 //        JSONReader jr = new JSONReader(new BufferedReader(new FileReader("e:/customer-details.json"), 6553600));
 //        JSONReader jr = new JSONReader(new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream("e:/customer-details.json.gz"))), 6553600));
-        JSONReader jr = new JSONReader(new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(path))), 6553600));
+        JSONReader jr = new JSONReader(new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(path)), "UTF-8"), 6553600));
 
         int cnt = 0;
         CustomerDto dto;
@@ -61,6 +63,6 @@ public class BatchDumper {
     }
 
     public static void main(String[] args) throws IOException {
-//        dump();
+        dump("E:\\codeslike\\sseip\\src\\main\\webapp\\WEB-INF\\customer-details.json.gz");
     }
 }

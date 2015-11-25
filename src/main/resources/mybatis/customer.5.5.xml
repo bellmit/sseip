@@ -244,6 +244,7 @@
     </insert>
     <insert id="addOld" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO customer (
+        id,
         added,
         age,
         contact_records,
@@ -268,6 +269,7 @@
         )
         VALUES
         (
+        #{entity.id},
         #{entity.added},
         #{entity.age},
         <choose>
@@ -791,4 +793,20 @@
         select count(1) from customer where if_report=1;
     </select>
 
+    <update id="alterAutoIncr">
+        alter table customer auto_increment=10;
+    </update>
+    <select id="maxOldsId" resultType="Long">
+        SELECT max(id)
+        FROM customer
+        WHERE id &gt;= 2000 AND id &lt; 10000
+    </select>
+    <update id="clearOldsRepoCustomers">
+        DELETE FROM customer
+        WHERE id &gt; 2000 AND id &lt; 10000
+    </update>
+    <update id="clearOldsRepoMemo">
+        DELETE FROM memo
+        WHERE customer_id &gt; 2000 AND customer_id &lt; 10000
+    </update>
 </mapper>

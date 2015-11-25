@@ -1,5 +1,6 @@
 package com.syzc.sseip.controller;
 
+import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.enumtype.Role;
 import com.syzc.sseip.pasture.olddata.BatchDumper;
@@ -21,9 +22,16 @@ public class ManagementController {
     private Logger logger = Logger.getLogger(ManagementController.class);
     private UserService userService;
 
+    private CustomerDao customerDao;
+
     @Resource
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Resource
+    public void setCustomerDao(CustomerDao customerDao) {
+        this.customerDao = customerDao;
     }
 
     @RequestMapping(value = "/welcome")
@@ -136,9 +144,9 @@ public class ManagementController {
     @ResponseBody
     public String ifDumpingCompleted(HttpSession session) {
         final String MARK = "dump-old-completed";
-        if (session.getAttribute(MARK) != null) {
-            boolean stat = (boolean) session.getAttribute(MARK);
-            if (stat) {
+        Boolean state = (boolean) session.getAttribute(MARK);
+        if (state != null) {
+            if (state) {
                 return "dumping completed";
             } else {
                 return "the dumping process is still running";
@@ -146,5 +154,28 @@ public class ManagementController {
         } else {
             return "not started";
         }
+    }
+
+    @RequestMapping(value = "/login/wierd")
+    @ResponseBody
+    public String wierd(HttpSession session) {
+        final String MARK = "wierd-mark";
+        session.setAttribute(MARK, true);
+        boolean state = (boolean) session.getAttribute(MARK);
+        return String.valueOf(state);
+    }
+
+    @RequestMapping(value = "max-olds-id")
+    @ResponseBody
+    public String maxOldsId() {
+        return String.valueOf(customerDao.maxOldsId());
+    }
+
+    @RequestMapping(value = "clear-old-repo-customers")
+    @ResponseBody
+    public String clearOldsRepoCustomers() {
+        customerDao.clearOldsRepoMemo();
+        customerDao.clearOldsRepoCustomers();
+        return "method called";
     }
 }
