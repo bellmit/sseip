@@ -5,7 +5,6 @@ import com.syzc.sseip.entity.CustomerDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Weight;
-import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.jsoup.Jsoup;
@@ -40,10 +39,14 @@ public class Yjson {
         p = "e:/yingwen-new.csv";
         File pf = new File(p);
 //        System.out.println(pf.exists());
-        Reader reader = new FileReader(pf);
-        CSVParser ps = CSVFormat.DEFAULT.withHeader(
+
+//        Reader reader = new FileReader(pf);
+
+        CSVParser ps;
+        /*ps = CSVFormat.DEFAULT.withHeader(
 //                new String[]{"ID", "UserName", "Sex", "Age", "Address", "Tel", "SubTime", "zhengzhuang", "LtRecord", "kfmark", "ZbUserName", "WebAddress", "SubUserName", "mzbeizhu", "sfzy", "quanzhong", "hfTime", "sfyx", "zhuanruren", "zhuanchuren", "zhuanyitime", "zhuanyijilu", "telstatus", "sfsc", "sfjj", "bingzhong", "LastTime", "kfusername", "kfusertel", "kfuseraddr", "kfbeizhu", "strurl", "zystyle", "mzusername", "mzusertel", "mzuseraddr", "sfby", "sfck"}
-        ).parse(reader);
+        ).parse(reader);*/
+        ps = Extractor.ext();
 
         CSVRecord r;
         CustomerDto customer;

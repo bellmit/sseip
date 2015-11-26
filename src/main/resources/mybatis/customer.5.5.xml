@@ -794,7 +794,7 @@
     </select>
 
     <update id="alterAutoIncr">
-        alter table customer auto_increment=10;
+        alter table customer auto_increment=10000;
     </update>
     <select id="maxOldsId" resultType="Long">
         SELECT max(id)

@@ -42,10 +42,9 @@
                                     <th>是否住院</th>
                                     <td><#if customer.hospitalization??>${customer.hospitalization.textName}</#if></td>
                                     <th>咨患关系</th>
-                                    <td><#if (customer.relationship)??>${customer.relationship}</#if>
-                                    </td>
+                                    <td><#if (customer.relationship)??>${customer.relationship}</#if></td>
                                     <th>更新日期</th>
-                                    <td><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
+                                    <td><#if (customer.updated)??>${customer.updated?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
                                 </tr>
                                 <tr>
                                     <th class="text-danger">患者年龄</th>
