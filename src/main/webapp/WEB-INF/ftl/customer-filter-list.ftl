@@ -137,19 +137,19 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="col-sm-2"><input data-toggle="tooltip-a"
-                                                                     class="form-control filters green"
+                                                                     class="form-control filters"
                                                                      name="name" type="text"
                                                                      form="filter-form"
                                                                      title="筛选或患者咨询人的姓名"
                                                                      placeholder="患者或咨询人的姓名"
                                                                      value="${(RequestParameters.name)!''}"/></div>
                                         <div class="col-sm-2"><input data-toggle="tooltip-a"
-                                                                     class="filters green form-control"
+                                                                     class="filters form-control"
                                                                      name="email" type="text" form="filter-form"
                                                                      title="电子邮件地址" placeholder="电子邮件地址"
                                                                      value="${(RequestParameters.email)!''}"/></div>
                                         <div class="col-sm-2"><input data-toggle="tooltip-a"
-                                                                     class="filters green form-control"
+                                                                     class="filters form-control"
                                                                      name="tel" type="tel" form="filter-form"
                                                                      title="筛选电话" placeholder="电话"
                                                                      value="${(RequestParameters.tel)!''}"/></div>

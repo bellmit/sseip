@@ -9945,14 +9945,18 @@ select {
     border-radius: 0;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    color: #858585;
+    /*edited*/
+    /*color: #858585;*/
+    color: black;
     background-color: #ffffff;
     border: 1px solid #d5d5d5;
 }
 
 .form-control:focus,
 select:focus {
-    color: #696969;
+    /*edited*/
+    /*color: #696969;*/
+    color: #FF6600;
     border-color: #f59942;
     background-color: #ffffff;
     outline: none;

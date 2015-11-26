@@ -35,7 +35,9 @@ public class Yjson {
         GZIPOutputStream gzos = new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(jf), 6553600), true);
         jw = new JSONWriter(new OutputStreamWriter(gzos));
 
-        String p = "C:/Users/TechUser/Documents/yingwen2.csv";
+        String p;
+//        p = "C:/Users/TechUser/Documents/yingwen2.csv";
+        p = "e:/yingwen-new.csv";
         File pf = new File(p);
 //        System.out.println(pf.exists());
         Reader reader = new FileReader(pf);
@@ -56,7 +58,9 @@ public class Yjson {
             cnt++;
             r = ir.next();
             customer = new CustomerDto();
-//            System.out.println(r.getRecordNumber());
+            if (r.getRecordNumber() % 100 == 0) {
+                System.out.println(r.getRecordNumber());
+            }
 
             customer.setId(cnt);
             customer.setPatientName(r.get("UserName"));
@@ -180,16 +184,28 @@ public class Yjson {
     }
 
     static Date subTimeParser(String str) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return sdf.parse(str);
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        final SimpleDateFormat sdfO = new SimpleDateFormat("yyyy/MM/dd");
+
+        try {
+            return sdf.parse(str);
+        } catch (ParseException e) {
+            return sdfO.parse(str);
+        }
     }
 
     static Date revisitDateParser(String str) throws ParseException {
         if (str == null || str.length() == 0) {
             return null;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return sdf.parse(str);
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        final SimpleDateFormat sdfO = new SimpleDateFormat("yyyy/MM/dd");
+
+        try {
+            return sdf.parse(str);
+        } catch (ParseException e) {
+            return sdfO.parse(str);
+        }
     }
 
     static Integer weightConverter(String str) {

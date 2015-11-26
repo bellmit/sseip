@@ -3,10 +3,14 @@
     <ul class="pagination">
         <li>
         <#--<span>${page.pageNo?c}/${page.maxPageNo?c}页</span>-->
-            <span>每页${page.pageSize?c}条</span>
-        <#--</li>-->
-        <#--<li>-->
-            <span>共${page.totalRows?c}条</span>
+            <span>共${page.totalRows?c}条, 第${(page.rowOffset+1)?c}~${(page.rowOffset+page.pageSize)?c}条</span>
+        </li>
+        <li>
+            <form style="display: inline;margin: 0;padding: 0;"><input class="form-page-field" style="width: 3em;;">
+                <script>
+
+                </script>
+            </form>
         </li>
         <#if page.totalRows gt 0>
             <#if !page.firstPage>

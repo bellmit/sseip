@@ -57,15 +57,11 @@
             <input form="filter-form" name="dateRange" type="hidden" id="date-range-input" style="display: none;"
                    value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
 
-            <div class="col-md-2"><input data-toggle="tooltip-a" class="filters text-right green form-control"
+            <div class="col-md-2"><input data-toggle="tooltip-a" class="filters text-right form-control"
                                          name="name" type="text" form="filter-form" title="筛选患者咨询人姓名"
                                          placeholder="患者或咨询人姓名"/></div>
-            <div class="col-md-2"><input data-toggle="tooltip-a" name="email"
-                                         class="filters text-right green form-control"
-                                         type="text"
-                                         form="filter-form"
-                                         title="电子邮件地址"
-                                         placeholder="电子邮件地址"/></div>
+            <div class="col-md-2"><input data-toggle="tooltip-a" name="email" class="filters text-right form-control"
+                                         type="text" form="filter-form" title="电子邮件地址" placeholder="电子邮件地址"/></div>
 
             <div data-toggle="tooltip-a" class="col-md-2" style="padding: 0; margin: 0;" title="选择网站群组"><select
                     name="websiteId"
@@ -145,11 +141,10 @@
                                                         </select></div>
 
                                                         <div class="col-md-2"><input data-toggle="tooltip-a" name="tel"
-                                                                                     class="filters text-right green form-control"
-                                                                                     type="tel"
-                                                                                     form="filter-form"
-                                                                                     title="筛选电话"
-                                                                                     placeholder="电话"/></div>
+                                                                                     class="filters text-right form-control"
+                                                                                     type="tel" form="filter-form"
+                                                                                     title="筛选电话" placeholder="电话"/>
+                                                        </div>
 
                                                         <div data-toggle="tooltip-a" class="col-md-2"
                                                              title="筛选患者或咨询人国家">

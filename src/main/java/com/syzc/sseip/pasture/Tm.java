@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 public class Tm {
     public static void main(String[] args) {
         //遍历 map, ftl
-//        System.out.println(JSON.toJSONString(System.getProperties(), true));
+        System.out.println(JSON.toJSONString(System.getProperties(), true));
         System.out.println(JSON.toJSONString(System.getenv(), true));
         System.out.println(Runtime.getRuntime().freeMemory());
         System.out.println(Runtime.getRuntime().totalMemory());
