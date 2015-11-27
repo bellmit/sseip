@@ -160,7 +160,7 @@
                 <div class="col-xs-12">
                     <dl class="dl-horizontal">
                         <dt>ID</dt>
-                        <dd>${customer.id}</dd>
+                        <dd>${customer.id?long?c}</dd>
                         <dt>患者姓名</dt>
                         <dd><#if (customer.patientName)??>${customer.patientName}<#else><span
                                 class="label">未知</span></#if></dd>

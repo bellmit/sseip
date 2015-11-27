@@ -140,7 +140,7 @@
                                                                     <#list countries as country>
                                                                         <option
                                                                             <#if (customer.liaisonCountryId)?? && customer.liaisonCountryId=country.id>selected=""</#if>
-                                                                            value="${country.id}">${country.a2Code}
+                                                                            value="${country.id?long?c}">${country.a2Code}
                                                                             - ${country.name}
                                                                             - ${country.nameEn}</option>
                                                                     </#list>
@@ -269,7 +269,7 @@
                                                 <#list websites as website>
                                                     <option
                                                         <#if (customer.websiteId)?? && customer.websiteId=website.id>selected=""</#if>
-                                                        value="${website.id}">${website.name}</option>
+                                                        value="${website.id?long?c}">${website.name}</option>
                                                 </#list>
                                                 </select>
                                             </div>
@@ -332,7 +332,7 @@
                                                 <#list diseaseTypes as diseaseType>
                                                     <option
                                                         <#if (customer.diseaseTypeId)?? && customer.diseaseTypeId=diseaseType.id>selected=""</#if>
-                                                        value="${diseaseType.id}">${diseaseType.name}</option>
+                                                        value="${diseaseType.id?long?c}">${diseaseType.name}</option>
                                                 </#list>
                                                 </select>
                                             </div>
@@ -354,7 +354,7 @@
                                                 <#list countries as country>
                                                     <option
                                                         <#if (customer.patientCountryId)?? && customer.patientCountryId=country.id>selected=""</#if>
-                                                        value="${country.id}">${country.a2Code}
+                                                        value="${country.id?long?c}">${country.a2Code}
                                                         - ${country.name} - ${country.nameEn}</option>
                                                 </#list>
                                                 </select>

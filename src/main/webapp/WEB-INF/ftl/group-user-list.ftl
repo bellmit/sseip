@@ -48,10 +48,10 @@
                             <tbody>
                             <#list page.list as user>
                             <tr>
-                                <td class="text-right">${user.id}</td>
+                                <td class="text-right">${user.id?long?c}</td>
                                 <td class="text-right">${user.username}
                                     <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/user/profile/${user.id}" class=""
+                                        <a href="${context.contextPath}/user/profile/${user.id?long?c}" class=""
                                            title="查看"><span class="fa fa-eye"></span></a>
                                     </#if>
                                 </td>
@@ -73,7 +73,7 @@
                                 <td class="text-right"><#if (user.group.name)??>${user.group.name}<#else>
                                     <span class="label">没有写</span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/group/user-update/${user.id}" title="转部门"><span
+                                        <a href="${context.contextPath}/group/user-update/${user.id?long?c}" title="转部门"><span
                                                 class="fa fa-gear"></span></a>
                                     </#if>
                                 </td>

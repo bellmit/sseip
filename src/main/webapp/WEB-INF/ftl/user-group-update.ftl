@@ -94,7 +94,7 @@
                     <#list groups as group>
                         <div class="row">
                             <div class="col-md-12">
-                                <label><input type="radio" name="group" value="${group.id}"
+                                <label><input type="radio" name="group" value="${group.id?long?c}"
                                               <#if (user.groupId)?? && group.id==user.groupId>checked=""</#if>>${group.name}
                                 </label>
                             </div>

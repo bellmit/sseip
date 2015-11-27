@@ -53,7 +53,7 @@
                                 <td class="center">
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
-                                            <a class="btn btn-minier" href="/website/update/${website.id}"
+                                            <a class="btn btn-minier" href="/website/update/${website.id?long?c}"
                                                title="编辑网站条目"> <span class="fa fa-pencil-square bigger-130"> </span> </a>
                                             <button form="from-remove-website-${website_index}"
                                                     class="remove-control btn btn-minier"
@@ -65,7 +65,7 @@
                                         <form id="from-remove-website-${website_index}"
                                               action="${context.contextPath}/website/remove" method="post"
                                               style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${website.id}">
+                                                                              value="${website.id?long?c}">
                                         </form>
                                     </#if>
                                 </td>

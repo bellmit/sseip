@@ -51,12 +51,12 @@
                                 <td class="center">
                                     <span class="btn-group">
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a class="btn btn-minier" href="${context.contextPath}/group/edit/${group.id}"
+                                        <a class="btn btn-minier" href="${context.contextPath}/group/edit/${group.id?long?c}"
                                            title="编辑"><span class="fa fa-pencil-square"></span></a>
                                     </#if>
                                         <#if loginUser.role?? && loginUser.role='ADMIN'>
                                             <a class="btn btn-minier"
-                                               href="${context.contextPath}/group/user-list/${group.id}/1" title="用户列表"><span
+                                               href="${context.contextPath}/group/user-list/${group.id?long?c}/1" title="用户列表"><span
                                                     class="fa fa-list"></span></a>
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
@@ -66,7 +66,7 @@
                                             <form id="from-remove-${group_index}"
                                                   action="${context.contextPath}/group/remove" method="post"
                                                   style="display: inline"><input type="hidden" name="groupid"
-                                                                                 value="${group.id}">
+                                                                                 value="${group.id?long?c}">
                                             </form>
                                         </#if>
                                         </span>

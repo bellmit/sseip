@@ -707,6 +707,109 @@
             </if>
         </where>
     </select>
+    <select id="listByFilterA" resultMap="CustomerDtoWithMemo">
+        SELECT
+        *
+        FROM
+        customer
+        <where>
+            <if test="query.websiteId != null">
+                website_id=#{query.websiteId}
+            </if>
+            <if test="query.tel!=null and query.tel!=''">
+                and tel=#{query.tel}
+            </if>
+            <if test="query.name!=null and query.name!=''">
+                and (liaison_name=#{query.name} OR patient_name=#{query.name})
+            </if>
+            <if test="query.countryId!=null and query.countryId!=''">
+                and (liaison_country_id=#{query.countryId} OR patient_country_id=#{query.countryId})
+            </if>
+            <if test="query.userId != null">
+                and owner_user_id=#{query.userId}
+            </if>
+            <if test="query.email!=null and query.email!= ''">
+                and email like CONCAT('%','${query.email}','%')
+            </if>
+            <if test="query.diseaseTypeId != null">
+                and disease_type_id=#{query.diseaseTypeId}
+            </if>
+            <if test="query.valid != null">
+                and valid=#{query.valid}
+            </if>
+            <if test="query.hospitalization !=null">
+                and hospitalization=#{query.hospitalization}
+            </if>
+            <if test="query.stars !=null and query.stars !=0">
+                and stars=#{query.stars}
+            </if>
+            <if test="query.discard !=null">
+                and discard=#{query.discard}
+            </if>
+            <if test="query.ifReport !=null">
+                and if_report=#{query.ifReport}
+            </if>
+            <if test="query.dateRangeL !=null">
+                and added&gt;=#{query.dateRangeL}
+            </if>
+            <if test="query.dateRangeR !=null">
+                and added&lt;=#{query.dateRangeR}
+            </if>
+        </where>
+        order by added desc
+        LIMIT #{offset}, #{size, javaType=Byte}
+    </select>
+    <select id="countByFilterA" resultType="Long">
+        SELECT
+        count(id)
+        FROM
+        `customer`
+        <where>
+            <if test="query.websiteId != null">
+                website_id=#{query.websiteId}
+            </if>
+            <if test="query.tel!=null and query.tel!=''">
+                and tel=#{query.tel}
+            </if>
+            <if test="query.name!=null and query.name!=''">
+                and (liaison_name=#{query.name} OR patient_name=#{query.name})
+            </if>
+            <if test="query.countryId!=null and query.countryId!=''">
+                and (liaison_country_id=#{query.countryId} OR patient_country_id=#{query.countryId})
+            </if>
+            <if test="query.userId != null">
+                and owner_user_id=#{query.userId}
+            </if>
+            <if test="query.email!=null and query.email!= ''">
+                and email like CONCAT('%','${query.email}','%')
+            </if>
+            <if test="query.diseaseTypeId != null">
+                and disease_type_id=#{query.diseaseTypeId}
+            </if>
+            <if test="query.valid != null">
+                and valid=#{query.valid}
+            </if>
+            <if test="query.hospitalization !=null">
+                and hospitalization=#{query.hospitalization}
+            </if>
+            <if test="query.stars !=null and query.stars !=0">
+                and stars=#{query.stars}
+            </if>
+            <if test="query.discard !=null">
+                and discard=#{query.discard}
+            </if>
+            <if test="query.ifReport !=null">
+                and if_report=#{query.ifReport}
+            </if>
+            <if test="query.dateRangeL !=null">
+                and added&gt;=#{query.dateRangeL}
+            </if>
+            <if test="query.dateRangeR !=null">
+                and added&lt;=#{query.dateRangeR}
+            </if>
+        </where>
+    </select>
+
     <select id="count" resultType="Long">
         select count(id) from customer;
     </select>
@@ -794,7 +897,7 @@
     </select>
 
     <update id="alterAutoIncr">
-        alter table customer auto_increment=10000;
+        alter table customer auto_increment=15000;
     </update>
     <select id="maxOldsId" resultType="Long">
         SELECT max(id)
@@ -803,10 +906,10 @@
     </select>
     <update id="clearOldsRepoCustomers">
         DELETE FROM customer
-        WHERE id &gt; 2000 AND id &lt; 10000
+        WHERE id &gt; 2000 AND id &lt;= 8586
     </update>
     <update id="clearOldsRepoMemo">
         DELETE FROM memo
-        WHERE customer_id &gt; 2000 AND customer_id &lt; 10000
+        WHERE customer_id &gt; 2000 AND customer_id &lt;= 8586
     </update>
 </mapper>

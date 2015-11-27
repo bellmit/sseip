@@ -42,7 +42,7 @@
                             <tbody>
                             <#list page.list as diseaseType>
                             <tr>
-                                <td class="text-right">${diseaseType.id}</td>
+                                <td class="text-right">${diseaseType.id?long?c}</td>
                                 <td class="text-right"><#if (diseaseType.name)??>${diseaseType.name}<#else><span
                                         class="label">不详</span></#if>
                                 </td>
@@ -50,7 +50,7 @@
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
                                             <a class="btn btn-minier"
-                                               href="/disease-type/update/${diseaseType.id}" title="编辑病种"><span
+                                               href="/disease-type/update/${diseaseType.id?long?c}" title="编辑病种"><span
                                                     class="fa fa-pencil-square"></span></a>
                                             <button form="from-remove-disease-type-${diseaseType_index}"
                                                     class="remove-control btn btn-minier" title="删除病种"><span
@@ -60,7 +60,7 @@
                                         <form id="from-remove-disease-type-${diseaseType_index}"
                                               action="${context.contextPath}/disease-type/remove" method="post"
                                               style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${diseaseType.id}">
+                                                                              value="${diseaseType.id?long?c}">
                                         </form>
                                     </#if>
                                 </td>

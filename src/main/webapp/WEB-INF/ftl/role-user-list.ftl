@@ -48,9 +48,9 @@
                             <tbody>
                             <#list page.list as user>
                             <tr>
-                                <td class="text-right">${user.id}</td>
+                                <td class="text-right">${user.id?long?c}</td>
                                 <td class="text-right">${user.username}<a
-                                        href="${context.contextPath}/user/profile/${user.id}" class="list_link"><span
+                                        href="${context.contextPath}/user/profile/${user.id?long?c}" class="list_link"><span
                                         class="fa fa-search" title="查看"></span></a>
                                 </td>
                                 <td class="text-right">${user.realName}</td>
@@ -70,7 +70,7 @@
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
                                     <span class="label">没有写</span></#if></td>
                                 <td class="center"><a class="btn btn-minier"
-                                                      href="${context.contextPath}/role/updaterole/${user.id}"><span
+                                                      href="${context.contextPath}/role/updaterole/${user.id?long?c}"><span
                                         class="fa fa-edit" title="编辑"></span></a>
                                 </td>
                             </tr>

@@ -38,7 +38,7 @@
                     <div class="col-xs-12">
                         <dl class="dl-horizontal">
                             <dt>ID</dt>
-                            <dd>${diseaseType.id}</dd>
+                            <dd>${diseaseType.id?long?c}</dd>
                             <dt>名称</dt>
                             <dd>${diseaseType.name}</dd>
                         </dl>

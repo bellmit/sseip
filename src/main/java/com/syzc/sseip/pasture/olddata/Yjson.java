@@ -132,7 +132,8 @@ public class Yjson {
 //            System.out.println(JSON.toJSONString(customer, true));
 
 //            jw.writeObject(customer);
-            jw.writeValue(customer);
+
+//            jw.writeValue(customer);
 
 //            System.out.println(JSON.toJSONString(customer.getSymptom()));
 //            System.out.println(customer.getSymptom());

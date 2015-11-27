@@ -1,6 +1,7 @@
 package com.syzc.sseip.dao;
 
 import com.syzc.sseip.entity.Customer;
+import com.syzc.sseip.entity.CustomerQueryDto;
 import com.syzc.sseip.entity.TelAuditDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import org.apache.ibatis.annotations.Param;
@@ -52,6 +53,12 @@ public interface CustomerDao extends BaseDao<Customer> {
                        @Param("discard") Boolean discard,
                        @Param("ifReport") Boolean ifReport
     );
+
+    List<Customer> listByFilterA(@Param("query") CustomerQueryDto dto,
+                                 @Param("offset") Long offset,
+                                 @Param("size") Byte size);
+
+    Long countByFilterA(@Param("query") CustomerQueryDto dto);
 
     List<Customer> listRevisitTodayByUser(@Param("userId") Long userId, @Param("offset") Long offset, @Param("size") Integer size);
 

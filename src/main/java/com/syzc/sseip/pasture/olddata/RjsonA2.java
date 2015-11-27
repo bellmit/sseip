@@ -13,7 +13,7 @@ import java.util.zip.GZIPInputStream;
 public class RjsonA2 {
     public static void main(String[] args) throws IOException {
 
-        JSONReader jr = new JSONReader(new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream("e:/customer-details.json.gz"))), 6553600));
+        JSONReader jr = new JSONReader(new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream("e:/customer-details.json.gz"))), 10485760));
         int cnt = 0;
         CustomerDto dto;
 
@@ -21,7 +21,7 @@ public class RjsonA2 {
         JSONObject jo;
 
         File jf = new File("e:/customer-details2a.json");
-        JSONWriter jw = new JSONWriter(new BufferedWriter(new FileWriter(jf), 6553600));
+        JSONWriter jw = new JSONWriter(new BufferedWriter(new FileWriter(jf), 10485760));
         jw.startArray();
 
         for (Object o : ja) {

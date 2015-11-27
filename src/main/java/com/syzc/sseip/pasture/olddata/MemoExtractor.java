@@ -22,6 +22,9 @@ public class MemoExtractor {
 
     public static List<Memo> extract(String memosStr) throws ParseException {
         Matcher m, n;
+        if (memosStr == null) {
+            return new ArrayList<>();
+        }
         m = pFullEntry.matcher(memosStr);
         Memo memo;
         List<Memo> list = new LinkedList<>();

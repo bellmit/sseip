@@ -33,7 +33,7 @@
                                     <td><#if (customer.liaisonCountry.name)??>${customer.liaisonCountry.name}</#if>
                                     </td>
                                     <th>创建日期</th>
-                                    <td><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
+                                    <td><#if (customer.added)??>${customer.added?string('yyyy-MM-dd, HH:mm:ss')}</#if></td>
                                 </tr>
                                 <tr>
                                     <th>患者性别</th>
@@ -44,7 +44,7 @@
                                     <th>咨患关系</th>
                                     <td><#if (customer.relationship)??>${customer.relationship}</#if></td>
                                     <th>更新日期</th>
-                                    <td><#if (customer.updated)??>${customer.updated?string('yyyy-MM-hh, HH:mm:ss')}</#if></td>
+                                    <td><#if (customer.updated)??>${customer.updated?string('yyyy-MM-dd, HH:mm:ss')}</#if></td>
                                 </tr>
                                 <tr>
                                     <th class="text-danger">患者年龄</th>
@@ -184,9 +184,9 @@
                                         <div class="col-xs-3">
                                             <dl class="dl-horizontal">
                                                 <dt>创建日期</dt>
-                                                <dd><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></dd>
+                                                <dd><#if (customer.added)??>${customer.added?string('yyyy-MM-dd, HH:mm:ss')}</#if></dd>
                                                 <dt>更新日期</dt>
-                                                <dd><#if (customer.added)??>${customer.added?string('yyyy-MM-hh, HH:mm:ss')}</#if></dd>
+                                                <dd><#if (customer.added)??>${customer.added?string('yyyy-MM-dd, HH:mm:ss')}</#if></dd>
                                                 <dt>提交人</dt>
                                                 <dd><#if (customer.user.realName)??>${customer.user.realName}</#if></dd>
                                                 <dt>所属人</dt>

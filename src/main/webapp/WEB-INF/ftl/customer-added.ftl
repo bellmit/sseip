@@ -126,7 +126,7 @@
                     <a class="btn btn-info" href="${context.contextPath}/customer/add">
                         <span class="ace-icon fa fa-edit bigger-110"></span>继续添加
                     </a>
-                    <a class="btn btn-info" href="${context.contextPath}/customer/update/${customer.id}">
+                    <a class="btn btn-info" href="${context.contextPath}/customer/update/${customer.id?long?c}">
                         <span class="ace-icon fa fa-eye bigger-110"></span>编辑提交内容
                     </a>
                 </div>

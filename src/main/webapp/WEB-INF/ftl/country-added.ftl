@@ -38,7 +38,7 @@
                     <div class="col-xs-12">
                         <dl class="dl-horizontal">
                             <dt>ID</dt>
-                            <dd>${country.id}</dd>
+                            <dd>${country.id?long?c}</dd>
                             <dt>名称</dt>
                             <dd>${country.name}</dd>
                             <dt>名称（英文）</dt>

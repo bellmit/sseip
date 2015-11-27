@@ -1,6 +1,6 @@
 <dl>
     <dt>id</dt>
-    <dd>${loginUser.id}</dd>
+    <dd>${loginUser.id?long?c}</dd>
     <dt>用户名</dt>
     <dd>${loginUser.username}</dd>
     <dt>真实姓名</dt>

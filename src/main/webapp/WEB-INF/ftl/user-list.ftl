@@ -78,7 +78,7 @@
                             <tr>
                                 <td class="text-right">${user.id }</td>
                                 <td class="text-right">${user.username}<#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||(loginUser.role='DIRECTOR' && user.groupId?? && loginUser.groupId?? && loginUser.groupId==user.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                    <a href="${context.contextPath}/user/profile/${user.id}" class="list_link"
+                                    <a href="${context.contextPath}/user/profile/${user.id?long?c}" class="list_link"
                                        title="查看资料"><span class="fa fa-eye"></span></a></#if></td>
                                 <td class="text-right">${user.realName}</td>
                                 <td class="text-right"><#if user.age??>${user.age}<#else><span class="label"><span
@@ -113,20 +113,20 @@
                                 <td class="text-right"><#if (user.group.name)??>${user.group.name}<#else>
                                     <span class="label"><span class="fa fa-question"></span></span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                        <a href="${context.contextPath}/group/user-update/${user.id}"
+                                        <a href="${context.contextPath}/group/user-update/${user.id?long?c}"
                                            title="变更部门"><span class="fa fa-gear"></span></a>
                                     </#if>
                                 </td>
                                 <td class="text-right"><#if (user.role.roleName)??>${user.role.roleName}<#else>
                                     <span class="label"><span class="fa fa-question"></span></span></#if>
                                     <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')><a
-                                            href="${context.contextPath}/role/updaterole/${user.id}" title="变更角色"><span
+                                            href="${context.contextPath}/role/updaterole/${user.id?long?c}" title="变更角色"><span
                                             class="fa fa-gear"></span></a></#if>
                                 </td>
                                 <td class="center">
                                     <span class="btn-group">
                                         <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& loginUser.id==user.id) ||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                            <a class="btn btn-minier" href="/user/update/${user.id}" title="更新资料"><span
+                                            <a class="btn btn-minier" href="/user/update/${user.id?long?c}" title="更新资料"><span
                                                     class="fa fa-edit"></span></a>
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
@@ -138,7 +138,7 @@
                                                     class="fa fa-trash"></span></button>
                                         </#if>
                                         <#if loginUser.role?? && (loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                            <a href="/user/reset-password/${user.id}" class="btn btn-minier btn-gold"
+                                            <a href="/user/reset-password/${user.id?long?c}" class="btn btn-minier btn-gold"
                                                title="重置密码"><span
                                                     class="fa fa-lock"></span></a>
                                         </#if>
@@ -147,7 +147,7 @@
                                     <form id="form-remove-user-${user_index}"
                                           action="${context.contextPath}/user/remove" method="post"><input type="hidden"
                                                                                                            name="id"
-                                                                                                           value="${user.id}">
+                                                                                                           value="${user.id?long?c}">
                                     </form>
                                 </td>
                             </tr>

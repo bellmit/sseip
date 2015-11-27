@@ -6,11 +6,10 @@
             <span>共${page.totalRows?c}条, 第${(page.rowOffset+1)?c}~${(page.rowOffset+page.pageSize)?c}条</span>
         </li>
         <li>
-            <form style="display: inline;margin: 0;padding: 0;"><input class="form-page-field" style="width: 3em;;">
-                <script>
+            <span style="padding: 0;margin: 0;"><form style="display: inline;margin: 0;padding: 0;"><input
+                    style="width: 3em;">
 
-                </script>
-            </form>
+            </form></span>
         </li>
         <#if page.totalRows gt 0>
             <#if !page.firstPage>

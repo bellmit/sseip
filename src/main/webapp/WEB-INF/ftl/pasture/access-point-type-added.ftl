@@ -38,7 +38,7 @@
                     <div class="col-xs-12">
                         <dl class="dl-horizontal">
                             <dt>ID</dt>
-                            <dd>${accessPointType.id}</dd>
+                            <dd>${accessPointType.id?long?c}</dd>
                             <dt>名称</dt>
                             <dd>${accessPointType.name}</dd>
                         </dl>

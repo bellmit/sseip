@@ -38,7 +38,7 @@
                     <div class="col-xs-12">
                         <dl class="dl-horizontal">
                             <dt>ID</dt>
-                            <dd><#if (website.id)??>${website.id}<#else><label
+                            <dd><#if (website.id?long?c)??>${website.id?long?c}<#else><label
                                     class="label label-inverse">不详</label></#if></dd>
                             <dt>名称</dt>
                             <dd><#if (website.name)??>${website.name}<#else><label

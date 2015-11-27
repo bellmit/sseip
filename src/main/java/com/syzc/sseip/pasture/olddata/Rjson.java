@@ -1,6 +1,5 @@
 package com.syzc.sseip.pasture.olddata;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONReader;
 import com.syzc.sseip.entity.CustomerDto;
@@ -16,14 +15,20 @@ public class Rjson {
         Object o;
         CustomerDto dto;
         JSONObject jo;
+        jr.startArray();
         do {
             cnt++;
 //            jo = (JSONObject) jr.readObject();
             dto = (CustomerDto) jr.readObject(CustomerDto.class);
             System.out.println(cnt);
-            System.out.println(JSON.toJSONString(dto));
+//            System.out.println(JSON.toJSONString(dto));
+            if (dto.getContactRecords() != null) {
+                System.out.println(dto.getContactRecords().length());
+            }
 //            System.out.println(dto);
-        } while (dto != null);
+//        } while (dto != null);
+        } while (jr.hasNext());
+        jr.endArray();
         System.out.println(cnt);
     }
 }

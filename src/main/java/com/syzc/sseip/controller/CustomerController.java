@@ -209,6 +209,57 @@ public class CustomerController {
         return "customer-filter-list";
     }
 
+    //    ,{dateRangeR:\d+}
+//    @RequestMapping(value = "/filterA/{dateRangeL:[^,]*},{dateRangeR:\\d*}")
+    @RequestMapping(value = "/filterA/{dateRangeL:\\d*}|{dateRangeR:\\d*}|{websiteId:\\d*}|{userId:\\d*}|" +
+            "{ifReport:[^|]*}|{hospitalization:\\d*}|{name:[^|]*}|{email:[^|]*}|{tel:[^|]*}|{valid:\\d*}|" +
+            "{discard:\\d*}|{stars:0|1|2|3|4|5|}|{countryId:\\d*}|{diseaseTypeId:\\d*}")
+/*
+    @RequestMapping(value = "/filterA/{dateRangeL:\\d*},{dateRangeR:\\d*},{websiteId:\\d*},{userId:\\d*}," +
+            "{ifReport:[^,]*},{hospitalization:\\d*},{name:[^,]*},{email:[^,]*},{tel:[^,]*},{valid:\\d*}," +
+            "{discard:\\d*},{stars:0|1|2|3|4|5|},{countryId:\\d*},{diseaseTypeId:\\d*}")
+*/
+//    produces = "text/plain"
+//    @ResponseBody
+    public String filterAllA(@RequestParam(value = "page", defaultValue = "1") Long pageNo, CustomerQueryDto dto, HttpSession session, Model model) {
+//        return String.format("%s\n%d", JSON.toJSONString(dto, true), pageNo);
+
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        if (loginUser.getRole() != Role.ADMIN && loginUser.getRole() != Role.TELADMIN) {
+            throw AuthException.create("没有权限", Level.DEBUG);
+        }
+
+
+        Page<Customer> page;
+
+        page = customerService.listByFilterA(dto, pageNo, pageSize);
+
+        List<User> users;
+
+        users = userService.listAllByGroup(loginUser.getGroupId());
+/*
+        if (loginUser.getGroupId() != null) {
+        } else {
+            users = new ArrayList<>();
+        }
+*/
+
+        model.addAttribute("query", dto);
+
+        model.addAttribute("users", users);
+
+        model.addAttribute("diseaseTypes", diseaseTypeService.listAll());
+        model.addAttribute("sexTypes", Sex.values());
+        model.addAttribute("websites", websiteService.listAll());
+        model.addAttribute("hospitalizationTypes", HospitalizationType.values());
+        model.addAttribute("countries", countryService.listAll());
+
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/customer/filterA");
+        return "customer-filter-list-a";
+
+    }
+
     @RequestMapping(value = "/filter-own/{page:\\d+}")
     public String filterOwn(
             @RequestParam(value = "dateRange", required = false) Long[] dateRange,

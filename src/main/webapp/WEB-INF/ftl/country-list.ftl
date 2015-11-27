@@ -64,7 +64,7 @@
                                 <td class="center">
                                     <#if ['ADMIN']?seq_contains(loginUser.role)>
                                         <span class="btn-group">
-                                            <a class="btn btn-minier" href="/country/update/${country.id}"
+                                            <a class="btn btn-minier" href="/country/update/${country.id?long?c}"
                                                title="编辑国家条目"><span class="fa fa-pencil-square"></span></a>
                                             <button form="from-remove-country-${country_index}"
                                                     class="remove-control btn btn-minier"
@@ -75,7 +75,7 @@
                                         <form id="from-remove-country-${country_index}"
                                               action="${context.contextPath}/country/remove" method="post"
                                               style="display: inline;"><input type="hidden" name="id"
-                                                                              value="${country.id}">
+                                                                              value="${country.id?long?c}">
                                         </form>
                                     </#if>
                                 </td>

@@ -149,7 +149,7 @@
 
                             <option ${groupChecked!''} value="">选择部门</option>
                         <#list groups as group>
-                            <option ${((user.groupId)?? && user.groupId=group.id)?string('selected="selected" ','')}value="${group.id}">${group.name}</option>
+                            <option ${((user.groupId)?? && user.groupId=group.id)?string('selected="selected" ','')}value="${group.id?long?c}">${group.name}</option>
                         </#list>
                         </select></div>
                     </div>

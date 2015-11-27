@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.syzc.sseip.dao.BaseDao;
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.dao.MemoDao;
-import com.syzc.sseip.entity.Customer;
-import com.syzc.sseip.entity.CustomerStatDto;
-import com.syzc.sseip.entity.Memo;
-import com.syzc.sseip.entity.TelAuditDto;
+import com.syzc.sseip.entity.*;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.util.LocalAcUtil;
 import com.syzc.sseip.util.Page;
@@ -81,6 +78,18 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDao> 
         Page<Customer> page = PageUtil.make(pageNo, size, total);
         page.setList(customerDao.listByFilter(since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId,
                 valid, hospitalization, stars, discard, ifReport, page.getRowOffset(), page.getPageSize()));
+        return page;
+    }
+
+    @Override
+    public Page<Customer> listByFilterA(CustomerQueryDto dto, Long pageNo, Byte size) {
+
+//        System.out.println("since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, pageSize");
+//        System.out.println(Arrays.toString(new Object[]{since, till, websiteId, tel, name, countryId, userId, email, diseaseTypeId, valid, hospitalization, stars, discard, ifReport, pageNo, size}));
+
+        Long total = customerDao.countByFilterA(dto);
+        Page<Customer> page = PageUtil.make(pageNo, size, total);
+        page.setList(customerDao.listByFilterA(dto, page.getRowOffset(), page.getPageSize()));
         return page;
     }
 

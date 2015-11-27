@@ -41,17 +41,17 @@
                             <tbody>
                             <#list page.list as accessPointType>
                             <tr>
-                                <td class="text-right">${accessPointType.id}</td>
+                                <td class="text-right">${accessPointType.id?long?c}</td>
                                 <td class="text-right"><#if (accessPointType.name)??>${accessPointType.name}<#else><span
                                         class="label">不详</span></#if>
                                 </td>
                                 <td class="center">
-                                    <a href="/access-point-type/update/${accessPointType.id}"><span
+                                    <a href="/access-point-type/update/${accessPointType.id?long?c}"><span
                                             class="fa fa-edit"></span></a>
 
                                     <form action="${context.contextPath}/access-point-type/remove" method="post"
                                           style="display: inline;"><input type="hidden" name="id"
-                                                                          value="${accessPointType.id}">
+                                                                          value="${accessPointType.id?long?c}">
                                         <button><span class="fa fa-trash"></span></button>
                                     </form>
                                 </td>
