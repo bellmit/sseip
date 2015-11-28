@@ -8,6 +8,7 @@ import com.syzc.sseip.entity.Memo;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Weight;
+import com.syzc.sseip.pasture.olddata.mdbdumper.ExtractorMdb;
 import com.syzc.sseip.util.HosException;
 import com.syzc.sseip.util.LocalAcUtil;
 import org.apache.log4j.Level;
@@ -111,10 +112,11 @@ public class YDumpMdb {
             try {
                 cd.addOld(customer);
                 for (Memo memo : customer.getMemos()) {
+                    System.out.println(memo.getContent().length());
                     md.addToCustomerF(memo, customer.getId());
                 }
             } catch (Exception e) {
-                throw HosException.create(e, String.format("DB write error while dumping the old data, at row %d", cnt), Level.ERROR);
+                throw HosException.create(e, String.format("DB write error while dumping the old data, at row (+2000)%d", cnt), Level.ERROR);
             }
 
 //            jw.writeObject(customer);

@@ -17,10 +17,10 @@
 <#include "/common/left.ftl">
     <div class="main-content">
     <#if ['ADMIN','TELADMIN']?seq_contains(loginUser.role)>
-        <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter/1"
+        <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter"
                 style="margin:0 auto;width:100%;height:100%;"></iframe>
     <#else>
-        <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter-own/1"
+        <iframe name="mainFrame" id="mainFrame" frameborder="0" src="${context.contextPath}/customer/filter-own"
                 style="margin:0 auto;width:100%;height:100%;"></iframe>
     </#if>
     </div>

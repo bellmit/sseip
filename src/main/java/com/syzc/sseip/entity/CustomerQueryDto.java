@@ -1,12 +1,15 @@
 package com.syzc.sseip.entity;
 
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 public class CustomerQueryDto {
-    //    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Long dateRangeL;
-    //    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Long dateRangeR;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH")
+    private Date dateRangeL;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH")
+    private Date dateRangeR;
     private Long websiteId;
     private Long userId;
     private Boolean ifReport;
@@ -20,19 +23,19 @@ public class CustomerQueryDto {
     private Long countryId;
     private Long diseaseTypeId;
 
-    public Long getDateRangeL() {
+    public Date getDateRangeL() {
         return dateRangeL;
     }
 
-    public void setDateRangeL(Long dateRangeL) {
+    public void setDateRangeL(Date dateRangeL) {
         this.dateRangeL = dateRangeL;
     }
 
-    public Long getDateRangeR() {
+    public Date getDateRangeR() {
         return dateRangeR;
     }
 
-    public void setDateRangeR(Long dateRangeR) {
+    public void setDateRangeR(Date dateRangeR) {
         this.dateRangeR = dateRangeR;
     }
 

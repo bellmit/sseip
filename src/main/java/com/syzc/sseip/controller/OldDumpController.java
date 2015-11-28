@@ -3,7 +3,7 @@ package com.syzc.sseip.controller;
 import com.syzc.sseip.dao.CustomerDao;
 import com.syzc.sseip.entity.User;
 import com.syzc.sseip.entity.enumtype.Role;
-import com.syzc.sseip.pasture.olddata.BatchDumper;
+import com.syzc.sseip.pasture.olddata.mdbdumper.YDumpMdbDumper;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class OldDumpController {
         this.customerDao = customerDao;
     }
 
-    @RequestMapping(value = "/admin/dump-old")
+    //    @RequestMapping(value = "/admin/dump-old")
     public void dumpOld(HttpSession session, HttpServletResponse response) {
         User user = (User) session.getAttribute("loginUser");
         if (user == null || user.getRole() != Role.ADMIN) {
@@ -98,8 +98,9 @@ public class OldDumpController {
         session.setAttribute("dump-old-completed", false);
         try {
             System.out.println("here14");
-            BatchDumper.dump(ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/WEB-INF/customer-details.json.gz"));
-        } catch (IOException e) {
+//            BatchDumper.dump(ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/WEB-INF/customer-details.json.gz"));
+            YDumpMdbDumper.dump();
+        } catch (Exception e) {
             System.out.println("here15");
             logger.error("error while dumping the old data", e);
         }
@@ -123,7 +124,7 @@ public class OldDumpController {
         }
     }
 
-    @RequestMapping(value = "max-olds-id")
+    //    @RequestMapping(value = "max-olds-id")
     @ResponseBody
     public String maxOldsId() {
         return String.valueOf(customerDao.maxOldsId());

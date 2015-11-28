@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DiseaseTExtractor {
-    static Map<String, Long> diseaseTMap = new HashMap<>();
+    public static Map<String, Long> diseaseTMap = new HashMap<>();
 
     static {
         diseaseTMap.put("肾衰竭", 44L);

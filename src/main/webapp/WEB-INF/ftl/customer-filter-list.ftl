@@ -47,10 +47,15 @@
 
             <div data-toggle="tooltip-a" class="col-md-4" title="选择日期时间范围"><input class="filters form-control"
                                                                                   id="date-range" placeholder="日期时间范围"
-                                                                                  value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+                                                                                  value="<#if query.dateRangeL??>${query.dateRangeL?string("yyyy年MM月dd日HH时")}</#if> 到 <#if query.dateRangeR??>${query.dateRangeR?string("yyyy年MM月dd日HH时")}</#if>"/>
             </div>
-            <input form="filter-form" name="dateRange" type="hidden" id="date-range-input" style="display: none;"
-                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
+        <#--<input form="filter-form" name="dateRange" type="hidden" id="date-range-input" style="display: none;"
+               value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">-->
+
+            <input form="filter-form" name="dateRangeL" type="hidden" id="date-range-input-l"
+                   value="<#if query.dateRangeL??>${query.dateRangeL?string("yyyy-MM-dd HH")}</#if>">
+            <input form="filter-form" name="dateRangeR" type="hidden" id="date-range-input-r"
+                   value="<#if query.dateRangeR??>${query.dateRangeR?string("yyyy-MM-dd HH")}</#if>">
 
             <div data-toggle="tooltip-a" class="col-md-2" title="选择网站群组" style="padding: 0; margin: 0;"><select
                     class="filters text-right greens select2-ui form-control" name="websiteId" style="width:100%;"
@@ -246,7 +251,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="" class="filters btn btn-xs col-md-2 btn-warning">重置条件</a>
-                <a href="${context.contextPath}/customer/filter/1"
+                <a href="${context.contextPath}/customer/filter"
                    class="filters btn btn-xs col-md-2 btn-grey">重新搜索</a>
                 <button type="submit" class="filters btn btn-xs col-md-2 btn-info"
                         form="filter-form">查询
@@ -263,7 +268,7 @@
                 class="btn-group btn-corner"><#if ['EMPLOYEE']?seq_contains(loginUser.role)><a
                 href="${context.contextPath}/customer/add" target="_self" style="color:#FFF;text-decoration:none;"
                 title="填写资源" class="btn btn-info btn-sm"><span class="fa fa-file"></span></a></#if></span></span> <span
-                class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
+                class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
         </div>
         <table id="customer-table-1"
                class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90 customer-list-table"
@@ -436,12 +441,11 @@
                                                                         title="刷新列表"><span
                     class="fa fa-refresh"></span></a></span></div>
             <div class="col-md-10">
-            <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+            <#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
             </div>
         </div>
     </div>
 </div>
-
 <#include "/common/common_js.ftl">
 <#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>-->
 <#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>-->
@@ -512,12 +516,18 @@
 //            console.log(start);
             $('#date-range').val([start.format('YYYY年MM月DD日HH时'), ' 到 ', end.format('YYYY年MM月DD日HH时')].join(''));
 //            l = start;//用于调试
-            $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
+//            $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
+//            $('#date-range-input-l').val(start.unix() * 1000);
+//            $('#date-range-input-r').val(end.unix() * 1000);
+            $('#date-range-input-l').val(start.format('YYYY-MM-DD HH'));
+            $('#date-range-input-r').val(end.format('YYYY-MM-DD HH'));
         });
         $('#date-range').on('cancel.daterangepicker', function (e) {
             //清除内容
             $('#date-range').val('');
-            $('#date-range-input').val('');
+//            $('#date-range-input').val('');
+            $('#date-range-input-l').val('');
+            $('#date-range-input-r').val('');
         });
 
 //        $('.btn').tooltip();
@@ -558,7 +568,19 @@
         });
         $('[data-toggle="tooltip-a"]').tooltip({trigger: 'hover'});
 
-        $('#another-d-picker').daterangepicker();
+        $('#filter-form').submit(function () {
+            var queryCombo = [encodeURIComponent($('[name=dateRangeL]').val()), encodeURIComponent($('[name=dateRangeR]').val()),
+                encodeURIComponent($('[name=websiteId]').val()), encodeURIComponent($('[name=userId]').val()),
+                encodeURIComponent($('[name=ifReport]').val()), encodeURIComponent($('[name=hospitalization]').val()),
+                encodeURIComponent($('[name=name]').val()), encodeURIComponent($('[name=email]').val()),
+                encodeURIComponent($('[name=tel]').val()), encodeURIComponent($('[name=valid]').val()),
+                encodeURIComponent($('[name=discard]').val()), encodeURIComponent($('[name=stars]').val()),
+                encodeURIComponent($('[name=countryId]').val()), encodeURIComponent($('[name=diseaseTypeId]').val())
+            ].join('|');
+            var perfix = "${basePath}";
+            location = [perfix, '/', queryCombo].join('');
+            return false;
+        });
 
     <#--<#if dateRange?? && dateRange?size gt 0 >-->
     <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->

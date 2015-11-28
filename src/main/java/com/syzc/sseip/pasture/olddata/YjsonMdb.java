@@ -6,6 +6,7 @@ import com.syzc.sseip.entity.CustomerDto;
 import com.syzc.sseip.entity.enumtype.HospitalizationType;
 import com.syzc.sseip.entity.enumtype.Sex;
 import com.syzc.sseip.entity.enumtype.Weight;
+import com.syzc.sseip.pasture.olddata.mdbdumper.ExtractorMdb;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 

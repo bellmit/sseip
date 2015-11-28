@@ -52,10 +52,14 @@
             <div data-toggle="tooltip-a" class="col-md-4" title="筛选日期时间范围"><input class="filters form-control"
                                                                                   id="date-range"
                                                                                   placeholder="日期时间范围"
-                                                                                  value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?string("yyyy年MM月dd日HH时")} 到 ${dateRange[1]?string("yyyy年MM月dd日HH时")}</#if>"/>
+                                                                                  value="<#if query.dateRangeL??>${query.dateRangeL?string("yyyy年MM月dd日HH时")}</#if> 到 <#if query.dateRangeR??>${query.dateRangeR?string("yyyy年MM月dd日HH时")}</#if>"/>
             </div>
-            <input form="filter-form" name="dateRange" type="hidden" id="date-range-input" style="display: none;"
-                   value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">
+        <#--<input form="filter-form" name="dateRange" type="hidden" id="date-range-input" style="display: none;"
+               value="<#if dateRange?? && dateRange?size gt 0 >${dateRange[0]?long?c},${dateRange[1]?long?c}</#if>">-->
+            <input form="filter-form" name="dateRangeL" type="hidden" id="date-range-input-l"
+                   value="<#if query.dateRangeL??>${query.dateRangeL?string("yyyy-MM-dd HH")}</#if>">
+            <input form="filter-form" name="dateRangeR" type="hidden" id="date-range-input-r"
+                   value="<#if query.dateRangeR??>${query.dateRangeR?string("yyyy-MM-dd HH")}</#if>">
 
             <div class="col-md-2"><input data-toggle="tooltip-a" class="filters text-right form-control"
                                          name="name" type="text" form="filter-form" title="筛选患者咨询人姓名"
@@ -257,7 +261,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="" class="filters btn btn-xs col-md-2 btn-warning">重置条件</a>
-                <a href="${context.contextPath}/customer/filter-own/1"
+                <a href="${context.contextPath}/customer/filter-own"
                    class="filters btn btn-xs col-md-2 btn-grey">重新搜索</a>
                 <button type="submit" class="filters btn btn-xs col-md-2 btn-info"
                         form="filter-form">查询
@@ -276,7 +280,7 @@
                 title="填写资源"
                 class="btn btn-info btn-sm"><span class="fa fa-file"></span></a></span></span>
                                 <span class="col-md-10">
-                                <#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+                                <#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
                                 </span>
         </div>
 
@@ -486,7 +490,7 @@
             <form style="display: none;" id="pass-on-form" method="post"
                   action="${context.contextPath}/customer/pass"></form>
 <span class="col-md-7">
-<#if page.totalRows gt 0><#import "/common/pager.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+<#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
 </span>
         </div>
     </div>
@@ -560,12 +564,18 @@
 //            console.log(start);
             $('#date-range').val([start.format('YYYY年MM月DD日HH时'), ' 到 ', end.format('YYYY年MM月DD日HH时')].join(''));
 //            l = start;//用于调试
-            $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
+//            $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
+//            $('#date-range-input-l').val(start.unix() * 1000);
+//            $('#date-range-input-r').val(end.unix() * 1000);
+            $('#date-range-input-l').val(start.format('YYYY-MM-DD HH'));
+            $('#date-range-input-r').val(end.format('YYYY-MM-DD HH'));
         });
         $('#date-range').on('cancel.daterangepicker', function (e) {
             //清除内容
             $('#date-range').val('');
-            $('#date-range-input').val('');
+//            $('#date-range-input').val('');
+            $('#date-range-input-l').val('');
+            $('#date-range-input-r').val('');
         });
 
         $('#check-all').change(function (e) {
@@ -639,6 +649,19 @@
             container: 'body'
         });
         $('[data-toggle="tooltip-a"]').tooltip({trigger: 'hover'});
+
+        $('#filter-form').submit(function () {
+            var queryCombo = [encodeURIComponent($('[name=dateRangeL]').val()), encodeURIComponent($('[name=dateRangeR]').val()),
+                encodeURIComponent($('[name=websiteId]').val()),
+                encodeURIComponent($('[name=ifReport]').val()), encodeURIComponent($('[name=hospitalization]').val()),
+                encodeURIComponent($('[name=name]').val()), encodeURIComponent($('[name=email]').val()),
+                encodeURIComponent($('[name=tel]').val()), encodeURIComponent($('[name=valid]').val()),
+                encodeURIComponent($('[name=discard]').val()),
+                encodeURIComponent($('[name=countryId]').val()), encodeURIComponent($('[name=diseaseTypeId]').val())].join('|');
+            var perfix = "${basePath}";
+            location = [perfix, '/', queryCombo].join('');
+            return false;
+        });
 
         $('#another-d-picker').daterangepicker();
 

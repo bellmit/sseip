@@ -23,9 +23,9 @@ public class ManagementController {
     public String defaultPage(HttpSession session) {
         User user = (User) session.getAttribute("loginUser");
         if (user.getRole() == Role.ADMIN || user.getRole() == Role.TELADMIN) {
-            return "redirect:/customer/filter/1";
+            return "redirect:/customer/filter";
         } else if (user.getRole() == Role.EMPLOYEE) {
-            return "redirect:/customer/filter-own/1";
+            return "redirect:/customer/filter-own";
         }
         return "redirect:about:blank";
     }
@@ -42,7 +42,7 @@ public class ManagementController {
 
     @RequestMapping(value = "/admin/sys")
     @ResponseBody
-    public String vvv() {
+    public String sys() {
         StringBuilder builder = new StringBuilder();
 
         builder.append("System Properties: \n");

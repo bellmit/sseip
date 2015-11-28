@@ -181,7 +181,7 @@ CREATE TABLE customer (
 DROP TABLE IF EXISTS memo;
 CREATE TABLE memo (
   id          INT PRIMARY KEY AUTO_INCREMENT,
-  content     TEXT,
+  content     MEDIUMTEXT,
   added       DATETIME,
   customer_id INT,
   user_id     INT,
