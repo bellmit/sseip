@@ -31,7 +31,7 @@
                 <#if ['ADMIN','TELADMIN','EMPLOYEE']?seq_contains(loginUser.role)>
                     <li><a
                         <#if ['ADMIN','TELADMIN']?seq_contains(loginUser.role)>href="${context.contextPath}/customer/filter/1"
-                        <#else>href="${context.contextPath}/customer/filter-own/1"</#if> target="mainFrame"><span
+                        <#else>href="${context.contextPath}/customer/filter-own"</#if> target="mainFrame"><span
                             class="menu-icon fa fa-table light-red"></span><span class="menu-text">资源查询</span></a></li>
                 </#if>
 

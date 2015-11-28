@@ -20,7 +20,7 @@
                 <span class="ace-icon fa fa-home home-icon"></span>
                 <a href="${context.contextPath}/" target="_top">Home</a>
             </li>
-            <li><a href="${context.contextPath}/customer/filter-own/1">资源一览</a></li>
+            <li><a href="${context.contextPath}/default">资源一览</a></li>
             <li class="active">转交完成</li>
         </ul>
         <!-- /.breadcrumb -->

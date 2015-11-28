@@ -467,7 +467,7 @@ public class CustomerController {
 
         String referer = request.getHeader("Referer");
         if (referer == null) {
-            referer = "/";
+            referer = "/default";
         }
         // may present a web page, with links to the source referer, the customer consultance list, the publisher function page
         return "redirect:" + referer;
@@ -631,7 +631,7 @@ public class CustomerController {
         if (customerService.update(customer)) {
 //            model.addAttribute("success", "更新完成");
             if (referer == null || referer.equals("")) {
-                referer = "/customer/filter-own/1";
+                referer = "/default";
             }
             return "redirect:" + referer;
         } else {
@@ -701,7 +701,7 @@ public class CustomerController {
 //        session.setAttribute("referer", referer);
 
         if (referer == null) {
-            referer = request.getContextPath() + "/customer/filter-own/1";
+            referer = "/default";
         }
 //        return "customer-pass-result";
         return "redirect:" + referer;
@@ -712,7 +712,8 @@ public class CustomerController {
     public String updateDiscard(@RequestParam("id") Long customerId, Boolean discard, HttpServletRequest request, HttpSession session) {
         String referer = request.getHeader("Referer");
         if (referer == null) {
-            referer = request.getContextPath() + "/customer/filter-own/1";
+//            referer = request.getContextPath();
+            referer = "/default";
         }
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
         customerService.updateDiscard(customerId, discard, loginUser.getId());
@@ -755,7 +756,7 @@ public class CustomerController {
         }
 
         if (referer == null) {
-            referer = "/";
+            referer = "/default";
         }
         Customer customer = customerService.get(customerId);
         if (customer == null) {

@@ -241,7 +241,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <a href="" class="filters btn btn-xs col-md-2 btn-warning">重置条件</a>
-                                <a href="${context.contextPath}/customer/filter-own/1"
+                                <a href="${context.contextPath}/customer/filter-own"
                                    class="filters btn btn-xs col-md-2 btn-grey">重新搜索</a>
                                 <button type="submit" class="filters btn btn-xs col-md-2 btn-info"
                                         form="filter-form">查询
