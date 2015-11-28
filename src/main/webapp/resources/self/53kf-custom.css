@@ -1,0 +1,7 @@
+.mnkf_dialog_receive {
+    color: darkred;
+}
+
+.mnkf_dialog_send, .talk_msg_content, .kh_msg_color {
+    color: darkcyan;
+}
