@@ -226,11 +226,7 @@
                                         <dt>联系记录</dt>
                                         <dd>
                                             <div class="well"
-                                                 style="word-wrap:break-word;overflow-y:auto;height:auto;max-height:60em;min-height:8em;">
-                                            <#if (customer.contactRecords)??>
-                                    ${customer.contactRecords}
-                                </#if>
-                                            </div>
+                                                 style="word-wrap:break-word;overflow-y:auto;height:auto;max-height:750px;min-height:8em;">${(customer.contactRecords)!''}</div>
                                         </dd>
                                     </dl>
                                 </div>

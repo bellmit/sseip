@@ -586,7 +586,7 @@
                                             <#--wysiwyg-editor-->
                                                 <div data-toggle="tooltip-a" class="wysiwyg-editor" title="聊天记录粘贴"
                                                      id="contact-records-editor" data-placeholder="聊天记录"
-                                                     style="word-wrap:break-word;overflow-y:auto;height:auto;max-height:60em;min-height:8em;">${(customer.contactRecords)!''}</div>
+                                                     style="word-wrap:break-word;overflow-y:auto;height:auto;max-height:750px;min-height:8em;">${(customer.contactRecords)!''}</div>
 
                                             <#--<div class="wysiwyg-editor"
                                                  id="contact-records-editor"

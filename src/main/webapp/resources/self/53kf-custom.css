@@ -4,4 +4,10 @@
 
 .mnkf_dialog_send, .talk_msg_content, .kh_msg_color {
     color: darkcyan;
+    background-color: rgb(236, 251, 225);
+    border: 2px solid;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    padding: 5px 10px;
 }

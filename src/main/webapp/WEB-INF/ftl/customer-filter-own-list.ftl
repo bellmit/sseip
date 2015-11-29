@@ -287,176 +287,183 @@
         <div id="msg-container">
 
         </div>
-        <table id="customer-table-1"
-               class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90 customer-list-table"
-               style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
-            <colgroup class="row">
-            <#--1-->
-            <#--<col style="width: 3.5em;">-->
-                <col style="width: 10.5em;">
-                <col style="width: 8em;">
-                <col style="width: 3em;">
-                <col style="width:3em;">
-                <col style="width:4.5em;">
-                <col style="width:3em;">
-                <col style="width: 6em;">
-                <col class="">
-            <#--5    -->
-                <col style="width: 3em;">
-                <col style="width: 7em;">
-            <#--<col style="width: 10em;">-->
-            <#--<col >--> <#--style="width: 11em;"--> <#--备注-->
-            <#--报备-->
-                <col style="width: 3em;">
-            <#--9-->
-            <#--提交人-->
-                <col style="width: 4.3em;">
-            <#--更新时间-->
-            <#--<col style="width: 9.3em;">-->
-                <col style="width: 9.3em;">
-                <col style="width: 7em;">
-            <#--<col class="col-sm-1">
-            <col class="col-sm-2">
-            <col class="col-sm-2">
-            <col class="col-sm-2">
-            <col class="col-sm-2">
-            <col class="col-sm-1">
-            <col class="col-sm-2">-->
-            </colgroup>
-            <thead>
-            <tr>
-            <#--<th class="text-right"><input type="checkbox" id="check-all"></th>-->
-                <th class=""><input type="checkbox" id="check-all">姓名</th>
-                <th class="">邮箱</th>
-                <th class="">性别</th>
-                <th class="">发邮</th>
-                <th class="">通话</th>
-                <th class="">年龄</th>
-                <th class="">国家</th>
-                <th class="">症状</th>
-                <th class="" title="是否住院">住院</th>
-                <th class="">所属网站群组</th>
-            <#--<th class="">来源域名</th>-->
-                <th class="" title="是否报备">报备</th>
-                <th class="">提交人</th>
-            <#--<th class="">更新时间</th>-->
-                <th class="">创建时间</th>
+        <div class="row">
+            <div class="col-sm-12" style="overflow-y: auto">
+                <table id="customer-table-1"
+                       class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90 customer-list-table"
+                       style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;min-width: 960px;">
+                    <colgroup class="row">
+                    <#--1-->
+                    <#--<col style="width: 3.5em;">-->
+                        <col style="width: 10.5em;">
+                        <col style="width: 8em;">
+                        <col style="width: 3em;">
+                        <col style="width:3em;">
+                        <col style="width:4.5em;">
+                        <col style="width:3em;">
+                        <col style="width: 6em;">
+                        <col class="">
+                    <#--5    -->
+                        <col style="width: 3em;">
+                        <col style="width: 7em;">
+                    <#--<col style="width: 10em;">-->
+                    <#--<col >--> <#--style="width: 11em;"--> <#--备注-->
+                    <#--报备-->
+                        <col style="width: 3em;">
+                    <#--9-->
+                    <#--提交人-->
+                        <col style="width: 4.3em;">
+                    <#--更新时间-->
+                    <#--<col style="width: 9.3em;">-->
+                        <col style="width: 9.3em;">
+                        <col style="width: 7em;">
+                    <#--<col class="col-sm-1">
+                    <col class="col-sm-2">
+                    <col class="col-sm-2">
+                    <col class="col-sm-2">
+                    <col class="col-sm-2">
+                    <col class="col-sm-1">
+                    <col class="col-sm-2">-->
+                    </colgroup>
+                    <thead>
+                    <tr>
+                    <#--<th class="text-right"><input type="checkbox" id="check-all"></th>-->
+                        <th class=""><input type="checkbox" id="check-all">姓名</th>
+                        <th class="">邮箱</th>
+                        <th class="">性别</th>
+                        <th class="">发邮</th>
+                        <th class="">通话</th>
+                        <th class="">年龄</th>
+                        <th class="">国家</th>
+                        <th class="">症状</th>
+                        <th class="" title="是否住院">住院</th>
+                        <th class="">所属网站群组</th>
+                    <#--<th class="">来源域名</th>-->
+                        <th class="" title="是否报备">报备</th>
+                        <th class="">提交人</th>
+                    <#--<th class="">更新时间</th>-->
+                        <th class="">创建时间</th>
 
-                <th class="center">功能</th>
-            </tr>
-            </thead>
+                        <th class="center">功能</th>
+                    </tr>
+                    </thead>
 
-            <tbody>
-            <#list page.list as customer>
-            <tr>
-            <#--<td class="text-right id-col">-->
-            <#--${customer.id?c}-->
-            <#--<input type="checkbox" class="checkbox-each-id" name="customer-ids"
-                   value="${customer.id?c}" form="pass-on-form" style="margin: 0;">-->
-            <#--<label style="width: 100%;"></label>-->
-            <#--</td>-->
-                <td data-toggle="tooltip" class="checkbox-control" title="${(customer.patientName)!''}">
-                    <input type="checkbox" class="checkbox-each-id" name="customer-ids"
-                           value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
+                    <tbody>
+                    <#list page.list as customer>
+                    <tr>
+                    <#--<td class="text-right id-col">-->
+                    <#--${customer.id?c}-->
+                    <#--<input type="checkbox" class="checkbox-each-id" name="customer-ids"
+                           value="${customer.id?c}" form="pass-on-form" style="margin: 0;">-->
+                    <#--<label style="width: 100%;"></label>-->
+                    <#--</td>-->
+                        <td data-toggle="tooltip" class="checkbox-control" title="${(customer.patientName)!''}">
+                            <input type="checkbox" class="checkbox-each-id" name="customer-ids"
+                                   value="${customer.id?c}" form="pass-on-form" style="margin: 0;">
 
-                    <span class="label-yellow">${(customer.stars)!'0'}</span>
-                    <#if (customer.patientName)??>${customer.patientName}<#else><#if (customer.liaisonName)??>${customer.liaisonName}</#if></#if>
+                            <span class="label-yellow">${(customer.stars)!'0'}</span>
+                            <#if (customer.patientName)??>${customer.patientName}<#else><#if (customer.liaisonName)??>${customer.liaisonName}</#if></#if>
 
-                <#--<div></div>-->
-                <#--<div class="stars-ui-ele btn-minier rating"
-                     data-init-score="${(customer.stars)!'0'}" title="意向的星级"
-                     style="font-size: 7px"></div>-->
-                </td>
+                        <#--<div></div>-->
+                        <#--<div class="stars-ui-ele btn-minier rating"
+                             data-init-score="${(customer.stars)!'0'}" title="意向的星级"
+                             style="font-size: 7px"></div>-->
+                        </td>
 
-                <td data-toggle="tooltip" title="${(customer.email)!''}">${(customer.email)!''}</td>
-                <#assign color><#switch (customer.sex)!''><#case 'FEMALE'>red<#break><#case 'MALE'>
-                    blue<#break></#switch></#assign>
-                <#assign faClass><#switch (customer.sex)!''><#case 'FEMALE'>fa-female<#break><#case 'MALE'>
-                    fa-male<#break></#switch></#assign>
-                <td class="center ${color}" title="${(customer.sex.textName)!''}"><span
-                        class="bigger-150 fa ${faClass}"></span></td>
+                        <td data-toggle="tooltip" title="${(customer.email)!''}">${(customer.email)!''}</td>
+                        <#assign color><#switch (customer.sex)!''><#case 'FEMALE'>red<#break><#case 'MALE'>
+                            blue<#break></#switch></#assign>
+                        <#assign faClass><#switch (customer.sex)!''><#case 'FEMALE'>fa-female<#break><#case 'MALE'>
+                            fa-male<#break></#switch></#assign>
+                        <td class="center ${color}" title="${(customer.sex.textName)!''}"><span
+                                class="bigger-150 fa ${faClass}"></span></td>
 
-                <td data-toggle="tooltip" class="center"
-                    title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
-                    <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
-                <td data-toggle="tooltip" title="${(customer.callState)!''}">${(customer.callState)!''}</td>
-                <td title="${(customer.age)!''}">${(customer.age)!''}</td>
-                <td data-toggle="tooltip"
-                    title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
-                <td data-toggle="tooltip"
-                    title="${(customer.symptom)!''}"><#if customer.symptom??>${customer.symptom}</#if></td>
-                <td data-toggle="tooltip" class="center"
-                    title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
-                    <#switch customer.hospitalization>
-                        <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
-                            <#break>
-                        <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span>
-                            <#break>
-                        <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span>
-                            <#break>
-                    </#switch>
-                <#else>
-                <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-                <td data-toggle="tooltip"
-                    title="${(customer.website.name)!''}"><#if customer.website??>${(customer.website.name)!''}<#else>
-                <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
-            <#--来源域名-->
-            <#--<td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>-->
-            <#--<td class=""
-                title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>-->
-                <td class="center"
-                    title="${(customer.ifReport?string('报备','不报备'))!''}"><#if (customer.ifReport)?? && customer.ifReport>
-                    <span class="fa bigger-140 fa-circle-o-notch green"></#if></td>
-            <#--<td class=""
-                title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>-->
-                <td data-toggle="tooltip" title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
-            <#--更新时间-->
-            <#--<td data-toggle="tooltip"
-                title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>-->
-                <td data-toggle="tooltip"
-                    title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
+                        <td data-toggle="tooltip" class="center"
+                            title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
+                            <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
+                        <td data-toggle="tooltip" title="${(customer.callState)!''}">${(customer.callState)!''}</td>
+                        <td title="${(customer.age)!''}">${(customer.age)!''}</td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.symptom)!''}"><#if customer.symptom??>${customer.symptom}</#if></td>
+                        <td data-toggle="tooltip" class="center"
+                            title="${(customer.hospitalization.textName)!''}"><#if (customer.hospitalization)??>
+                            <#switch customer.hospitalization>
+                                <#case 'YES'><span class="fa bigger-140 fa-hotel text-danger"></span>
+                                    <#break>
+                                <#case 'NO'><span class="fa bigger-140 fa-thumbs-o-down text-info"></span>
+                                    <#break>
+                                <#case 'DISCHARGE'><span class="fa bigger-140 fa-child text-success"></span>
+                                    <#break>
+                            </#switch>
+                        <#else>
+                        <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.website.name)!''}"><#if customer.website??>${(customer.website.name)!''}<#else>
+                        <#--<span class="label"><span class="fa fa-question"></span>--></#if></td>
+                    <#--来源域名-->
+                    <#--<td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>-->
+                    <#--<td class=""
+                        title="${(customer.memo)!''}"><#if customer.memo??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
+                        <span class="label"><span class="fa fa-question"></span></#if></td>-->
+                        <td class="center"
+                            title="${(customer.ifReport?string('报备','不报备'))!''}"><#if (customer.ifReport)?? && customer.ifReport>
+                            <span class="fa bigger-140 fa-circle-o-notch green"></#if></td>
+                    <#--<td class=""
+                        title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
+                        <span class="label"><span class="fa fa-question"></span></#if></td>-->
+                        <td data-toggle="tooltip"
+                            title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
+                    <#--更新时间-->
+                    <#--<td data-toggle="tooltip"
+                        title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>-->
+                        <td data-toggle="tooltip"
+                            title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 
-                <td>
-                    <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                        <span class="btn-group"><a class="btn btn-minier" href="/customer/update/${customer.id?c}"
-                                                   title="编辑"><span class="fa fa-paint-brush "></span></a>
+                        <td>
+                            <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                                <span class="btn-group"><a class="btn btn-minier"
+                                                           href="/customer/update/${customer.id?c}"
+                                                           title="编辑"><span class="fa fa-paint-brush "></span></a>
 
-                        <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
-                            <form action="${context.contextPath}/customer/remove" method="post"
-                                  style="display: inline;"><input type="hidden" name="id"
-                                                                  value="${customer.id?c}">
-                                <button class="btn btn-minier"
-                                        href="${context.contextPath}/customer/remove"><span
-                                        class="fa fa-trash"></span></button>
-                            </form></#if>-->
-                            <button form="from-discard-customer-${customer_index}"
-                                    class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
-                                    title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
-                                    class="fa fa-eraser "></span>
-                            </button>
-                            <#if (customer.memos)?? &&customer.memos?size &gt; 0>
-                                <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
-                                <button class="btn btn-info btn-minier" data-toggle="tooltip" data-placement="left"
-                                        data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
-                                        class="fa fa-info"></span>&nbsp;
-                                </button>
-                            </#if>
-                            <form id="from-discard-customer-${customer_index}"
-                                  action="${context.contextPath}/customer/update-discard" method="post"
-                                  style="display: none;"><input type="hidden" name="id"
-                                                                value="${customer.id?c}"><input
-                                    type="hidden" name="discard"
-                                    value="${customer.discard?string('0','1')}">
-                            </form>
+                                <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
+                                    <form action="${context.contextPath}/customer/remove" method="post"
+                                          style="display: inline;"><input type="hidden" name="id"
+                                                                          value="${customer.id?c}">
+                                        <button class="btn btn-minier"
+                                                href="${context.contextPath}/customer/remove"><span
+                                                class="fa fa-trash"></span></button>
+                                    </form></#if>-->
+                                    <button form="from-discard-customer-${customer_index}"
+                                            class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
+                                            title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
+                                            class="fa fa-eraser "></span>
+                                    </button>
+                                    <#if (customer.memos)?? &&customer.memos?size &gt; 0>
+                                        <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
+                                        <button class="btn btn-info btn-minier" data-toggle="tooltip"
+                                                data-placement="left"
+                                                data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
+                                                class="fa fa-info"></span>&nbsp;
+                                        </button>
+                                    </#if>
+                                    <form id="from-discard-customer-${customer_index}"
+                                          action="${context.contextPath}/customer/update-discard" method="post"
+                                          style="display: none;"><input type="hidden" name="id"
+                                                                        value="${customer.id?c}"><input
+                                            type="hidden" name="discard"
+                                            value="${customer.discard?string('0','1')}">
+                                    </form>
                 </span>
-                    </#if>
-                </td>
-            </tr>
-            </#list>
-            </tbody>
-        </table>
+                            </#if>
+                        </td>
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <div class="row">
 <span class="col-md-1">
@@ -540,6 +547,7 @@
         });
 
         $('#date-range').daterangepicker({
+            "linkedCalendars": false,
             "autoUpdateInput": false,
             "format": "YYYY/MM/DD HH",
             "locale": {

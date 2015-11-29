@@ -270,323 +270,335 @@
                 title="填写资源" class="btn btn-info btn-sm"><span class="fa fa-file"></span></a></#if></span></span> <span
                 class="col-md-10"> <#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if></span>
         </div>
-        <table id="customer-table-1"
-               class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90 customer-list-table"
-               style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;">
-            <colgroup class="row">
-            <#--1-->
-            <#--<col style="width: 5em;">-->
-                <col style="width: 7em;">
-                <col style="width: 8em;">
-                <col style="width: 3em;">
-                <col style="width:3em;">
-                <col style="width:4.5em;">
-                <col style="width:3em;">
-                <col style="width: 6em;">
-                <col class="">
-            <#--4    -->
-                <col style="width: 3em;">
-            <#--来源域名-->
-            <#--<col style="width: 7em;">-->
-                <col style="width: 10.3em;">
-            <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
-                <col style="width: 3em;">
-            <#--8-->
-                <col style="width: 4.3em;">
-                <col style="width: 4.3em;">
-            <#--<col style="width: 9.3em;">-->
-                <col style="width: 9.3em;">
-                <col style="width: 7em;">
-            </colgroup>
-            <thead>
-            <tr>
-            <#--<th class="text-right">ID</th>-->
-                <th class="">姓名</th>
-                <th class="">邮箱</th>
-                <th class="">性别</th>
-                <th class="">发邮</th>
-                <th class="">通话</th>
-                <th class="">年龄</th>
-                <th class="">国家</th>
-                <th class="">症状</th>
-                <th class="" title="是否住院">住院</th>
-                <th class="">所属网站群组</th>
-            <#--<th class="">来源域名</th>-->
-            <#--<th class="">备注</th>-->
-                <th class="" title="是否报备">报备</th>
-                <th class="">所属人</th>
-                <th class="">提交人</th>
-            <#--<th class="">更新时间</th>-->
-                <th class="">创建时间</th>
+        <div class="row">
+            <div class="col-sm-12" style="overflow-y: auto">
+                <table id="customer-table-1"
+                       class="table table-striped table-bordered table-hover table-condensed table-responsive smaller-90 customer-list-table"
+                       style="word-wrap: break-word;table-layout:fixed;margin-bottom:4px;min-width: 960px;">
+                    <colgroup class="row">
+                    <#--1-->
+                    <#--<col style="width: 5em;">-->
+                        <col style="width: 7em;">
+                        <col style="width: 8em;">
+                        <col style="width: 3em;">
+                        <col style="width:3em;">
+                        <col style="width:4.5em;">
+                        <col style="width:3em;">
+                        <col style="width: 6em;">
+                        <col class="">
+                    <#--4    -->
+                        <col style="width: 3em;">
+                    <#--来源域名-->
+                    <#--<col style="width: 7em;">-->
+                        <col style="width: 10.3em;">
+                    <#--<col>--> <#--style="width: 11em;"--> <#--备注-->
+                        <col style="width: 3em;">
+                    <#--8-->
+                        <col style="width: 4.3em;">
+                        <col style="width: 4.3em;">
+                    <#--<col style="width: 9.3em;">-->
+                        <col style="width: 9.3em;">
+                        <col style="width: 7em;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                    <#--<th class="text-right">ID</th>-->
+                        <th class="">姓名</th>
+                        <th class="">邮箱</th>
+                        <th class="">性别</th>
+                        <th class="">发邮</th>
+                        <th class="">通话</th>
+                        <th class="">年龄</th>
+                        <th class="">国家</th>
+                        <th class="">症状</th>
+                        <th class="" title="是否住院">住院</th>
+                        <th class="">所属网站群组</th>
+                    <#--<th class="">来源域名</th>-->
+                    <#--<th class="">备注</th>-->
+                        <th class="" title="是否报备">报备</th>
+                        <th class="">所属人</th>
+                        <th class="">提交人</th>
+                    <#--<th class="">更新时间</th>-->
+                        <th class="">创建时间</th>
 
-                <th class="center">功能</th>
-            </tr>
-            </thead>
+                        <th class="center">功能</th>
+                    </tr>
+                    </thead>
 
-            <tbody>
-            <#list page.list as customer>
-            <tr>
-            <#--<td class="">${customer.id?c}</td>-->
-                <td title="${(customer.patientName)!''}" data-toggle="tooltip">
-                    <span class=" label-minier label-yellow">${(customer.stars)!'0'}</span>
-                    <#if (customer.patientName)??>${customer.patientName}<#else>
-                        <#if (customer.liaisonName)??>${customer.liaisonName}<#else><span
-                                class="label">不详</span></#if></#if>
+                    <tbody>
+                    <#list page.list as customer>
+                    <tr>
+                    <#--<td class="">${customer.id?c}</td>-->
+                        <td title="${(customer.patientName)!''}" data-toggle="tooltip">
+                            <span class=" label-minier label-yellow">${(customer.stars)!'0'}</span>
+                            <#if (customer.patientName)??>${customer.patientName}<#else>
+                                <#if (customer.liaisonName)??>${customer.liaisonName}<#else><span
+                                        class="label">不详</span></#if></#if>
 
-                <#--<div class="stars-ui-ele btn-minier rating"
-                     data-init-score="${(customer.stars)!'0'}" title="意向的星级"
-                     style="font-size: 7px"></div>-->
-                </td>
+                        <#--<div class="stars-ui-ele btn-minier rating"
+                             data-init-score="${(customer.stars)!'0'}" title="意向的星级"
+                             style="font-size: 7px"></div>-->
+                        </td>
 
-                <td data-toggle="tooltip" title="${(customer.email)!''}"
-                    data-toggle="tooltip">${(customer.email)!''}</td>
-                <#assign color><#switch (customer.sex)!''><#case 'FEMALE'>red<#break><#case 'MALE'>
-                    blue<#break></#switch></#assign>
-                <#assign faClass><#switch (customer.sex)!''><#case 'FEMALE'>fa-female<#break><#case 'MALE'>
-                    fa-male<#break></#switch></#assign>
-                <td class="center ${color}" title="${(customer.sex.textName)!''}"><span
-                        class="bigger-150 fa ${faClass}"></span></td>
+                        <td data-toggle="tooltip" title="${(customer.email)!''}"
+                            data-toggle="tooltip">${(customer.email)!''}</td>
+                        <#assign color><#switch (customer.sex)!''><#case 'FEMALE'>red<#break><#case 'MALE'>
+                            blue<#break></#switch></#assign>
+                        <#assign faClass><#switch (customer.sex)!''><#case 'FEMALE'>fa-female<#break><#case 'MALE'>
+                            fa-male<#break></#switch></#assign>
+                        <td class="center ${color}" title="${(customer.sex.textName)!''}"><span
+                                class="bigger-150 fa ${faClass}"></span></td>
 
-                <td class="center"
-                    title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
-                    <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
-                <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
-                <td title="${(customer.age)!''}">${(customer.age)!''}</td>
-                <td data-toggle="tooltip"
-                    title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
-                <td data-toggle="tooltip"
-                    title="${(customer.symptom)!''}"><#if customer.symptom??>${customer.symptom}</#if></td>
-                <td class="center" title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
-                    <#switch customer.hospitalization>
-                        <#case 'YES'><span class="fa bigger fa-hotel text-danger bigger-140"></span><#break>
-                        <#case 'NO'><span class="fa bigger fa-thumbs-o-down text-info bigger-140"></span><#break>
-                        <#case 'DISCHARGE'><span class="fa bigger fa-child text-success bigger-140"></span><#break>
-                    </#switch>
-                <#else>
-                <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
-                <td data-toggle="tooltip" title="${(customer.website.name)!''}">${(customer.website.name)!''}</td>
-            <#--来源域名-->
-            <#--<td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>-->
-            <#--<td class=""
-                title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
-                <span class="label"><span class="fa fa-question"></span></#if></td>-->
-                <td class="center"
-                    title="${(customer.ifReport?string('报备','不报备'))!''}"><#if (customer.ifReport)?? && customer.ifReport>
-                    <span class="fa bigger-140 fa-circle-o-notch green"></#if></td>
-            <#--<td class=""
-                title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
-                <span class="label">不详</span></#if></td>-->
-                <td data-toggle="tooltip"
-                    title="${(customer.ownerUser.realName)!''}">${(customer.ownerUser.realName)!''}</td>
-                <td data-toggle="tooltip" title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
+                        <td class="center"
+                            title="${((customer.emailSent)?? && customer.emailSent)?string('已发送','未发送')}"><#if (customer.emailSent)?? && customer.emailSent>
+                            <span class="fa fa-envelope-square bigger-140 text-success"></#if></td>
+                        <td title="${(customer.callState)!''}">${(customer.callState)!''}</td>
+                        <td title="${(customer.age)!''}">${(customer.age)!''}</td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.patientCountry.name)!''}"><#if customer.patientCountry??>${customer.patientCountry.name}</#if></td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.symptom)!''}"><#if customer.symptom??>${customer.symptom}</#if></td>
+                        <td class="center"
+                            title="${(customer.hospitalization.textName)!''}"><#if customer.hospitalization??>
+                            <#switch customer.hospitalization>
+                                <#case 'YES'><span class="fa bigger fa-hotel text-danger bigger-140"></span><#break>
+                                <#case 'NO'><span
+                                        class="fa bigger fa-thumbs-o-down text-info bigger-140"></span><#break>
+                                <#case 'DISCHARGE'><span
+                                        class="fa bigger fa-child text-success bigger-140"></span><#break>
+                            </#switch>
+                        <#else>
+                        <#--<span class="label"><span class="fa fa-question"></span></span>--></#if></td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.website.name)!''}">${(customer.website.name)!''}</td>
+                    <#--来源域名-->
+                    <#--<td data-toggle="tooltip" title="${(customer.sourceWebsite)!''}">${(customer.sourceWebsite)!''}</td>-->
+                    <#--<td class=""
+                        title="${(customer.memo)!''}"><#if (customer.memo)??><#if customer.memo?length gt 26>${customer.memo?substring(0,26)+'...'}<#else>${customer.memo}</#if><#else>
+                        <span class="label"><span class="fa fa-question"></span></#if></td>-->
+                        <td class="center"
+                            title="${(customer.ifReport?string('报备','不报备'))!''}"><#if (customer.ifReport)?? && customer.ifReport>
+                            <span class="fa bigger-140 fa-circle-o-notch green"></#if></td>
+                    <#--<td class=""
+                        title="${(customer.diseaseType.name)!''}"><#if customer.diseaseType??><#if customer.diseaseType.name?length gt 8>${customer.diseaseType.name?substring(0,5)+'...'}<#else>${customer.diseaseType.name}</#if><#else>
+                        <span class="label">不详</span></#if></td>-->
+                        <td data-toggle="tooltip"
+                            title="${(customer.ownerUser.realName)!''}">${(customer.ownerUser.realName)!''}</td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.user.realName)!''}">${(customer.user.realName)!''}</td>
 
-            <#--<td data-toggle="tooltip"
-                title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>-->
+                    <#--<td data-toggle="tooltip"
+                        title="${(customer.updated?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.updated?string('yyyy.MM.dd HH:mm'))!''}</td>-->
 
-                <td data-toggle="tooltip"
-                    title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
+                        <td data-toggle="tooltip"
+                            title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 
-                <td class="">
-                <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
-                <#--||loginUser.role='MANAGER'-->
-                    <span class="btn-group">
+                        <td class="">
+                        <#--(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)-->
+                        <#--||loginUser.role='MANAGER'-->
+                            <span class="btn-group">
                     <#if loginUser.role?? && ['TELADMIN']?seq_contains(loginUser.role)>
                         <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
                            class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-120"> </span> </a>
                     </#if>
-                        <#if ['ADMIN']?seq_contains(loginUser.role)>
-                            <a class="btn btn-minier" href="${context.contextPath}/customer/get/${customer.id?c}"><span
-                                    class="fa fa-newspaper-o bigger-120"></span></a>
-                        </#if>
-                        <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>
-                            <button form="from-remove-customer-${customer_index}"
-                                    class="remove-control btn btn-minier btn-pink" title="已提交删除"><span
-                                    class="fa fa-trash bigger-120"> </span>
-                            </button>
+                                <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                    <a class="btn btn-minier"
+                                       href="${context.contextPath}/customer/get/${customer.id?c}"><span
+                                            class="fa fa-newspaper-o bigger-120"></span></a>
+                                </#if>
+                                <#if ['ADMIN']?seq_contains(loginUser.role) && customer.discard>
+                                    <button form="from-remove-customer-${customer_index}"
+                                            class="remove-control btn btn-minier btn-pink" title="已提交删除"><span
+                                            class="fa fa-trash bigger-120"> </span>
+                                    </button>
                     <form id="from-remove-customer-${customer_index}" action="${context.contextPath}/customer/remove"
                           method="post" style="display: none;"><input type="hidden" name="id" value="${customer.id?c}">
                     </form>
-                        </#if>
-                        <#if (customer.memos)?? &&customer.memos?size &gt; 0>
-                            <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
-                            <button class="btn btn-info btn-minier" data-toggle="tooltip" data-placement="left"
-                                    data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
-                                    class="fa fa-info"></span>&nbsp;
-                            </button>
-                        </#if>
+                                </#if>
+                                <#if (customer.memos)?? &&customer.memos?size &gt; 0>
+                                    <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
+                                    <button class="btn btn-info btn-minier" data-toggle="tooltip" data-placement="left"
+                                            data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
+                                            class="fa fa-info"></span>&nbsp;
+                                    </button>
+                                </#if>
             </span>
-                <#--
-                                    <#if ['ADMIN']?seq_contains(loginUser.role)>
-                                        <button form="from-remove-customer-${customer_index}"
-                                                href="${context.contextPath}/customer/remove"
-                                                class="remove-control btn btn-minier ${customer.discard?then('btn-pink','btn-success')}"
-                                                title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span class="fa fa-trash"> </span>
-                                        </button>
-                                    <form id="from-remove-customer-${customer_index}"
-                                          action="${context.contextPath}/customer/remove" method="post"
-                                          style="display: none;"><input type="hidden" name="id"
-                                                                        value="${customer.id?c}">
-                                    </form>
-                                    </#if>
-                -->
-                </td>
-            </tr>
-            </#list>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-md-2"><span class="btn-group btn-corner"><a href=""
-                                                                        style="color:#FFF;text-decoration:none;"
-                                                                        class="btn btn-info btn-sm"
-                                                                        title="刷新列表"><span
-                    class="fa fa-refresh"></span></a></span></div>
-            <div class="col-md-10">
-            <#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+                        <#--
+                                            <#if ['ADMIN']?seq_contains(loginUser.role)>
+                                                <button form="from-remove-customer-${customer_index}"
+                                                        href="${context.contextPath}/customer/remove"
+                                                        class="remove-control btn btn-minier ${customer.discard?then('btn-pink','btn-success')}"
+                                                        title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span class="fa fa-trash"> </span>
+                                                </button>
+                                            <form id="from-remove-customer-${customer_index}"
+                                                  action="${context.contextPath}/customer/remove" method="post"
+                                                  style="display: none;"><input type="hidden" name="id"
+                                                                                value="${customer.id?c}">
+                                            </form>
+                                            </#if>
+                        -->
+                        </td>
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </
+        <div>
+            <div class="row">
+                <div class="col-md-2"><span class="btn-group btn-corner"><a href=""
+                                                                            style="color:#FFF;text-decoration:none;"
+                                                                            class="btn btn-info btn-sm"
+                                                                            title="刷新列表"><span
+                        class="fa fa-refresh"></span></a></span></div>
+                <div class="col-md-10">
+                <#if page.totalRows gt 0><#import "/common/pager.mod.ftl" as pager><@pager.pager page context.contextPath+path></@pager.pager></#if>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <#include "/common/common_js.ftl">
 <#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.js"></script>-->
 <#--<script src="${context.contextPath}/resources/ace/assets/js/jquery.dataTables.bootstrap.js"></script>-->
-<script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
-<script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
+    <script src="${context.contextPath}/resources/ace/assets/js/bootbox.js"></script>
+    <script src="${context.contextPath}/resources/ace/assets/js/jquery.raty.js"></script>
 
-<!--daterangepicker-->
-<script src="${context.contextPath}/resources/self/moment.min.js"></script>
-<script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
+    <!--daterangepicker-->
+    <script src="${context.contextPath}/resources/self/moment.min.js"></script>
+    <script src="${context.contextPath}/resources/self/daterangepicker.js"></script>
 
-<script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
+    <script src="${context.contextPath}/resources/self/select2/js/select2.min.js"></script>
 
 
-<script>
-    var l;
-    $(function () {
-        $('.stars-ui-ele').raty({
-            noRatedMsg: "它只读，它还没有星星",
-            starType: 'span',
-            hints: ['很糟糕', '不好', '一般', '好', '很向往'],
-            space: false,
-            score: function () {
-                return $(this).attr('data-init-score');
-            },
-            readOnly: true,
-            size: 4,
-            space: false
-        });
-        $('#stars-ui').raty({
-            noRatedMsg: "I'am readOnly and I haven't rated yet!",
-            starType: 'span',
+    <script>
+        var l;
+        $(function () {
+            $('.stars-ui-ele').raty({
+                noRatedMsg: "它只读，它还没有星星",
+                starType: 'span',
+                hints: ['很糟糕', '不好', '一般', '好', '很向往'],
+                space: false,
+                score: function () {
+                    return $(this).attr('data-init-score');
+                },
+                readOnly: true,
+                size: 4,
+                space: false
+            });
+            $('#stars-ui').raty({
+                noRatedMsg: "I'am readOnly and I haven't rated yet!",
+                starType: 'span',
 //            score: 0,
-            cancel: true,
-            cancelHint: '零意向',
-            hints: ['好', '很好', '非常好', '棒极了', 'YEAH'],
-            space: false,
-            score: function () {
-                return $(this).attr('data-init-score');
-            },
-            click: function (score, evt) {
-                $('#form-stars').val(score);
+                cancel: true,
+                cancelHint: '零意向',
+                hints: ['好', '很好', '非常好', '棒极了', 'YEAH'],
+                space: false,
+                score: function () {
+                    return $(this).attr('data-init-score');
+                },
+                click: function (score, evt) {
+                    $('#form-stars').val(score);
 //                alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
-            }
-        });
+                }
+            });
 
-        $('#date-range').daterangepicker({
-            "autoUpdateInput": false,
-            "format": "YYYY/MM/DD HH",
-            "locale": {
-                "format": "YYYY-MM-DD HH",
-                "separator": ",",
-                "applyLabel": "选择",
-                "cancelLabel": "清除",
-                "fromLabel": "从",
-                "toLabel": "到",
-                "customRangeLabel": "订制",
-                "daysOfWeek": ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
-                "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-                "firstDay": 1
-            },
-            "timePicker": true,
-            "timePicker24Hour": true,
-            "timePickerIncrement": 70,
+            $('#date-range').daterangepicker({
+                "linkedCalendars": false,
+                "autoUpdateInput": false,
+                "format": "YYYY/MM/DD HH",
+                "locale": {
+                    "format": "YYYY-MM-DD HH",
+                    "separator": ",",
+                    "applyLabel": "选择",
+                    "cancelLabel": "清除",
+                    "fromLabel": "从",
+                    "toLabel": "到",
+                    "customRangeLabel": "订制",
+                    "daysOfWeek": ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                    "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                    "firstDay": 1
+                },
+                "timePicker": true,
+                "timePicker24Hour": true,
+                "timePickerIncrement": 70,
 //            "maxDate": [d.getMonth() + 1, d.getDate() + 1, d.getFullYear()].join('/')
-            "maxDate": [moment().year(), moment().month() + 1, moment().date() + 1].join('-')
-        }, function (start, end, label) {
+                "maxDate": [moment().year(), moment().month() + 1, moment().date() + 1].join('-')
+            }, function (start, end, label) {
 //            console.log('New date range selected: ' + start.format('YYYY-MM-DD HH') + ' to ' + end.format('YYYY-MM-DD HH'));
 //            console.log(start);
-            $('#date-range').val([start.format('YYYY年MM月DD日HH时'), ' 到 ', end.format('YYYY年MM月DD日HH时')].join(''));
+                $('#date-range').val([start.format('YYYY年MM月DD日HH时'), ' 到 ', end.format('YYYY年MM月DD日HH时')].join(''));
 //            l = start;//用于调试
 //            $('#date-range-input').val([start.unix() * 1000, end.unix() * 1000].join());
 //            $('#date-range-input-l').val(start.unix() * 1000);
 //            $('#date-range-input-r').val(end.unix() * 1000);
-            $('#date-range-input-l').val(start.format('YYYY-MM-DD HH'));
-            $('#date-range-input-r').val(end.format('YYYY-MM-DD HH'));
-        });
-        $('#date-range').on('cancel.daterangepicker', function (e) {
-            //清除内容
-            $('#date-range').val('');
+                $('#date-range-input-l').val(start.format('YYYY-MM-DD HH'));
+                $('#date-range-input-r').val(end.format('YYYY-MM-DD HH'));
+            });
+            $('#date-range').on('cancel.daterangepicker', function (e) {
+                //清除内容
+                $('#date-range').val('');
 //            $('#date-range-input').val('');
-            $('#date-range-input-l').val('');
-            $('#date-range-input-r').val('');
-        });
+                $('#date-range-input-l').val('');
+                $('#date-range-input-r').val('');
+            });
 
 //        $('.btn').tooltip();
 
-        $(".remove-control").click(function (e) {
-            e.preventDefault();
-            var button = this;
-            bootbox.confirm({
-                        message: "将要删除！",
-                        buttons: {
-                            confirm: {
-                                label: "好的",
-                                className: "btn-danger btn-sm"
+            $(".remove-control").click(function (e) {
+                e.preventDefault();
+                var button = this;
+                bootbox.confirm({
+                            message: "将要删除！",
+                            buttons: {
+                                confirm: {
+                                    label: "好的",
+                                    className: "btn-danger btn-sm"
+                                },
+                                cancel: {
+                                    label: "不好",
+                                    className: "btn-primary btn-sm"
+                                }
                             },
-                            cancel: {
-                                label: "不好",
-                                className: "btn-primary btn-sm"
-                            }
-                        },
-                        callback: function (result) {
-                            if (result) {
-                                $(button).prop('form').submit();
+                            callback: function (result) {
+                                if (result) {
+                                    $(button).prop('form').submit();
+                                }
                             }
                         }
-                    }
-            );
-        });
+                );
+            });
 
-        $('.select2-ui').select2();
+            $('.select2-ui').select2();
 
-        $('[data-toggle="tooltip"]').tooltip({
-            trigger: 'click hover',
-            html: true
+            $('[data-toggle="tooltip"]').tooltip({
+                trigger: 'click hover',
+                html: true
 //            ,
 //            selector: ':parent'
-            ,
-            container: 'body'
-        });
-        $('[data-toggle="tooltip-a"]').tooltip({trigger: 'hover'});
+                ,
+                container: 'body'
+            });
+            $('[data-toggle="tooltip-a"]').tooltip({trigger: 'hover'});
 
-        $('#filter-form').submit(function () {
-            var queryCombo = [encodeURIComponent($('[name=dateRangeL]').val()), encodeURIComponent($('[name=dateRangeR]').val()),
-                encodeURIComponent($('[name=websiteId]').val()), encodeURIComponent($('[name=userId]').val()),
-                encodeURIComponent($('[name=ifReport]').val()), encodeURIComponent($('[name=hospitalization]').val()),
-                encodeURIComponent($('[name=name]').val()), encodeURIComponent($('[name=email]').val()),
-                encodeURIComponent($('[name=tel]').val()), encodeURIComponent($('[name=valid]').val()),
-                encodeURIComponent($('[name=discard]').val()), encodeURIComponent($('[name=stars]').val()),
-                encodeURIComponent($('[name=countryId]').val()), encodeURIComponent($('[name=diseaseTypeId]').val())
-            ].join('|');
-            var perfix = "${basePath}";
-            location = [perfix, '/', queryCombo].join('');
-            return false;
-        });
+            $('#filter-form').submit(function () {
+                var queryCombo = [encodeURIComponent($('[name=dateRangeL]').val()), encodeURIComponent($('[name=dateRangeR]').val()),
+                    encodeURIComponent($('[name=websiteId]').val()), encodeURIComponent($('[name=userId]').val()),
+                    encodeURIComponent($('[name=ifReport]').val()), encodeURIComponent($('[name=hospitalization]').val()),
+                    encodeURIComponent($('[name=name]').val()), encodeURIComponent($('[name=email]').val()),
+                    encodeURIComponent($('[name=tel]').val()), encodeURIComponent($('[name=valid]').val()),
+                    encodeURIComponent($('[name=discard]').val()), encodeURIComponent($('[name=stars]').val()),
+                    encodeURIComponent($('[name=countryId]').val()), encodeURIComponent($('[name=diseaseTypeId]').val())
+                ].join('|');
+                var perfix = "${basePath}";
+                location = [perfix, '/', queryCombo].join('');
+                return false;
+            });
 
-    <#--<#if dateRange?? && dateRange?size gt 0 >-->
-    <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->
-    <#--$('#date-range-input').val([${dateRange[0]?long?c}, ${dateRange[1]?long?c}].join());-->
-    <#--</#if>-->
-    });
-</script>
+        <#--<#if dateRange?? && dateRange?size gt 0 >-->
+        <#--$('#date-range').val(['${dateRange[0]?string("yyyy年MM月dd日HH时")}', ' 到 ', '${dateRange[1]?string("yyyy年MM月dd日HH时")}'].join(''));-->
+        <#--$('#date-range-input').val([${dateRange[0]?long?c}, ${dateRange[1]?long?c}].join());-->
+        <#--</#if>-->
+        });
+    </script>
 </body>
 </html>
