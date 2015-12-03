@@ -421,42 +421,42 @@
                         <td data-toggle="tooltip"
                             title="${(customer.added?string('yyyy.MM.dd HH:mm:ss'))!''}">${(customer.added?string('yyyy.MM.dd HH:mm'))!''}</td>
 
-                        <td>
-                            <#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
-                                <span class="btn-group"><a class="btn btn-minier"
-                                                           href="/customer/update/${customer.id?c}"
-                                                           title="编辑"><span class="fa fa-paint-brush "></span></a>
+                        <td><#if loginUser.role?? && ((loginUser.role=='EMPLOYEE'&& customer.userId?? && loginUser.id==customer.ownerUserId) ||(loginUser.role='DIRECTOR' && customer.groupId?? && loginUser.groupId?? && loginUser.groupId==customer.groupId)||loginUser.role='ADMIN'||loginUser.role='MANAGER')>
+                            <span class="btn-group"><a
+                                    class="btn btn-minier <#if Session.editId?? && Session.editId==customer.id>btn-warning</#if>"
+                                    href="/customer/update/${customer.id?c}" title="编辑"><span
+                                    class="fa fa-paint-brush"></span></a>
 
-                                <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
-                                    <form action="${context.contextPath}/customer/remove" method="post"
-                                          style="display: inline;"><input type="hidden" name="id"
-                                                                          value="${customer.id?c}">
-                                        <button class="btn btn-minier"
-                                                href="${context.contextPath}/customer/remove"><span
-                                                class="fa fa-trash"></span></button>
-                                    </form></#if>-->
-                                    <button form="from-discard-customer-${customer_index}"
-                                            class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
-                                            title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
-                                            class="fa fa-eraser "></span>
+                            <#--<#if ['ADMIN']?seq_contains(loginUser.role)>
+                                <form action="${context.contextPath}/customer/remove" method="post"
+                                      style="display: inline;"><input type="hidden" name="id"
+                                                                      value="${customer.id?c}">
+                                    <button class="btn btn-minier"
+                                            href="${context.contextPath}/customer/remove"><span
+                                            class="fa fa-trash"></span></button>
+                                </form></#if>-->
+                                <button form="from-discard-customer-${customer_index}"
+                                        class="remove-control btn btn-minier <#if customer.discard>btn-pink<#else>btn-success</#if>"
+                                        title="<#if customer.discard>已提交删除<#else>未提交删除</#if>"><span
+                                        class="fa fa-eraser "></span>
+                                </button>
+                                <#if (customer.memos)?? &&customer.memos?size &gt; 0>
+                                    <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
+                                    <button class="btn btn-info btn-minier" data-toggle="tooltip"
+                                            data-placement="left"
+                                            data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
+                                            class="fa fa-info"></span>&nbsp;
                                     </button>
-                                    <#if (customer.memos)?? &&customer.memos?size &gt; 0>
-                                        <#assign tooltipTitle><#include "customer-update-memo-fragment-on-filter.ftl"></#assign>
-                                        <button class="btn btn-info btn-minier" data-toggle="tooltip"
-                                                data-placement="left"
-                                                data-title="${tooltipTitle?replace('"', '&quot;')}">&nbsp;<span
-                                                class="fa fa-info"></span>&nbsp;
-                                        </button>
-                                    </#if>
-                                    <form id="from-discard-customer-${customer_index}"
-                                          action="${context.contextPath}/customer/update-discard" method="post"
-                                          style="display: none;"><input type="hidden" name="id"
-                                                                        value="${customer.id?c}"><input
-                                            type="hidden" name="discard"
-                                            value="${customer.discard?string('0','1')}">
-                                    </form>
+                                </#if>
+                                <form id="from-discard-customer-${customer_index}"
+                                      action="${context.contextPath}/customer/update-discard" method="post"
+                                      style="display: none;"><input type="hidden" name="id"
+                                                                    value="${customer.id?c}"><input
+                                        type="hidden" name="discard"
+                                        value="${customer.discard?string('0','1')}">
+                                </form>
                 </span>
-                            </#if>
+                        </#if>
                         </td>
                     </tr>
                     </#list>

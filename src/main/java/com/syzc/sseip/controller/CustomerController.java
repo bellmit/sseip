@@ -540,7 +540,6 @@ public class CustomerController {
 
     @RequestMapping(value = "/update/{id:\\d+}", method = RequestMethod.GET)
     public String update(@PathVariable("id") Long id, @RequestParam(required = false) String referer, Model model, HttpSession session, HttpServletRequest request) {
-
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
 //        if (loginUser.getRole() == null || loginUser.getRole() == Role.EMPTY) {
         if (loginUser.getRole() != Role.EMPLOYEE) {
@@ -580,6 +579,8 @@ public class CustomerController {
 
         model.addAttribute("hospitalizationTypes", HospitalizationType.values());
         model.addAttribute("customer", customer);
+
+        session.setAttribute("editId", id);
         return "customer-update";
     }
 

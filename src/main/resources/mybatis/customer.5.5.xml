@@ -618,7 +618,8 @@
                 and tel=#{tel}
             </if>
             <if test="name!=null and name!=''">
-                and (liaison_name=#{name} OR patient_name=#{name})
+                <!--and (liaison_name=#{name} OR patient_name=#{name})-->
+                and (liaison_name like CONCAT('%','${name}','%') OR patient_name like CONCAT('%','${name}','%'))
             </if>
             <if test="countryId!=null and countryId!=''">
                 and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
@@ -670,7 +671,8 @@
                 and tel=#{tel}
             </if>
             <if test="name!=null and name!=''">
-                and (liaison_name=#{name} OR patient_name=#{name})
+                <!--and (liaison_name=#{name} OR patient_name=#{name})-->
+                and (liaison_name like CONCAT('%','${name}','%') OR patient_name like CONCAT('%','${name}','%'))
             </if>
             <if test="countryId!=null and countryId!=''">
                 and (liaison_country_id=#{countryId} OR patient_country_id=#{countryId})
@@ -720,7 +722,9 @@
                 and tel=#{query.tel}
             </if>
             <if test="query.name!=null and query.name!=''">
-                and (liaison_name=#{query.name} OR patient_name=#{query.name})
+                and (liaison_name like CONCAT('%','${query.name}','%') OR patient_name like
+                CONCAT('%','${query.name}','%'))
+                <!--and (liaison_name=#{query.name} OR patient_name=#{query.name})-->
             </if>
             <if test="query.countryId!=null and query.countryId!=''">
                 and (liaison_country_id=#{query.countryId} OR patient_country_id=#{query.countryId})
@@ -772,7 +776,9 @@
                 and tel=#{query.tel}
             </if>
             <if test="query.name!=null and query.name!=''">
-                and (liaison_name=#{query.name} OR patient_name=#{query.name})
+                and (liaison_name like CONCAT('%','${query.name}','%') OR patient_name like
+                CONCAT('%','${query.name}','%'))
+                <!--and (liaison_name=#{query.name} OR patient_name=#{query.name})-->
             </if>
             <if test="query.countryId!=null and query.countryId!=''">
                 and (liaison_country_id=#{query.countryId} OR patient_country_id=#{query.countryId})

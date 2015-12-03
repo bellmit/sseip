@@ -399,7 +399,7 @@
                             <span class="btn-group">
                     <#if loginUser.role?? && ['TELADMIN']?seq_contains(loginUser.role)>
                         <a href="${context.contextPath}/customer/${customer.id?c}/update-by-tel-admin"
-                           class="btn btn-minier" title="编辑电话备注"> <span class="fa fa-phone bigger-120"> </span> </a>
+                           class="btn btn-minier" title="编辑电话备注"><span class="fa fa-phone bigger-120"></span></a>
                     </#if>
                                 <#if ['ADMIN']?seq_contains(loginUser.role)>
                                     <a class="btn btn-minier"
