@@ -6,7 +6,6 @@
         <session-timeout>420</session-timeout>
     </session-config>
 
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:applicationContext.xml,classpath*:spring-mybatis.xml</param-value>
